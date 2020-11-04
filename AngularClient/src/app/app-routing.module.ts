@@ -6,6 +6,8 @@ import { AccountComponent } from './admin/verify/accounts/accounts.component';
 import { PostsComponent } from './admin/verify/posts/posts.component';
 import { NavbarComponent } from './admin/navbar/navbar.component';
 
+// Tạo đường dẫn để duyệt tài khoản/bài đăng cho admin với định dạng /admin/verify/...
+
 const routes: Routes = [
   { path: 'admin', component: AdminComponent },
   { path: 'admin/verify/accounts', component: AccountComponent },
