@@ -8,6 +8,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AccountComponent } from './admin/verify/accounts/accounts.component';
 import { PostsComponent } from './admin/verify/posts/posts.component';
 import { NavbarComponent } from './admin/navbar/navbar.component';
+import { HomeComponent } from './admin/home/home.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { NavbarComponent } from './admin/navbar/navbar.component';
     AdminComponent,
     AccountComponent,
     PostsComponent,
-    NavbarComponent
+    NavbarComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -24,4 +26,5 @@ import { NavbarComponent } from './admin/navbar/navbar.component';
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
