@@ -31,6 +31,10 @@ app.get("/", (req, res) => {
   res.json({ message: "Server is running" });
 });
 
+app.get("/admin/verify/accounts", (req, res) => {
+  res.send('Backend verify page')
+})
+
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
