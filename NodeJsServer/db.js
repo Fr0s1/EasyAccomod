@@ -1,3 +1,4 @@
+// Kết nối tới local db mysql của phpMyAdmin
 const { Sequelize, DataTypes } = require('sequelize')
 
 const sequelize = new Sequelize('easyaccomod', 'root', '123456', {
@@ -19,22 +20,3 @@ try {
 }
 
 module.exports = sequelize
-
-// const me = userAccount.build({ username: "frost", password: "hieu" })
-// console.log(me instanceof userAccount)
-// console.log(me)
-
-// me.save()
-// console.log('me was saved to the database!');
-
-// const myRoom = room.build({
-//     ID: 1,
-//     roomType: "chung cu",
-//     rented: false,
-//     sharedOwner: false,
-//     area: 50,
-//     image: 'null',
-//     usernameOwner: 'frost'
-// })
-
-// myRoom.save()
