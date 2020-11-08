@@ -1,3 +1,4 @@
+const { response } = require('express')
 const express = require('express')
 const { Sequelize, DataTypes } = require('sequelize')
 
@@ -20,8 +21,19 @@ router.post('/room', async (req, res) => {
     } catch (e) {
         res.status(400).send('Internal Error')
     }
-    
+
     res.send(newRoom)
+})
+
+router.get('/room/:id', async (req, res) => {
+    const id = req.params.id;
+
+    const url = 'db/room-images/' + id + '/1.jpg';
+
+    let option = {
+        root: 'D:/Mon hoc UET/Web_Applications_Development/Project/EasyAccomod/NodeJsServer/'
+    }
+    res.sendFile(url, option);
 })
 
 module.exports = router
