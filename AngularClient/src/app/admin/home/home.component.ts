@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -10,16 +7,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
   ngOnInit(): void {
-  }
-
-  httpHeaders = new HttpHeaders().set('Accept', "image/webp,*/*");
-
-  getImage(): Observable<Blob> {
-    return this.http.get<Blob>('localhost:8080/room/1', { headers: this.httpHeaders, responseType: 'blob' as 'json' }).pipe(
-      tap(_ => console.log('fetched image'))
-    )
   }
 }
