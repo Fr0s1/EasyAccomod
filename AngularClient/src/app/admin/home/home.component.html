@@ -1,5 +1,8 @@
 <p>Thông kê luôn ở trang này</p>
 
-<button (click)="getImage()">GET</button>
+<button type="button" (click)="getImageFromService()">Get Image</button>
 
-<!-- <img [src]="imageUrl"> -->
+<img [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading; else noImageFound">
+<ng-template #noImageFound>
+    <img src="fallbackImage.png" alt="Fallbackimage">
+</ng-template>

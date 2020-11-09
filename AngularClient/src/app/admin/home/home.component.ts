@@ -13,8 +13,32 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  imageUrl: string
-  getImage(): void {
-    this.imageService.get()
+  imgUrl: string = 'localhost:8080/room/1';
+  // https://picsum.photos/200/300/?random
+  // localhost:8080/room/1
+
+  imageToShow: any;
+  isImageLoading: boolean;
+
+  createImageFromBlob(image: Blob) {
+   let reader = new FileReader();
+   reader.addEventListener("load", () => {
+      this.imageToShow = reader.result;
+   }, false);
+
+   if (image) {
+      reader.readAsDataURL(image);
+   }
+  }
+
+  getImageFromService() {
+      this.isImageLoading = true;
+      this.imageService.getImage(this.imgUrl).subscribe(data => {
+        this.createImageFromBlob(data);
+        this.isImageLoading = false;
+      }, error => {
+        this.isImageLoading = false;
+        console.log(error);
+      });
   }
 }

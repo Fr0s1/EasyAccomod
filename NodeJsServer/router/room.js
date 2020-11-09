@@ -1,7 +1,7 @@
 const { response } = require('express')
 const express = require('express')
 const { Sequelize, DataTypes } = require('sequelize')
-
+const cors = require('cors')
 const sequelize = require('../db')
 const router = new express.Router()
 
@@ -25,7 +25,11 @@ router.post('/room', async (req, res) => {
     res.send(newRoom)
 })
 
-router.get('/room/:id', async (req, res) => {
+var corsOptions = {
+    origin: 'localhost:8080',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+router.get('/room/:id', cors(corsOptions), async (req, res) => {
     const id = req.params.id;
 
     const url = 'db/room-images/' + id + '/1.jpg';
@@ -33,6 +37,10 @@ router.get('/room/:id', async (req, res) => {
     let option = {
         root: 'D:/Mon hoc UET/Web_Applications_Development/Project/EasyAccomod/NodeJsServer/'
     }
+
+    res.set({
+        'Access-Control-Allow-Origin': 'localhost:4200'
+    })
     res.sendFile(url, option);
 })
 
