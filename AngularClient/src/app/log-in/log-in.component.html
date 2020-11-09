@@ -1,0 +1,79 @@
+<div class="wrapper">
+    <div class="part intro">
+        
+        <h1>Tham gia ngay bây giờ!</h1>
+        <hr>
+        <p>Gia nhập cộng đồng chia sẻ slide / giáo trình giữa các giảng viên lớn nhất tại Việt Nam.</p>
+        <p>Hoàn toàn miễn phí! Hãy bắt đầu ngay.</p>
+        <button class = "intro-button">Tìm hiểu thêm</button>
+    </div>
+
+    <div class="part container">
+    <title>EasyAccomod</title>
+
+    <div class="title">
+        <h1>EasyAccomod</h1>
+    </div>
+    <form appIdentityRevealed>
+            <div class="cross-validation">
+
+                <label for="name"><b>Tên người dùng</b></label>
+
+                <!-- <div *ngIf="incorrectUsername" class="invalidLabel">
+                    <p>Tên người dùng không chính xác!</p>
+                </div> -->
+
+                <input id="name" name="name" class="form-control" type="text" >
+                
+                <!-- <div *ngIf="name.invalid && (name.dirty || name.touched)"
+                    class="alert alert-danger">
+
+                    <div *ngIf="name.errors.required" class="required user-name">
+                        Yêu cầu nhập tên đăng nhập
+                    </div>
+                    <div *ngIf="name.errors.minlength" class="required user-name">
+                        Tên đăng nhập phải có tối thiểu 5 ký tự 
+                    </div>
+
+                </div> -->
+
+                <label for="psw"><b>Mật khẩu</b></label>
+
+                <!-- <div *ngIf="incorrectPassword" class="invalidLabel">
+                    <p>Mật khẩu không chính xác!</p>
+                </div> -->
+
+                <input id="password" name="password" class="form-control" type="password">
+
+                <!-- <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                    class="alert alert-danger">
+        
+                    <div *ngIf="password.errors.required" class="required password">
+                        Yêu cầu nhập mật khẩu
+                    </div>
+                    <div *ngIf="password.errors.minlength" class="required password">
+                        Mật khẩu phải có tối thiểu 6 ký tự
+                    </div>
+                    
+                </div> -->
+            </div>
+        
+    </form>
+
+    <label>
+        <input type="checkbox" checked="checked" name="remember"> Ghi nhớ tài khoản
+    </label>
+
+    <button type="submit" (click)="logIn()" class="ownButton"> 
+        Đăng nhập
+    </button>
+
+    <a routerLink="/register" routerLinkActive="active">
+        <button type="button" class="ownButton">Chưa có tài khoản? Đăng ký ngay!</button>
+    </a>
+
+    <div class="container2">
+        <a href="#">Quên mật khẩu?</a>
+    </div>
+</div>
+</div>
