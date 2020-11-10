@@ -10,6 +10,7 @@ import { AccountComponent } from './admin/verify/accounts/accounts.component';
 import { PostsComponent } from './admin/verify/posts/posts.component';
 import { NavbarComponent } from './admin/navbar/navbar.component';
 import { HomeComponent } from './admin/home/home.component';
+import { LogInComponent } from './log-in/log-in.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HomeComponent } from './admin/home/home.component';
     AccountComponent,
     PostsComponent,
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    LogInComponent
   ],
   imports: [
     BrowserModule,
