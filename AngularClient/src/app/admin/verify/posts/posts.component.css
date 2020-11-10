@@ -22,3 +22,7 @@ th, td {
 .search {
     margin-bottom: 5px;
 }
+
+.container {
+    float: left;
+}
