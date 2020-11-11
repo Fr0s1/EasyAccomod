@@ -11,6 +11,7 @@ import { PostsComponent } from './admin/verify/posts/posts.component';
 import { NavbarComponent } from './admin/navbar/navbar.component';
 import { HomeComponent } from './admin/home/home.component';
 import { LogInComponent } from './log-in/log-in.component';
+import { CreatePostComponent } from './create-post/create-post.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { LogInComponent } from './log-in/log-in.component';
     PostsComponent,
     NavbarComponent,
     HomeComponent,
-    LogInComponent
+    LogInComponent,
+    CreatePostComponent
   ],
   imports: [
     BrowserModule,
