@@ -1,1 +1,166 @@
-<p>create-post works!</p>
+<form method="POST">
+    <div class="form-row">
+        <div class="col">
+            <label for="ownerName">Họ và tên</label>
+            <input type="text" class="form-control" id="ownerName" placeholder="Example input" readonly>
+        </div>
+
+        <div class="col">
+            <label for="ownerNumber">Số điện thoại</label>
+            <input type="text" class="form-control" id="ownerNumber" placeholder="Example input" readonly>
+
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col">
+            <label for="homeNumber">Số nhà</label>
+            <input type="text" class="form-control" id="homeNumber" placeholder="Example input">
+        </div>
+
+        <div class="col">
+            <label for="street">Đường</label>
+            <input type="text" class="form-control" id="street" placeholder="Example input">
+        </div>
+
+        <div class="col">
+            <label for="ward">Phường</label>
+            <input type="text" class="form-control" id="ward" placeholder="Example input">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col">
+            <label for="district">Quận</label>
+            <input type="text" class="form-control" id="district" placeholder="Example input">
+        </div>
+
+        <div class="col">
+            <label for="city">Tỉnh</label>
+            <input type="text" class="form-control" id="city" placeholder="Example input">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="description">Mô tả</label>
+        <textarea class="form-control" id="description"></textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="col">
+            <label for="roomType">Loại phòng</label>
+            <select id="roomType" class="form-control">
+                <option selected>Chọn...</option>
+                <option>Phòng trọ</option>
+                <option>Chung cư mini</option>
+                <option>Nhà nguyên căn</option>
+                <option>Chung cư nguyên căn</option>
+            </select>
+        </div>
+
+        <div class="col">
+            <label for="sharedOwner">Chung chủ</label>
+            <select id="sharedOwner" class="form-control">
+                <option selected>Chọn...</option>
+                <option>Có</option>
+                <option>Không</option>
+            </select>
+
+        </div>
+
+        <div class="col">
+            <label for="area">Diện tích</label>
+            <input type="text" class="form-control" id="area">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Điều kiện vật chất</label>
+        <div class="row">
+            <legend class="col-form-label col-sm-2 pt-0">Điều hòa</legend>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                    value="option1">
+                <label class="form-check-label" for="inlineRadio1">Có</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                    value="option2">
+                <label class="form-check-label" for="inlineRadio2">Không</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <legend class="col-form-label col-sm-2 pt-0">Ban công</legend>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                    value="option1">
+                <label class="form-check-label" for="inlineRadio1">Có</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                    value="option2">
+                <label class="form-check-label" for="inlineRadio2">Không</label>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col">
+                <label for="bathroom">Phòng tắm</label>
+                <input type="text" class="form-control" id="bathroom" placeholder="Example input">
+            </div>
+
+            <div class="col">
+                <label for="kitchen">Phòng bếp</label>
+                <input type="text" class="form-control" id="kitchen" placeholder="Example input">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col">
+                <label for="electrictyPrice">Giá điện</label>
+                <input type="text" class="form-control" id="electrictyPrice" placeholder="Example input">
+
+            </div>
+
+            <div class="col">
+                <label for="waterPrice">Giá nước</label>
+                <input type="text" class="form-control" id="waterPrice" placeholder="Example input">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Giá phòng</label>
+        <div class="form-row">
+            <div class="col">
+                <label for="monthlyPrice">Theo tháng</label>
+                <input type="text" class="form-control" id="monthlyPrice" placeholder="Example input">
+            </div>
+            <div class="col">
+                <label for="quarterPrice">Theo quý</label>
+                <input type="text" class="form-control" id="quarterPrice" placeholder="Example input">
+            </div>
+
+            <div class="col">
+                <label for="yearlyPrice">Theo năm</label>
+                <input type="text" class="form-control" id="yearlyPrice" placeholder="Example input">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="otherUtils">Tiện ích khác</label>
+        <textarea class="form-control" id="otherUtils" rows="3"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="images">Hình ảnh</label>
+        <input type="file" class="form-control-file" id="images" multiple>
+        <div class="row">
+            <img *ngFor="">
+        </div>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Đăng kí phòng trọ</button>
+</form>
