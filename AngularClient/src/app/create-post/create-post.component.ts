@@ -12,4 +12,16 @@ export class CreatePostComponent implements OnInit {
   ngOnInit(): void {
   }
 
-}
+  homeNum
+  imgUrls = []
+  displayImage(files) {
+    for (let i = 0; i < files.length; i++) {
+      var reader = new FileReader();
+      reader.readAsDataURL(files[i]); // read file as data url
+
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        this.imgUrls.push(event.target.result)
+      }
+    }
+  }
+};

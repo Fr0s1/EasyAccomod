@@ -16,7 +16,7 @@
         <div class="form-row">
             <div class="col">
                 <label for="homeNumber">Số nhà</label>
-                <input type="text" class="form-control" id="homeNumber">
+                <input type="text" class="form-control" id="homeNumber" name="homeNum" required>
             </div>
 
             <div class="col">
@@ -37,7 +37,7 @@
             </div>
 
             <div class="col">
-                <label for="city">Tỉnh</label>
+                <label for="city">Tỉnh (Thành phố)</label>
                 <input type="text" class="form-control" id="city">
             </div>
         </div>
@@ -82,28 +82,24 @@
             <div class="row">
                 <legend class="col-form-label col-sm-2 pt-0">Điều hòa</legend>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                        value="option1">
-                    <label class="form-check-label" for="inlineRadio1">Có</label>
+                    <input class="form-check-input" type="radio" name="ac" id="aircondition1" value="option1">
+                    <label class="form-check-label" for="aircondition1">Có</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                        value="option2">
-                    <label class="form-check-label" for="inlineRadio2">Không</label>
+                    <input class="form-check-input" type="radio" name="ac" id="aircondition2" value="option2" checked>
+                    <label class="form-check-label" for="aircondition2">Không</label>
                 </div>
             </div>
 
             <div class="row">
                 <legend class="col-form-label col-sm-2 pt-0">Ban công</legend>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                        value="option1">
-                    <label class="form-check-label" for="inlineRadio1">Có</label>
+                    <input class="form-check-input" type="radio" name="balcony" id="balcony1" value="option3">
+                    <label class="form-check-label" for="balcony1">Có</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                        value="option2">
-                    <label class="form-check-label" for="inlineRadio2">Không</label>
+                    <input class="form-check-input" type="radio" name="balcony" id="balcony2" value="option4" checked>
+                    <label class="form-check-label" for="balcony2">Không</label>
                 </div>
             </div>
 
@@ -162,11 +158,6 @@
         </fieldset>
     </fieldset>
 
-    <div class="form-group">
-        <label for="images">Hình ảnh</label>
-        <input type="file" class="form-control-file" id="images" multiple>
-    </div>
-
     <fieldset>
         <legend>Thời gian hiển thị bài đăng</legend>
         <div class="form-group">
@@ -189,6 +180,18 @@
         </div>
     </fieldset>
 
+    <fieldset>
+        <legend>Hình ảnh phòng trọ</legend>
+        <div class="form-group">
+            <input #imgs type="file" class="form-control-file" id="images" (change)=displayImage(imgs.files) multiple>
+            <div class="row">
+                <div *ngFor="let imgUrl of imgUrls" class="col">
+                    <img [src]="imgUrl" height="200px">
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+
     <button type="submit" class="btn btn-primary">Đăng kí phòng trọ</button>
 </form>
-
