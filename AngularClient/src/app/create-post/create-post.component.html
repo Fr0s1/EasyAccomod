@@ -1,57 +1,58 @@
-<form action="http://localhost:8080/post/create" method="POST" class="needs-validation" novalidate>
-    <div class="form-row">
+<form [formGroup]="roomModel" (ngSubmit)="createPost()">
+    <div class="form-row" formGroupName="owner">
         <div class="col">
             <label for="ownerName">Họ và tên</label>
-            <input type="text" class="form-control" id="ownerName" placeholder="Example input" readonly>
+            <input type="text" class="form-control" id="ownerName" placeholder="dthieu" formControlName="name" readonly>
         </div>
 
         <div class="col">
             <label for="ownerNumber">Số điện thoại</label>
-            <input type="text" class="form-control" id="ownerNumber" placeholder="Example input" readonly>
+            <input type="text" class="form-control" id="ownerNumber" placeholder="0927146476"
+                formControlName="phoneNumber" readonly>
         </div>
     </div>
 
     <fieldset>
         <legend>Địa chỉ phòng trọ</legend>
-        <div class="form-row">
+        <div class="form-row" formGroupName="address">
             <div class="col">
                 <label for="homeNumber">Số nhà</label>
-                <input type="text" class="form-control" id="homeNumber" name="homeNum" required>
+                <input type="text" class="form-control" id="homeNumber" name="homeNum" formControlName="homeNumber">
             </div>
 
             <div class="col">
                 <label for="street">Đường</label>
-                <input type="text" class="form-control" id="street">
+                <input type="text" class="form-control" id="street" formControlName="street">
             </div>
 
             <div class="col">
                 <label for="ward">Phường</label>
-                <input type="text" class="form-control" id="ward">
+                <input type="text" class="form-control" id="ward" formControlName="ward">
             </div>
         </div>
 
-        <div class="form-row">
+        <div class="form-row" formGroupName="address">
             <div class="col">
                 <label for="district">Quận</label>
-                <input type="text" class="form-control" id="district">
+                <input type="text" class="form-control" id="district" formControlName="district">
             </div>
 
             <div class="col">
                 <label for="city">Tỉnh (Thành phố)</label>
-                <input type="text" class="form-control" id="city">
+                <input type="text" class="form-control" id="city" formControlName="city">
             </div>
         </div>
     </fieldset>
 
     <div class="form-group">
         <label for="description">Mô tả</label>
-        <textarea class="form-control" id="description"></textarea>
+        <textarea class="form-control" id="description" formControlName="description"></textarea>
     </div>
 
     <div class="form-row">
         <div class="col">
             <label for="roomType">Loại phòng</label>
-            <select id="roomType" class="form-control">
+            <select id="roomType" class="form-control" formControlName="roomType">
                 <option selected>Chọn...</option>
                 <option>Phòng trọ</option>
                 <option>Chung cư mini</option>
@@ -62,31 +63,32 @@
 
         <div class="col">
             <label for="sharedOwner">Chung chủ</label>
-            <select id="sharedOwner" class="form-control">
+            <select id="sharedOwner" class="form-control" formControlName="sharedOwner">
                 <option selected>Chọn...</option>
                 <option>Có</option>
                 <option>Không</option>
             </select>
-
         </div>
 
         <div class="col">
             <label for="area">Diện tích</label>
-            <input type="text" class="form-control" id="area">
+            <input type="text" class="form-control" id="area" formControlName="area">
         </div>
     </div>
 
     <fieldset>
-        <div class="form-group">
+        <div class="form-group" formGroupName="roomUtils">
             <legend>Điều kiện vật chất</legend>
             <div class="row">
                 <legend class="col-form-label col-sm-2 pt-0">Điều hòa</legend>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="ac" id="aircondition1" value="option1">
+                    <input class="form-check-input" type="radio" name="ac" id="aircondition1" name="airconditioner"
+                        value="Có" formControlName="airconditioner">
                     <label class="form-check-label" for="aircondition1">Có</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="ac" id="aircondition2" value="option2" checked>
+                    <input class="form-check-input" type="radio" name="ac" id="aircondition2" name="airconditioner"
+                        value="Không" formControlName="airconditioner">
                     <label class="form-check-label" for="aircondition2">Không</label>
                 </div>
             </div>
@@ -94,11 +96,13 @@
             <div class="row">
                 <legend class="col-form-label col-sm-2 pt-0">Ban công</legend>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="balcony" id="balcony1" value="option3">
+                    <input class="form-check-input" type="radio" name="balcony" id="balcony1" formControlName="balcony"
+                        value="Có">
                     <label class="form-check-label" for="balcony1">Có</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="balcony" id="balcony2" value="option4" checked>
+                    <input class="form-check-input" type="radio" name="balcony" id="balcony2" formControlName="balcony"
+                        value="Không">
                     <label class="form-check-label" for="balcony2">Không</label>
                 </div>
             </div>
@@ -106,52 +110,51 @@
             <div class="form-row">
                 <div class="col">
                     <label for="bathroom">Phòng tắm</label>
-                    <input type="text" class="form-control" id="bathroom" placeholder="Mô tả phòng tắm">
+                    <input type="text" class="form-control" id="bathroom" placeholder="Mô tả phòng tắm"
+                        formControlName="bathroom">
                 </div>
 
                 <div class="col">
                     <label for="kitchen">Phòng bếp</label>
-                    <input type="text" class="form-control" id="kitchen" placeholder="Mô tả phòng bếp">
+                    <input type="text" class="form-control" id="kitchen" placeholder="Mô tả phòng bếp"
+                        formControlName="kitchen">
                 </div>
             </div>
 
             <div class="row">
                 <div class="col">
                     <label for="electrictyPrice">Giá điện</label>
-                    <input type="text" class="form-control" id="electrictyPrice">
+                    <input type="text" class="form-control" id="electrictyPrice" formControlName="electricPrice">
                 </div>
 
                 <div class="col">
                     <label for="waterPrice">Giá nước</label>
-                    <input type="text" class="form-control" id="waterPrice">
+                    <input type="text" class="form-control" id="waterPrice" formControlName="waterPrice">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="otherUtils">Tiện ích khác</label>
-                <textarea class="form-control" id="otherUtils" rows="3"></textarea>
+                <textarea class="form-control" id="otherUtils" rows="3" formControlName="otherUtils"></textarea>
             </div>
         </div>
 
         <fieldset>
             <legend>Giá phòng</legend>
-            <div class="form-group">
+            <div class="form-group" formGroupName="roomPrice">
                 <div class="form-row">
                     <div class="col">
                         <label for="monthlyPrice">Theo tháng</label>
-                        <input type="text" class="form-control" id="monthlyPrice">
+                        <input type="text" class="form-control" id="monthlyPrice" formControlName="month">
                     </div>
                     <div class="col">
                         <label for="quarterPrice">Theo quý</label>
-                        <input type="text" class="form-control" id="quarterPrice">
+                        <input type="text" class="form-control" id="quarterPrice" formControlName="quarter">
                     </div>
 
                     <div class="col">
                         <label for="yearlyPrice">Theo năm</label>
-                        <input type="text" class="form-control" id="yearlyPrice">
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
+                        <input type="text" class="form-control" id="yearlyPrice" formControlName="year">
                     </div>
                 </div>
             </div>
@@ -160,21 +163,21 @@
 
     <fieldset>
         <legend>Thời gian hiển thị bài đăng</legend>
-        <div class="form-group">
+        <div class="form-group" formGroupName="roomPostDuration">
             <div class="row">
                 <div class="col">
                     <label for="postWeek">Tuần</label>
-                    <input type="week" class="form-control" id="postWeek">
+                    <input type="week" class="form-control" id="postWeek" formControlName="week">
                 </div>
 
                 <div class="col">
                     <label for="postMonth">Tháng</label>
-                    <input type="month" class="form-control" id="postMonth">
+                    <input type="month" class="form-control" id="postMonth" formControlName="month">
                 </div>
 
                 <div class="col">
                     <label for="postYear">Năm</label>
-                    <input type="text" class="form-control" id="postYear">
+                    <input type="text" class="form-control" id="postYear" formControlName="year">
                 </div>
             </div>
         </div>
@@ -193,5 +196,5 @@
     </fieldset>
 
 
-    <button type="submit" class="btn btn-primary">Đăng kí phòng trọ</button>
+    <button (click)="createPost()" class="btn btn-primary">Đăng kí phòng trọ</button>
 </form>
