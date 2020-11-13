@@ -22,11 +22,14 @@ export class CreatePostComponent implements OnInit {
 
       reader.onload = (event) => { // called once readAsDataURL is completed
         this.imgUrls.push(event.target.result)
+        this.roomModel.patchValue({
+          images: this.roomImages
+        })
       }
     }
   }
 
-  // Object thể hiện các thông tin trong form
+  // Object thể hiện các thông tin trong form trừ
   roomModel = this.fb.group({
     owner: this.fb.group({
       name: [''],
@@ -67,8 +70,11 @@ export class CreatePostComponent implements OnInit {
 
   createPost() {
     console.log(this.roomModel.value)
-    console.log(this.roomImages)
-    var formData = JSON.stringify(this.roomModel.value) // Sẽ gửi thông tin form dưới dạng JSON
-    console.log(formData)
+    console.log(this.roomImages)    
+    var form = document.querySelector('form')
+    var formData = new FormData(form)
+    for (var pair of formData.entries()) {
+      console.log(pair[0] + ', ' + pair[1]);
+    }
   }
 };
