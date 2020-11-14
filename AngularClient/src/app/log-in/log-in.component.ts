@@ -12,6 +12,10 @@ export class LogInComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getUrl() {
+    return "./../assets/background3.jpg";
+  }
+
   logIn() {
     
   }
