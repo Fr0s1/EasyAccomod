@@ -1,5 +1,5 @@
-import { Input, Component, OnInit } from '@angular/core';
-import { FormControl, FormBuilder } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { Validators, FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-create-post',
   templateUrl: './create-post.component.html',
@@ -23,54 +23,54 @@ export class CreatePostComponent implements OnInit {
       reader.onload = (event) => { // called once readAsDataURL is completed
         this.imgUrls.push(event.target.result)
         this.roomModel.patchValue({
-          images: this.roomImages
+          images: this.roomImages // thêm ảnh vào model để tạo FormData
         })
       }
     }
   }
 
-  // Object thể hiện các thông tin trong form trừ
+  // Object thể hiện các thông tin trong form 
   roomModel = this.fb.group({
     owner: this.fb.group({
-      name: [''],
-      phoneNumber: [''],
+      name: ['Dinh Trong Hieu'],
+      phoneNumber: ['0927146476'],
     }),
     address: this.fb.group({
-      homeNumber: [''],
-      street: [''],
-      ward: [''], // phường
-      district: [''],
-      city: [''] // tỉnh/thành phố
+      homeNumber: ['', [Validators.required]],
+      street: ['', [Validators.required]],
+      ward: ['', [Validators.required]], // phường
+      district: ['', [Validators.required]],
+      city: ['', [Validators.required]] // tỉnh/thành phố
     }),
-    description: [''],
-    roomType: [''],
-    sharedOwner: [''], // Chung/ko chung chủ
-    area: [''],
+    description: ['', [Validators.required]],
+    roomType: ['', [Validators.required]],
+    sharedOwner: ['', [Validators.required]], // Chung/ko chung chủ
+    area: ['', [Validators.required]],
     roomUtils: this.fb.group({
-      airconditioner: [''],
-      balcony: [''],
-      bathroom: [''],
-      kitchen: [''],
-      electricPrice: [''],
-      waterPrice: [''],
-      otherUtils: ['']
+      airconditioner: ['', [Validators.required]],
+      balcony: ['', [Validators.required]],
+      bathroom: ['', [Validators.required]],
+      kitchen: ['', [Validators.required]],
+      electricPrice: ['', [Validators.required]],
+      waterPrice: ['', [Validators.required]],
+      otherUtils: ['',]
     }),
     roomPrice: this.fb.group({
-      month: [''],
-      quarter: [''],
-      year: ['']
+      month: ['', [Validators.required]],
+      quarter: ['', [Validators.required]],
+      year: ['', [Validators.required]]
     }),
     roomPostDuration: this.fb.group({
-      week: [''],
-      month: [''],
-      year: ['']
+      week: ['', [Validators.required, Validators.min(1)]],
+      month: ['', [Validators.required]],
+      year: ['', [Validators.required]]
     }),
-    images: ['']
+    images: ['', [Validators.required, Validators.minLength(3)]]
   })
 
   createPost() {
     console.log(this.roomModel.value)
-    console.log(this.roomImages)    
+    console.log(this.roomImages)
     var form = document.querySelector('form')
     var formData = new FormData(form)
     for (var pair of formData.entries()) {

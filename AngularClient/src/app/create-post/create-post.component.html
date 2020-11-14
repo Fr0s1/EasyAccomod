@@ -2,13 +2,14 @@
     <div class="form-row" formGroupName="owner">
         <div class="col">
             <label for="ownerName">Họ và tên</label>
-            <input type="text" class="form-control" id="ownerName" name="ownerName" placeholder="dthieu" formControlName="name" readonly>
+            <input type="text" class="form-control" id="ownerName" name="ownerName" placeholder="dthieu"
+                formControlName="name" readonly>
         </div>
 
         <div class="col">
             <label for="ownerNumber">Số điện thoại</label>
             <input type="text" class="form-control" id="ownerNumber" placeholder="0927146476"
-                formControlName="phoneNumber"  name="ownerPhoneNumber" readonly>
+                formControlName="phoneNumber" name="ownerPhoneNumber" readonly>
         </div>
     </div>
 
@@ -53,7 +54,6 @@
         <div class="col">
             <label for="roomType">Loại phòng</label>
             <select id="roomType" class="form-control" formControlName="roomType" name="roomType">
-                <option selected>Chọn...</option>
                 <option>Phòng trọ</option>
                 <option>Chung cư mini</option>
                 <option>Nhà nguyên căn</option>
@@ -64,7 +64,6 @@
         <div class="col">
             <label for="sharedOwner">Chung chủ</label>
             <select id="sharedOwner" class="form-control" formControlName="sharedOwner" name="sharedOwner">
-                <option selected>Chọn...</option>
                 <option>Có</option>
                 <option>Không</option>
             </select>
@@ -124,18 +123,21 @@
             <div class="row">
                 <div class="col">
                     <label for="electrictyPrice">Giá điện</label>
-                    <input type="text" class="form-control" id="electrictyPrice" name="electrictyPrice" formControlName="electricPrice">
+                    <input type="text" class="form-control" id="electrictyPrice" name="electrictyPrice"
+                        formControlName="electricPrice">
                 </div>
 
                 <div class="col">
                     <label for="waterPrice">Giá nước</label>
-                    <input type="text" class="form-control" id="waterPrice" name="waterPrice" formControlName="waterPrice">
+                    <input type="text" class="form-control" id="waterPrice" name="waterPrice"
+                        formControlName="waterPrice">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="otherUtils">Tiện ích khác</label>
-                <textarea class="form-control" id="otherUtils" rows="3" formControlName="otherUtils" name="otherUtils"></textarea>
+                <textarea class="form-control" id="otherUtils" rows="3" formControlName="otherUtils"
+                    name="otherUtils"></textarea>
             </div>
         </div>
 
@@ -145,16 +147,19 @@
                 <div class="form-row">
                     <div class="col">
                         <label for="monthlyPrice">Theo tháng</label>
-                        <input type="text" class="form-control" id="monthlyPrice" formControlName="month" name="monthPrice">
+                        <input type="text" class="form-control" id="monthlyPrice" formControlName="month"
+                            name="monthPrice">
                     </div>
                     <div class="col">
                         <label for="quarterPrice">Theo quý</label>
-                        <input type="text" class="form-control" id="quarterPrice" formControlName="quarter" name="quarterPrice">
+                        <input type="text" class="form-control" id="quarterPrice" formControlName="quarter"
+                            name="quarterPrice">
                     </div>
 
                     <div class="col">
                         <label for="yearlyPrice">Theo năm</label>
-                        <input type="text" class="form-control" id="yearlyPrice" formControlName="year" name="yearPrice">
+                        <input type="text" class="form-control" id="yearlyPrice" formControlName="year"
+                            name="yearPrice">
                     </div>
                 </div>
             </div>
@@ -186,7 +191,8 @@
     <fieldset>
         <legend>Hình ảnh phòng trọ</legend>
         <div class="form-group">
-            <input #imgs type="file" class="form-control-file" id="images" name="roomImages" (change)=displayImage(imgs.files) multiple>
+            <input #imgs type="file" class="form-control-file" id="images" name="roomImages"
+                (change)=displayImage(imgs.files) multiple>
             <div class="row">
                 <div *ngFor="let imgUrl of imgUrls" class="col">
                     <img [src]="imgUrl" height="200px">
