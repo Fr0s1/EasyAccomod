@@ -1,4 +1,4 @@
-<form [formGroup]="roomModel" (ngSubmit)="createPost()">
+<form [formGroup]="postModel" (ngSubmit)="createPost()" enctype="multipart/form-data">
     <div class="form-row" formGroupName="owner">
         <div class="col">
             <label for="ownerName">Họ và tên</label>
@@ -12,6 +12,11 @@
                 formControlName="phoneNumber" name="ownerPhoneNumber" readonly>
         </div>
     </div>
+
+    <fieldset>
+        <legend for="postName">Tên bài đăng</legend>
+        <input type="text" class="form-control" id="postName" name="postName" formControlName="postName">
+    </fieldset>
 
     <fieldset>
         <legend>Địa chỉ phòng trọ</legend>
@@ -143,7 +148,7 @@
 
         <fieldset>
             <legend>Giá phòng</legend>
-            <div class="form-group" formGroupName="roomPrice">
+            <div class="form-group" formGroupName="roomCost">
                 <div class="form-row">
                     <div class="col">
                         <label for="monthlyPrice">Theo tháng</label>
@@ -168,22 +173,46 @@
 
     <fieldset>
         <legend>Thời gian hiển thị bài đăng</legend>
-        <div class="form-group" formGroupName="roomPostDuration">
+        <div class="form-group" formGroupName="postDuration">
+            <div class="row">
+                <div class="col">
+                    <label>Phí tuần: {{postDurationCost.weekCost}} đồng</label>
+                </div>
+
+                <div class="col">
+                    <label>Phí tháng: {{postDurationCost.monthCost}} đồng</label>
+                </div>
+                <div class="col">
+                    <label>Phí năm: {{postDurationCost.yearCost}} đồng</label>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col">
                     <label for="postWeek">Tuần</label>
-                    <input type="week" class="form-control" id="postWeek" formControlName="week" name="postWeek">
+                    <input type="text" class="form-control" id="postWeek" formControlName="week" name="postWeek"
+                        (change)="updateCost()">
                 </div>
 
                 <div class="col">
                     <label for="postMonth">Tháng</label>
-                    <input type="month" class="form-control" id="postMonth" formControlName="month" name="postMonth">
+                    <input type="text" class="form-control" id="postMonth" formControlName="month" name="postMonth"
+                        (change)="updateCost()">
                 </div>
 
                 <div class="col">
                     <label for="postYear">Năm</label>
-                    <input type="text" class="form-control" id="postYear" formControlName="year" name="postYear">
+                    <input type="text" class="form-control" id="postYear" formControlName="year" name="postYear"
+                        (change)="updateCost()">
                 </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label for="postCost">Số tiền phải trả</label>
+                <input type="text" class="form-control" id="postCost" formControlName="postCost" name="postCost"
+                    readonly>
             </div>
         </div>
     </fieldset>
@@ -201,5 +230,5 @@
         </div>
     </fieldset>
 
-    <button (click)="createPost()" class="btn btn-primary">Đăng kí phòng trọ</button>
+    <button type="submit" class="btn btn-primary">Đăng kí phòng trọ</button>
 </form>

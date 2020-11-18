@@ -1,23 +1,23 @@
 module.exports = (sequelize, Sequelize) => {
     const Account = sequelize.define("account", {
         username: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING(20),
+            primaryKey: true
         },
         password: {
-            type: Sequelize.STRING
+            type: Sequelize.TEXT
         },
         accountType: {
-            type: Sequelize.INTEGER
-        },
-        idCard: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING(10)
         },
         state: {
-            type: Sequelize.INTEGER
+            type: Sequelize.BOOLEAN
         },
         online: {
-            type: Sequelize.INTEGER
+            type: Sequelize.BOOLEAN
         }
+    }, {
+        timestamps: false
     });
     
     return Account;
