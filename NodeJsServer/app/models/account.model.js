@@ -5,16 +5,18 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true
         },
         password: {
-            type: Sequelize.TEXT
+            type: Sequelize.STRING(20)
         },
         accountType: {
             type: Sequelize.STRING(10)
         },
-        state: {
-            type: Sequelize.BOOLEAN
+        verified: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
         },
         online: {
-            type: Sequelize.BOOLEAN
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
         }
     }, {
         timestamps: false

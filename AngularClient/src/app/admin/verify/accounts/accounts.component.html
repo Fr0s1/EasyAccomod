@@ -1,7 +1,7 @@
 <div class="container">
     <div class="account">
         <input class="search" type="text" placeholder="Tìm kiếm username">
-        <button class="accept">Duyệt tài khoản</button>
+        <button class="accept" (click)="verifyAccount()">Duyệt tài khoản</button>
         <button class="deny">Từ chối duyệt</button>
         <br>
         <table>
@@ -12,10 +12,10 @@
                 <th>Username</th>
                 <th>Trạng thái duyệt</th>
             </tr>
-            <tr>
+            <tr *ngFor="let account of accounts">
                 <td><input type="checkbox"></td>
-                <td>dthieu223</td>
-                <td>Chưa duyệt</td>
+                <td (click)="showAccountInfo($event)">{{account.username}}</td>
+                <td>{{account.verified}}</td>
             </tr>
         </table>
 
@@ -23,13 +23,13 @@
 
     <div class="account-info">
         <h1>Thông tin chi tiết</h1>
-        <ul>
-            <li>Username: </li>
-            <li>Số căn cước: </li>
-            <li>Họ tên: </li>
-            <li>Số điện thoại:</li>
-            <li>Email: </li>
-            <li>Địa chỉ: </li>
+        <ul *ngIf="accountInfo !== {}">
+            <li>Username: {{accountInfo.username}}</li>
+            <li>Số căn cước: {{accountInfo.idCard}}</li>
+            <li>Họ tên: {{accountInfo.fullName}}</li>
+            <li>Số điện thoại: {{accountInfo.phoneNumber}}</li>
+            <li>Email: {{accountInfo.email}}</li>
+            <li>Địa chỉ: {{accountInfo.address}}</li>
         </ul>
     </div>
 

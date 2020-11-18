@@ -1,12 +1,15 @@
 const db = require("../models");
 const Account = db.accounts;
+const User = db.users;
+const sequelize = db.sequelize
 const Op = db.Sequelize.Op;
-
+const { QueryTypes } = require('sequelize');
 // Create and Save a new account
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.username || !req.body.password || !req.body.accountType || !req.body.userIdCard ||
-    !req.body.state || !req.body.online) {
+  const accountData = req.body
+  if (!accountData.username || !accountData.password || !accountData.accountType || !accountData.userIdCard ||
+    !accountData.verified || !accountData.online) {
     res.status(400).send({
       message: "Content can not be empty!"
     });
@@ -15,14 +18,17 @@ exports.create = (req, res) => {
 
   // Create an account
   const account = {
-    username: req.body.username,
-    password: req.body.password,
-    accountType: req.body.accountType,
-    userIdCard: req.body.userIdCard,
-    state: req.body.state,
-    online: req.body.online,
+    username: accountData.username,
+    password: accountData.password,
+    accountType: accountData.accountType, // Loại tài khoản: 'renter' hoặc 'landlord'
+    userIdCard: accountData.userIdCard,
+    verified: accountData.verified, // trạng thái phê duyệt
+    online: accountData.online,
   };
 
+  if (account.accountType === 'renter') {
+    account.verified = true
+  }
   // Save account in the database
   Account.create(account)
     .then(data => {
@@ -63,6 +69,31 @@ exports.findAll = (req, res) => {
       });
     });
 };
+
+exports.findByVerifiedStatus = (req, res) => {
+  const verifiedStatus = req.query.verified
+
+  Account.findAll({
+    where: {
+      verified: verifiedStatus
+    }
+  }).then(data => {
+    res.send(data);
+  })
+    .catch(err => {
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving accounts."
+      });
+    });
+}
+
+exports.getUserInfo = async (req, res) => {
+  const username = req.params.username
+  const results = await sequelize.query(`SELECT username, fullName, idCard, phoneNumber, email, address FROM users JOIN accounts ON users.idCard = accounts.userIdCard WHERE username='${username}' `, { type: QueryTypes.SELECT })
+
+  // console.log(results)
+  res.send(results)
+}
 
 exports.findByUsername = (req, res) => {
   const searchUsername = req.params.username;
@@ -116,11 +147,12 @@ exports.delete = (req, res) => {
     });
 };
 
+
 exports.edit = (req, res) => {
-  const id = req.params.id;
+  const username = req.params.username;
 
   Account.update(req.body, {
-    where: { id: id }
+    where: { username }
   })
     .then(num => {
       if (num == 1) {
@@ -129,13 +161,13 @@ exports.edit = (req, res) => {
         });
       } else {
         res.send({
-          message: `Cannot update account with id=${id}. Maybe account was not found or req.body is empty!`
+          message: `Cannot update account with username=${username}. Maybe account was not found or req.body is empty!`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error updating account with id=" + id
+        message: "Error updating account with username=" + username
       });
     });
 };
