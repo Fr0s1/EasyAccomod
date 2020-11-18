@@ -25,7 +25,7 @@ exports.create = (req, res) => {
   // Save user in the database
   User.create(user)
     .then(data => {
-      res.send(data);
+        res.send(data);
     })
     .catch(err => {
       res.status(500).send({

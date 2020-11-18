@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { LogInComponent } from './log-in/log-in.component'
 import { AccountComponent } from './admin/verify/accounts/accounts.component';
 import { PostsComponent } from './admin/verify/posts/posts.component';
