@@ -1,0 +1,13 @@
+form {
+    width: 50%;
+    margin: auto;
+}
+
+div .ng-touched.ng-valid {
+    border-left: 5px solid #42A948;
+}
+
+div .ng-touched.ng-invalid {
+    border-left: 5px solid #a94442;
+    /* red */
+}

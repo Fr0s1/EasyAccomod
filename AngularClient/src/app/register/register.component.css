@@ -3,11 +3,13 @@
     background-size: cover;
     width: 100%;
     height: 100%;
-    position: absolute; top: 0; left: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
     overflow: overlay
 }
 
-  .container {
+.container {
     width: 40%;
     border-radius: 1rem;
     background-color: rgba(211, 211, 211, .2);
@@ -15,10 +17,10 @@
     top: 5rem;
     color: white;
     box-shadow: 0px 0px 2px #0B031C;
-  }
-  
-  .btn{
-    background:transparent;
+}
+
+.btn {
+    background: transparent;
     width: 100%;
     border: 2px solid transparent;
     box-sizing: border-box;
@@ -31,29 +33,31 @@
     padding: 15px 25px;
     text-align: center;
     text-decoration: none;
-    display:inline-block;
-    outline:none;
-    position:relative;
-    text-shadow:0 1px 1px rgba(0, 0, 0, 0.5);
+    display: inline-block;
+    outline: none;
+    position: relative;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
     -webkit-transition: all 0.2s ease-in-out 0s;
     -moz-transition: all 0.2s ease-in-out 0s;
     -ms-transition: all 0.2s ease-in-out 0s;
-     transition: all 0.2s ease-in-out 0s;
-  }
-  
-  .grey{
-    background:#4c4c4c;
-    color:#fff;
+    transition: all 0.2s ease-in-out 0s;
+}
+
+.grey {
+    background: #4c4c4c;
+    color: #fff;
     box-shadow: 0 3px 0 #333333;
-  }
-  .grey:hover{
-    background:#747373;    
-  }
-  .grey:active, .grey:focus{
-    background:#444444;    
-  }
-  
-  .login100-form-title {
+}
+
+.grey:hover {
+    background: #747373;
+}
+
+.grey:active, .grey:focus {
+    background: #444444;
+}
+
+.login100-form-title {
     display: block;
     font-family: Poppins;
     font-size: 30px;
@@ -61,9 +65,9 @@
     line-height: 1.2;
     text-align: center;
     font-weight: bold;
-  }
-  
-  .p-b-26 {
+}
+
+.p-b-26 {
     padding-bottom: 26px;
     padding-top: 26px;
-  }
+}
