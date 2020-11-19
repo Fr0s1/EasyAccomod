@@ -1,0 +1,57 @@
+.post-details {
+    display: grid;
+    grid-template-areas: "postTitle postTitle" "postStats postStats" "roomImage roomDetails" "roomImage features" "ownerInfo ownerInfo" "roomDescription roomDescription" "comments comments";
+    grid-template-columns: 1fr 1fr;
+    column-gap: 50px;
+}
+
+.post-stats {
+    grid-area: postStats;
+}
+
+.post-title {
+    grid-area: postTitle;
+}
+
+.roomDetails {
+    grid-area: roomDetails;
+}
+
+.roomPreview {
+    grid-area: roomImage;
+}
+
+.features {
+    grid-area: features;
+}
+
+.comments {
+    grid-area: comments;
+}
+
+.owner-info {
+    grid-area: ownerInfo;
+}
+
+.roomDescription {
+    grid-area: roomDescription;
+}
+
+.roomDetails p:not(p:first-child) {
+    /* float: left */
+    display: inline-block;
+}
+
+.thumb-bar img {
+    float: left;
+    display: block;
+    width: 33%;
+}
+
+.favorite button {
+    display: inline-block;
+}
+
+.container {
+    background-color: white;
+}
