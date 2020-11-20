@@ -47,6 +47,10 @@ module.exports = (sequelize, DataTypes) => {
         postCost: {
             type: DataTypes.INTEGER(32).UNSIGNED,
         },
+        paidAmount: {
+            type: DataTypes.INTEGER(32).UNSIGNED,
+            defaultValue: 0
+        },
         paymentStatus: {
             type: DataTypes.BOOLEAN,
             defaultValue: false

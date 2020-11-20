@@ -44,9 +44,9 @@ exports.create = async (req, res) => {
     const post = {
         postName: formData.postName,
         roomID: newRoom.roomID, // Lấy id phòng trọ tương ứng với bài đăng
-        postWeek: newRoom.postWeek,
-        postMonth: newRoom.postMonth,
-        postYear: newRoom.postYear,
+        postWeek: formData.postWeek,
+        postMonth: formData.postMonth,
+        postYear: formData.postYear,
         postCost: formData.postWeek * price.weekCost + formData.postMonth * price.monthCost + formData.postYear * price.yearCost,
         accountUsername: 'dthieu223'
     }
@@ -85,6 +85,7 @@ exports.getPostInfoByID = async (req, res) => {
 exports.findByQuery = async (req, res) => {
     const conditions = req.query
 
+    console.log(conditions)
     try {
         let result = await Post.findAll({
             where: conditions
@@ -120,7 +121,7 @@ exports.updatePostByID = async (req, res) => {
             }
         })
         if (result == 1) {
-            res.send({message: 'Verifiy post successfully'})
+            res.send({ message: 'Updated post successfully' })
         }
     } catch (err) {
         res.send(err)

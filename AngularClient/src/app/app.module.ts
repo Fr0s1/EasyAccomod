@@ -15,6 +15,7 @@ import { LogInComponent } from './log-in/log-in.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
 import { PaymentComponent } from './admin/payment/payment.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { PaymentComponent } from './admin/payment/payment.component';
     LogInComponent,
     CreatePostComponent,
     PostDetailsComponent,
-    PaymentComponent
+    PaymentComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

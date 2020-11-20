@@ -29,7 +29,10 @@ export class PostsComponent implements OnInit {
 
   verifyPost() {
     this.selectedPosts.forEach(postID => {
-      this.postService.updatePost(this.targetURL + `/${postID}`, { verifiedStatus: 1 }).subscribe(data => console.log(data))
+      this.postService.updatePost(this.targetURL + `/${postID}`, { verifiedStatus: 1 }).subscribe(data => {
+        console.log(data)
+        // location.reload()
+      })
     })
   }
 }

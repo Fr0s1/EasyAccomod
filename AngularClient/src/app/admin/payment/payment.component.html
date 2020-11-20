@@ -1,8 +1,9 @@
 <div class="container">
     <table>
         <thead>
-            <tr >
-                <th rowspan="2" >username</th>
+
+            <tr>
+                <th rowspan="2">username</th>
                 <th rowspan="2">ID bài đăng</th>
                 <th rowspan="2">Tên bài đăng</th>
                 <th colspan="3">Thời gian hiển thị</th>
@@ -16,10 +17,22 @@
                 <th>Số tháng</th>
                 <th>Số năm</th>
             </tr>
-
         </thead>
-        <tbody>
 
+        <tbody>
+            <tr *ngFor="let post of unpaidPostsList">
+                <td>{{post.accountUsername}}</td>
+                <td>{{post.postID}}</td>
+                <td>{{post.postName}}</td>
+                <td>{{post.postWeek}}</td>
+                <td>{{post.postMonth}}</td>
+                <td>{{post.postYear}}</td>
+                <td>{{post.postCost}}</td>
+                <td><input type="text" class="form-control paidAmount" value={{post.paidAmount}}></td>
+                <td>{{post.paymentStatus}}</td>
+                <td><button class="btn btn-primary"
+                        (click)="updatePostPaymentStatus($event, post.postID, post.postCost)">Cập nhật</button></td>
+            </tr>
         </tbody>
     </table>
 </div>
