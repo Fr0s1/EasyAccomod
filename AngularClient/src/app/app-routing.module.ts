@@ -9,6 +9,7 @@ import { HomeComponent } from './admin/home/home.component';
 import { CreatePostComponent } from './create-post/create-post.component'
 import { RegisterComponent } from './register/register.component'
 import { PostDetailsComponent } from './post-details/post-details.component'
+import { PaymentComponent } from './admin/payment/payment.component'
 
 // Tạo đường dẫn để duyệt tài khoản/bài đăng cho admin với định dạng /admin/verify/...
 
@@ -22,6 +23,7 @@ const routes: Routes = [
         { path: '', component: HomeComponent },
         { path: 'verify/accounts', component: AccountComponent },
         { path: 'verify/posts', component: PostsComponent },
+        { path: 'payment', component: PaymentComponent }
       ]
   },
   { path: 'login', component: LogInComponent },

@@ -14,6 +14,7 @@ import { HomeComponent } from './admin/home/home.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
+import { PaymentComponent } from './admin/payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { PostDetailsComponent } from './post-details/post-details.component';
     HomeComponent,
     LogInComponent,
     CreatePostComponent,
-    PostDetailsComponent
+    PostDetailsComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,

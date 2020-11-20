@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { VerifyAccountService} from './../../../services/adminServices/getUnverifiedAccounts/verify-account.service'
+import { AccountService } from './../../../services/accountServices/account.service'
 
 @Component({
   selector: 'admin-accounts',
@@ -8,25 +8,37 @@ import { VerifyAccountService} from './../../../services/adminServices/getUnveri
 })
 export class AccountComponent implements OnInit {
 
-  constructor(private verifyAccountService: VerifyAccountService) { }
+  constructor(private accountService: AccountService) { }
 
   accounts: any
-  accountInfo = {}
+  accountInfo = {
+    username: '',
+    idCard: '',
+    fullName: '',
+    phoneNumber: '',
+    email: '',
+    address: ''
+  }
 
   selectedAccounts = []
   ngOnInit(): void {
-    this.verifyAccountService.getUnverifiedAccountsList().subscribe(data => this.accounts = data)
+    this.accountService.getUnverifiedAccountsList().subscribe(data => this.accounts = data)
   }
-  
+
   verifyAccount() {
     for (let username of this.selectedAccounts) {
       console.log(username)
-      this.verifyAccountService.verifyAccount(username).subscribe(data => console.log('Verified'))
+      this.accountService.verifyAccount(username).subscribe(data => console.log('Verified'))
     }
   }
 
+  clicked: boolean = true
   showAccountInfo(event) {
-    this.verifyAccountService.getAccountInfo(event.target.innerHTML).subscribe(data => this.accountInfo=data[0])
-    this.selectedAccounts.push(event.target.innerHTML)
+    this.clicked = !this.clicked
+    this.accountService.getAccountInfo(event.target.innerHTML).subscribe(data => this.accountInfo = data[0])
+    if (!this.selectedAccounts.includes(event.target.innerHTML)) {
+      this.selectedAccounts.push(event.target.innerHTML)
+    }
+    console.log(this.selectedAccounts)
   }
 }

@@ -31,10 +31,30 @@ module.exports = (sequelize, DataTypes) => {
         starsReview: {
             type: DataTypes.FLOAT,
             defaultValue: 0
+        },
+        postWeek: {
+            type: DataTypes.INTEGER(8).UNSIGNED,
+            defaultValue: 1
+        },
+        postMonth: {
+            type: DataTypes.INTEGER(8).UNSIGNED,
+            defaultValue: 0
+        },
+        postYear: {
+            type: DataTypes.INTEGER(8).UNSIGNED,
+            defaultValue: 0
+        },
+        postCost: {
+            type: DataTypes.INTEGER(32).UNSIGNED,
+        },
+        paymentStatus: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         }
     }, {
         tableName: 'posts',
-        timestamps: false
+        timestamps: true,
+        createdAt: true,
+        updatedAt: false
     })
-
 }

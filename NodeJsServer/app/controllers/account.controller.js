@@ -70,23 +70,6 @@ exports.findAll = (req, res) => {
     });
 };
 
-exports.findByVerifiedStatus = (req, res) => {
-  const verifiedStatus = req.query.verified
-
-  Account.findAll({
-    where: {
-      verified: verifiedStatus
-    }
-  }).then(data => {
-    res.send(data);
-  })
-    .catch(err => {
-      res.status(500).send({
-        message: err.message || "Some error occurred while retrieving accounts."
-      });
-    });
-}
-
 exports.getUserInfo = async (req, res) => {
   const username = req.params.username
   const results = await sequelize.query(`SELECT username, fullName, idCard, phoneNumber, email, address FROM users JOIN accounts ON users.idCard = accounts.userIdCard WHERE username='${username}' `, { type: QueryTypes.SELECT })

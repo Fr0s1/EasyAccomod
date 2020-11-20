@@ -7,16 +7,7 @@ module.exports = app => {
   router.post("/", accounts.create);
 
   //Retrieve all accounts
-  router.get("/", (req, res) => {
-    console.log(req.query)
-    if (req.query !== {}) {
-      if (req.query.verified) {
-        accounts.findByVerifiedStatus(req, res)
-      }
-    } else {
-      accounts.findAll(req, res)
-    }
-  });
+  router.get("/", accounts.findAll);
 
   //Retrieve an account by username
   router.get("/username/:username", accounts.findOne);

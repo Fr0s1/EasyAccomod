@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
-import { UploadPostService } from '../services/createPost/upload-service.service';
+import { PostService } from '../services/postService/post.service';
 
 @Component({
   selector: 'app-create-post',
@@ -9,16 +9,13 @@ import { UploadPostService } from '../services/createPost/upload-service.service
 })
 export class CreatePostComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private uploadService: UploadPostService) { }
+  constructor(private fb: FormBuilder, private postService: PostService) { }
 
   ngOnInit(): void {
+    this.getPostCost()
   }
 
-  postDurationCost = {
-    weekCost: 5,
-    monthCost: 20,
-    yearCost: 100,
-  }
+  postUploadCost: any
   roomImages = [] // mảng lưu các file ảnh của phòng trọ (Blob)
   imgUrls = []
   displayImage(files) {
@@ -77,12 +74,13 @@ export class CreatePostComponent implements OnInit {
     images: ['', [Validators.required, Validators.minLength(3)]]
   })
 
+  uploadURL = 'http://localhost:8080/api/posts'
+
   createPost() {
     var form = document.querySelector('form')
     var formData = new FormData(form)
-    var uploadURL = 'http://localhost:8080/api/posts'
 
-    this.uploadService.uploadForm(uploadURL, formData).subscribe(res => {
+    this.postService.uploadForm(this.uploadURL, formData).subscribe(res => {
       console.log(res)
     })
   }
@@ -91,6 +89,10 @@ export class CreatePostComponent implements OnInit {
     var week = parseInt(this.postModel.get('postDuration.week').value)
     var month = parseInt(this.postModel.get('postDuration.month').value)
     var year = parseInt(this.postModel.get('postDuration.year').value)
-    this.postModel.get('postCost').setValue(this.postDurationCost.weekCost * week + this.postDurationCost.monthCost * month + this.postDurationCost.yearCost * year)
+    this.postModel.get('postCost').setValue(this.postUploadCost.weekCost * week + this.postUploadCost.monthCost * month + this.postUploadCost.yearCost * year)
+  }
+
+  getPostCost() {
+    this.postService.getUploadFee(this.uploadURL + '/uploadFee').subscribe(data => this.postUploadCost = data)
   }
 };

@@ -1,21 +1,32 @@
 <div class="container">
     <div class="posts">
         <input class="search" type="text" placeholder="Tìm kiếm bài đăng">
-        <button class="verify">Duyệt bài đăng</button>
+        <button class="verify" (click)="verifyPost()">Duyệt bài đăng</button>
         <button class="deny">Từ chối bài đăng</button>
 
         <br>
-        <table>
-            <tr>
+        <table >
+            <thead>
                 <th>
                     <input type="checkbox">
                 </th>
                 <th>ID bài đăng</th>
                 <th>Tên bài đăng</th>
                 <th>Username</th>
-                <th>Ngày đăng</th>
+                <th>Thời gian tạo</th>
                 <th>Trạng thái duyệt</th>
-            </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let post of unverifiedPosts">
+                    <td><input type="checkbox"></td>
+                    <td  (click)="addPost($event)">{{post.postID}}</td>
+                    <td >{{post.postName}}</td>
+                    <td>{{post.accountUsername}}</td>
+                    <td>{{post.createdAt}}</td>
+                    <td>{{post.verifiedStatus}}</td>
+                </tr>
+            </tbody>
         </table>
     </div>
 
