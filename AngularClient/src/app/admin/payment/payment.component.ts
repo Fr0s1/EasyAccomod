@@ -31,7 +31,6 @@ export class PaymentComponent implements OnInit {
     expiredDate.setDate(today.getDate() + week * 30);
     expiredDate.setMonth(today.getMonth() + month)
     expiredDate.setFullYear(today.getFullYear() + year)
-    expiredDate.setHours(expiredDate.getHours() + 7)
     return expiredDate
   }
 
@@ -52,7 +51,6 @@ export class PaymentComponent implements OnInit {
     if (paymentStatus) {
       expiredTime = this.updatePostTime(postWeek, postMonth, postYear)
       postTime = new Date()
-      postTime.setHours(postTime.getHours() + 7)
     }
 
     this.postService.updatePost(this.targetURL + `/${postID}`, { postID, paidAmount, paymentStatus, postTime, expiredTime }).subscribe(data => console.log(data))

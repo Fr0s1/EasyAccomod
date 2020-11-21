@@ -32,13 +32,42 @@ export class AccountComponent implements OnInit {
     }
   }
 
-  clicked: boolean = true
   showAccountInfo(event) {
-    this.clicked = !this.clicked
     this.accountService.getAccountInfo(event.target.innerHTML).subscribe(data => this.accountInfo = data[0])
-    if (!this.selectedAccounts.includes(event.target.innerHTML)) {
-      this.selectedAccounts.push(event.target.innerHTML)
+  }
+
+  addToVerifyList(event) {
+    let username = event.target.parentElement.nextSibling.innerHTML;
+
+    if (event.target.checked) {
+      if (!this.selectedAccounts.includes(username)) {
+        this.selectedAccounts.push(username)
+      }
+    } else {
+      this.selectedAccounts = this.selectedAccounts.filter(value => value != username)
     }
+
     console.log(this.selectedAccounts)
+  }
+
+  addAllAccount(event) {
+    let inputList = document.querySelectorAll('td input');
+    if (event.target.checked) {
+      for (let i = 0; i < inputList.length; i++) {
+        let input = (<HTMLInputElement>inputList[i])
+        input.checked = true
+        this.selectedAccounts.push(this.accounts[i].username)
+      }
+
+    } else {
+      this.selectedAccounts = []
+      for (let i = 0; i < inputList.length; i++) {
+        let input = (<HTMLInputElement>inputList[i])
+        input.checked = false
+      }
+    }
+
+    console.log(this.selectedAccounts)
+    // console.log(inputList)
   }
 }

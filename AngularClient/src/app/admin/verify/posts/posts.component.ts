@@ -21,9 +21,16 @@ export class PostsComponent implements OnInit {
   }
 
   addPost(event) {
-    if (!this.selectedPosts.includes(event.target.innerHTML)) {
-      this.selectedPosts.push(event.target.innerHTML)
+    let postID = event.target.parentElement.nextSibling.innerHTML;
+
+    if (event.target.checked) {
+      if (!this.selectedPosts.includes(postID)) {
+        this.selectedPosts.push(postID)
+      }
+    } else {
+      this.selectedPosts = this.selectedPosts.filter(value => value != postID)
     }
+
     console.log(this.selectedPosts)
   }
 
@@ -31,9 +38,31 @@ export class PostsComponent implements OnInit {
     this.selectedPosts.forEach(postID => {
       this.postService.updatePost(this.targetURL + `/${postID}`, { verifiedStatus: 1 }).subscribe(data => {
         console.log(data)
-        // location.reload()
       })
     })
+  }
+
+  addAllPost(event) {
+    let postList = document.querySelectorAll('td input')
+
+    if (!event.target.checked) {
+      this.selectedPosts = []
+      for (let i = 0; i < postList.length; i++) {
+        let currentPost = (<HTMLInputElement>postList[i])
+
+        currentPost.checked = false;
+      }
+    } else {
+
+      for (let i = 0; i < postList.length; i++) {
+        let currentPost = (<HTMLInputElement>postList[i])
+
+        currentPost.checked = true;
+        this.selectedPosts.push(this.unverifiedPosts[i].postID)
+      }
+    }
+
+    console.log(this.selectedPosts);
   }
 }
 
