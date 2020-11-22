@@ -14,7 +14,7 @@
             </div>
         </div>
 
-        <fieldset>
+        <fieldset class="title">
             <legend for="postName">Tên bài đăng</legend>
             <input type="text" class="form-control" id="postName" name="postName" formControlName="postName">
         </fieldset>
@@ -178,14 +178,14 @@
             <div class="form-group" formGroupName="postDuration">
                 <div class="row">
                     <div class="col">
-                        <label>Phí tuần: {{postUploadCost.weekCost}} đồng</label>
+                        <label>Phí tuần: {{postUploadCost?.weekCost}} đồng</label>
                     </div>
 
                     <div class="col">
-                        <label>Phí tháng: {{postUploadCost.monthCost}} đồng</label>
+                        <label>Phí tháng: {{postUploadCost?.monthCost}} đồng</label>
                     </div>
                     <div class="col">
-                        <label>Phí năm: {{postUploadCost.yearCost}} đồng</label>
+                        <label>Phí năm: {{postUploadCost?.yearCost}} đồng</label>
                     </div>
                 </div>
 

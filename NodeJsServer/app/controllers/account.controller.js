@@ -4,6 +4,7 @@ const User = db.users;
 const sequelize = db.sequelize
 const Op = db.Sequelize.Op;
 const { QueryTypes } = require('sequelize');
+
 // Create and Save a new account
 exports.create = (req, res) => {
   // Validate request
@@ -56,9 +57,10 @@ exports.findOne = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-  const title = req.query.title;
-  var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+  // const title = req.query.title;
+  // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
 
+  condition = req.query
   Account.findAll({ where: condition })
     .then(data => {
       res.send(data);
@@ -74,7 +76,6 @@ exports.getUserInfo = async (req, res) => {
   const username = req.params.username
   const results = await sequelize.query(`SELECT username, fullName, idCard, phoneNumber, email, address FROM users JOIN accounts ON users.idCard = accounts.userIdCard WHERE username='${username}' `, { type: QueryTypes.SELECT })
 
-  // console.log(results)
   res.send(results)
 }
 
