@@ -4,55 +4,60 @@
             Register
         </span>
 
-        <form [formGroup]="">
+        <form [formGroup]="accountModel" (ngSubmit)="registerAccount()" enctype="multipart/form-data">
             <div class="cross-validation">
-                <div class="form-row">
+                <div class="form-row" formGroupName="name">
                     <div class="col">
                         <label for="firstName"><b>First Name</b></label>
-                        <input type="text" class="form-control" placeholder="First name">
+                        <input type="text" class="form-control" placeholder="First name" name="firstName"
+                            formControlName="firstName">
                     </div>
                     <div class="col">
                         <label for="lastName"><b>Last Name</b></label>
-                        <input type="text" class="form-control" placeholder="Last name">
+                        <input type="text" class="form-control" placeholder="Last name" name="lastName"
+                            formControlName="lastName">
                     </div>
                 </div>
 
                 <label for="name"><b>Username</b></label>
-                <input class="input100 form-control" id="name" name="name" type="text">
+                <input class="input100 form-control" id="name" name="username" type="text" formControlName="username">
 
                 <label for="psw"><b>Password</b></label>
-                <input class="input100 form-control" id="password" name="password" type="password">
+                <input class="input100 form-control" id="password" name="password" type="password"
+                    formControlName="password">
 
                 <label for="confirmPsw"><b>Confirm Password</b></label>
                 <input class="input100 form-control" id="confirmPassword" name="confirmPassword" type="password">
 
-                <label for="type"><b>Account Type</b></label>
-                <select class="form-control">
+                <label for="accountType"><b>Account Type</b></label>
+                <select class="form-control" name="accountType" formControlName="accountType">
                     <option>Landlord</option>
                     <option>Renter</option>
                 </select>
 
-                <label for="confirmPsw"><b>ID Card Number</b></label>
-                <input class="input100 form-control" id="idCard" name="idCard" type="text">
+                <label for="idCard"><b>ID Card Number</b></label>
+                <input class="input100 form-control" id="idCard" name="idCard" type="text" formControlName="idCard">
 
-                <label for="confirmPsw"><b>Phone number</b></label>
-                <input class="input100 form-control" id="phone" name="phone" type="text">
+                <label for="phoneNumber"><b>Phone number</b></label>
+                <input class="input100 form-control" id="phoneNumber" name="phoneNumber" type="text"
+                    formControlName="phoneNumber">
 
-                <label for="confirmPsw"><b>Email</b></label>
-                <input class="input100 form-control" id="email" name="email" type="email">
+                <label for="email"><b>Email</b></label>
+                <input class="input100 form-control" id="email" name="email" type="email" formControlName="email">
 
-                <label for="confirmPsw"><b>Address</b></label>
-                <textarea class="form-control" id="address" name="address" rows="3"></textarea>
+                <label for="address"><b>Address</b></label>
+                <textarea class="form-control" id="address" name="address" rows="3"
+                    formControlName="address"></textarea>
             </div>
-        </form>
 
-        <a class="btn grey" href="#">Register</a>
+            <button class="btn grey" type="submit">Register</button>
+        </form>
 
         <span class="txt1">
             Already have an account?
         </span>
 
-        <a class="txt2" href="#">
+        <a class="txt2" href="/login">
             Sign In
         </a>
     </div>

@@ -5,13 +5,16 @@ const Post = db.posts // model của bài đăng
 
 exports.create = async (req, res) => {
     const Room = db.rooms // model cho phòng trọ
+
     const formData = req.body // các thông tin trong http body
 
     const sharedOwner = formData.sharedOwner === 'Có' ? true : false;
     const airconditioner = formData.airconditioner === 'Có' ? true : false;
     const balcony = formData.balcony === 'Có' ? true : false;
-    const roomImagesLocalPath = path.join(__dirname, `./../../roomImages/${req.roomID}`)
-    // tạo instance phòng trọ
+
+    const roomImagesLocalPath = path.join(__dirname, `./../../roomImages/${req.roomID}`) // directory to save room's images
+
+    // Create room instance 
     const room = {
         roomType: formData.roomType,
         sharedOwner,
@@ -33,32 +36,33 @@ exports.create = async (req, res) => {
         waterPrice: formData.waterPrice,
         imageURI: roomImagesLocalPath,
         otherUtils: formData.otherUtils,
-        accountUsername: 'dthieu223'
+        accountUsername: req.username
     }
 
-    // Lưu phòng trọ trong db
+    // Save room in database
     let newRoom = await Room.create(room)
+
     let postCost = await PostCost.findAll()
 
-    const price = postCost[0].dataValues;
+    const costs = postCost[0].dataValues;
     const post = {
         postName: formData.postName,
-        roomID: newRoom.roomID, // Lấy id phòng trọ tương ứng với bài đăng
+        roomID: newRoom.roomID, // Lấy id phòng trọ vừa được thêm vào database để tương ứng với bài đăng
         postWeek: formData.postWeek,
         postMonth: formData.postMonth,
         postYear: formData.postYear,
-        postCost: formData.postWeek * price.weekCost + formData.postMonth * price.monthCost + formData.postYear * price.yearCost,
-        accountUsername: 'dthieu223'
+        postCost: formData.postWeek * costs.weekCost + formData.postMonth * costs.monthCost + formData.postYear * costs.yearCost,
+        accountUsername: req.username
     }
-    // Sau đó lưu thông tin bài đăng gắn với phòng trọ
+
+    // Sau đó lưu thông tin bài đăng
     await Post.create(post)
 
     res.send({ message: 'Success' })
-    // console.log(req.files)
-    // console.log(req.body)
 }
 
 exports.getUploadFee = async (req, res) => {
+    // Lấy chi phí đăng bài
     let uploadFee = await PostCost.findAll()
 
     uploadFee = uploadFee[0].dataValues

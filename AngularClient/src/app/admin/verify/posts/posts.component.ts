@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PostService } from '../../../services/postService/post.service'
+import { PostService } from '../../../services/post.service'
 @Component({
   selector: 'admin-posts',
   templateUrl: './posts.component.html',

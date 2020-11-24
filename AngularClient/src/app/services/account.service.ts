@@ -19,6 +19,7 @@ export class AccountService {
     return this.http.put(this.accountUrl + `/${username}`, { verified: true })
   }
 
+  // Get user information corresponding to account with given username
   getAccountInfo(username: string) {
     return this.http.get(this.accountUrl + `/info/${username}`)
   }

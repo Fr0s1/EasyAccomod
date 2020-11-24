@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
-import { PostService } from '../services/postService/post.service';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { PostService } from '../services/post.service';
+import { AccountService } from '../services/account.service';
+import { AuthService } from '../services/auth.service';
+import { Account } from '../_model/account'
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-create-post',
@@ -9,15 +13,63 @@ import { PostService } from '../services/postService/post.service';
 })
 export class CreatePostComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private postService: PostService) { }
+  constructor(private fb: FormBuilder, private postService: PostService, private accountService: AccountService, private authService: AuthService) { }
+
+  currentAccount: Account // account with token
+  userInfo // User information(Full name, phone number, ... ) corresponding to account
+  postUploadCost: any // Cost to upload post
+  roomImages = [] // mảng lưu các file ảnh của phòng trọ (Blob)
+  imgUrls = []
+  postModel: FormGroup
 
   ngOnInit(): void {
     this.getPostCost()
+    this.currentAccount = this.authService.currentUserValue // Get current logged in account information
+    this.getUserInfo()
+
+    // Object thể hiện các thông tin trong form 
+    this.postModel = this.fb.group({
+      owner: this.fb.group({
+        name: [''],
+        phoneNumber: [''],
+      }),
+      postName: ['', [Validators.required]],
+      address: this.fb.group({
+        homeNumber: ['', [Validators.required]],
+        street: ['', [Validators.required]],
+        ward: ['', [Validators.required]], // phường
+        district: ['', [Validators.required]],
+        city: ['', [Validators.required]] // tỉnh/thành phố
+      }),
+      description: ['', [Validators.required]],
+      roomType: ['', [Validators.required]],
+      sharedOwner: ['', [Validators.required]], // Chung/ko chung chủ
+      area: ['', [Validators.required]],
+      roomUtils: this.fb.group({
+        airconditioner: ['', [Validators.required]],
+        balcony: ['', [Validators.required]],
+        bathroom: ['', [Validators.required]],
+        kitchen: ['', [Validators.required]],
+        electricPrice: ['', [Validators.required]],
+        waterPrice: ['', [Validators.required]],
+        otherUtils: ['',]
+      }),
+      roomCost: this.fb.group({
+        month: ['', [Validators.required]],
+        quarter: ['', [Validators.required]],
+        year: ['', [Validators.required]]
+      }),
+      postDuration: this.fb.group({
+        week: ['1', [Validators.required, Validators.min(1)]],
+        month: ['0', [Validators.required]],
+        year: ['0', [Validators.required]]
+      }),
+      postCost: [''],
+      images: ['', [Validators.required, Validators.minLength(3)]]
+    })
   }
 
-  postUploadCost: any
-  roomImages = [] // mảng lưu các file ảnh của phòng trọ (Blob)
-  imgUrls = []
+  // Show preview when upload images
   displayImage(files) {
     for (let i = 0; i < files.length; i++) {
       var reader = new FileReader();
@@ -32,47 +84,6 @@ export class CreatePostComponent implements OnInit {
       }
     }
   }
-
-  // Object thể hiện các thông tin trong form 
-  postModel = this.fb.group({
-    owner: this.fb.group({
-      name: ['Dinh Trong Hieu'],
-      phoneNumber: ['0927146476'],
-    }),
-    postName: ['', [Validators.required]],
-    address: this.fb.group({
-      homeNumber: ['', [Validators.required]],
-      street: ['', [Validators.required]],
-      ward: ['', [Validators.required]], // phường
-      district: ['', [Validators.required]],
-      city: ['', [Validators.required]] // tỉnh/thành phố
-    }),
-    description: ['', [Validators.required]],
-    roomType: ['', [Validators.required]],
-    sharedOwner: ['', [Validators.required]], // Chung/ko chung chủ
-    area: ['', [Validators.required]],
-    roomUtils: this.fb.group({
-      airconditioner: ['', [Validators.required]],
-      balcony: ['', [Validators.required]],
-      bathroom: ['', [Validators.required]],
-      kitchen: ['', [Validators.required]],
-      electricPrice: ['', [Validators.required]],
-      waterPrice: ['', [Validators.required]],
-      otherUtils: ['',]
-    }),
-    roomCost: this.fb.group({
-      month: ['', [Validators.required]],
-      quarter: ['', [Validators.required]],
-      year: ['', [Validators.required]]
-    }),
-    postDuration: this.fb.group({
-      week: ['1', [Validators.required, Validators.min(1)]],
-      month: ['0', [Validators.required]],
-      year: ['0', [Validators.required]]
-    }),
-    postCost: [''],
-    images: ['', [Validators.required, Validators.minLength(3)]]
-  })
 
   uploadURL = 'http://localhost:8080/api/posts'
 
@@ -95,4 +106,18 @@ export class CreatePostComponent implements OnInit {
   getPostCost() {
     this.postService.getUploadFee(this.uploadURL + '/uploadFee').subscribe(data => this.postUploadCost = data)
   }
-};
+
+  getUserInfo() {
+    this.accountService.getAccountInfo(this.currentAccount.username).subscribe(data => {
+      this.userInfo = data[0]
+
+      // Fill form with logged in account data
+      this.postModel.patchValue({
+        owner: {
+          name: this.userInfo.fullName,
+          phoneNumber: this.userInfo.phoneNumber
+        }
+      })
+    })
+  };
+}

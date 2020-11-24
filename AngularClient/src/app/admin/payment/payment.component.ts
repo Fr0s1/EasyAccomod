@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PostService } from '../../services/postService/post.service'
-import { FormControl } from '@angular/forms'
-import { TmplAstBoundAttribute } from '@angular/compiler';
-import { expressionType } from '@angular/compiler/src/output/output_ast';
+import { PostService } from '../../services/post.service'
+
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',

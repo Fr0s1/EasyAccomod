@@ -2,7 +2,8 @@ const multer = require('multer')
 const db = require('../models')
 const path = require('path')
 const fs = require('fs')
-const { nextTick } = require('process')
+const authJwt = require('../middleware/authJwt')
+
 module.exports = app => {
     const post = require("../controllers/post.controller.js");
 
@@ -43,7 +44,7 @@ module.exports = app => {
     upload = multer({ storage, preservePath: true })
 
     // Create new post with corresponding room
-    router.post("/", getNextRoomID, upload.any(), post.create)
+    router.post("/", authJwt.verifyToken, getNextRoomID, upload.any(), post.create)
 
     // Get post upload fee
     router.get("/uploadFee", post.getUploadFee)

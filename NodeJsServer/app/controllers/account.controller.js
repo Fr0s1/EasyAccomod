@@ -4,36 +4,64 @@ const User = db.users;
 const sequelize = db.sequelize
 const Op = db.Sequelize.Op;
 const { QueryTypes } = require('sequelize');
+const bcryptjs = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+const auth = require('../config/auth.config')
 
 // Create and Save a new account
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
+
   // Validate request
   const accountData = req.body
-  if (!accountData.username || !accountData.password || !accountData.accountType || !accountData.userIdCard ||
-    !accountData.verified || !accountData.online) {
+  if (!accountData.username || !accountData.password || !accountData.accountType || !accountData.idCard) {
     res.status(400).send({
       message: "Content can not be empty!"
     });
     return;
   }
 
-  // Create an account
+  // Create user
+  const user = {
+    idCard: accountData.idCard,
+    fullName: accountData.firstName + ' ' + accountData.lastName,
+    phoneNumber: accountData.phoneNumber,
+    email: accountData.email,
+    address: accountData.address
+  }
+
+  await User.create(user)
+
+  // Create an account with corresponding user
   const account = {
     username: accountData.username,
     password: accountData.password,
-    accountType: accountData.accountType, // Loại tài khoản: 'renter' hoặc 'landlord'
-    userIdCard: accountData.userIdCard,
-    verified: accountData.verified, // trạng thái phê duyệt
+    accountType: accountData.accountType, // Account type: 'Renter' or 'Landlord'
+    userIdCard: accountData.idCard,
+    verified: accountData.verified, // Verified status: default is 'true' for 'renter', 'false' for 'Landlord'
     online: accountData.online,
   };
 
-  if (account.accountType === 'renter') {
+  if (account.accountType === 'Renter') {
     account.verified = true
   }
-  // Save account in the database
+
+  // Save account of user in database
   Account.create(account)
     .then(data => {
-      res.send(data);
+      // Optional: send token immediately for recently signed up account
+
+      // var token = jwt.sign({ username: data.username, accountType: data.accountType }, auth.secret, {
+      //   expiresIn: "1d"
+      // })
+
+      // res.status(201).send({
+      //   username: data.username,
+      //   accountType: data.accountType,
+      //   token
+      // });
+      //
+
+      res.send({message: 'Signup successfully'})
     })
     .catch(err => {
       res.status(500).send({
@@ -57,9 +85,6 @@ exports.findOne = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-  // const title = req.query.title;
-  // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-
   condition = req.query
   Account.findAll({ where: condition })
     .then(data => {
