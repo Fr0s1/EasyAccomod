@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
-import { UploadPostService } from '../services/createPost/upload-service.service';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { PostService } from '../services/post.service';
+import { AccountService } from '../services/account.service';
+import { AuthService } from '../services/auth.service';
+import { Account } from '../_model/account'
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-create-post',
@@ -9,18 +13,63 @@ import { UploadPostService } from '../services/createPost/upload-service.service
 })
 export class CreatePostComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private uploadService: UploadPostService) { }
+  constructor(private fb: FormBuilder, private postService: PostService, private accountService: AccountService, private authService: AuthService) { }
 
-  ngOnInit(): void {
-  }
-
-  postDurationCost = {
-    weekCost: 5,
-    monthCost: 20,
-    yearCost: 100,
-  }
+  currentAccount: Account // account with token
+  userInfo // User information(Full name, phone number, ... ) corresponding to account
+  postUploadCost: any // Cost to upload post
   roomImages = [] // mảng lưu các file ảnh của phòng trọ (Blob)
   imgUrls = []
+  postModel: FormGroup
+
+  ngOnInit(): void {
+    this.getPostCost()
+    this.currentAccount = this.authService.currentUserValue // Get current logged in account information
+    this.getUserInfo()
+
+    // Object thể hiện các thông tin trong form 
+    this.postModel = this.fb.group({
+      owner: this.fb.group({
+        name: [''],
+        phoneNumber: [''],
+      }),
+      postName: ['', [Validators.required]],
+      address: this.fb.group({
+        homeNumber: ['', [Validators.required]],
+        street: ['', [Validators.required]],
+        ward: ['', [Validators.required]], // phường
+        district: ['', [Validators.required]],
+        city: ['', [Validators.required]] // tỉnh/thành phố
+      }),
+      description: ['', [Validators.required]],
+      roomType: ['', [Validators.required]],
+      sharedOwner: ['', [Validators.required]], // Chung/ko chung chủ
+      area: ['', [Validators.required]],
+      roomUtils: this.fb.group({
+        airconditioner: ['', [Validators.required]],
+        balcony: ['', [Validators.required]],
+        bathroom: ['', [Validators.required]],
+        kitchen: ['', [Validators.required]],
+        electricPrice: ['', [Validators.required]],
+        waterPrice: ['', [Validators.required]],
+        otherUtils: ['',]
+      }),
+      roomCost: this.fb.group({
+        month: ['', [Validators.required]],
+        quarter: ['', [Validators.required]],
+        year: ['', [Validators.required]]
+      }),
+      postDuration: this.fb.group({
+        week: ['1', [Validators.required, Validators.min(1)]],
+        month: ['0', [Validators.required]],
+        year: ['0', [Validators.required]]
+      }),
+      postCost: [''],
+      images: ['', [Validators.required, Validators.minLength(3)]]
+    })
+  }
+
+  // Show preview when upload images
   displayImage(files) {
     for (let i = 0; i < files.length; i++) {
       var reader = new FileReader();
@@ -36,53 +85,13 @@ export class CreatePostComponent implements OnInit {
     }
   }
 
-  // Object thể hiện các thông tin trong form 
-  postModel = this.fb.group({
-    owner: this.fb.group({
-      name: ['Dinh Trong Hieu'],
-      phoneNumber: ['0927146476'],
-    }),
-    postName: ['', [Validators.required]],
-    address: this.fb.group({
-      homeNumber: ['', [Validators.required]],
-      street: ['', [Validators.required]],
-      ward: ['', [Validators.required]], // phường
-      district: ['', [Validators.required]],
-      city: ['', [Validators.required]] // tỉnh/thành phố
-    }),
-    description: ['', [Validators.required]],
-    roomType: ['', [Validators.required]],
-    sharedOwner: ['', [Validators.required]], // Chung/ko chung chủ
-    area: ['', [Validators.required]],
-    roomUtils: this.fb.group({
-      airconditioner: ['', [Validators.required]],
-      balcony: ['', [Validators.required]],
-      bathroom: ['', [Validators.required]],
-      kitchen: ['', [Validators.required]],
-      electricPrice: ['', [Validators.required]],
-      waterPrice: ['', [Validators.required]],
-      otherUtils: ['',]
-    }),
-    roomCost: this.fb.group({
-      month: ['', [Validators.required]],
-      quarter: ['', [Validators.required]],
-      year: ['', [Validators.required]]
-    }),
-    postDuration: this.fb.group({
-      week: ['1', [Validators.required, Validators.min(1)]],
-      month: ['0', [Validators.required]],
-      year: ['0', [Validators.required]]
-    }),
-    postCost: [''],
-    images: ['', [Validators.required, Validators.minLength(3)]]
-  })
+  uploadURL = 'http://localhost:8080/api/posts'
 
   createPost() {
     var form = document.querySelector('form')
     var formData = new FormData(form)
-    var uploadURL = 'http://localhost:8080/api/posts'
 
-    this.uploadService.uploadForm(uploadURL, formData).subscribe(res => {
+    this.postService.uploadForm(this.uploadURL, formData).subscribe(res => {
       console.log(res)
     })
   }
@@ -91,6 +100,24 @@ export class CreatePostComponent implements OnInit {
     var week = parseInt(this.postModel.get('postDuration.week').value)
     var month = parseInt(this.postModel.get('postDuration.month').value)
     var year = parseInt(this.postModel.get('postDuration.year').value)
-    this.postModel.get('postCost').setValue(this.postDurationCost.weekCost * week + this.postDurationCost.monthCost * month + this.postDurationCost.yearCost * year)
+    this.postModel.get('postCost').setValue(this.postUploadCost.weekCost * week + this.postUploadCost.monthCost * month + this.postUploadCost.yearCost * year)
   }
-};
+
+  getPostCost() {
+    this.postService.getUploadFee(this.uploadURL + '/uploadFee').subscribe(data => this.postUploadCost = data)
+  }
+
+  getUserInfo() {
+    this.accountService.getAccountInfo(this.currentAccount.username).subscribe(data => {
+      this.userInfo = data[0]
+
+      // Fill form with logged in account data
+      this.postModel.patchValue({
+        owner: {
+          name: this.userInfo.fullName,
+          phoneNumber: this.userInfo.phoneNumber
+        }
+      })
+    })
+  };
+}

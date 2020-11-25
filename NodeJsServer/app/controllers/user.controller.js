@@ -25,6 +25,7 @@ exports.create = (req, res) => {
   // Save user in the database
   User.create(user)
     .then(data => {
+        
         res.send(data);
     })
     .catch(err => {
@@ -95,7 +96,7 @@ exports.findPhoneNumber = (req, res) => {
     });
 }
 
-//Retrieve one user from the databse by email
+//Retrieve one user from the database by email
 exports.findEmail = (req, res) => {
   const searchEmail = req.params.email;
 

@@ -4,26 +4,25 @@
             EasyAccomod
         </span>
 
-        <form appIdentityRevealed [formGroup]="">
+        <form [formGroup]="account" (ngSubmit)="signIn()" enctype="multipart/form-data">
             <div class="cross-validation">
-
                 <label for="name"><b>Username</b></label>
 
-                <input class="input100 form-control" id="name" name="name" type="text">
+                <input class="input100 form-control" id="name" name="username" type="text" formControlName="username">
 
-                <label for="psw"><b>Password</b></label>
+                <label for="password"><b>Password</b></label>
 
-                <input class="input100 form-control" id="password" name="password" type="password">
+                <input class="input100 form-control" id="password" name="password" type="password"
+                    formControlName="password">
             </div>
-
+            <button class="btn grey" type="submit">Sign In</button>
         </form>
-        <a class="btn grey" href="#">Sign In</a>
 
         <span class="txt1">
             Don’t have an account?
         </span>
 
-        <a class="txt2" href="#">
+        <a class="txt2" href="/register">
             Sign Up
         </a>
 

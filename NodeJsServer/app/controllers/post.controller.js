@@ -1,15 +1,23 @@
 const db = require("../models");
+const path = require('path')
+const PostCost = db.postCost // chi phí đăng bài
+const Post = db.posts // model của bài đăng
 
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
     const Room = db.rooms // model cho phòng trọ
-    const Post = db.posts // model của bài đăng
 
     const formData = req.body // các thông tin trong http body
 
-    // tạo instance phòng trọ
+    const sharedOwner = formData.sharedOwner === 'Có' ? true : false;
+    const airconditioner = formData.airconditioner === 'Có' ? true : false;
+    const balcony = formData.balcony === 'Có' ? true : false;
+
+    const roomImagesLocalPath = path.join(__dirname, `./../../roomImages/${req.roomID}`) // directory to save room's images
+
+    // Create room instance 
     const room = {
         roomType: formData.roomType,
-        sharedOwner: formData.sharedOwner,
+        sharedOwner,
         area: formData.area,
         description: formData.description,
         homeNumber: formData.homeNumber,
@@ -22,27 +30,104 @@ exports.create = (req, res) => {
         yearPrice: formData.yearPrice,
         bathroom: formData.bathroom,
         kitchen: formData.kitchen,
-        airconditioner: formData.airconditioner,
-        balcony: formData.balcony,
+        airconditioner,
+        balcony,
         electricityPrice: formData.electricityPrice,
         waterPrice: formData.waterPrice,
+        imageURI: roomImagesLocalPath,
         otherUtils: formData.otherUtils,
-        accountUsername: formData.accountUsername
+        accountUsername: req.username
     }
 
+    // Save room in database
+    let newRoom = await Room.create(room)
 
-    // Lưu phòng trọ trong db
-    Room.create(room)
-        .then(data => {
-            res.send(data)
-            const post = {
-                postName: formData.postName,
-                roomID: data.roomID
+    let postCost = await PostCost.findAll()
+
+    const costs = postCost[0].dataValues;
+    const post = {
+        postName: formData.postName,
+        roomID: newRoom.roomID, // Lấy id phòng trọ vừa được thêm vào database để tương ứng với bài đăng
+        postWeek: formData.postWeek,
+        postMonth: formData.postMonth,
+        postYear: formData.postYear,
+        postCost: formData.postWeek * costs.weekCost + formData.postMonth * costs.monthCost + formData.postYear * costs.yearCost,
+        accountUsername: req.username
+    }
+
+    // Sau đó lưu thông tin bài đăng
+    await Post.create(post)
+
+    res.send({ message: 'Success' })
+}
+
+exports.getUploadFee = async (req, res) => {
+    // Lấy chi phí đăng bài
+    let uploadFee = await PostCost.findAll()
+
+    uploadFee = uploadFee[0].dataValues
+
+    res.send(uploadFee)
+}
+
+exports.getPostInfoByID = async (req, res) => {
+    const _id = req.params.id
+
+    try {
+        let post = await Post.findAll({
+            where: {
+                postID: _id
             }
-            // Sau đó lưu thông tin bài đăng gắn với phòng trọ
-            Post.create(post).then(data => console.log(data))
         })
-        .catch(e => {
-            res.send(e)
+
+        res.send(post)
+    } catch (err) {
+        res.send(err)
+    }
+}
+
+exports.findByQuery = async (req, res) => {
+    const conditions = req.query
+
+    console.log(conditions)
+    try {
+        let result = await Post.findAll({
+            where: conditions
         })
+
+        res.send(result)
+    } catch (err) {
+        console.log("Can't find post with given queries")
+    }
+}
+
+exports.deleteByQuery = async (req, res) => {
+    const conditions = req.query
+
+    try {
+        let deletedPosts = Post.destroy({
+            where: conditions
+        })
+
+        res.send('Posts deleted: ' + deletedPosts)
+    } catch (err) {
+        res.send(err)
+    }
+}
+
+exports.updatePostByID = async (req, res) => {
+    const info = req.body
+    const postID = req.params.id
+    try {
+        let result = await Post.update(info, {
+            where: {
+                postID
+            }
+        })
+        if (result == 1) {
+            res.send({ message: 'Updated post successfully' })
+        }
+    } catch (err) {
+        res.send(err)
+    }
 }

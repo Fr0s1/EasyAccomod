@@ -7,22 +7,19 @@
         <table>
             <tr>
                 <th>
-                    <input type="checkbox">
+                    <input type="checkbox" class="selectAll" (change)="addAllAccount($event)">
                 </th>
                 <th>Username</th>
                 <th>Trạng thái duyệt</th>
             </tr>
             <tr *ngFor="let account of accounts">
-                <td><input type="checkbox"></td>
-                <td (click)="showAccountInfo($event)">{{account.username}}</td>
-                <td>{{account.verified}}</td>
+                <td><input type="checkbox" (change)="addToVerifyList($event)"></td>
+                <td (click)="showAccountInfo($event)">{{account?.username}}</td>
+                <td>{{account?.verified}}</td>
             </tr>
         </table>
 
     </div>
-
-    
-
     <div class="account-info">
         <h1>Thông tin chi tiết</h1>
         <ul *ngIf="accountInfo !== {}">

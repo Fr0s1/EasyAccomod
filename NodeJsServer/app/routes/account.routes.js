@@ -1,22 +1,21 @@
+const multer = require('multer')
+const authJwt = require('../middleware/authJwt')
 module.exports = app => {
   const accounts = require("../controllers/account.controller.js");
+  const auth = require("../controllers/auth.controller.js");
 
   var router = require("express").Router();
 
+  let upload = multer();
+
   //Create a new account
-  router.post("/", accounts.create);
+  router.post("/", upload.none(), accounts.create);
+
+  // Login account
+  router.post("/login", upload.none(), auth.signIn)
 
   //Retrieve all accounts
-  router.get("/", (req, res) => {
-    console.log(req.query)
-    if (req.query !== {}) {
-      if (req.query.verified) {
-        accounts.findByVerifiedStatus(req, res)
-      }
-    } else {
-      accounts.findAll(req, res)
-    }
-  });
+  router.get("/", accounts.findAll);
 
   //Retrieve an account by username
   router.get("/username/:username", accounts.findOne);

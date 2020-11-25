@@ -1,3 +1,16 @@
+/* table {} */
+
+.container {
+    margin-left: 0px;
+    margin-top: 20px;
+    /* width: 70%; */
+}
+
+th, td {
+    text-align: center;
+    vertical-align: middle;
+}
+
 table {
     /* margin-top: 20px; */
     border-collapse: collapse;
@@ -8,18 +21,4 @@ table {
 th, td {
     border: 1px solid black;
     text-align: center;
-}
-
-.container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 20px;
-}
-
-.search, h1 {
-    margin-top: 20px;
-}
-
-.search {
-    margin-bottom: 5px;
 }

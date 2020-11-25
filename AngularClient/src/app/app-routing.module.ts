@@ -7,7 +7,10 @@ import { AdminComponent } from './admin/admin.component'
 import { HomeComponent } from './admin/home/home.component';
 import { CreatePostComponent } from './create-post/create-post.component'
 import { RegisterComponent } from './register/register.component'
-// Tạo đường dẫn để duyệt tài khoản/bài đăng cho admin với định dạng /admin/verify/...
+import { PostDetailsComponent } from './post-details/post-details.component'
+import { PaymentComponent } from './admin/payment/payment.component'
+import { AuthGuard } from './_helpers/auth.guard'
+import { Role } from './_model/role'
 
 const routes: Routes = [
   //{ path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -19,15 +22,24 @@ const routes: Routes = [
         { path: '', component: HomeComponent },
         { path: 'verify/accounts', component: AccountComponent },
         { path: 'verify/posts', component: PostsComponent },
-      ]
+        { path: 'payment', component: PaymentComponent }
+      ],
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin] } // Only admin account can access
   },
   { path: 'login', component: LogInComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'post/create', component: CreatePostComponent }
+  {
+    path: 'post/create', component: CreatePostComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Landlord, Role.Admin] } // Only account with right type can access
+  },
+  { path: 'post/details', component: PostDetailsComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }

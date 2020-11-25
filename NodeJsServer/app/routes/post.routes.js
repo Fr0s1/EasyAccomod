@@ -2,7 +2,8 @@ const multer = require('multer')
 const db = require('../models')
 const path = require('path')
 const fs = require('fs')
-const { nextTick } = require('process')
+const authJwt = require('../middleware/authJwt')
+
 module.exports = app => {
     const post = require("../controllers/post.controller.js");
 
@@ -41,7 +42,25 @@ module.exports = app => {
     }
 
     upload = multer({ storage, preservePath: true })
-    router.post("/", getNextRoomID, upload.any(), post.create)
+
+    // Create new post with corresponding room
+    router.post("/", authJwt.verifyToken, getNextRoomID, upload.any(), post.create)
+
+    // Get post upload fee
+    router.get("/uploadFee", post.getUploadFee)
+
+    // Get post info by ID
+    router.get("/:id", post.getPostInfoByID)
+
+    // Get post with conditions specified in URL query string
+    // find all if the req.query obj is empty
+    router.get("/", post.findByQuery)
+
+    // Update date post info with given postID 
+    router.put("/:id", post.updatePostByID)
+    
+    // Delete posts with columns sastify conditions in query string 
+    router.delete("/", post.deleteByQuery)
 
     app.use("/api/posts", router)
 }

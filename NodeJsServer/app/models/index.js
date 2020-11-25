@@ -39,7 +39,10 @@ accounts.belongsTo(users, { foreignKey: 'userIdCard' }) // 1 người dùng ch�
 accounts.hasMany(posts) // 1 tài khoản chủ trọ có nhiều bài đăng
 accounts.hasMany(rooms) // 1 chủ trọ có thể có nhiều phòng
 
-test()
+
+// Liên kết m-n
+// posts.belongsToMany(User)
+// test()
 
 const db = {
   rooms,
