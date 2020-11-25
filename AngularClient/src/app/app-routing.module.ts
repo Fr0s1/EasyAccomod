@@ -10,7 +10,7 @@ import { RegisterComponent } from './register/register.component'
 // Tạo đường dẫn để duyệt tài khoản/bài đăng cho admin với định dạng /admin/verify/...
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  //{ path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path: 'admin',
     component: AdminComponent,

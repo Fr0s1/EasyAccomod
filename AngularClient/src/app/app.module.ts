@@ -24,7 +24,7 @@ import { RegisterComponent } from './register/register.component';
     NavbarComponent,
     HomeComponent,
     LogInComponent,
-    CreatePostComponent
+    CreatePostComponent,
     LogInComponent,
     RegisterComponent
   ],
