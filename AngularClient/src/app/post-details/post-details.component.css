@@ -1,0 +1,71 @@
+.post-details {
+    display: grid;
+    grid-template-areas: "postTitle postTitle" "postStats postStats" "roomImage roomDetails" "roomImage features" "ownerInfo ownerInfo" "roomDescription roomDescription" "comments comments";
+    grid-template-columns: 1fr 1fr;
+}
+
+.post-stats {
+    grid-area: postStats;
+}
+
+.post-title {
+    grid-area: postTitle;
+    padding: 5px;
+}
+
+.roomDetails {
+    grid-area: roomDetails;
+}
+
+.roomPreview {
+    grid-area: roomImage;
+}
+
+.features {
+    grid-area: features;
+}
+
+.comments {
+    grid-area: comments;
+}
+
+.owner-info {
+    grid-area: ownerInfo;
+}
+
+.roomDescription {
+    grid-area: roomDescription;
+}
+
+.thumb-bar img {
+    float: left;
+    display: block;
+    width: 33%;
+}
+
+.favorite button {
+    display: inline-block;
+}
+
+.owner-info, .roomDescription, .comments, .roomPreview, .features, .post-stats, .post-title, .roomDetails {
+    background-color: white;
+    border-radius: 5px;
+}
+
+.container div {
+    margin: 10px
+}
+
+.features h2, .roomDetails h2 {
+    display: block;
+    background-color: rgb(60, 103, 141);
+    color: white;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    padding-left: 5px;
+
+}
+
+.owner-info h2, .comments h2, .roomDescription h2 {
+    padding: 5px;
+}

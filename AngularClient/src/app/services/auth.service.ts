@@ -1,0 +1,70 @@
+import { Injectable } from "@angular/core";
+
+import { HttpClient } from '@angular/common/http'
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Account } from '../_model/account'
+import { map } from 'rxjs/operators';
+import * as bcrypt from 'bcryptjs'
+
+@Injectable({
+    providedIn: 'root'
+})
+export class AuthService {
+    private currentAccountSubject: BehaviorSubject<Account>;
+    public currentAccount: Observable<Account>;
+
+    private apiUrl = 'http://localhost:8080/api/accounts'
+
+    constructor(private http: HttpClient) {
+        this.currentAccountSubject = new BehaviorSubject<Account>(JSON.parse(localStorage.getItem('currentAccount')));
+        this.currentAccount = this.currentAccountSubject.asObservable();
+    }
+
+    public get currentUserValue(): Account {
+        return this.currentAccountSubject.value;
+    }
+
+    salt = bcrypt.genSaltSync(10)
+    hashPassword(form: FormData): FormData {
+        var hasedPsw = bcrypt.hashSync(form.get('password'), this.salt)
+
+        form.set('password', hasedPsw)
+
+        return form
+    }
+
+    signIn(form: FormData) {
+        return this.http.post<any>(this.apiUrl + '/login', form, { responseType: 'json' }).pipe(map(user => {
+            // login successful if there's a jwt token in the response
+            if (user && user.token) {
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('currentAccount', JSON.stringify(user));
+                this.currentAccountSubject.next(user);
+                console.log('Logged in')
+            }
+
+            return user;
+        }));
+    }
+
+    signUp(form: FormData) {
+        form = this.hashPassword(form)
+        return this.http.post<any>(this.apiUrl, form, { responseType: 'json' })
+            .pipe(map(user => {
+                // sign up successful if there's a jwt token in the response
+                if (user && user.token) {
+                    // store user details and jwt token in local storage to keep user logged in between page refreshes
+                    localStorage.setItem('currentAccount', JSON.stringify(user));
+                    this.currentAccountSubject.next(user);
+                }
+
+                return user;
+            }));
+    }
+
+    logout() {
+        // remove user from local storage to log user out
+        localStorage.removeItem('currentAccount');
+        this.currentAccountSubject.next(null);
+    }
+}
