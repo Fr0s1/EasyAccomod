@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand" routerLink="/home">
+        <img src="../../assets/EA-Emblem.png" height="40px">
+        EasyAccomod
+    </a>
+
+    <div class="navbar-nav">
+        <a class="nav-link" routerLink="/posts">Phòng trọ</a>
+    </div>
+
+    <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item dropdown" *ngIf="currentAccount">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Hồ sơ
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+                <a class="dropdown-item" href="#">Trang cá nhân</a>
+                <a class="dropdown-item" href="#">Thông báo</a>
+                <a class="dropdown-item" routerLink="/post/create" *ngIf="!(currentAccount.accountType === renterType)"
+                    target="_blank">Tạo bài đăng</a>
+                <button class="dropdown-item" (click)="logout()">Đăng xuất</button>
+            </div>
+        </li>
+        <a class="nav-link" routerLink="/admin"
+            *ngIf="currentAccount && currentAccount.accountType === adminType">Admin</a>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right ml-auto" *ngIf="!currentAccount">
+        <li><a class="nav-link" routerLink="/register">Đăng kí</a></li>
+        <li><a class="nav-link" routerLink="/login">Đăng nhập</a></li>
+    </ul>
+</nav>

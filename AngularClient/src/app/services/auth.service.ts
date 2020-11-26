@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Account } from '../_model/account'
 import { map } from 'rxjs/operators';
 import * as bcrypt from 'bcryptjs'
+import { Router } from '@angular/router'
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +16,7 @@ export class AuthService {
 
     private apiUrl = 'http://localhost:8080/api/accounts'
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router) {
         this.currentAccountSubject = new BehaviorSubject<Account>(JSON.parse(localStorage.getItem('currentAccount')));
         this.currentAccount = this.currentAccountSubject.asObservable();
     }
@@ -24,9 +25,10 @@ export class AuthService {
         return this.currentAccountSubject.value;
     }
 
-    salt = bcrypt.genSaltSync(10)
     hashPassword(form: FormData): FormData {
-        var hasedPsw = bcrypt.hashSync(form.get('password'), this.salt)
+        const salt: string = bcrypt.genSaltSync(10)
+
+        var hasedPsw = bcrypt.hashSync(form.get('password'), salt)
 
         form.set('password', hasedPsw)
 
@@ -48,7 +50,10 @@ export class AuthService {
     }
 
     signUp(form: FormData) {
+
+        // Hash password before sending to server
         form = this.hashPassword(form)
+
         return this.http.post<any>(this.apiUrl, form, { responseType: 'json' })
             .pipe(map(user => {
                 // sign up successful if there's a jwt token in the response
@@ -66,5 +71,6 @@ export class AuthService {
         // remove user from local storage to log user out
         localStorage.removeItem('currentAccount');
         this.currentAccountSubject.next(null);
+        location.reload()
     }
 }

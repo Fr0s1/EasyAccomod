@@ -86,10 +86,20 @@ exports.getPostInfoByID = async (req, res) => {
     }
 }
 
+exports.getPreviewPosts = async (req, res) => {
+    let result = await Post.findAll({ limit: 4, order: [["postTime", 'DESC']] }, {
+        where: {
+            verifiedStatus: true,
+            paymentStatus: true
+        }
+    })
+
+    res.send(result)
+}
+
 exports.findByQuery = async (req, res) => {
     const conditions = req.query
 
-    console.log(conditions)
     try {
         let result = await Post.findAll({
             where: conditions

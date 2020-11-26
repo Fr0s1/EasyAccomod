@@ -1,27 +1,32 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
+import { HomepageComponent } from './homepage/homepage.component'
 import { LogInComponent } from './log-in/log-in.component'
-import { AccountComponent } from './admin/verify/accounts/accounts.component';
-import { PostsComponent } from './admin/verify/posts/posts.component';
+import { AdminAccountsComponent } from './admin/verify/accounts/accounts.component';
+import { AdminPostsComponent } from './admin/verify/posts/posts.component';
 import { AdminComponent } from './admin/admin.component'
 import { HomeComponent } from './admin/home/home.component';
 import { CreatePostComponent } from './create-post/create-post.component'
 import { RegisterComponent } from './register/register.component'
 import { PostDetailsComponent } from './post-details/post-details.component'
 import { PaymentComponent } from './admin/payment/payment.component'
+import { PostsComponent } from './posts/posts.component'
+
 import { AuthGuard } from './_helpers/auth.guard'
 import { Role } from './_model/role'
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: HomepageComponent },
   {
     path: 'admin',
     component: AdminComponent,
     children:
       [
         { path: '', component: HomeComponent },
-        { path: 'verify/accounts', component: AccountComponent },
-        { path: 'verify/posts', component: PostsComponent },
+        { path: 'verify/accounts', component: AdminAccountsComponent },
+        { path: 'verify/posts', component: AdminPostsComponent },
         { path: 'payment', component: PaymentComponent }
       ],
     canActivate: [AuthGuard],
@@ -34,7 +39,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [Role.Landlord, Role.Admin] } // Only account with right type can access
   },
-  { path: 'post/details', component: PostDetailsComponent }
+  { path: 'post/details/:id', component: PostDetailsComponent },
+  { path: 'posts', component: PostsComponent }
 ];
 
 @NgModule({

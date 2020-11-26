@@ -10,20 +10,9 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     min: dbConfig.pool.min,
     acquire: dbConfig.pool.acquire,
     idle: dbConfig.pool.idle
-  }
+  },
+  timezone: '+07:00'
 });
-
-let test = async () => {
-  try {
-    await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
-
-  // await sequelize.sync({ force: true })
-  console.log("All models were synchronized successfully.")
-}
 
 rooms = require("./rooms.model")(sequelize, DataTypes)
 posts = require("./posts.model")(sequelize, DataTypes)

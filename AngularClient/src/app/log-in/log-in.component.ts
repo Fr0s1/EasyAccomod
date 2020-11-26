@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
+import { Router } from '@angular/router'
+
 import { first } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service'
 
@@ -10,7 +12,7 @@ import { AuthService } from '../services/auth.service'
 })
 export class LogInComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
   account: FormGroup
   ngOnInit(): void {
@@ -30,7 +32,9 @@ export class LogInComponent implements OnInit {
     var formData = new FormData(form)
 
     this.authService.signIn(formData).pipe(first()).subscribe(data => {
-      console.log(data)
+      if (data) {
+        this.router.navigate(['/home'])
+      }
     })
   }
 }
