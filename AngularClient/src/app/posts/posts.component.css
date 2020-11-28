@@ -6,28 +6,31 @@
 }
 
 .room {
-    border: 1px solid grey;
-    /* margin-bottom: 50px; */
+    border: 1px solid rgb(226, 226, 226);
     overflow: hidden;
     background-color: white;
+    margin-bottom: 10px;
+    border-radius: 3px;
 }
 
 .room img {
     float: left;
     object-fit: cover;
+    width: 200px;
+    height: 200px;
+    margin-right: 10px;
 }
 
-.room2 img {
-    float: left;
-}
-
-.room2 {
-    margin-top: 10px;
-    border: 1px solid grey;
-    overflow: hidden;
-    background-color: white;
+.room h2 {
+    font-weight: bold;
 }
 
 .navigation {
     margin: auto
 }
+
+mat-paginator {
+    grid-column: 1 / 3;
+    margin-bottom: 10px;
+}
+

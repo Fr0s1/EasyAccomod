@@ -9,7 +9,6 @@ module.exports = app => {
 
     router.get('/:id', room.getRoomInfoByID)
     
-    // G
     router.get('/:id/image/:name', room.getImageByName)
 
     router.get('/images/:id', room.getRoomImagesByID)

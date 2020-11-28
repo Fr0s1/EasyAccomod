@@ -1,36 +1,22 @@
 <app-main-nav> </app-main-nav>
 
 <div class="container">
-    <div class="main">
-        <h1>Test</h1>
-        <div class="room">
-            <img src="../../assets/EA-Emblem.png" width="200px">
-            <p>Room 1s</p>
-            <p>User: </p>
-        </div>
 
-        <div class="room2">
-            <img src="../../assets/EA-Emblem.png" width="200px">
-            <p>Room 1s</p>
-            <p>User: </p>
+    <div class="main">
+        <mat-paginator style-paginator showFirstLastButtons (page)="pageChangeEvent($event)" [length]="pageLength" [pageSize]="pageSizeOptions[2]"
+            [pageSizeOptions]="pageSizeOptions">
+        </mat-paginator>
+
+        <div class="room" *ngFor="let post of previewPosts">
+            <a routerLink="/post/details/{{post.postID}}">
+                <img [src]="postImages[post.postID-1]" height="200px" width="">
+            </a>
+            <h2>{{post.postName}}</h2>
+            <p>Thời gian đăng: {{post.postTime}} </p>
         </div>
     </div>
+
     <div class="sidebar">
         <h1>Sidebar</h1>
-    </div>
-
-    <div class="navigation">
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item"><a class="page-link">First</a></li>
-                <li class="page-item"><a class="page-link">Previous</a></li>
-                <li class="page-item"><a class="page-link">1</a></li>
-                <li class="page-item"><a class="page-link">2</a></li>
-                <li class="page-item"><a class="page-link">3</a></li>
-                <li class="page-item"><a class="page-link">Next</a></li>
-                <li class="page-item"><a class="page-link">Last</a></li>
-
-            </ul>
-        </nav>
     </div>
 </div>

@@ -74,8 +74,7 @@
 }
 
 .roomDetails h2 {
-    /* border-bottom: 1px solid rgb(226, 221, 221); */
-    display: block;
+    font-size: 2em;
     margin: 0px 10px;
 }
 
@@ -100,9 +99,13 @@ li span {
     font-weight: normal;
 }
 
-.thumb-bar img{
+.thumb-bar img {
     height: 150px;
     object-fit: cover;
+}
+
+.thumb-bar img:hover {
+    cursor: pointer;
 }
 
 .post-stats {
@@ -118,12 +121,18 @@ ul {
 
 ul li {
     flex: 1 200px;
+    margin-bottom: 10px;
 }
 
 #main {
     height: 400px;
     object-fit: contain;
 }
+
 .price ul li {
     flex: 1 100px
+}
+
+h3 {
+    font-size: large;
 }

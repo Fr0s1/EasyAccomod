@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from '../services/post.service';
 import { AccountService } from '../services/account.service';
-import { AuthService } from '../services/auth.service';
+import { AuthService} from '../services/auth.service';
 
 @Component({
   selector: 'app-post-details',
@@ -11,10 +11,10 @@ import { AuthService } from '../services/auth.service';
 })
 export class PostDetailsComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private postService: PostService,
+  constructor(private route: ActivatedRoute, private postService: PostService, 
     private accountService: AccountService, private authService: AuthService) { }
 
-  currentAccount 
+  currentAccount
   postID: number // Current post
   roomID: number // Room ID corresponding to post
 
@@ -29,7 +29,6 @@ export class PostDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentAccount = this.authService.currentUserValue
-    
     this.route.paramMap.subscribe(params => this.postID = +params.get('id')) // Get id in url's params
 
     this.postService.getPostsByQuery(`?postID=${this.postID}`).subscribe(result => { // Get post by id in the url's params

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PostService } from '../services/post.service';
 import { ImageService } from '../services/image.service';
 
@@ -51,10 +51,7 @@ export class HomepageComponent implements OnInit {
 
             if (data) {
               reader.readAsDataURL(data);
-            }
-
-            // this.previewImages.push(this.imgService.blobToImageUrl(data))
-            
+            }            
           })
         })
       })

@@ -12,7 +12,12 @@ import { AuthService } from '../services/auth.service'
 })
 export class LogInComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+    if (this.authService.currentUserValue) {
+        this.router.navigate(['/home'])
+    }
+  }
+
 
   account: FormGroup
   ngOnInit(): void {

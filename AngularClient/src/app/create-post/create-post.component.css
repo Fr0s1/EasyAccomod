@@ -22,3 +22,7 @@ form {
 form {
     width: fit-content;
 }
+
+legend {
+    margin-top: 10px;
+}
