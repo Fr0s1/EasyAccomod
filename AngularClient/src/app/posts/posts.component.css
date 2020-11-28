@@ -1,0 +1,33 @@
+.container {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    column-gap: 10px;
+}
+
+.room {
+    border: 1px solid grey;
+    /* margin-bottom: 50px; */
+    overflow: hidden;
+    background-color: white;
+}
+
+.room img {
+    float: left;
+    object-fit: cover;
+}
+
+.room2 img {
+    float: left;
+}
+
+.room2 {
+    margin-top: 10px;
+    border: 1px solid grey;
+    overflow: hidden;
+    background-color: white;
+}
+
+.navigation {
+    margin: auto
+}

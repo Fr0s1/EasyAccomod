@@ -17,6 +17,7 @@ exports.getRoomInfoByID = async (req, res) => {
         res.send({ message: 'Room not exist' })
     }
 }
+
 exports.getRoomImagesByID = async (req, res) => {
     let _id = req.params.id
 

@@ -110,3 +110,20 @@ li span {
     flex-direction: row;
     justify-content: space-between;
 }
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+ul li {
+    flex: 1 200px;
+}
+
+#main {
+    height: 400px;
+    object-fit: contain;
+}
+.price ul li {
+    flex: 1 100px
+}

@@ -17,15 +17,19 @@
             <h2>Thông tin phòng trọ</h2>
             <div>
                 <ul>
+                    <li>Trạng thái thuê: <span>{{roomInfo?.rented === false ? 'Chưa được thuê' : 'Đã được thuê'}}</span>
+                    </li>
+
                     <li>Địa chỉ:
                         <span> số nhà {{roomInfo?.homeNumber}}, đường {{roomInfo?.street}}, phường {{roomInfo?.ward}},
                             quận {{roomInfo?.district}},
                             {{roomInfo?.city}}
                         </span>
                     </li>
-                    <li>Loại phòng: <span>{{roomInfo?.roomType}}</span></li>
-                    <li>Chung chủ: <span>{{roomInfo?.sharedOwner === false ? 'Không': 'Có'}}</span></li>
+                    <li>Chung chủ: <span>{{roomInfo?.sharedOwner === false ? 'Không' : 'Có'}}</span></li>
                     <li>Diện tích: <span>{{roomInfo?.area}} m<sup>2</sup></span> </li>
+                    <li>Loại phòng: <span>{{roomInfo?.roomType}}</span></li>
+
                 </ul>
             </div>
 
@@ -67,6 +71,8 @@
             <div>
                 <button type="button" class="btn btn-primary">Favorite</button>
                 <button type="button" class="btn btn-danger">Report </button>
+                <button type="button" class="btn btn-info"
+                    *ngIf="postInfo?.accountUsername === currentAccount.username">Gia hạn </button>
             </div>
         </div>
 

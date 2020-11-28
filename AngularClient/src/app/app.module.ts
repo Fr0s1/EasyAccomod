@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -17,10 +16,11 @@ import { PostDetailsComponent } from './post-details/post-details.component';
 import { PaymentComponent } from './admin/payment/payment.component';
 import { RegisterComponent } from './register/register.component';
 import { PostsComponent} from './posts/posts.component'
-
-import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { HomepageComponent } from './homepage/homepage.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
+import { ExtendDurationComponent } from './admin/extend-duration/extend-duration.component';
+
+import { JwtInterceptor } from './_helpers/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -37,7 +37,8 @@ import { MainNavComponent } from './main-nav/main-nav.component';
     RegisterComponent,
     HomepageComponent,
     MainNavComponent,
-    PostsComponent
+    PostsComponent,
+    ExtendDurationComponent
   ],
   imports: [
     BrowserModule,

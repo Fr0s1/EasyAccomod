@@ -49,7 +49,7 @@ module.exports = app => {
     // Create new post with corresponding roomID
     router.post("/", authJwt.verifyToken, getNextRoomID, upload.any(), post.create)
 
-    // Get preview posts for homepage
+    // Get preview posts by requirement for homepage
     router.get("/preview", post.getPreviewPosts)
 
     // Get post upload fee
@@ -61,11 +61,11 @@ module.exports = app => {
     // Get post with conditions specified in URL query string
     // find all if the req.query obj is empty
     router.get("/", post.findByQuery)
-
+    
     // Update post info with given postID 
     router.put("/:id", post.updatePostByID)
     
-    // Delete posts with columns sastify conditions in query string 
+    // Delete posts with columns satisfy conditions in query string
     router.delete("/", post.deleteByQuery)
 
     app.use("/api/posts", router)

@@ -11,6 +11,7 @@ export class PostService {
 
   roomUrl = 'http://localhost:8080/api/rooms'
   postUrl = 'http://localhost:8080/api/posts'
+  
   // Upload form containg room and post data to server
   uploadForm(url: string, form: FormData) {
     return this.http.post(url, form)
@@ -34,8 +35,8 @@ export class PostService {
     return this.http.get(url)
   }
 
-  getPostsByQuery(url: string) {
-    return this.http.get(url)
+  getPostsByQuery(queryString: string) {
+    return this.http.get(this.postUrl + queryString)
   }
 
   getRoomInfoByID(id: number) {
@@ -50,7 +51,9 @@ export class PostService {
     return this.http.get(this.roomUrl + `/${roomId}/image/${fileName}`, { responseType: 'blob' })
   }
 
-  getPreviewPost(url: string) {
-    return this.http.get(this.postUrl + '/preview')
+
+  // Preview 4 posts sort by column name
+  getPreviewPost(columnName: string) {
+    return this.http.get(this.postUrl + `/preview?column=${columnName}`)
   }
 }

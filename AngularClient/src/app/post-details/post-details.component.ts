@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from '../services/post.service';
 import { AccountService } from '../services/account.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-post-details',
@@ -10,8 +11,10 @@ import { AccountService } from '../services/account.service';
 })
 export class PostDetailsComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private postService: PostService, private accountService: AccountService) { }
+  constructor(private route: ActivatedRoute, private postService: PostService,
+    private accountService: AccountService, private authService: AuthService) { }
 
+  currentAccount 
   postID: number // Current post
   roomID: number // Room ID corresponding to post
 
@@ -25,10 +28,11 @@ export class PostDetailsComponent implements OnInit {
   postUrl = 'http://localhost:8080/api/posts'
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => this.postID = +params.get('id'))
+    this.currentAccount = this.authService.currentUserValue
+    
+    this.route.paramMap.subscribe(params => this.postID = +params.get('id')) // Get id in url's params
 
-
-    this.postService.getPostsByQuery(this.postUrl + `?postID=${this.postID}`).subscribe(result => { // Get post id in the url's params
+    this.postService.getPostsByQuery(`?postID=${this.postID}`).subscribe(result => { // Get post by id in the url's params
       this.postInfo = result[0]
 
       // Increment views number
@@ -38,12 +42,13 @@ export class PostDetailsComponent implements OnInit {
 
       this.postService.getRoomInfoByID(this.roomID).subscribe(result => this.roomInfo = result[0])
 
+      // Get info of post's owner
       this.accountService.getAccountInfo(this.postInfo.accountUsername).subscribe(result => this.ownerInfo = result[0])
 
       this.postService.getRoomImagesByID(this.roomID).subscribe(result => {
         this.roomImagesNameList = result // Array contains file names
 
-        // Get image file associated with filename and convert from Blob to HTML displayable image
+        // Get image files associated with filename and convert from Blob to HTML displayable image
         this.roomImagesNameList.forEach(filename => this.postService.getRoomImageByName(this.roomID, filename).subscribe(data => {
           // Create image in html file
           let reader = new FileReader();

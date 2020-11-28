@@ -12,6 +12,7 @@ import { RegisterComponent } from './register/register.component'
 import { PostDetailsComponent } from './post-details/post-details.component'
 import { PaymentComponent } from './admin/payment/payment.component'
 import { PostsComponent } from './posts/posts.component'
+import { ExtendDurationComponent } from './admin/extend-duration/extend-duration.component';
 
 import { AuthGuard } from './_helpers/auth.guard'
 import { Role } from './_model/role'
@@ -27,7 +28,8 @@ const routes: Routes = [
         { path: '', component: HomeComponent },
         { path: 'verify/accounts', component: AdminAccountsComponent },
         { path: 'verify/posts', component: AdminPostsComponent },
-        { path: 'payment', component: PaymentComponent }
+        { path: 'payment', component: PaymentComponent },
+        { path: 'extend', component: ExtendDurationComponent}
       ],
     canActivate: [AuthGuard],
     data: { roles: [Role.Admin] } // Only admin account can access

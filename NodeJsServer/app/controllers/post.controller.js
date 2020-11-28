@@ -87,7 +87,9 @@ exports.getPostInfoByID = async (req, res) => {
 }
 
 exports.getPreviewPosts = async (req, res) => {
-    let result = await Post.findAll({ limit: 4, order: [["postTime", 'DESC']] }, {
+    let query = req.query
+
+    let result = await Post.findAll({ limit: 4, order: [[`${query.column}`, 'DESC']] }, {
         where: {
             verifiedStatus: true,
             paymentStatus: true
@@ -128,6 +130,7 @@ exports.deleteByQuery = async (req, res) => {
 exports.updatePostByID = async (req, res) => {
     const info = req.body
     const postID = req.params.id
+
     try {
         let result = await Post.update(info, {
             where: {

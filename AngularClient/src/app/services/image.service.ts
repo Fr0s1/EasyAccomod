@@ -11,6 +11,7 @@ export class ImageService {
   blobToImageUrl(image: Blob) {
     let reader = new FileReader();
     reader.addEventListener("load", () => {
+      console.log(reader.result)
       return reader.result
     }, false);
 

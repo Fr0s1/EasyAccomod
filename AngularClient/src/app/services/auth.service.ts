@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 
 import { HttpClient } from '@angular/common/http'
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Account } from '../_model/account'
 import { map } from 'rxjs/operators';
 import * as bcrypt from 'bcryptjs'
@@ -12,13 +12,11 @@ import { Router } from '@angular/router'
 })
 export class AuthService {
     private currentAccountSubject: BehaviorSubject<Account>;
-    public currentAccount: Observable<Account>;
 
     private apiUrl = 'http://localhost:8080/api/accounts'
 
     constructor(private http: HttpClient, private router: Router) {
         this.currentAccountSubject = new BehaviorSubject<Account>(JSON.parse(localStorage.getItem('currentAccount')));
-        this.currentAccount = this.currentAccountSubject.asObservable();
     }
 
     public get currentUserValue(): Account {
