@@ -15,8 +15,14 @@ form {
 .container {
     width: 90%;
     background-color: white;
+    margin-top: 10px;
+    border-radius: 5px;
 }
 
 form {
     width: fit-content;
+}
+
+legend {
+    margin-top: 10px;
 }

@@ -5,7 +5,7 @@ import { PostService } from '../../../services/post.service'
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css']
 })
-export class PostsComponent implements OnInit {
+export class AdminPostsComponent implements OnInit {
 
   constructor(private postService: PostService) { }
 
@@ -17,11 +17,14 @@ export class PostsComponent implements OnInit {
 
   targetURL = "http://localhost:8080/api/posts"
   getUnverifiedPosts() {
-    this.postService.getUnverifiedPosts(this.targetURL).subscribe(data => this.unverifiedPosts = data)
+    this.postService.getPostsByQuery('?verifiedStatus=0').subscribe(data => {
+      this.unverifiedPosts = data
+      console.log(this.unverifiedPosts)
+    })
   }
 
   addPost(event) {
-    let postID = event.target.parentElement.nextSibling.innerHTML;
+    let postID = parseInt(event.target.parentElement.nextSibling.innerHTML);
 
     if (event.target.checked) {
       if (!this.selectedPosts.includes(postID)) {
@@ -36,7 +39,7 @@ export class PostsComponent implements OnInit {
 
   verifyPost() {
     this.selectedPosts.forEach(postID => {
-      this.postService.updatePost(this.targetURL + `/${postID}`, { verifiedStatus: 1 }).subscribe(data => {
+      this.postService.updatePost(postID, { verifiedStatus: 1 }).subscribe(data => {
         console.log(data)
       })
     })
@@ -44,16 +47,15 @@ export class PostsComponent implements OnInit {
 
   addAllPost(event) {
     let postList = document.querySelectorAll('td input')
+    this.selectedPosts = []
 
     if (!event.target.checked) {
-      this.selectedPosts = []
       for (let i = 0; i < postList.length; i++) {
         let currentPost = (<HTMLInputElement>postList[i])
 
         currentPost.checked = false;
       }
     } else {
-
       for (let i = 0; i < postList.length; i++) {
         let currentPost = (<HTMLInputElement>postList[i])
 

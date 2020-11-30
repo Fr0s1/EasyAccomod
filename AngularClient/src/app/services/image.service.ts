@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -7,9 +6,16 @@ import { Observable } from 'rxjs';
 })
 export class ImageService {
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
-  getImage(imageUrl: string): Observable<Blob> {
-    return this.http.get(imageUrl, { responseType: 'blob' })
+  blobToImageUrl(image: Blob) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+      console.log(reader.result)
+      return reader.result
+    }, false);
+
+    reader.readAsDataURL(image);
+
   }
 }

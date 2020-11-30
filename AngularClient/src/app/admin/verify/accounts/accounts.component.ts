@@ -6,7 +6,7 @@ import { AccountService } from './../../../services/account.service'
   templateUrl: './accounts.component.html',
   styleUrls: ['./accounts.component.css']
 })
-export class AccountComponent implements OnInit {
+export class AdminAccountsComponent implements OnInit {
 
   constructor(private accountService: AccountService) { }
 

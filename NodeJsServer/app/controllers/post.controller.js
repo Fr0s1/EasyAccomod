@@ -2,10 +2,9 @@ const db = require("../models");
 const path = require('path')
 const PostCost = db.postCost // chi phí đăng bài
 const Post = db.posts // model của bài đăng
+const Room = db.rooms // model cho phòng trọ
 
 exports.create = async (req, res) => {
-    const Room = db.rooms // model cho phòng trọ
-
     const formData = req.body // các thông tin trong http body
 
     const sharedOwner = formData.sharedOwner === 'Có' ? true : false;
@@ -86,15 +85,31 @@ exports.getPostInfoByID = async (req, res) => {
     }
 }
 
+exports.getPreviewPosts = async (req, res) => {
+    let query = req.query
+
+    let result = await Post.findAll({ limit: 4, order: [[`${query.column}`, 'DESC']] }, {
+        where: {
+            verifiedStatus: true,
+            paymentStatus: true
+        }
+    })
+
+    res.send(result)
+}
+
 exports.findByQuery = async (req, res) => {
     const conditions = req.query
 
     console.log(conditions)
     try {
         let result = await Post.findAll({
+            include: {
+                model: Room
+            },
+
             where: conditions
         })
-
         res.send(result)
     } catch (err) {
         console.log("Can't find post with given queries")
@@ -118,6 +133,7 @@ exports.deleteByQuery = async (req, res) => {
 exports.updatePostByID = async (req, res) => {
     const info = req.body
     const postID = req.params.id
+
     try {
         let result = await Post.update(info, {
             where: {

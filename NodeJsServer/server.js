@@ -35,6 +35,7 @@ require("./app/routes/user.routes")(app);
 require("./app/routes/account.routes")(app);
 require("./app/routes/post.routes")(app);
 require("./app/routes/room.routes")(app)
+require("./app/routes/comment.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

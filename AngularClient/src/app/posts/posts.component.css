@@ -1,0 +1,53 @@
+.container {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    column-gap: 10px;
+}
+
+.room {
+    border: 1px solid rgb(226, 226, 226);
+    overflow: hidden;
+    background-color: white;
+    margin-bottom: 10px;
+    border-radius: 3px;
+}
+
+.room img {
+    float: left;
+    object-fit: cover;
+    width: 200px;
+    height: 200px;
+    margin-right: 10px;
+}
+
+.room h2 {
+    font-weight: bold;
+}
+
+.navigation {
+    margin: auto
+}
+
+.mat-paginator {
+    display: inline-block;
+}
+
+.sidebar {
+    background-color: white;
+    border-radius: 5px;
+    height: fit-content;
+}
+
+.input-group-prepend span:first-child {
+    width: 100px;
+}
+
+.search {
+    width: 90%;
+    margin: 10px auto;
+}
+
+.input-group.mb-3:last-of-type {
+    justify-content: space-around;
+}
