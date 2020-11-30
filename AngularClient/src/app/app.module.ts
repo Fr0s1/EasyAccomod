@@ -38,6 +38,7 @@ import { CommentsComponent } from './comments/comments.component';
     HomeComponent,
     LogInComponent,
     CreatePostComponent,
+    LogInComponent,
     PostDetailsComponent,
     PaymentComponent,
     RegisterComponent,
