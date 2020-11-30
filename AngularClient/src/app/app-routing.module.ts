@@ -12,6 +12,7 @@ import { RegisterComponent } from './register/register.component'
 import { PostDetailsComponent } from './post-details/post-details.component'
 import { PaymentComponent } from './admin/payment/payment.component'
 import { PostsComponent } from './posts/posts.component'
+import { ProfileComponent } from './profile/profile.component'
 import { ExtendDurationComponent } from './admin/extend-duration/extend-duration.component';
 
 import { AuthGuard } from './_helpers/auth.guard'
@@ -44,6 +45,7 @@ const routes: Routes = [
     data: { roles: [Role.Landlord, Role.Admin] } // Only account with right type can access
   },
   { path: 'post/details/:id', component: PostDetailsComponent },
+  { path: ':username', component: ProfileComponent },
   { path: 'posts', component: PostsComponent }
 ];
 
