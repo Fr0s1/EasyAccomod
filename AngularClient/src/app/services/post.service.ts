@@ -22,14 +22,9 @@ export class PostService {
     return this.http.get(url)
   }
 
-  // Get a list of unverified posts
-  getUnverifiedPosts() {
-    return this.http.get(this.postUrl + '?verifiedStatus=0')
-  }
-
   // Change post information
-  updatePost(url: string, option) {
-    return this.http.put(url, option)
+  updatePost(postID: number, option) {
+    return this.http.put(this.postUrl + `/${postID}`, option)
   }
 
   getPostPaymentInfo(url: string) {

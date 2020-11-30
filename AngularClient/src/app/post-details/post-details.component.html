@@ -17,18 +17,20 @@
             <h2>Thông tin phòng trọ</h2>
             <div>
                 <ul>
-                    <li>Trạng thái thuê: <span>{{roomInfo?.rented === false ? 'Chưa được thuê' : 'Đã được thuê'}}</span>
+                    <li>Trạng thái thuê:
+                        <span>{{postInfo?.Room.rented === false ? 'Chưa được thuê' : 'Đã được thuê'}}</span>
                     </li>
 
                     <li>Địa chỉ:
-                        <span> số nhà {{roomInfo?.homeNumber}}, đường {{roomInfo?.street}}, phường {{roomInfo?.ward}},
-                            quận {{roomInfo?.district}},
-                            {{roomInfo?.city}}
+                        <span> số nhà {{postInfo?.Room.homeNumber}}, đường {{postInfo?.Room.street}}, phường
+                            {{postInfo?.Room.ward}},
+                            quận {{postInfo?.Room.district}},
+                            {{postInfo?.Room.city}}
                         </span>
                     </li>
-                    <li>Chung chủ: <span>{{roomInfo?.sharedOwner === false ? 'Không' : 'Có'}}</span></li>
-                    <li>Diện tích: <span>{{roomInfo?.area}} m<sup>2</sup></span> </li>
-                    <li>Loại phòng: <span>{{roomInfo?.roomType}}</span></li>
+                    <li>Chung chủ: <span>{{postInfo?.Room.sharedOwner === false ? 'Không' : 'Có'}}</span></li>
+                    <li>Diện tích: <span>{{postInfo?.Room.area}} m<sup>2</sup></span> </li>
+                    <li>Loại phòng: <span>{{postInfo?.Room.roomType}}</span></li>
 
                 </ul>
             </div>
@@ -36,26 +38,26 @@
             <div class="utils">
                 <h3>Cơ sở vật chất</h3>
                 <ul>
-                    <li>Điều hòa: <span>{{roomInfo?.airconditioner === true ? 'Có' : 'Không'}}</span></li>
-                    <li>Ban công: <span>{{roomInfo?.balcony === true ? 'Có' : 'Không'}}</span></li>
-                    <li>Giá điện: <span>{{roomInfo?.electricityPrice}}</span></li>
-                    <li>Giá nước: <span>{{roomInfo?.waterPrice}}</span></li>
-                    <li>Phòng bếp: <span>{{roomInfo?.kitchen}}</span></li>
-                    <li>Phòng tắm: <span>{{roomInfo?.bathroom}}</span></li>
+                    <li>Điều hòa: <span>{{postInfo?.Room.airconditioner === true ? 'Có' : 'Không'}}</span></li>
+                    <li>Ban công: <span>{{postInfo?.Room.balcony === true ? 'Có' : 'Không'}}</span></li>
+                    <li>Giá điện: <span>{{postInfo?.Room.electricityPrice}}</span></li>
+                    <li>Giá nước: <span>{{postInfo?.Room.waterPrice}}</span></li>
+                    <li>Phòng bếp: <span>{{postInfo?.Room.kitchen}}</span></li>
+                    <li>Phòng tắm: <span>{{postInfo?.Room.bathroom}}</span></li>
                 </ul>
 
                 <div class="price">
                     <h3>Giá phòng</h3>
                     <ul>
-                        <li>Theo tháng: <span>{{roomInfo?.monthPrice}} đồng</span></li>
-                        <li>Theo quý: <span>{{roomInfo?.quarterPrice}} đồng</span></li>
-                        <li>Theo năm: <span>{{roomInfo?.yearPrice}} đồng</span></li>
+                        <li>Theo tháng: <span>{{postInfo?.Room.monthPrice}} đồng</span></li>
+                        <li>Theo quý: <span>{{postInfo?.Room.quarterPrice}} đồng</span></li>
+                        <li>Theo năm: <span>{{postInfo?.Room.yearPrice}} đồng</span></li>
                     </ul>
                 </div>
 
                 <div class="otherUtils">
                     <h3>Tiện ích khác: </h3>
-                    <span>{{roomInfo?.otherUtils}}</span>
+                    <span>{{postInfo?.Room.otherUtils}}</span>
                 </div>
             </div>
         </div>
@@ -96,10 +98,10 @@
 
     <div class="roomDescription">
         <h2>Mô tả phòng trọ</h2>
-        <p>{{roomInfo?.description}}</p>
+        <p>{{postInfo?.Room.description}}</p>
     </div>
 
     <div class="comments">
-        <h2>Bình luận</h2>
+        <app-comments></app-comments>
     </div>
 </div>

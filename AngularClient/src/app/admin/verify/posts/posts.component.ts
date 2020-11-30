@@ -17,14 +17,14 @@ export class AdminPostsComponent implements OnInit {
 
   targetURL = "http://localhost:8080/api/posts"
   getUnverifiedPosts() {
-    this.postService.getUnverifiedPosts().subscribe(data => {
+    this.postService.getPostsByQuery('?verifiedStatus=0').subscribe(data => {
       this.unverifiedPosts = data
       console.log(this.unverifiedPosts)
     })
   }
 
   addPost(event) {
-    let postID = event.target.parentElement.nextSibling.innerHTML;
+    let postID = parseInt(event.target.parentElement.nextSibling.innerHTML);
 
     if (event.target.checked) {
       if (!this.selectedPosts.includes(postID)) {
@@ -39,7 +39,7 @@ export class AdminPostsComponent implements OnInit {
 
   verifyPost() {
     this.selectedPosts.forEach(postID => {
-      this.postService.updatePost(this.targetURL + `/${postID}`, { verifiedStatus: 1 }).subscribe(data => {
+      this.postService.updatePost(postID, { verifiedStatus: 1 }).subscribe(data => {
         console.log(data)
       })
     })
@@ -47,9 +47,9 @@ export class AdminPostsComponent implements OnInit {
 
   addAllPost(event) {
     let postList = document.querySelectorAll('td input')
+    this.selectedPosts = []
 
     if (!event.target.checked) {
-      this.selectedPosts = []
       for (let i = 0; i < postList.length; i++) {
         let currentPost = (<HTMLInputElement>postList[i])
 

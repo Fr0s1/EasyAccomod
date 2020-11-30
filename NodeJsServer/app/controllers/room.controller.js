@@ -130,6 +130,10 @@ exports.findByQuery = async (req, res) => {
                             }
                         }]
                     }
+                },
+                where: {
+                    verifiedStatus: 1,
+                    paymentStatus: 1
                 }
             })
         } else if (priceRange) {
@@ -141,7 +145,6 @@ exports.findByQuery = async (req, res) => {
                         {
                             monthPrice: {
                                 [Op.and]: {
-                                    [Op.not]: null,
                                     [Op.between]:
                                         [priceRange[0], priceRange[2]],
 
@@ -149,6 +152,10 @@ exports.findByQuery = async (req, res) => {
                             }
                         }]
                     }
+                },
+                where: {
+                    verifiedStatus: 1,
+                    paymentStatus: 1
                 }
             })
         } else if (areaRange) {
@@ -160,7 +167,6 @@ exports.findByQuery = async (req, res) => {
                         {
                             area: {
                                 [Op.and]: {
-                                    [Op.not]: null,
                                     [Op.between]:
                                         [areaRange[0], areaRange[2]],
 
@@ -168,6 +174,10 @@ exports.findByQuery = async (req, res) => {
                             }
                         }]
                     }
+                },
+                where: {
+                    verifiedStatus: 1,
+                    paymentStatus: 1
                 }
             })
         } else {
@@ -175,6 +185,10 @@ exports.findByQuery = async (req, res) => {
                 include: {
                     model: Room,
                     where: conditions
+                },
+                where: {
+                    verifiedStatus: 1,
+                    paymentStatus: 1
                 }
             })
         }

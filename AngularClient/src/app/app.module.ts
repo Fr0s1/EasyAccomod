@@ -25,6 +25,8 @@ import { MainNavComponent } from './main-nav/main-nav.component';
 import { ExtendDurationComponent } from './admin/extend-duration/extend-duration.component';
 
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
+import { VerifyCommentsComponent } from './admin/verify/comments/verify-comments.component';
+import { CommentsComponent } from './comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';
     HomepageComponent,
     MainNavComponent,
     PostsComponent,
-    ExtendDurationComponent
+    ExtendDurationComponent,
+    VerifyCommentsComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,

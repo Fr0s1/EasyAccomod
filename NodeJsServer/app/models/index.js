@@ -19,6 +19,7 @@ posts = require("./posts.model")(sequelize, DataTypes)
 postCost = require("./postCost.model")(sequelize, DataTypes)
 accounts = require("./account.model")(sequelize, DataTypes)
 users = require("./user.model")(sequelize, DataTypes)
+comments = require('./comments.model')(sequelize, DataTypes)
 
 // Liên kết 1 - 1
 posts.belongsTo(rooms, { foreignKey: 'roomID' })
@@ -28,6 +29,8 @@ accounts.belongsTo(users, { foreignKey: 'userIdCard' }) // 1 người dùng ch�
 accounts.hasMany(posts) // 1 tài khoản chủ trọ có nhiều bài đăng
 accounts.hasMany(rooms) // 1 chủ trọ có thể có nhiều phòng
 
+accounts.hasMany(comments)
+posts.hasMany(comments)
 
 // Liên kết m-n
 // posts.belongsToMany(User)
@@ -38,7 +41,8 @@ const db = {
   posts,
   postCost,
   accounts,
-  users
+  users,
+  comments
 };
 
 db.Sequelize = Sequelize;

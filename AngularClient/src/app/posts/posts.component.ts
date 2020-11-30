@@ -101,7 +101,9 @@ export class PostsComponent implements OnInit {
     let requirement = document.querySelectorAll('select')
     let input = document.querySelectorAll('.search input')
 
-    let requirementObject = {}
+    let requirementObject = {
+      
+    }
 
     requirement.forEach(data => {
       if (data.value !== 'Chọn...') {

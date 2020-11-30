@@ -16,6 +16,7 @@ import { ExtendDurationComponent } from './admin/extend-duration/extend-duration
 
 import { AuthGuard } from './_helpers/auth.guard'
 import { Role } from './_model/role'
+import { VerifyCommentsComponent } from './admin/verify/comments/verify-comments.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -28,6 +29,7 @@ const routes: Routes = [
         { path: '', component: HomeComponent },
         { path: 'verify/accounts', component: AdminAccountsComponent },
         { path: 'verify/posts', component: AdminPostsComponent },
+        { path: 'verify/comments', component: VerifyCommentsComponent},
         { path: 'payment', component: PaymentComponent },
         { path: 'extend', component: ExtendDurationComponent}
       ],
