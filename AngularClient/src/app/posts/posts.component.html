@@ -1,0 +1,144 @@
+<app-main-nav> </app-main-nav>
+
+<div class="container">
+
+    <div class="main">
+        <div class="room" *ngFor="let post of previewPosts">
+            <a routerLink="/post/details/{{post.postID}}">
+                <img [src]="postImages[post.postID-1]" height="200px" width="">
+            </a>
+            <h2>{{post.postName}}</h2>
+            <p>Thời gian đăng: {{post.postTime}} </p>
+            <p>Giá: {{post.Room.monthPrice}} đồng / tháng</p>
+            <p>Diện tích: {{post.Room.area}} m<sup>2</sup></p>
+            <p>{{post.Room.city}}</p>
+        </div>
+
+        <mat-form-field>
+            <mat-label>Page number</mat-label>
+            <input matInput type="number" [(ngModel)]="pageNumber" (ngModelChange)="goToPage()">
+        </mat-form-field>
+
+        <mat-paginator showFirstLastButtons (page)="pageChangeEvent($event)" [length]="pageLength"
+            [pageSize]="pageSizeOptions[2]" [pageSizeOptions]="pageSizeOptions">
+        </mat-paginator>
+    </div>
+
+    <div class="sidebar">
+
+        <div class="search">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Thành phố</span>
+                </div>
+                <input type="text" class="form-control" aria-describedby="basic-addon1" name="city">
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Quận</span>
+                </div>
+                <select class="form-control" name="district" (change)="fetchWards($event)">
+                    <option>Chọn...</option>
+                    <option *ngFor="let district of data[0].district">{{district.name}}</option>
+                </select>
+            </div>
+
+            <div class="input-group mb-3">
+
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Phường</span>
+                </div>
+
+                <select class="form-control" name="ward">
+                    <option>Chọn...</option>
+
+                    <option *ngFor="let ward of selectedDistrict">{{ward?.name}}</option>
+                </select>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Đường</span>
+                </div>
+                <input type="text" class="form-control" aria-describedby="basic-addon1" name="street">
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Giá</span>
+                </div>
+
+                <select class="form-control" name="monthPrice">
+                    <option>Chọn...</option>
+                    <option>1 triệu - 5 triệu</option>
+                    <option>5 triệu - 10 triệu</option>
+                    <option>10 triệu - 20 triệu</option>
+                    <option>20 triệu - 30 triệu</option>
+                    <option>&gt; 30 triệu</option>
+                </select>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Diện tích</span>
+
+                </div>
+                <select class="form-control" name="area">
+                    <option>Chọn...</option>
+                    <option> &lt; 50<sup>m2</sup></option>
+                    <option>50 - 100m2</option>
+                    <option>100 - 200m2</option>
+                    <option>&gt; 200m2</option>
+                </select>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Chung chủ</span>
+                </div>
+                <select class="form-control" name="sharedOwner">
+                    <option>Chọn...</option>
+                    <option>Có </option>
+                    <option>Không</option>
+                </select>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Loại phòng</span>
+                </div>
+
+                <select id="roomType" class="form-control" name="roomType">
+                    <option>Chọn...</option>
+                    <option>Phòng trọ</option>
+                    <option>Chung cư mini</option>
+                    <option>Nhà nguyên căn</option>
+                    <option>Chung cư nguyên căn</option>
+                </select>
+            </div>
+
+            <!-- <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <input type="checkbox" name="airconditioner">
+                    </div>
+                    <label>Điều hòa</label>
+                </div>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <input type="checkbox" name="balcony">
+                    </div>
+                    <label>Ban công</label>
+                </div>
+            </div> -->
+            <div class="input-group mb-3">
+                <button class="btn btn-light" (click)="searchPost()">Tìm kiếm</button>
+                <button class="btn btn-secondary" (click)="resetPost()">Quay lại</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+button.dropdown-item:hover {
+    cursor: pointer;
+}
+
+.dropdown-item svg {
+    margin-right: 5px;
+}

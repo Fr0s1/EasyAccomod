@@ -1,7 +1,7 @@
 .post-details {
     display: grid;
-    grid-template-areas: "postTitle postTitle" "postStats postStats" "roomImage roomDetails" "roomImage features" "ownerInfo ownerInfo" "roomDescription roomDescription" "comments comments";
-    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "postTitle postTitle " "postStats postStats " "roomImage roomDetails " "ownerInfo features" "roomDescription roomDescription" "comments comments";
+    grid-template-columns: 1fr 2fr;
 }
 
 .post-stats {
@@ -17,6 +17,10 @@
     grid-area: roomDetails;
 }
 
+.owner-info {
+    grid-area: ownerInfo;
+}
+
 .roomPreview {
     grid-area: roomImage;
 }
@@ -29,10 +33,6 @@
     grid-area: comments;
 }
 
-.owner-info {
-    grid-area: ownerInfo;
-}
-
 .roomDescription {
     grid-area: roomDescription;
 }
@@ -41,6 +41,10 @@
     float: left;
     display: block;
     width: 33%;
+}
+
+.roomPreview>img {
+    width: 400px;
 }
 
 .favorite button {
@@ -56,16 +60,79 @@
     margin: 10px
 }
 
-.features h2, .roomDetails h2 {
+.features h2, .owner-info h2 {
     display: block;
     background-color: rgb(60, 103, 141);
     color: white;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     padding-left: 5px;
-
 }
 
-.owner-info h2, .comments h2, .roomDescription h2 {
+.comments h2, .roomDescription h2, .roomDetails h2 {
     padding: 5px;
+}
+
+.roomDetails h2 {
+    font-size: 2em;
+    margin: 0px 10px;
+}
+
+.post-details {
+    background-color: white;
+}
+
+ul li {
+    font-weight: bold;
+    list-style-type: disc;
+}
+
+.roomDetails {
+    border-left: 1px solid rgb(226, 221, 221);
+}
+
+.features button {
+    margin: 5px;
+}
+
+li span {
+    font-weight: normal;
+}
+
+.thumb-bar img {
+    height: 150px;
+    object-fit: cover;
+}
+
+.thumb-bar img:hover {
+    cursor: pointer;
+}
+
+.post-stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+ul li {
+    flex: 1 200px;
+    margin-bottom: 10px;
+}
+
+#main {
+    height: 400px;
+    object-fit: contain;
+}
+
+.price ul li {
+    flex: 1 100px
+}
+
+h3 {
+    font-size: large;
 }

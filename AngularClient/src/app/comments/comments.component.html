@@ -1,0 +1,12 @@
+<h2>Bình luận</h2>
+
+<div class="send-comment" *ngIf="currentAccount">
+    <textarea class="form-control content"></textarea>
+
+    <button class="btn btn-primary" (click)="sendComment($event)">Gửi</button>
+    <span class="noti">Test</span>
+</div>
+
+<div class="all-comments">
+
+</div>

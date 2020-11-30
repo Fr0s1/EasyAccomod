@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="posts">
+        <input class="search" type="text" placeholder="Tìm kiếm bình luận">
+        <button class="verify" (click)="verifyComment()">Duyệt bình luận</button>
+        <button class="deny">Từ chối bình luận</button>
+
+        <br>
+        <table>
+            <thead>
+                <th>
+                    <input type="checkbox" (change)="addAllComments($event)">
+                </th>
+                <th>ID bình luận</th>
+                <th>Nội dung</th>
+                <th>Username</th>
+                <th>Thời gian comment</th>
+                <th>ID bài đăng</th>
+                <th>Tên bài đăng</th>
+            </thead>
+
+            <tbody>
+                <ng-container *ngFor="let post of postsHaveUnverifiedComments">
+                    <tr *ngFor="let comment of post.comments">
+                        <td><input type="checkbox" (click)="addComment($event)"></td>
+                        <td>{{comment.commentID}}</td>
+                        <td>{{comment.content}}</td>
+                        <td>{{comment.accountUsername}}</td>
+                        <td>{{comment.createdAt}}</td>
+                        <td>{{comment.PostPostID}}</td>
+                        <td>{{post.postName}}</td>
+                    </tr>
+                </ng-container>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="post-info">
+        <h1>Thông tin phòng trọ</h1>
+    </div>
+</div>

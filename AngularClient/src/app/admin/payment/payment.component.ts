@@ -51,6 +51,6 @@ export class PaymentComponent implements OnInit {
       postTime = new Date()
     }
 
-    this.postService.updatePost(this.targetURL + `/${postID}`, { postID, paidAmount, paymentStatus, postTime, expiredTime }).subscribe(data => console.log(data))
+    this.postService.updatePost(postID, { postID, paidAmount, paymentStatus, postTime, expiredTime }).subscribe(data => console.log(data))
   }
 }

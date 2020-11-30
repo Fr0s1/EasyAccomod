@@ -1,0 +1,42 @@
+<app-main-nav> </app-main-nav>
+<img src="../../assets/background3-small.jpg" class="card-img-top" alt="...">
+
+<div class="main">
+    <div class="input-group mb-3" style="margin-top: 10px">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Tìm kiếm</span>
+        </div>
+        <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+            aria-describedby="basic-addon1">
+    </div>
+
+    <div class="preview">
+        <h1>
+            <img class="room" src="../../assets/room-logo.jpg" height="75px">
+            Bài đăng mới nhất
+        </h1>
+
+        <div class="room-preview" *ngIf="previewPosts">
+            <div *ngFor="let i of createRange(4)">
+                <a routerLink="/post/details/{{previewPosts[i-1].postID}}">
+                    <img [src]="previewImages[i-1]">
+                </a>
+
+                <p class="postTitle" *ngIf="previewPosts">{{previewPosts[i-1].postName}}</p>
+                <p *ngIf="previewPosts">Tạo bởi {{previewPosts[i-1].accountUsername}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="top-viewed">
+        <h1>
+            <img class="room" src="../../assets/room-logo.jpg" height="75px">
+
+            Nhiều lượt xem nhất
+        </h1>
+
+        <div>
+            <p>Test</p>
+        </div>
+    </div>
+</div>
