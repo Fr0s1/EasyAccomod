@@ -29,8 +29,25 @@
     margin: auto
 }
 
-mat-paginator {
-    grid-column: 1 / 3;
-    margin-bottom: 10px;
+.mat-paginator {
+    display: inline-block;
 }
 
+.sidebar {
+    background-color: white;
+    border-radius: 5px;
+    height: fit-content;
+}
+
+.input-group-prepend span:first-child {
+    width: 100px;
+}
+
+.search {
+    width: 90%;
+    margin: 10px auto;
+}
+
+.input-group.mb-3:last-of-type {
+    justify-content: space-around;
+}

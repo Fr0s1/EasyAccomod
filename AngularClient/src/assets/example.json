@@ -1,0 +1,1858 @@
+[
+	{
+		"name": "Hà Nội",
+		"district": [
+			{
+				"name": "Ba Đình",
+				"ward": [
+					{
+						"name": "Phúc Xá"
+					},
+					{
+						"name": "Trúc Bạch"
+					},
+					{
+						"name": "Vĩnh Phúc"
+					},
+					{
+						"name": "Cống Vị"
+					},
+					{
+						"name": "Liễu Giai"
+					},
+					{
+						"name": "Nguyễn Trung Trực"
+					},
+					{
+						"name": "Quán Thánh"
+					},
+					{
+						"name": "Ngọc Hà"
+					},
+					{
+						"name": "Điện Biên"
+					},
+					{
+						"name": "Đội Cấn"
+					},
+					{
+						"name": "Ngọc Khánh"
+					},
+					{
+						"name": "Kim Mã"
+					},
+					{
+						"name": "Giảng Võ"
+					},
+					{
+						"name": "Thành Công"
+					}
+				]
+			},
+			{
+				"name": "Bắc Từ Liêm",
+				"ward": [
+					{
+						"name": "Thượng Cát"
+					},
+					{
+						"name": "Liên Mạc"
+					},
+					{
+						"name": "Thụy Phương"
+					},
+					{
+						"name": "Tây Tựu"
+					},
+					{
+						"name": "Đông Ngạc 1"
+					},
+					{
+						"name": "Đông Ngạc 2"
+					},
+					{
+						"name": "Xuân Đỉnh 1"
+					},
+					{
+						"name": "Xuân Đỉnh 2"
+					},
+					{
+						"name": "Cổ Nhuế 1"
+					},
+					{
+						"name": "Cổ Nhuế 2"
+					},
+					{
+						"name": "Phú Diễn 1"
+					},
+					{
+						"name": "Phú Diễn 2"
+					},
+					{
+						"name": "Minh Khai"
+					}
+				]
+			},
+			{
+				"name": "Cầu Giấy",
+				"ward": [
+					{
+						"name": "Dịch Vọng"
+					},
+					{
+						"name": "Dịch Vọng Hậu"
+					},
+					{
+						"name": "Mai Dịch"
+					},
+					{
+						"name": "Nghĩa Đô"
+					},
+					{
+						"name": "Nghĩa Tân"
+					},
+					{
+						"name": "Quan Hoa"
+					},
+					{
+						"name": "Trung Hòa"
+					},
+					{
+						"name": "Yên Hòa"
+					}
+				]
+			},
+			{
+				"name": "Hà Đông",
+				"ward": [
+					{
+						"name": "Biên Giang"
+					},
+					{
+						"name": "Đồng Mai"
+					},
+					{
+						"name": "Dương Nội"
+					},
+					{
+						"name": "Hà Cầu"
+					},
+					{
+						"name": "Kiến Hưng"
+					},
+					{
+						"name": "La Khê"
+					},
+					{
+						"name": "Mộ Lao"
+					},
+					{
+						"name": "Nguyễn Trãi"
+					},
+					{
+						"name": "Phú La"
+					},
+					{
+						"name": "Phú Lâm"
+					},
+					{
+						"name": "Phú Lương"
+					},
+					{
+						"name": "Phú La"
+					},
+					{
+						"name": "Quang Trung"
+					},
+					{
+						"name": "Vạn Phúc"
+					},
+					{
+						"name": "Văn Quán"
+					},
+					{
+						"name": "Yên Nghĩa"
+					},
+					{
+						"name": "Yết Kiêu"
+					}
+				]
+			},
+			{
+				"name": "Hai Bà Trưng",
+				"ward": [
+					{
+						"name": "Bạch Đằng"
+					},
+					{
+						"name": "Bách Khoa"
+					},
+					{
+						"name": "Bạch Mai"
+					},
+					{
+						"name": "Bùi Thị Xuân"
+					},
+					{
+						"name": "Cầu Dền"
+					},
+					{
+						"name": "Đống Mác"
+					},
+					{
+						"name": "Đồng Nhân"
+					},
+					{
+						"name": "Đồng Tâm"
+					},
+					{
+						"name": "Lê Đại Thành"
+					},
+					{
+						"name": "Minh Khai"
+					},
+					{
+						"name": "Ngô Thì Nhậm"
+					},
+					{
+						"name": "Nguyễn Du"
+					},
+					{
+						"name": "Phạm Đình Hổ"
+					},
+					{
+						"name": "Phố Huế"
+					},
+					{
+						"name": "Quỳnh Lôi"
+					},
+					{
+						"name": "Quỳnh Mai"
+					},
+					{
+						"name": "Thanh Lương"
+					},
+					{
+						"name": "Thanh Nhàn"
+					},
+					{
+						"name": "Trương Định"
+					},
+					{
+						"name": "Vĩnh Tuy"
+					}
+				]
+			},
+			{
+				"name": "Hoàn Kiếm",
+				"ward": [
+					{
+						"name": "Chương Dương"
+					},
+					{
+						"name": "Cửa Đông"
+					},
+					{
+						"name": "Cửa Nam"
+					},
+					{
+						"name": "Đồng Xuân"
+					},
+					{
+						"name": "Hàng Bạc"
+					},
+					{
+						"name": "Hàng Bài"
+					},
+					{
+						"name": "Hàng Bồ"
+					},
+					{
+						"name": "Hàng Buồm"
+					},
+					{
+						"name": "Hàng Đào"
+					},
+					{
+						"name": "Hàng Gai"
+					},
+					{
+						"name": "Hàng Mã"
+					},
+					{
+						"name": "Hàng Trống"
+					},
+					{
+						"name": "Lý Thái Tổ"
+					},
+					{
+						"name": "Phan Chu Trinh"
+					},
+					{
+						"name": "Phú Tân"
+					},
+					{
+						"name": "Trần Hưng Đạo"
+					},
+					{
+						"name": "Tràng Tiền"
+					}
+				]
+			},
+			{
+				"name": "Hoàng Mai",
+				"ward": [
+					{
+						"name": "Đại Kim"
+					},
+					{
+						"name": "Định Công"
+					},
+					{
+						"name": "Giáp Bát"
+					},
+					{
+						"name": "Hoàng Liệt"
+					},
+					{
+						"name": "Hoàng VĂn Thụ"
+					},
+					{
+						"name": "Lĩnh Nam"
+					},
+					{
+						"name": "Mai Động"
+					},
+					{
+						"name": "Tân Mai"
+					},
+					{
+						"name": "Thanh Trì"
+					},
+					{
+						"name": "Thịnh Liệt"
+					},
+					{
+						"name": "Trần Phú"
+					},
+					{
+						"name": "Tương Mai"
+					},
+					{
+						"name": "Vĩnh Hưng"
+					},
+					{
+						"name": "Yên Sở"
+					}
+				]
+			},
+			{
+				"name": "Long Biên",
+				"ward": [
+					{
+						"name": "Bồ Đề"
+					},
+					{
+						"name": "Cự khối"
+					},
+					{
+						"name": "Đức Giang"
+					},
+					{
+						"name": "Gia Thụy"
+					},
+					{
+						"name": "Giang Biên"
+					},
+					{
+						"name": "Long Biên"
+					},
+					{
+						"name": "Ngọc Lâm"
+					},
+					{
+						"name": "Ngọc Thụy"
+					},
+					{
+						"name": "Phúc Đồng"
+					},
+					{
+						"name": "Phúc Lợi"
+					},
+					{
+						"name": "Sài Đồng"
+					},
+					{
+						"name": "Thạch Bàn"
+					},
+					{
+						"name": "Thượng Thanh"
+					},
+					{
+						"name": "Việt Hưng"
+					}
+				]
+			},
+			{
+				"name": "Nam Từ Liêm",
+				"ward": [
+					{
+						"name": "Trung Văn"
+					},
+					{
+						"name": "Đại Mỗ"
+					},
+					{
+						"name": "Tây Mỗ"
+					},
+					{
+						"name": "Mễ Trì"
+					},
+					{
+						"name": "Phú Đô"
+					},
+					{
+						"name": "Mỹ Đình 1"
+					},
+					{
+						"name": "Mỹ Đình 2"
+					},
+					{
+						"name": "Cầu Diễn"
+					},
+					{
+						"name": "Xuân Phương 1"
+					},
+					{
+						"name": "Xuân Phương 2"
+					}
+				]
+			},
+			{
+				"name": "Tây Hồ",
+				"ward": [
+					{
+						"name": "Bưởi"
+					},
+					{
+						"name": "Nhật Tân"
+					},
+					{
+						"name": "Phú Thượng"
+					},
+					{
+						"name": "Quảng An"
+					},
+					{
+						"name": "Thụy Khuê"
+					},
+					{
+						"name": "Tứ Liên"
+					},
+					{
+						"name": "Xuân La"
+					},
+					{
+						"name": "Yên Phụ"
+					}
+				]
+			},
+			{
+				"name": "Thanh Xuân",
+				"ward": [
+					{
+						"name": "Hạ Đình"
+					},
+					{
+						"name": "Khương Đình"
+					},
+					{
+						"name": "Khương Mai"
+					},
+					{
+						"name": "Khương Trung"
+					},
+					{
+						"name": "Kim Giang"
+					},
+					{
+						"name": "Nhân Chính"
+					},
+					{
+						"name": "Phương Liệt"
+					},
+					{
+						"name": "Thanh Xuân Bắc"
+					},
+					{
+						"name": "Thanh Xuân Nam"
+					},
+					{
+						"name": "Thanh Xuân Trung"
+					},
+					{
+						"name": "Thượng Đình"
+					},
+					{
+						"name": "Thanh Đình"
+					}
+				]
+			},
+			{
+				"name": "Đống Đa",
+				"ward": [
+					{
+						"name": "Cát linh"
+					},
+					{
+						"name": "Hàng Bột"
+					},
+					{
+						"name": "Khâm Thiên"
+					},
+					{
+						"name": "Khương Thượng"
+					},
+					{
+						"name": "Kim Liên"
+					},
+					{
+						"name": "Láng Hạ"
+					},
+					{
+						"name": "Lạng Thiện"
+					},
+					{
+						"name": "Nam Đồng"
+					},
+					{
+						"name": "Ngã Tư Sở"
+					},
+					{
+						"name": "Ô Cửa Dừa"
+					},
+					{
+						"name": "Phương Liên"
+					},
+					{
+						"name": "Phương Mai"
+					},
+					{
+						"name": "Quang Trung"
+					},
+					{
+						"name": "Quốc Tử Giám"
+					},
+					{
+						"name": "Thịnh Quang"
+					},
+					{
+						"name": "Thổ Quan"
+					},
+					{
+						"name": "Trung Liệt"
+					},
+					{
+						"name": "Trung Phụng"
+					},
+					{
+						"name": "Trung Tự"
+					},
+					{
+						"name": "Văn Chương"
+					},
+					{
+						"name": "Văn Hiến"
+					}
+				]
+			},
+			{
+				"name": "Ba Vì",
+				"ward": [
+					{
+						"name": "Ba Trại"
+					},
+					{
+						"name": "Ba Vì"
+					},
+					{
+						"name": "Cấm Lĩnh"
+					},
+					{
+						"name": "Cam Thường"
+					},
+					{
+						"name": "Châu Sơn"
+					},
+					{
+						"name": "Chu Minh"
+					},
+					{
+						"name": "Cổ Đô"
+					},
+					{
+						"name": "Bông Quang"
+					},
+					{
+						"name": "Đồng Thái"
+					},
+					{
+						"name": "Khánh Thượng"
+					},
+					{
+						"name": "Minh Châu"
+					},
+					{
+						"name": "Minh Quang"
+					},
+					{
+						"name": "Phong Vân"
+					},
+					{
+						"name": "Phú Châu"
+					},
+					{
+						"name": "Phú Cường"
+					},
+					{
+						"name": "Phú Đông"
+					},
+					{
+						"name": "Phú Thương"
+					},
+					{
+						"name": "Phú Sơn"
+					},
+					{
+						"name": "Sơn Đà"
+					},
+					{
+						"name": "Tần Hồng"
+					},
+					{
+						"name": "Tản Lĩnh"
+					},
+					{
+						"name": "Thái Hòa"
+					},
+					{
+						"name": "Thuần Mỹ"
+					},
+					{
+						"name": "Thụy An"
+					},
+					{
+						"name": "Tiên Phong"
+					},
+					{
+						"name": "Tòng Bạt"
+					},
+					{
+						"name": "Vân Hòa"
+					},
+					{
+						"name": "Vạn Thắng"
+					},
+					{
+						"name": "Vật Lại"
+					},
+					{
+						"name": "Yên Bài"
+					}
+				]
+			},
+			{
+				"name": "Chương Mỹ",
+				"ward": [
+					{
+						"name": "Đại Yên"
+					},
+					{
+						"name": "Đông Phương Yên"
+					},
+					{
+						"name": "Đông Sơn"
+					},
+					{
+						"name": "Đồng Lạc"
+					},
+					{
+						"name": "Đồng Phú"
+					},
+					{
+						"name": "Hòa Chính"
+					},
+					{
+						"name": "Hoàng Diệu"
+					},
+					{
+						"name": "Hoàng Văn Thụ"
+					},
+					{
+						"name": "Hồng Phong"
+					},
+					{
+						"name": "Hợp Đồng"
+					},
+					{
+						"name": "Hữu Văn"
+					},
+					{
+						"name": "Lam Điền"
+					},
+					{
+						"name": "Mỹ Lương"
+					},
+					{
+						"name": "Nam Phương Tiến"
+					},
+					{
+						"name": "Ngọc Hòa"
+					},
+					{
+						"name": "Phú Nam An"
+					},
+					{
+						"name": "Phú Nghĩa"
+					},
+					{
+						"name": "Phụng Châu"
+					},
+					{
+						"name": "Quảng Bị"
+					},
+					{
+						"name": "Tân Tiến"
+					},
+					{
+						"name": "Tiên Phương"
+					},
+					{
+						"name": "Tốt Động"
+					},
+					{
+						"name": "Thanh Bình"
+					},
+					{
+						"name": "Thủy Xuân Tiên"
+					},
+					{
+						"name": "Thụy Hương"
+					},
+					{
+						"name": "Thượng Vực"
+					},
+					{
+						"name": "Trần Phú"
+					},
+					{
+						"name": "Trung Hòa"
+					},
+					{
+						"name": "Trương Yên"
+					},
+					{
+						"name": "Văn Võ"
+					}
+				]
+			},
+			{
+				"name": "Gia Lâm",
+				"ward": [
+					{
+						"name": "Trâu Quỳ"
+					},
+					{
+						"name": "Yên Viên"
+					},
+					{
+						"name": "Bát Tràng"
+					},
+					{
+						"name": "Cổ Bi"
+					},
+					{
+						"name": "Đa Tốn"
+					},
+					{
+						"name": "Đặng Xá"
+					},
+					{
+						"name": "Phú Thị"
+					},
+					{
+						"name": "Đông Dư"
+					},
+					{
+						"name": "Dường Hà"
+					},
+					{
+						"name": "Dương Quang"
+					},
+					{
+						"name": "Dương Xá"
+					},
+					{
+						"name": "Kiêu Kỵ"
+					},
+					{
+						"name": "Kim Lan"
+					},
+					{
+						"name": "Văn Đức"
+					},
+					{
+						"name": "Lệ Chi"
+					},
+					{
+						"name": "Ninh Hiệp"
+					},
+					{
+						"name": "Đình Xuyên"
+					},
+					{
+						"name": "Phù Đổng"
+					},
+					{
+						"name": "Trung Mầu"
+					},
+					{
+						"name": "Yên Thường"
+					}
+				]
+			},
+			{
+				"name": "Hoài Đức",
+				"ward": [
+					{
+						"name": "An Khánh"
+					},
+					{
+						"name": "An Thượng"
+					},
+					{
+						"name": "Cát Quế"
+					},
+					{
+						"name": "Đắc Sở"
+					},
+					{
+						"name": "Di Trạch"
+					},
+					{
+						"name": "Đông La"
+					},
+					{
+						"name": "Đức Giang"
+					},
+					{
+						"name": "Đức Thượng"
+					},
+					{
+						"name": "Dương Liễu"
+					},
+					{
+						"name": "Kim Chung"
+					},
+					{
+						"name": "La Phù"
+					},
+					{
+						"name": "Lại Yên"
+					},
+					{
+						"name": "Minh Khai"
+					},
+					{
+						"name": "Sơn Đồng"
+					},
+					{
+						"name": "Song Phương"
+					},
+					{
+						"name": "Tiền Yên"
+					},
+					{
+						"name": "Vân Canh"
+					},
+					{
+						"name": "Vân Côn"
+					},
+					{
+						"name": "Yên Sở"
+					}
+				]
+			},
+			{
+				"name": "Mê Linh",
+				"ward": [
+					{
+						"name": "Chi Đông"
+					},
+					{
+						"name": "Quang Minh"
+					},
+					{
+						"name": "Chu Phan"
+					},
+					{
+						"name": "Đại Thịnh"
+					},
+					{
+						"name": "Mê Linh"
+					},
+					{
+						"name": "Hoàng Kim"
+					},
+					{
+						"name": "Kim Hoa"
+					},
+					{
+						"name": "Liên Mạc"
+					},
+					{
+						"name": "Tam Đồng"
+					},
+					{
+						"name": "Thạch Hà"
+					},
+					{
+						"name": "Thanh Lâm"
+					},
+					{
+						"name": "Tiền Phong"
+					},
+					{
+						"name": "Tiến Thắng"
+					},
+					{
+						"name": "Tiến Thịnh"
+					},
+					{
+						"name": "Tráng Việt"
+					},
+					{
+						"name": "Tự Lập"
+					},
+					{
+						"name": "Văn Khê"
+					},
+					{
+						"name": "Văn Yên"
+					}
+				]
+			},
+			{
+				"name": "Mỹ Đức",
+				"ward": [
+					{
+						"name": "An Mỹ"
+					},
+					{
+						"name": "An Phú"
+					},
+					{
+						"name": "An Tiến"
+					},
+					{
+						"name": "Bột Xuyên"
+					},
+					{
+						"name": "Đại Hưng"
+					},
+					{
+						"name": "Đốc Tín"
+					},
+					{
+						"name": "Đồng Tâm"
+					},
+					{
+						"name": "Hồng Sơn"
+					},
+					{
+						"name": "Hợp Thanh"
+					},
+					{
+						"name": "Hợp Tiến"
+					},
+					{
+						"name": "Hùng Tiến"
+					},
+					{
+						"name": "Lương Sơn"
+					},
+					{
+						"name": "Lê Thanh"
+					},
+					{
+						"name": "Mỹ Thành"
+					},
+					{
+						"name": "Phù Lưu Tế"
+					},
+					{
+						"name": "Phúc Lâm"
+					},
+					{
+						"name": "Phùng Xá"
+					},
+					{
+						"name": "Thượng Lâm"
+					},
+					{
+						"name": "Tuy Lai"
+					},
+					{
+						"name": "Vạn Kim"
+					},
+					{
+						"name": "Xuy Xá"
+					}
+				]
+			},
+			{
+				"name": "Phú Xuyên",
+				"ward": [
+					{
+						"name": "Phú Xuyên"
+					},
+					{
+						"name": "Phú Minh"
+					},
+					{
+						"name": "Bạch Hạ"
+					},
+					{
+						"name": "Châu Can"
+					},
+					{
+						"name": "Chương Mỹ"
+					},
+					{
+						"name": "Đại Thắng"
+					},
+					{
+						"name": "Đại Xuyên"
+					},
+					{
+						"name": "Hoàng Long"
+					},
+					{
+						"name": "Hồng Minh"
+					},
+					{
+						"name": "Hồng Thái"
+					},
+					{
+						"name": "Khai Thái"
+					},
+					{
+						"name": "Minh Tân"
+					},
+					{
+						"name": "Nam Phong"
+					},
+					{
+						"name": "Nam Triều"
+					},
+					{
+						"name": "Phú Túc"
+					},
+					{
+						"name": "Phú Yên"
+					},
+					{
+						"name": "Phúc Tiến"
+					},
+					{
+						"name": "Phượng Dực"
+					},
+					{
+						"name": "Quang Lãng"
+					},
+					{
+						"name": "Quang Trung"
+					},
+					{
+						"name": "Sơn Hà"
+					},
+					{
+						"name": "Tân Dân"
+					},
+					{
+						"name": "Tri Thủy"
+					},
+					{
+						"name": "Tri Trung"
+					},
+					{
+						"name": "Văn Hoàng"
+					},
+					{
+						"name": "Nam Tiến"
+					},
+					{
+						"name": "Vân Từ"
+					}
+				]
+			},
+			{
+				"name": "Phúc Thọ",
+				"ward": [
+					{
+						"name": "Cẩm Đình"
+					},
+					{
+						"name": "Hát Môn"
+					},
+					{
+						"name": "Hiệp Thuận"
+					},
+					{
+						"name": "Liên Hiệp"
+					},
+					{
+						"name": "Long Xuyên"
+					},
+					{
+						"name": "Ngọc Tảo"
+					},
+					{
+						"name": "Phúc Hòa"
+					},
+					{
+						"name": "Phụng Thượng"
+					},
+					{
+						"name": "Phương Độ"
+					},
+					{
+						"name": "Sen Chiểu"
+					},
+					{
+						"name": "Tam Hiệp"
+					},
+					{
+						"name": "Tam thuấn"
+					},
+					{
+						"name": "Thanh Đa"
+					},
+					{
+						"name": "Thọ Lộc"
+					},
+					{
+						"name": "Thương Cốc"
+					},
+					{
+						"name": "Tích Giang"
+					},
+					{
+						"name": "Trạch Mỹ Lộc"
+					},
+					{
+						"name": "Vân Hà"
+					},
+					{
+						"name": "Vân Nam"
+					},
+					{
+						"name": "Vân Phúc"
+					},
+					{
+						"name": "Võng Xuyên"
+					},
+					{
+						"name": "Xuân Phú"
+					}
+				]
+			},
+			{
+				"name": "Quốc Oai",
+				"ward": [
+					{
+						"name": "Cấn Hữu"
+					},
+					{
+						"name": "Cộng Hòa"
+					},
+					{
+						"name": "Đại Thành"
+					},
+					{
+						"name": "Đồng Quang"
+					},
+					{
+						"name": "Đông Yên"
+					},
+					{
+						"name": "Hòa Thạch"
+					},
+					{
+						"name": "Liệp Tuyết"
+					},
+					{
+						"name": "Nghĩa Lương"
+					},
+					{
+						"name": "Ngọc Hiệp"
+					},
+					{
+						"name": "Ngọc Mỹ"
+					},
+					{
+						"name": "Phú Cát"
+					},
+					{
+						"name": "Phú Mãn"
+					},
+					{
+						"name": "Phượng Cách"
+					},
+					{
+						"name": "Sài Sơn"
+					},
+					{
+						"name": "Tân Hòa"
+					},
+					{
+						"name": "Tân Phú"
+					},
+					{
+						"name": "Thạch Thán"
+					},
+					{
+						"name": "Tuyết Nghĩa"
+					},
+					{
+						"name": "Yên Sơn"
+					},
+					{
+						"name": "Đông Xuân"
+					}
+				]
+			},
+			{
+				"name": "Sóc Sơn",
+				"ward": [
+					{
+						"name": "Bắc Phú"
+					},
+					{
+						"name": "Bắc Sơn"
+					},
+					{
+						"name": "Đông Xuân"
+					},
+					{
+						"name": "Đức Hòa"
+					},
+					{
+						"name": "Hiền Ninh"
+					},
+					{
+						"name": "Hồng Kỳ"
+					},
+					{
+						"name": "Kim Lũ"
+					},
+					{
+						"name": "Mai Đình"
+					},
+					{
+						"name": "Minh Phú"
+					},
+					{
+						"name": "Minh Trí"
+					},
+					{
+						"name": "Nam Sơn"
+					},
+					{
+						"name": "Phú Cường"
+					},
+					{
+						"name": "Phù Linh"
+					},
+					{
+						"name": "Phù Lỗ"
+					},
+					{
+						"name": "Phú Minh"
+					},
+					{
+						"name": "Quang Tiến"
+					},
+					{
+						"name": "Tân Dân"
+					},
+					{
+						"name": "Tân Hưng"
+					},
+					{
+						"name": "Tân Minh"
+					},
+					{
+						"name": "Thanh Xuân"
+					},
+					{
+						"name": "Tiên Dược"
+					},
+					{
+						"name": "Trung Giã"
+					},
+					{
+						"name": "Việt Long"
+					},
+					{
+						"name": "Xuân Giang"
+					},
+					{
+						"name": "Xuân Thu"
+					}
+				]
+			},
+			{
+				"name": "Thạch Thất",
+				"ward": [
+					{
+						"name": "Bình Phú"
+					},
+					{
+						"name": "Bình Yên"
+					},
+					{
+						"name": "Cẩm Yên"
+					},
+					{
+						"name": "Cần Kiệm"
+					},
+					{
+						"name": "Canh Nậu"
+					},
+					{
+						"name": "Chàng Sơn"
+					},
+					{
+						"name": "Đại Đồng"
+					},
+					{
+						"name": "Dị Nậu"
+					},
+					{
+						"name": "Đồng Trúc"
+					},
+					{
+						"name": "Hà Bằng"
+					},
+					{
+						"name": "Hương Ngải"
+					},
+					{
+						"name": "Hữu Bằng"
+					},
+					{
+						"name": "Lại Thượng"
+					},
+					{
+						"name": "Phú Kim"
+					},
+					{
+						"name": "Phùng Xá"
+					},
+					{
+						"name": "Tân Xã"
+					},
+					{
+						"name": "Thạch Hòa"
+					},
+					{
+						"name": "Thạch Xá"
+					},
+					{
+						"name": "Tiến Xuân"
+					},
+					{
+						"name": "Yên Bình"
+					},
+					{
+						"name": "Yên Trung"
+					}
+				]
+			},
+			{
+				"name": "Thanh Oai",
+				"ward": [
+					{
+						"name": "Bích Hòa"
+					},
+					{
+						"name": "Bình Minh"
+					},
+					{
+						"name": "Cao Dương"
+					},
+					{
+						"name": "Cao Viên"
+					},
+					{
+						"name": "Cự Khê"
+					},
+					{
+						"name": "Dân Hòa"
+					},
+					{
+						"name": "Đỗ Động"
+					},
+					{
+						"name": "Hồng Dương"
+					},
+					{
+						"name": "Kim An"
+					},
+					{
+						"name": "Kim Thư"
+					},
+					{
+						"name": "Liên Châu"
+					},
+					{
+						"name": "Mỹ Hưng"
+					},
+					{
+						"name": "Phương Trung"
+					},
+					{
+						"name": "Tam Hưng"
+					},
+					{
+						"name": "Tân Ước"
+					},
+					{
+						"name": "Thanh Cao"
+					},
+					{
+						"name": "Thanh Mai"
+					},
+					{
+						"name": "Thanh Thùy"
+					},
+					{
+						"name": "Thanh Văn"
+					},
+					{
+						"name": "Xuân Dương"
+					}
+				]
+			},
+			{
+				"name": "Thanh Trì",
+				"ward": [
+					{
+						"name": "Đại Áng"
+					},
+					{
+						"name": "Đông Mỹ"
+					},
+					{
+						"name": "Duyên Hà"
+					},
+					{
+						"name": "Hữu Hòa"
+					},
+					{
+						"name": "Liên Ninh"
+					},
+					{
+						"name": "Ngọc Hồi"
+					},
+					{
+						"name": "Ngũ Hiệp"
+					},
+					{
+						"name": "Tả Thanh Oai"
+					},
+					{
+						"name": "Tam Hiệp"
+					},
+					{
+						"name": "Tân Triều"
+					},
+					{
+						"name": "Thanh Liệt"
+					},
+					{
+						"name": "Tứ Hiệp"
+					},
+					{
+						"name": "Văn Phúc"
+					},
+					{
+						"name": "Vĩnh Quỳnh"
+					},
+					{
+						"name": "Yên Mỹ"
+					}
+				]
+			},
+			{
+				"name": "Thường Tín",
+				"ward": [
+					{
+						"name": "Thường Tín"
+					},
+					{
+						"name": "Chương Dương"
+					},
+					{
+						"name": "Dũng Tiến"
+					},
+					{
+						"name": "Duyên Thái"
+					},
+					{
+						"name": "Hà Hội"
+					},
+					{
+						"name": "Hiền Giang"
+					},
+					{
+						"name": "Hòa Bình"
+					},
+					{
+						"name": "Khánh Hà"
+					},
+					{
+						"name": "Hồng vân"
+					},
+					{
+						"name": "Lê Lợi"
+					},
+					{
+						"name": "Liên Phương"
+					},
+					{
+						"name": "Minh Cường"
+					},
+					{
+						"name": "Nghiêm Xuyên"
+					},
+					{
+						"name": "Nguyễn Trãi"
+					},
+					{
+						"name": "Nhị Khê"
+					},
+					{
+						"name": "Ninh Sở"
+					},
+					{
+						"name": "Quất Động"
+					},
+					{
+						"name": "Tân Minh"
+					},
+					{
+						"name": "Thắng Lợi"
+					},
+					{
+						"name": "Thư Phú"
+					},
+					{
+						"name": "Tiền Phong"
+					},
+					{
+						"name": "Tô Hiệu"
+					},
+					{
+						"name": "Tự Nhiên"
+					},
+					{
+						"name": "Vạn Điểm"
+					},
+					{
+						"name": "Văn Bình"
+					},
+					{
+						"name": "Văn Phú"
+					},
+					{
+						"name": "Văn Tự"
+					},
+					{
+						"name": "Vân Tảo"
+					}
+				]
+			},
+			{
+				"name": "Ứng Hòa",
+				"ward": [
+					{
+						"name": "Vân Đình"
+					},
+					{
+						"name": "Cao Thành"
+					},
+					{
+						"name": "Đại Cường"
+					},
+					{
+						"name": "Đại Hùng"
+					},
+					{
+						"name": "Đội Bình"
+					},
+					{
+						"name": "Đông Lỗ"
+					},
+					{
+						"name": "Đồng Tiến"
+					},
+					{
+						"name": "Đông Tân"
+					},
+					{
+						"name": "Hoa Sơn"
+					},
+					{
+						"name": "Hòa Lâm"
+					},
+					{
+						"name": "Hòa Nam"
+					},
+					{
+						"name": "Hòa Phú"
+					},
+					{
+						"name": "Hòa Xã"
+					},
+					{
+						"name": "Hồng Quang"
+					},
+					{
+						"name": "Kim Đường"
+					},
+					{
+						"name": "Liên Bạt"
+					},
+					{
+						"name": "Lưu Hoàng"
+					},
+					{
+						"name": "Minh Đức"
+					},
+					{
+						"name": "Phù lưu"
+					},
+					{
+						"name": "Phương Tú"
+					},
+					{
+						"name": "Quảng Phú Cầu"
+					},
+					{
+						"name": "Sơn Công"
+					},
+					{
+						"name": "Tảo Dương Văn"
+					},
+					{
+						"name": "Trầm Lộng"
+					},
+					{
+						"name": "Trung Tú"
+					},
+					{
+						"name": "Trường Thịnh"
+					},
+					{
+						"name": "Vạn Thái"
+					},
+					{
+						"name": "Viên An"
+					},
+					{
+						"name": "Viên Nội"
+					}
+				]
+			},
+			{
+				"name": "Đan Phượng",
+				"ward": [
+					{
+						"name": "Đan phượng"
+					},
+					{
+						"name": "Đồng Tháp"
+					},
+					{
+						"name": "Hạ Mỗ"
+					},
+					{
+						"name": "Hồng Hà"
+					},
+					{
+						"name": "Liên Hà"
+					},
+					{
+						"name": "Liên Hồng"
+					},
+					{
+						"name": "Liên Trung"
+					},
+					{
+						"name": "Phương Đình"
+					},
+					{
+						"name": "Song Phượng"
+					},
+					{
+						"name": "Tân Hội"
+					},
+					{
+						"name": "Tân Lập"
+					},
+					{
+						"name": "Thọ An"
+					},
+					{
+						"name": "Thọ Xuân"
+					},
+					{
+						"name": "Thượng Mỗ"
+					},
+					{
+						"name": "Trung Châu"
+					}
+				]
+			},
+			{
+				"name": "Đông Anh",
+				"ward": [
+					{
+						"name": "Bắc Hồng"
+					},
+					{
+						"name": "Cổ Loa"
+					},
+					{
+						"name": "Dục Tú"
+					},
+					{
+						"name": "Đại Mạch"
+					},
+					{
+						"name": "Đông Anh"
+					},
+					{
+						"name": "Đông Hội"
+					},
+					{
+						"name": "Hải Bối"
+					},
+					{
+						"name": "Kim Chung"
+					},
+					{
+						"name": "Kim Nỗ"
+					},
+					{
+						"name": "Liên Hà"
+					},
+					{
+						"name": "Mai Lâm"
+					},
+					{
+						"name": "Nam Hồng"
+					},
+					{
+						"name": "Nguyên Khê"
+					},
+					{
+						"name": "Tàm Xá"
+					},
+					{
+						"name": "Thụy Lâm"
+					},
+					{
+						"name": "Tiên Dương"
+					},
+					{
+						"name": "Uy Nỗ"
+					},
+					{
+						"name": "Vân Hà"
+					},
+					{
+						"name": "Vân Nội"
+					},
+					{
+						"name": "Việt Hùng"
+					},
+					{
+						"name": "Vĩnh Ngọc"
+					},
+					{
+						"name": "Võng La"
+					},
+					{
+						"name": "Xuân Canh"
+					},
+					{
+						"name": "Xuân Nộn"
+					}
+				]
+			},
+			{
+				"name": "Sơn Tây",
+				"ward": [
+					{
+						"name": "Lê Lợi"
+					},
+					{
+						"name": "Ngô Quyền"
+					},
+					{
+						"name": "Phú Thịnh"
+					},
+					{
+						"name": "Quang Trung"
+					},
+					{
+						"name": "Sơn Lộc"
+					},
+					{
+						"name": "Trung Hưng"
+					},
+					{
+						"name": "Trung Sơn Trầm"
+					},
+					{
+						"name": "Xuân Khan"
+					},
+					{
+						"name": "Cổ Đông"
+					},
+					{
+						"name": "Đường Lâm"
+					},
+					{
+						"name": "Kim Sơn"
+					},
+					{
+						"name": "Sơn Đông"
+					},
+					{
+						"name": "Thanh Mỹ"
+					},
+					{
+						"name": "Xuân Sươn"
+					},
+					{
+						"name": "Viên Sơn"
+					}
+				]
+			}
+		]
+	}
+]

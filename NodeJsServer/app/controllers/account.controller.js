@@ -2,11 +2,7 @@ const db = require("../models");
 const Account = db.accounts;
 const User = db.users;
 const sequelize = db.sequelize
-const Op = db.Sequelize.Op;
 const { QueryTypes } = require('sequelize');
-const bcryptjs = require('bcryptjs')
-const jwt = require('jsonwebtoken')
-const auth = require('../config/auth.config')
 
 // Create and Save a new account
 exports.create = async (req, res) => {

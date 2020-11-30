@@ -54,7 +54,7 @@ module.exports = app => {
 
     // Get post upload fee
     router.get("/uploadFee", post.getUploadFee)
-
+    
     // Get post info by ID
     router.get("/:id", post.getPostInfoByID)
 

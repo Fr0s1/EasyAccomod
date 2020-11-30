@@ -1,22 +1,7 @@
 const fs = require('fs')
+const { Op } = require('sequelize')
 const db = require('../models')
 const Room = db.rooms
-
-exports.getRoomInfoByID = async (req, res) => {
-    let _id = req.params.id
-
-    try {
-        let selectedRoom = await Room.findAll({
-            where: {
-                roomID: _id
-            }
-        })
-
-        res.send(selectedRoom)
-    } catch (err) {
-        res.send({ message: 'Room not exist' })
-    }
-}
 
 exports.getRoomImagesByID = async (req, res) => {
     let _id = req.params.id
@@ -97,5 +82,106 @@ exports.deleteByID = async (req, res) => {
         res.send(`Deleted room with id = ${_id}`)
     } catch (err) {
         res.send("can't deleted room")
+    }
+}
+
+exports.findByQuery = async (req, res) => {
+    const conditions = req.query
+    const Post = db.posts
+
+    let priceRange
+    let areaRange
+
+    if (conditions.monthPrice) {
+        conditions.monthPrice = conditions.monthPrice.replace(/ triệu/g, '000000')
+        priceRange = conditions.monthPrice.split(' ')
+        delete conditions.monthPrice
+    }
+
+    if (conditions.area) {
+        areaRange = conditions.area
+        conditions.area = areaRange.replace(/m2/g, '')
+        areaRange = conditions.area.split(' ')
+        delete conditions.area
+    }
+
+    if (conditions.sharedOwner) {
+        conditions.sharedOwner = (conditions.sharedOwner === 'Có' ? true : false)
+    }
+
+    try {
+        let result = []
+        if (areaRange && priceRange) {
+            result = await Post.findAll({
+                include: {
+                    model: Room,
+                    where: {
+                        [Op.and]: [{ ...conditions },
+                        {
+                            monthPrice: {
+                                [Op.between]:
+                                    [priceRange[0], priceRange[2]],
+                            }
+                        },
+                        {
+                            area: {
+                                [Op.between]:
+                                    [area[0], area[2]],
+                            }
+                        }]
+                    }
+                }
+            })
+        } else if (priceRange) {
+            result = await Post.findAll({
+                include: {
+                    model: Room,
+                    where: {
+                        [Op.and]: [{ ...conditions },
+                        {
+                            monthPrice: {
+                                [Op.and]: {
+                                    [Op.not]: null,
+                                    [Op.between]:
+                                        [priceRange[0], priceRange[2]],
+
+                                }
+                            }
+                        }]
+                    }
+                }
+            })
+        } else if (areaRange) {
+            result = await Post.findAll({
+                include: {
+                    model: Room,
+                    where: {
+                        [Op.and]: [{ ...conditions },
+                        {
+                            area: {
+                                [Op.and]: {
+                                    [Op.not]: null,
+                                    [Op.between]:
+                                        [areaRange[0], areaRange[2]],
+
+                                }
+                            }
+                        }]
+                    }
+                }
+            })
+        } else {
+            result = await Post.findAll({
+                include: {
+                    model: Room,
+                    where: conditions
+                }
+            })
+        }
+
+        res.send(result)
+
+    } catch (err) {
+        res.send({ error: err })
     }
 }

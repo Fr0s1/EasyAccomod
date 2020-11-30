@@ -17,7 +17,10 @@ export class AdminPostsComponent implements OnInit {
 
   targetURL = "http://localhost:8080/api/posts"
   getUnverifiedPosts() {
-    this.postService.getUnverifiedPosts(this.targetURL).subscribe(data => this.unverifiedPosts = data)
+    this.postService.getUnverifiedPosts().subscribe(data => {
+      this.unverifiedPosts = data
+      console.log(this.unverifiedPosts)
+    })
   }
 
   addPost(event) {
@@ -53,7 +56,6 @@ export class AdminPostsComponent implements OnInit {
         currentPost.checked = false;
       }
     } else {
-
       for (let i = 0; i < postList.length; i++) {
         let currentPost = (<HTMLInputElement>postList[i])
 

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { PostService } from './../services/post.service'
+import geographicData from '../../assets/example.json';
 
 @Component({
   selector: 'app-posts',
@@ -7,19 +9,40 @@ import { PostService } from './../services/post.service'
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
-  posts // Fetch all posts from server
 
-  postImagesFileName = [] // Mảng lưu TÊN file ảnh đầu tiên ứng với từng bài đăng
-  postImages = [] // Mảng lưu ẢNH đầu tiên của từng bài đăng 
+  data = geographicData // Magiccc
 
-  pageLength // Tổng cộng bài đăng ở server
-  pageSizeOptions = [1, 2, 4] 
+  posts // All posts fetched from server
 
-  previewPosts // Số bài đăng sẽ hiển thị ở từng trang
+  // Phục vụ cho preview
+  postImagesFileName = [] // Mảng lưu TÊN file ảnh đầu tiên ứng với mỗi bài đăng
+  postImages = [] // Mảng lưu file ẢNH đầu tiên của mỗi bài đăng 
+
+
+  pageLength // Tổng cộng số bài đăng ở thanh pagination
+  pageSizeOptions = [1, 2, 4] // Tùy chọn số bài đăng hiển thị ở mỗi trang
+
+  searchedPosts // Kết quả tìm kiếm bài đăng
+  previewPosts  // Những bài đăng sẽ được hiển thị ở từng trang dựa theo pageSizeOptions và searchedPosts
+
+  pageNumber: number = 0 // trang hiện tại bằng 0
+
   constructor(private postService: PostService) { }
 
+  @ViewChild(MatPaginator) paginator: MatPaginator
+
   ngOnInit(): void {
-    this.getPost()
+    this.getPost() // Fetched all posts from server
+  }
+
+  // When user interacts with pagination bar
+  goToPage() {
+    this.paginator.pageIndex = this.pageNumber - 1;
+    this.paginator.page.next({
+      pageIndex: this.paginator.pageIndex,
+      pageSize: this.paginator.pageSize,
+      length: this.paginator.length
+    });
   }
 
   getPost() {
@@ -31,6 +54,7 @@ export class PostsComponent implements OnInit {
 
       this.posts.forEach(post => {
         // Với mỗi bài đăng, lấy thông tin về ảnh của phòng trọ
+
         this.postService.getRoomImagesByID(post.roomID).subscribe(data => {
 
           // Lấy tên file ảnh đầu tiên của phòng trọ
@@ -42,7 +66,7 @@ export class PostsComponent implements OnInit {
             // Tạo ảnh từ Blob
             let reader = new FileReader();
             reader.addEventListener("load", () => {
-              this.postImages.push(reader.result) // thêm vào mảng lưu ảnh
+              this.postImages.push(reader.result) // Khi load ảnh xong, lưu vào mảng  
             }, false);
 
             if (data) {
@@ -54,8 +78,60 @@ export class PostsComponent implements OnInit {
     })
   }
 
+  searched: boolean = false // Kiểm tra xem người dùng đã ấn nút tìm kiếm chưa
   pageChangeEvent(event) {
-    const offset = event.pageIndex * event.pageSize;
-    this.previewPosts = this.posts.slice(offset).slice(0, event.pageSize);
+    if (this.searched) {
+      const offset = event.pageIndex * event.pageSize;
+
+      this.previewPosts = this.searchedPosts.slice(offset).slice(0, event.pageSize);
+
+    } else {
+      const offset = event.pageIndex * event.pageSize;
+      this.previewPosts = this.posts.slice(offset).slice(0, event.pageSize);
+    }
+  }
+
+  selectedDistrict
+  fetchWards(event) {
+    this.selectedDistrict = geographicData[0].district.filter(ward => ward.name === event.target.value)[0].ward
+  }
+
+  searchPost() {
+    this.searched = true
+    let requirement = document.querySelectorAll('select')
+    let input = document.querySelectorAll('.search input')
+
+    let requirementObject = {}
+
+    requirement.forEach(data => {
+      if (data.value !== 'Chọn...') {
+        requirementObject[data.name] = data.value
+      }
+    })
+
+    input.forEach(<HTMLInputElement>(data) => {
+      if (data.value.length !== 0) {
+        requirementObject[data.name] = data.value
+      }
+    })
+    
+    this.postService.findPost(requirementObject).subscribe(data => {
+      this.searchedPosts = data
+      this.paginator.pageIndex = 0;
+      this.pageLength = this.searchedPosts.length
+
+      this.paginator.page.next({
+        pageIndex: this.paginator.pageIndex,
+        pageSize: this.paginator.pageSize,
+        length: this.paginator.length
+      });
+    })
+  }
+
+  resetPost() {
+    this.searched = false
+    this.previewPosts = this.posts
+    this.pageLength = this.posts.length
+    this.pageNumber = 0
   }
 }

@@ -11,7 +11,7 @@ export class PostService {
 
   roomUrl = 'http://localhost:8080/api/rooms'
   postUrl = 'http://localhost:8080/api/posts'
-  
+
   // Upload form containg room and post data to server
   uploadForm(url: string, form: FormData) {
     return this.http.post(url, form)
@@ -22,11 +22,12 @@ export class PostService {
     return this.http.get(url)
   }
 
-  // Get a list of unverified post
-  getUnverifiedPosts(url: string) {
-    return this.http.get(url + '?verifiedStatus=0')
+  // Get a list of unverified posts
+  getUnverifiedPosts() {
+    return this.http.get(this.postUrl + '?verifiedStatus=0')
   }
 
+  // Change post information
   updatePost(url: string, option) {
     return this.http.put(url, option)
   }
@@ -51,9 +52,20 @@ export class PostService {
     return this.http.get(this.roomUrl + `/${roomId}/image/${fileName}`, { responseType: 'blob' })
   }
 
-
-  // Preview 4 posts sort by column name
+  // Preview 4 posts in homepage sort by column name
   getPreviewPost(columnName: string) {
     return this.http.get(this.postUrl + `/preview?column=${columnName}`)
+  }
+
+  findPost(requirement: object) {
+    let queryString = '?'
+
+    for (const [key, value] of Object.entries(requirement)) {
+      if (key === 'airconditioner' || key === 'balcony') {
+        value === 'false' ? 0 : 1
+      }
+      queryString += `${key}=${value}&`
+    }
+    return this.http.get(this.roomUrl + encodeURI(queryString))
   }
 }

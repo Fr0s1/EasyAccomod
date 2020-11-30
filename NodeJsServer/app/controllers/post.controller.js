@@ -2,10 +2,9 @@ const db = require("../models");
 const path = require('path')
 const PostCost = db.postCost // chi phí đăng bài
 const Post = db.posts // model của bài đăng
+const Room = db.rooms // model cho phòng trọ
 
 exports.create = async (req, res) => {
-    const Room = db.rooms // model cho phòng trọ
-
     const formData = req.body // các thông tin trong http body
 
     const sharedOwner = formData.sharedOwner === 'Có' ? true : false;
@@ -102,11 +101,15 @@ exports.getPreviewPosts = async (req, res) => {
 exports.findByQuery = async (req, res) => {
     const conditions = req.query
 
+    console.log(conditions)
     try {
         let result = await Post.findAll({
+            include: {
+                model: Room
+            },
+
             where: conditions
         })
-
         res.send(result)
     } catch (err) {
         console.log("Can't find post with given queries")
