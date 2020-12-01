@@ -16,9 +16,9 @@
             Bài đăng mới nhất
         </h1>
 
-        <div class="room-preview" *ngIf="previewPosts">
+        <div class="room-preview" *ngIf="previewPosts?.length > 0">
             <div *ngFor="let i of createRange(4)">
-                <a routerLink="/post/details/{{previewPosts[i-1].postID}}">
+                <a routerLink="/post/details/{{previewPosts[i-1].postID}}" *ngIf="previewImages[i-1]">
                     <img [src]="previewImages[i-1]">
                 </a>
 

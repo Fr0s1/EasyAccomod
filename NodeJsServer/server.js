@@ -18,8 +18,7 @@ app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const db = require("./app/models");
-
+// const db = require("./app/models");
 // db.comments.sync({force: true});
 // // drop the table if it already exists
 // db.sequelize.sync({ force: true }).then(() => {

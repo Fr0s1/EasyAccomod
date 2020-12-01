@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
+import { throwError } from 'rxjs';
 
-import { first } from 'rxjs/operators';
+import { catchError, first } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service'
 
 @Component({
@@ -14,10 +15,9 @@ export class LogInComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     if (this.authService.currentUserValue) {
-        this.router.navigate(['/home'])
+      this.router.navigate(['/home'])
     }
   }
-
 
   account: FormGroup
   ngOnInit(): void {
@@ -27,19 +27,20 @@ export class LogInComponent implements OnInit {
     })
   }
 
-  getUrl() {
-    return "./../assets/background3.jpg";
-  }
-
+  errorMessage: string
   signIn() {
     var form = document.querySelector('form')
 
     var formData = new FormData(form)
 
-    this.authService.signIn(formData).pipe(first()).subscribe(data => {
-      if (data) {
+    this.authService.signIn(formData).pipe(catchError(err => {
+      this.errorMessage = err.error.message
+      return throwError(err);
+    })).subscribe(data => {
+      if (data.token) {
         this.router.navigate(['/home'])
       }
+      console.log(data)
     })
   }
 }

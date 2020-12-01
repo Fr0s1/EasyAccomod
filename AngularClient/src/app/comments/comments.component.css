@@ -5,3 +5,41 @@ h2 {
 span.noti {
     margin-left: 20px;
 }
+
+.send-comment {
+    width: 90%;
+    margin: 1em auto;
+    border-bottom: 1px solid rgb(235, 232, 232);
+    padding-bottom: 10px;
+}
+
+.send-comment textarea {
+    width: 50%;
+}
+
+.comment {
+    overflow: hidden;
+    margin: 1em auto;
+    border-bottom: 1px solid rgb(235, 232, 232);
+    padding-bottom: 1em;
+    width: 90%;
+}
+
+.comment img {
+    width: 6em;
+    float: left;
+    margin-right: 1em;
+}
+
+.comment p.time {
+    font-size: medium;
+    color: rgb(172, 179, 179);
+}
+
+.send-comment p.hidden {
+    display: none;
+}
+
+.send-comment p.show {
+    display: block;
+}

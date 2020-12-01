@@ -91,9 +91,11 @@ export class CreatePostComponent implements OnInit {
     var form = document.querySelector('form')
     var formData = new FormData(form)
 
-    this.postService.uploadForm(this.uploadURL, formData).subscribe(res => {
-      console.log(res)
-    })
+    if (this.postModel.valid) {
+      this.postService.uploadForm(this.uploadURL, formData).subscribe(res => {
+        console.log(res)
+      })
+    }
   }
 
   updateCost() {

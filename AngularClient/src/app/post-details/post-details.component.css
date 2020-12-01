@@ -136,3 +136,7 @@ ul li {
 h3 {
     font-size: large;
 }
+
+.roomDescription p{
+    margin-left: 10px;
+}

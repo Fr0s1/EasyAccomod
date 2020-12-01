@@ -10,7 +10,7 @@ import geographicData from '../../assets/example.json';
 })
 export class PostsComponent implements OnInit {
 
-  data = geographicData // Magiccc
+  data = geographicData
 
   posts // All posts fetched from server
 
@@ -21,6 +21,7 @@ export class PostsComponent implements OnInit {
 
   pageLength // Tổng cộng số bài đăng ở thanh pagination
   pageSizeOptions = [1, 2, 4] // Tùy chọn số bài đăng hiển thị ở mỗi trang
+
 
   searchedPosts // Kết quả tìm kiếm bài đăng
   previewPosts  // Những bài đăng sẽ được hiển thị ở từng trang dựa theo pageSizeOptions và searchedPosts
@@ -101,9 +102,7 @@ export class PostsComponent implements OnInit {
     let requirement = document.querySelectorAll('select')
     let input = document.querySelectorAll('.search input')
 
-    let requirementObject = {
-      
-    }
+    let requirementObject = {}
 
     requirement.forEach(data => {
       if (data.value !== 'Chọn...') {
@@ -116,7 +115,7 @@ export class PostsComponent implements OnInit {
         requirementObject[data.name] = data.value
       }
     })
-    
+
     this.postService.findPost(requirementObject).subscribe(data => {
       this.searchedPosts = data
       this.paginator.pageIndex = 0;

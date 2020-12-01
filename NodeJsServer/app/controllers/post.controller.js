@@ -5,59 +5,63 @@ const Post = db.posts // model của bài đăng
 const Room = db.rooms // model cho phòng trọ
 
 exports.create = async (req, res) => {
-    const formData = req.body // các thông tin trong http body
+    try {
+        const formData = req.body // các thông tin trong http body
 
-    const sharedOwner = formData.sharedOwner === 'Có' ? true : false;
-    const airconditioner = formData.airconditioner === 'Có' ? true : false;
-    const balcony = formData.balcony === 'Có' ? true : false;
+        const sharedOwner = formData.sharedOwner === 'Có' ? true : false;
+        const airconditioner = formData.airconditioner === 'Có' ? true : false;
+        const balcony = formData.balcony === 'Có' ? true : false;
 
-    const roomImagesLocalPath = path.join(__dirname, `./../../roomImages/${req.roomID}`) // directory to save room's images
+        const roomImagesLocalPath = path.join(__dirname, `./../../roomImages/${req.roomID}`) // directory to save room's images
 
-    // Create room instance 
-    const room = {
-        roomType: formData.roomType,
-        sharedOwner,
-        area: formData.area,
-        description: formData.description,
-        homeNumber: formData.homeNumber,
-        street: formData.street,
-        ward: formData.ward,
-        district: formData.district,
-        city: formData.city,
-        monthPrice: formData.monthPrice,
-        quarterPrice: formData.quarterPrice,
-        yearPrice: formData.yearPrice,
-        bathroom: formData.bathroom,
-        kitchen: formData.kitchen,
-        airconditioner,
-        balcony,
-        electricityPrice: formData.electricityPrice,
-        waterPrice: formData.waterPrice,
-        imageURI: roomImagesLocalPath,
-        otherUtils: formData.otherUtils,
-        accountUsername: req.username
+        // Create room instance 
+        const room = {
+            roomType: formData.roomType,
+            sharedOwner,
+            area: formData.area,
+            description: formData.description,
+            homeNumber: formData.homeNumber,
+            street: formData.street,
+            ward: formData.ward,
+            district: formData.district,
+            city: formData.city,
+            monthPrice: formData.monthPrice,
+            quarterPrice: formData.quarterPrice,
+            yearPrice: formData.yearPrice,
+            bathroom: formData.bathroom,
+            kitchen: formData.kitchen,
+            airconditioner,
+            balcony,
+            electricityPrice: formData.electricityPrice,
+            waterPrice: formData.waterPrice,
+            imageURI: roomImagesLocalPath,
+            otherUtils: formData.otherUtils,
+            accountUsername: req.username
+        }
+
+        // Save room in database
+        let newRoom = await Room.create(room)
+
+        let postCost = await PostCost.findAll()
+
+        const costs = postCost[0].dataValues;
+        const post = {
+            postName: formData.postName,
+            roomID: newRoom.roomID, // Lấy id phòng trọ vừa được thêm vào database để tương ứng với bài đăng
+            postWeek: formData.postWeek,
+            postMonth: formData.postMonth,
+            postYear: formData.postYear,
+            postCost: formData.postWeek * costs.weekCost + formData.postMonth * costs.monthCost + formData.postYear * costs.yearCost,
+            accountUsername: req.username
+        }
+
+        // Sau đó lưu thông tin bài đăng
+        await Post.create(post)
+
+        res.status(201).send({ message: 'Success' })
+    } catch (err) {
+        res.status(500).send({ message: err })
     }
-
-    // Save room in database
-    let newRoom = await Room.create(room)
-
-    let postCost = await PostCost.findAll()
-
-    const costs = postCost[0].dataValues;
-    const post = {
-        postName: formData.postName,
-        roomID: newRoom.roomID, // Lấy id phòng trọ vừa được thêm vào database để tương ứng với bài đăng
-        postWeek: formData.postWeek,
-        postMonth: formData.postMonth,
-        postYear: formData.postYear,
-        postCost: formData.postWeek * costs.weekCost + formData.postMonth * costs.monthCost + formData.postYear * costs.yearCost,
-        accountUsername: req.username
-    }
-
-    // Sau đó lưu thông tin bài đăng
-    await Post.create(post)
-
-    res.send({ message: 'Success' })
 }
 
 exports.getUploadFee = async (req, res) => {
@@ -88,8 +92,8 @@ exports.getPostInfoByID = async (req, res) => {
 exports.getPreviewPosts = async (req, res) => {
     let query = req.query
 
-    let result = await Post.findAll({ limit: 4, order: [[`${query.column}`, 'DESC']] }, {
-        where: {
+    let result = await Post.findAll({
+        limit: 4, order: [[`${query.column}`, 'DESC']], where: {
             verifiedStatus: true,
             paymentStatus: true
         }

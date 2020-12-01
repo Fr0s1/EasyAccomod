@@ -2,7 +2,7 @@
     <div class="posts">
         <input class="search" type="text" placeholder="Tìm kiếm bình luận">
         <button class="verify" (click)="verifyComment()">Duyệt bình luận</button>
-        <button class="deny">Từ chối bình luận</button>
+        <button class="deny" (click)="denyComment()">Từ chối bình luận</button>
 
         <br>
         <table>
@@ -35,7 +35,5 @@
         </table>
     </div>
 
-    <div class="post-info">
-        <h1>Thông tin phòng trọ</h1>
-    </div>
+
 </div>
