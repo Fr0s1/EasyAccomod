@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
-import { Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { throwError } from 'rxjs';
 
-import { catchError, first } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service'
 
 @Component({
@@ -11,20 +11,31 @@ import { AuthService } from '../services/auth.service'
   templateUrl: './log-in.component.html',
   styleUrls: ['./log-in.component.css']
 })
+
 export class LogInComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) {
     if (this.authService.currentUserValue) {
       this.router.navigate(['/home'])
     }
   }
 
+  returnUrl: string
   account: FormGroup
+
   ngOnInit(): void {
     this.account = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]]
     })
+
+    // get return url from route parameters or default to '/'
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   errorMessage: string
@@ -38,7 +49,7 @@ export class LogInComponent implements OnInit {
       return throwError(err);
     })).subscribe(data => {
       if (data.token) {
-        this.router.navigate(['/home'])
+        this.router.navigate([this.returnUrl])
       }
       console.log(data)
     })

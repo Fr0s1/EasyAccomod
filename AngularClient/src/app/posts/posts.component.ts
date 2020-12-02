@@ -15,9 +15,7 @@ export class PostsComponent implements OnInit {
   posts // All posts fetched from server
 
   // Phục vụ cho preview
-  postImagesFileName = [] // Mảng lưu TÊN file ảnh đầu tiên ứng với mỗi bài đăng
   postImages = [] // Mảng lưu file ẢNH đầu tiên của mỗi bài đăng 
-
 
   pageLength // Tổng cộng số bài đăng ở thanh pagination
   pageSizeOptions = [1, 2, 4] // Tùy chọn số bài đăng hiển thị ở mỗi trang
@@ -47,22 +45,19 @@ export class PostsComponent implements OnInit {
   }
 
   getPost() {
-    this.postService.getPostsByQuery('?verifiedStatus=1&paymentStatus=1').subscribe(data => {
+    this.postService.getPostsByQuery('?verifiedStatus=1&paymentStatus=1').subscribe(postsList => {
 
-      this.posts = data
+      this.posts = postsList
       this.pageLength = this.posts.length
       this.previewPosts = this.posts.slice(0, this.pageSizeOptions[2]);
 
       this.posts.forEach(post => {
         // Với mỗi bài đăng, lấy thông tin về ảnh của phòng trọ
 
-        this.postService.getRoomImagesByID(post.roomID).subscribe(data => {
-
-          // Lấy tên file ảnh đầu tiên của phòng trọ
-          this.postImagesFileName.push(data[0])
+        this.postService.getRoomImagesByID(post.roomID).subscribe(imageLists => {
 
           // Request tới server để tải ảnh
-          this.postService.getRoomImageByName(post.roomID, data[0]).subscribe(data => {
+          this.postService.getRoomImageByName(post.roomID, imageLists[0]).subscribe(image => {
 
             // Tạo ảnh từ Blob
             let reader = new FileReader();
@@ -70,8 +65,8 @@ export class PostsComponent implements OnInit {
               this.postImages.push(reader.result) // Khi load ảnh xong, lưu vào mảng  
             }, false);
 
-            if (data) {
-              reader.readAsDataURL(data);
+            if (image) {
+              reader.readAsDataURL(image);
             }
           })
         })

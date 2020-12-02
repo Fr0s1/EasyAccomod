@@ -45,6 +45,7 @@ export class VerifyReportComponent implements OnInit {
 
     console.log(this.seletedReports)
   }
+  
   addAllReports(event) {
     let reportList = document.querySelectorAll('td input')
     this.seletedReports = []

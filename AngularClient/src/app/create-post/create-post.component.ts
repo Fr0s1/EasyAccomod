@@ -4,6 +4,7 @@ import { PostService } from '../services/post.service';
 import { AccountService } from '../services/account.service';
 import { AuthService } from '../services/auth.service';
 import { Account } from '../_model/account'
+import { Role } from '../_model/role';
 
 @Component({
   selector: 'app-create-post',
@@ -14,7 +15,7 @@ export class CreatePostComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private postService: PostService, private accountService: AccountService, private authService: AuthService) { }
 
-  currentAccount: Account // account with token
+  currentAccount // account with token
   userInfo // User information(Full name, phone number, ... ) corresponding to account
   postUploadCost: any // Cost to upload post
   roomImages = [] // mảng lưu các file ảnh của phòng trọ (Blob)
@@ -24,6 +25,7 @@ export class CreatePostComponent implements OnInit {
   ngOnInit(): void {
     this.getPostCost()
     this.currentAccount = this.authService.currentUserValue // Get current logged in account information
+    console.log(this.currentAccount)
     this.getUserInfo()
 
     // Object thể hiện các thông tin trong form 

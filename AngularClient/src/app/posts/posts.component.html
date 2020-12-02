@@ -5,7 +5,7 @@
     <div class="main">
 
         <div class="no-result">
-            <img src="../../assets/no_result.gif" *ngIf="previewPosts.length == 0">
+            <img src="../../assets/no_result.gif" *ngIf="previewPosts?.length == 0">
         </div>
 
         <div class="room" *ngFor="let post of previewPosts">

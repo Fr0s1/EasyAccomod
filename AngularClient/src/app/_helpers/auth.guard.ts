@@ -5,16 +5,11 @@ import { AuthService } from '../services/auth.service'
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
 
-    constructor(
-        private router: Router,
-        private authService: AuthService
-    ) { }
+    constructor(private router: Router, private authService: AuthService) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const currentAccount = this.authService.currentUserValue
-
-        console.log(currentAccount)
-        if (currentAccount.token) {
+        if (currentAccount) {
             if (route.data.roles.includes(currentAccount.accountType)) {
                 return true
             }
@@ -23,7 +18,7 @@ export class AuthGuard implements CanActivate {
             return false
         }
 
-        this.router.navigate(['/login'])
+        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
         return false
     }
 }

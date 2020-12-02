@@ -16,14 +16,14 @@
             Bài đăng mới nhất
         </h1>
 
-        <div class="room-preview" *ngIf="previewPosts?.length > 0">
+        <div class="room-preview" *ngIf="latestPosts?.length > 0">
             <div *ngFor="let i of createRange(4)">
-                <a routerLink="/post/details/{{previewPosts[i-1].postID}}" *ngIf="previewImages[i-1]">
-                    <img [src]="previewImages[i-1]">
+                <a routerLink="/post/details/{{latestPosts[i].postID}}" *ngIf="latestPostsImages[i]">
+                    <img [src]="latestPostsImages[i]">
                 </a>
 
-                <p class="postTitle" *ngIf="previewPosts">{{previewPosts[i-1].postName}}</p>
-                <p *ngIf="previewPosts">Tạo bởi {{previewPosts[i-1].accountUsername}}</p>
+                <p class="postTitle" *ngIf="latestPosts">{{latestPosts[i].postName}}</p>
+                <p *ngIf="latestPosts">Tạo bởi {{latestPosts[i].accountUsername}}</p>
             </div>
         </div>
     </div>
