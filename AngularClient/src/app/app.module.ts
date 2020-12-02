@@ -28,6 +28,7 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { VerifyCommentsComponent } from './admin/verify/comments/verify-comments.component';
 import { CommentsComponent } from './comments/comments.component';
 import { ProfileComponent } from './profile/profile.component';
+import { VerifyReportComponent } from './admin/verify/reports/verify-report.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ProfileComponent } from './profile/profile.component';
     ExtendDurationComponent,
     VerifyCommentsComponent,
     CommentsComponent,
-    ProfileComponent
+    ProfileComponent,
+    VerifyReportComponent
   ],
   imports: [
     BrowserModule,

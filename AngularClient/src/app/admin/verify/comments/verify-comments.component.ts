@@ -66,8 +66,13 @@ export class VerifyCommentsComponent implements OnInit {
     console.log(this.selectedComments)
   }
 
+  verifiedSuccessfully: boolean = false
   verifyComment() {
-    this.selectedComments.forEach(commentID => this.commentService.updateComment(commentID, { verifiedStatus: true}).subscribe(data => console.log(data)))
+    this.selectedComments.forEach(commentID => this.commentService.updateComment(commentID, { verifiedStatus: true }).subscribe(data => {
+      if (Object(data).message) {
+        this.verifiedSuccessfully = true
+      }
+    }))
   }
 
   denyComment() {

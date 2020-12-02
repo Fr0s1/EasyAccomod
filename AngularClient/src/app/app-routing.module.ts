@@ -18,6 +18,7 @@ import { ExtendDurationComponent } from './admin/extend-duration/extend-duration
 import { AuthGuard } from './_helpers/auth.guard'
 import { Role } from './_model/role'
 import { VerifyCommentsComponent } from './admin/verify/comments/verify-comments.component';
+import { VerifyReportComponent } from './admin/verify/reports/verify-report.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -30,9 +31,10 @@ const routes: Routes = [
         { path: '', component: HomeComponent },
         { path: 'verify/accounts', component: AdminAccountsComponent },
         { path: 'verify/posts', component: AdminPostsComponent },
-        { path: 'verify/comments', component: VerifyCommentsComponent},
+        { path: 'verify/comments', component: VerifyCommentsComponent },
+        { path: 'verify/reports', component: VerifyReportComponent },
         { path: 'payment', component: PaymentComponent },
-        { path: 'extend', component: ExtendDurationComponent}
+        { path: 'extend', component: ExtendDurationComponent }
       ],
     canActivate: [AuthGuard],
     data: { roles: [Role.Admin] } // Only admin account can access
@@ -40,7 +42,7 @@ const routes: Routes = [
   { path: 'login', component: LogInComponent },
   { path: 'register', component: RegisterComponent },
   {
-    path: 'post/create', component: CreatePostComponent,
+    path: 'create/post', component: CreatePostComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.Landlord, Role.Admin] } // Only account with right type can access
   },
@@ -48,6 +50,7 @@ const routes: Routes = [
   { path: 'post/details/:id', component: PostDetailsComponent },
   { path: ':username', component: ProfileComponent }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

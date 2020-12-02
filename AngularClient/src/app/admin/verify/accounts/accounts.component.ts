@@ -25,10 +25,16 @@ export class AdminAccountsComponent implements OnInit {
     this.accountService.getUnverifiedAccountsList().subscribe(data => this.accounts = data)
   }
 
+  verifiedSuccessfully: boolean = false
+
   verifyAccount() {
     for (let username of this.selectedAccounts) {
       console.log(username)
-      this.accountService.verifyAccount(username).subscribe(data => console.log('Verified'))
+      this.accountService.verifyAccount(username).subscribe(data => {
+        if (Object(data).message) {
+          this.verifiedSuccessfully = true
+        }
+      })
     }
   }
 

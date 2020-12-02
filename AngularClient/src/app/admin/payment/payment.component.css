@@ -1,9 +1,5 @@
-/* table {} */
-
 .container {
-    margin-left: 0px;
     margin-top: 20px;
-    /* width: 70%; */
 }
 
 th, td {
@@ -12,13 +8,21 @@ th, td {
 }
 
 table {
-    /* margin-top: 20px; */
     border-collapse: collapse;
     border: 1px solid black;
-    float: left;
 }
 
 th, td {
     border: 1px solid black;
     text-align: center;
+    width: fit-content;
+}
+
+.noti {
+    background-color: rgb(207, 232, 220);
+    border: 2px solid rgb(79, 185, 227);
+    border-radius: 5px;
+    width: fit-content;
+    padding: 10px;
+    height: fit-content;
 }

@@ -37,13 +37,17 @@ export class AdminPostsComponent implements OnInit {
     console.log(this.selectedPosts)
   }
 
+  verifiedSuccessfully: boolean = false
   verifyPost() {
     this.selectedPosts.forEach(postID => {
       this.postService.updatePost(postID, { verifiedStatus: 1 }).subscribe(data => {
-        console.log(data)
+        if (Object(data).message) {
+          this.verifiedSuccessfully = true
+        }
       })
     })
   }
+
 
   addAllPost(event) {
     let postList = document.querySelectorAll('td input')

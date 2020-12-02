@@ -11,7 +11,7 @@ export class PostService {
 
   roomUrl = 'http://localhost:8080/api/rooms'
   postUrl = 'http://localhost:8080/api/posts'
-
+  reportUrl = 'http://localhost:8080/api/report'
   // Upload form containg room and post data to server
   uploadForm(url: string, form: FormData) {
     return this.http.post(url, form)
@@ -62,5 +62,9 @@ export class PostService {
       queryString += `${key}=${value}&`
     }
     return this.http.get(this.roomUrl + encodeURI(queryString))
+  }
+
+  sendReport(report: Object) {
+    return this.http.post(this.reportUrl, report)
   }
 }

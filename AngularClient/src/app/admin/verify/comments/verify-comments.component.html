@@ -1,12 +1,11 @@
 <div class="container">
     <div class="posts">
-        <input class="search" type="text" placeholder="Tìm kiếm bình luận">
-        <button class="verify" (click)="verifyComment()">Duyệt bình luận</button>
-        <button class="deny" (click)="denyComment()">Từ chối bình luận</button>
+        <button class="btn btn-primary verify" (click)="verifyComment()">Duyệt bình luận</button>
+        <button class="btn btn-secondary deny" (click)="denyComment()">Từ chối bình luận</button>
 
         <br>
-        <table>
-            <thead>
+        <table class="table table-hover">
+            <thead class="thead-dark">
                 <th>
                     <input type="checkbox" (change)="addAllComments($event)">
                 </th>
@@ -35,5 +34,7 @@
         </table>
     </div>
 
-
+    <div class="noti" *ngIf="verifiedSuccessfully">
+        Phê duyệt thành công
+    </div>
 </div>

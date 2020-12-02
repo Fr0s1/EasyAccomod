@@ -3,17 +3,19 @@ table {
     border-collapse: collapse;
     border: 1px solid black;
     float: left;
+    /* width: 50%; */
+    cursor: pointer;
 }
 
 th, td {
     border: 1px solid black;
-    text-align: center;
+    width: fit-content;
 }
 
 .container {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    grid-gap: 20px;
+    grid-gap: 20px
 }
 
 .search, h1 {
@@ -22,4 +24,17 @@ th, td {
 
 .search {
     margin-bottom: 5px;
+}
+
+button {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+.noti {
+    background-color: rgb(207, 232, 220);
+    border: 2px solid rgb(79, 185, 227);
+    border-radius: 5px;
+    width: fit-content;
+    padding: 10px;
 }

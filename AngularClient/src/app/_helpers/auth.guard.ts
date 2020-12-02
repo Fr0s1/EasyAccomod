@@ -13,7 +13,8 @@ export class AuthGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const currentAccount = this.authService.currentUserValue
 
-        if (currentAccount !== null || currentAccount !== undefined) {
+        console.log(currentAccount)
+        if (currentAccount.token) {
             if (route.data.roles.includes(currentAccount.accountType)) {
                 return true
             }

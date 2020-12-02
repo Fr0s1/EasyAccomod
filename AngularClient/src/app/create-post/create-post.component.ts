@@ -4,7 +4,6 @@ import { PostService } from '../services/post.service';
 import { AccountService } from '../services/account.service';
 import { AuthService } from '../services/auth.service';
 import { Account } from '../_model/account'
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-create-post',
@@ -95,6 +94,8 @@ export class CreatePostComponent implements OnInit {
       this.postService.uploadForm(this.uploadURL, formData).subscribe(res => {
         console.log(res)
       })
+    } else {
+      console.log('Invalid')
     }
   }
 
@@ -116,8 +117,8 @@ export class CreatePostComponent implements OnInit {
       // Fill form with logged in account data
       this.postModel.patchValue({
         owner: {
-          name: this.userInfo.fullName,
-          phoneNumber: this.userInfo.phoneNumber
+          name: this.userInfo?.fullName,
+          phoneNumber: this.userInfo?.phoneNumber
         }
       })
     })

@@ -137,6 +137,14 @@ h3 {
     font-size: large;
 }
 
-.roomDescription p{
+.roomDescription p {
     margin-left: 10px;
+}
+
+.post-title h1 {
+    margin: auto 10px;
+}
+
+.owner-info h2 {
+    margin-bottom: 0px;
 }

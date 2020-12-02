@@ -5,7 +5,6 @@ import { BehaviorSubject } from 'rxjs';
 import { Account } from '../_model/account'
 import { map } from 'rxjs/operators';
 import * as bcrypt from 'bcryptjs'
-import { Router } from '@angular/router'
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +14,7 @@ export class AuthService {
 
     private apiUrl = 'http://localhost:8080/api/accounts'
 
-    constructor(private http: HttpClient, private router: Router) {
+    constructor(private http: HttpClient) {
         this.currentAccountSubject = new BehaviorSubject<Account>(JSON.parse(localStorage.getItem('currentAccount')));
     }
 

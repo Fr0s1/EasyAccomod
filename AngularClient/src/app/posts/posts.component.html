@@ -3,12 +3,17 @@
 <div class="container">
 
     <div class="main">
+
+        <div class="no-result">
+            <img src="../../assets/no_result.gif" *ngIf="previewPosts.length == 0">
+        </div>
+
         <div class="room" *ngFor="let post of previewPosts">
             <a routerLink="/post/details/{{post.postID}}">
                 <img [src]="postImages[post.postID-1]" height="200px" width="">
             </a>
             <h2>{{post.postName}}</h2>
-            <p>Thời gian đăng: {{post.postTime}} </p>
+            <p>Thời gian đăng: {{post.postTime | date : 'short' : 'Asia/Ho_Chi_Minh'}} </p>
             <p>Giá: {{post.Room.monthPrice}} đồng / tháng</p>
             <p>Diện tích: {{post.Room.area}} m<sup>2</sup></p>
             <p>{{post.Room.city}}</p>
@@ -75,7 +80,7 @@
                     <option>5 triệu - 10 triệu</option>
                     <option>10 triệu - 20 triệu</option>
                     <option>20 triệu - 30 triệu</option>
-                    <option>&gt; 30 triệu</option>
+                    <option>30 triệu - 50 triệu</option>
                 </select>
             </div>
 
@@ -86,10 +91,10 @@
                 </div>
                 <select class="form-control" name="area">
                     <option>Chọn...</option>
-                    <option> &lt; 50<sup>m2</sup></option>
+                    <option>0 - 50m2</option>
                     <option>50 - 100m2</option>
                     <option>100 - 200m2</option>
-                    <option>&gt; 200m2</option>
+                    <option>200m2 - 300m2</option>
                 </select>
             </div>
 
@@ -118,23 +123,6 @@
                 </select>
             </div>
 
-            <!-- <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <input type="checkbox" name="airconditioner">
-                    </div>
-                    <label>Điều hòa</label>
-                </div>
-            </div>
-
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <input type="checkbox" name="balcony">
-                    </div>
-                    <label>Ban công</label>
-                </div>
-            </div> -->
             <div class="input-group mb-3">
                 <button class="btn btn-light" (click)="searchPost()">Tìm kiếm</button>
                 <button class="btn btn-secondary" (click)="resetPost()">Quay lại</button>

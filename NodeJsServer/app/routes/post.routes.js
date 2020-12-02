@@ -33,7 +33,6 @@ module.exports = app => {
 
         if (!roomID) { // If room table is empty
             await sequelize.query('ALTER TABLE rooms AUTO_INCREMENT = 1')
-            await sequelize.query('ALTER TABLE posts AUTO_INCREMENT = 1')
             roomID = 1
         } else {
             roomID += 1
