@@ -20,14 +20,17 @@ export class AdminPostsComponent implements OnInit {
   getPostByType(event) {
     switch (event.target.value) {
       case 'Tất cả':
+        this.operation = false
         this.showDeleteButton = false;
         this.getAllPosts()
         break;
       case 'Chưa được duyệt':
+        this.operation = false
         this.showDeleteButton = true;
         this.postService.getPostsByQuery('?verifiedStatus=0').subscribe(posts => this.postsList = posts)
         break;
       case 'Đã được duyệt':
+        this.operation = false
         this.showDeleteButton = false
         this.postService.getPostsByQuery('?verifiedStatus=1').subscribe(posts => this.postsList = posts)
         break;
@@ -56,23 +59,26 @@ export class AdminPostsComponent implements OnInit {
     console.log(this.selectedPosts)
   }
 
-  verifiedSuccessfully: boolean = false
+  message: string
+
+  operation: boolean = false
   verifyPost() {
     this.selectedPosts.forEach(postID => {
-      this.postService.updatePost(postID, { verifiedStatus: 1}).subscribe(data => {
+      this.postService.updatePost(postID, { verifiedStatus: 1 }).subscribe(data => {
         if (Object(data).message) {
-          this.verifiedSuccessfully = true
+          this.operation = true
+          this.message = 'Phê duyệt thành công'
         }
       })
     })
   }
 
-  deniedSuccessfully: boolean = false
   denyPost() {
     this.selectedPosts.forEach(postID => {
-      this.postService.updatePost(postID, { verifiedStatus: 0}).subscribe(data => {
+      this.postService.updatePost(postID, { verifiedStatus: 0 }).subscribe(data => {
         if (Object(data).message) {
-          this.deniedSuccessfully = true
+          this.operation = true
+          this.message = 'Đã từ chối bài đăng'
         }
       })
     })

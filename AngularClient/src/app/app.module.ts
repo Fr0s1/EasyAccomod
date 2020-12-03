@@ -29,6 +29,7 @@ import { VerifyCommentsComponent } from './admin/verify/comments/verify-comments
 import { CommentsComponent } from './comments/comments.component';
 import { ProfileComponent } from './profile/profile.component';
 import { VerifyReportComponent } from './admin/verify/reports/verify-report.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { VerifyReportComponent } from './admin/verify/reports/verify-report.comp
     VerifyCommentsComponent,
     CommentsComponent,
     ProfileComponent,
-    VerifyReportComponent
+    VerifyReportComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

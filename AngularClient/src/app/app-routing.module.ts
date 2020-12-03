@@ -14,6 +14,7 @@ import { PaymentComponent } from './admin/payment/payment.component'
 import { PostsComponent } from './posts/posts.component'
 import { ProfileComponent } from './profile/profile.component'
 import { ExtendDurationComponent } from './admin/extend-duration/extend-duration.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 import { AuthGuard } from './_helpers/auth.guard'
 import { Role } from './_model/role'
@@ -48,7 +49,8 @@ const routes: Routes = [
   },
   { path: 'posts', component: PostsComponent },
   { path: 'post/details/:id', component: PostDetailsComponent },
-  { path: ':username', component: ProfileComponent }
+  { path: ':username', component: ProfileComponent },
+  { path: '**', component: NotFoundComponent }
 ];
 
 
