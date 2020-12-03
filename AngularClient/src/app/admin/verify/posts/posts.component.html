@@ -22,7 +22,7 @@
                     <td>{{post.postID}}</td>
                     <td>{{post.postName}}</td>
                     <td>{{post.accountUsername}}</td>
-                    <td>{{post.createdAt}}</td>
+                    <td>{{post.createdAt | date : 'short' : 'Asia/Ho_Chi_Minh'}}</td>
                     <td>{{post.verifiedStatus}}</td>
                 </tr>
             </tbody>

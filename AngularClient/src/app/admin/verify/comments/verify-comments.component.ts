@@ -75,7 +75,8 @@ export class VerifyCommentsComponent implements OnInit {
     }))
   }
 
+  denied: boolean = false;
   denyComment() {
-    this.selectedComments.forEach(commentID => this.commentService.deleteComment(commentID).subscribe())
+    this.selectedComments.forEach(commentID => this.commentService.deleteComment(commentID).subscribe(message => this.denied = true))
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service'
 import { Account } from '../_model/account';
 import { Role } from '../_model/role'
@@ -13,13 +14,20 @@ export class MainNavComponent implements OnInit {
 
   renterType = Role.Renter
   adminType = Role.Admin
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
+
+  returnUrl: string
 
   ngOnInit() {
     this.currentAccount = this.authService.currentUserValue
+    this.returnUrl = this.router.routerState.snapshot.url
   }
 
   logout() {
     this.authService.logout()
+  }
+
+  setReturnRoute() {
+    this.router.navigate(['/login'], { queryParams: { returnUrl: this.returnUrl } });
   }
 }

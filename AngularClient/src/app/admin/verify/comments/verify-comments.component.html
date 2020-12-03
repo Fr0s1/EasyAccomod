@@ -1,7 +1,7 @@
 <div class="container">
     <div class="posts">
-        <button class="btn btn-primary verify" (click)="verifyComment()">Duyệt bình luận</button>
-        <button class="btn btn-secondary deny" (click)="denyComment()">Từ chối bình luận</button>
+        <button class="btn btn-primary" (click)="verifyComment()">Duyệt bình luận</button>
+        <button class="btn btn-secondary" (click)="denyComment()">Từ chối bình luận</button>
 
         <br>
         <table class="table table-hover">
@@ -24,7 +24,7 @@
                         <td>{{comment.commentID}}</td>
                         <td>{{comment.content}}</td>
                         <td>{{comment.accountUsername}}</td>
-                        <td>{{comment.createdAt}}</td>
+                        <td>{{comment.createdAt | date : 'short' : 'Asia/Ho_Chi_Minh'}}</td>
                         <td>{{comment.PostPostID}}</td>
                         <td>{{post.postName}}</td>
                     </tr>
@@ -36,5 +36,9 @@
 
     <div class="noti" *ngIf="verifiedSuccessfully">
         Phê duyệt thành công
+    </div>
+
+    <div class="deny" *ngIf="denied">
+        Đã xóa comment
     </div>
 </div>

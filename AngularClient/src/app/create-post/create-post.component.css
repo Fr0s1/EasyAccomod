@@ -27,3 +27,11 @@ legend {
     padding-top: 10px;
 }
 
+.noti {
+    margin-top: 5px;
+    background-color: rgb(207, 232, 220);
+    border: 2px solid rgb(79, 185, 227);
+    border-radius: 5px;
+    width: fit-content;
+    padding: 10px;
+}

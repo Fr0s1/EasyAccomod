@@ -88,11 +88,13 @@ export class CreatePostComponent implements OnInit {
 
   uploadURL = 'http://localhost:8080/api/posts'
 
+  sent: boolean = false;
   createPost() {
     var form = document.querySelector('form')
     var formData = new FormData(form)
 
     if (this.postModel.valid) {
+      this.sent = true
       this.postService.uploadForm(this.uploadURL, formData).subscribe(res => {
         console.log(res)
       })

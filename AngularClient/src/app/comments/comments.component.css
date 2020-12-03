@@ -43,3 +43,8 @@ span.noti {
 .send-comment p.show {
     display: block;
 }
+
+.content {
+    padding-top: 1em;
+    text-align: unset;
+}
