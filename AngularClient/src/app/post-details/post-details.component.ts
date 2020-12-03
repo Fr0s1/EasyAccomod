@@ -13,7 +13,7 @@ import { Account } from '../_model/account';
 export class PostDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private postService: PostService,
-    private accountService: AccountService, private authService: AuthService) { }
+    private accountService: AccountService, private authService: AuthService) {  }
 
   currentAccount: Account
   postID: number // Current post

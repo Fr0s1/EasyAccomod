@@ -10,7 +10,6 @@ export class AdminAccountsComponent implements OnInit {
 
   constructor(private accountService: AccountService) { }
 
-  accounts: any
   accountInfo = {
     username: '',
     idCard: '',
@@ -21,12 +20,32 @@ export class AdminAccountsComponent implements OnInit {
   }
 
   selectedAccounts = []
+  accounts: any
+
   ngOnInit(): void {
-    this.accountService.getUnverifiedAccountsList().subscribe(data => this.accounts = data)
+    this.getAllAccount()
+  }
+
+  getPostByType(event) {
+    switch (event.target.value) {
+      case 'Tất cả':
+        this.getAllAccount()
+        break;
+      case 'Chưa được duyệt':
+        this.accountService.getAccountByQuery('?accountType=Landlord&verified=0').subscribe(accounts => this.accounts = accounts)
+        break;
+      case 'Đã được duyệt':
+        this.accountService.getAccountByQuery('?accountType=Landlord&verified=1').subscribe(accounts => this.accounts = accounts)
+        break;
+      default:
+    }
+  }
+
+  getAllAccount() {
+    this.accountService.getAccountByQuery('?accountType=Landlord').subscribe(accounts => this.accounts = accounts)
   }
 
   verifiedSuccessfully: boolean = false
-
   verifyAccount() {
     for (let username of this.selectedAccounts) {
       console.log(username)
@@ -74,6 +93,5 @@ export class AdminAccountsComponent implements OnInit {
     }
 
     console.log(this.selectedAccounts)
-    // console.log(inputList)
   }
 }

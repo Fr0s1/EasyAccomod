@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service'
 import { Router} from '@angular/router'
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { Role } from '../_model/role';
 
 @Component({
     selector: 'app-register',
@@ -38,6 +39,7 @@ export class RegisterComponent implements OnInit {
     }
 
     errorMessage
+    message
     registerAccount() {
         var form = document.querySelector('form')
 
@@ -48,7 +50,7 @@ export class RegisterComponent implements OnInit {
             return throwError(err)
         })).subscribe(data => {
             if (data.message) {
-                this.router.navigate(['/home'])
+                this.message = data.message + ". If you're a Landlord, please wait for verification!"
             }
         })
     }

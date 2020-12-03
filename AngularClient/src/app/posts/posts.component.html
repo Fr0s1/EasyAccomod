@@ -7,9 +7,9 @@
             <img src="../../assets/no_result.gif" *ngIf="previewPosts?.length == 0">
         </div>
 
-        <div class="room" *ngFor="let post of previewPosts">
+        <div class="room" *ngFor="let post of previewPosts; let i=index">
             <a routerLink="/post/details/{{post.postID}}">
-                <img [src]="postImages[post.postID-1]" height="200px" width="">
+                <img [src]="postImages[i]" height="200px" width="">
             </a>
             <h2>{{post.postName}}</h2>
             <p>Thời gian đăng: {{post.postTime | date : 'short' : 'Asia/Ho_Chi_Minh'}} </p>

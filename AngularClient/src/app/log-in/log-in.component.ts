@@ -18,7 +18,7 @@ export class LogInComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {
     if (this.authService.currentUserValue) {
       this.router.navigate(['/home'])

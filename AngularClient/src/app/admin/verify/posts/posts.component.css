@@ -15,7 +15,9 @@ th, td {
 .container {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    grid-gap: 20px
+    grid-gap: 20px;
+    background-color: white;
+    margin-top: auto;
 }
 
 .search, h1 {
@@ -29,6 +31,7 @@ th, td {
 button {
     margin-top: 1em;
     margin-bottom: 0.5em;
+    margin-right: 10px;
 }
 
 .noti {
@@ -37,4 +40,8 @@ button {
     border-radius: 5px;
     width: fit-content;
     padding: 10px;
+}
+
+select.form-control {
+    width: 25%;
 }

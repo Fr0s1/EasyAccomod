@@ -10,8 +10,8 @@ export class AccountService {
   accountUrl = 'http://localhost:8080/api/accounts'
   userUrl = 'http://localhost:8080/api/users'
 
-  getUnverifiedAccountsList() {
-    return this.http.get(this.accountUrl + '?verified=0', { responseType: 'json' })
+  getAccountByQuery(query: string) {
+    return this.http.get(this.accountUrl + query, { responseType: 'json' })
   }
 
   // Verified account with correspoding username

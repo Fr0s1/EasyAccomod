@@ -3,6 +3,13 @@
         <button class="btn btn-secondary accept" (click)="verifyAccount()">Duyệt tài khoản</button>
         <button class="btn btn-danger deny">Từ chối duyệt</button>
         <br>
+
+        <select class="form-control" (change)="getPostByType($event)">
+            <option>Tất cả</option>
+            <option>Đã được duyệt</option>
+            <option>Chưa được duyệt</option>
+        </select>
+
         <table class="table table-hover">
             <thead class="thead-dark">
                 <th>
@@ -20,7 +27,7 @@
             </tbody>
         </table>
 
-       
+
     </div>
     <div class="account-info">
         <h1>Thông tin chi tiết</h1>

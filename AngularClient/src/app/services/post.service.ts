@@ -67,4 +67,8 @@ export class PostService {
   sendReport(report: Object) {
     return this.http.post(this.reportUrl, report)
   }
+
+  deletePost(postID: number) {
+    return this.http.delete(this.postUrl + `?postID=${postID}`)
+  }
 }
