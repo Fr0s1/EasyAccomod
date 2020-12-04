@@ -20,6 +20,7 @@ import { AuthGuard } from './_helpers/auth.guard'
 import { Role } from './_model/role'
 import { VerifyCommentsComponent } from './admin/verify/comments/verify-comments.component';
 import { VerifyReportComponent } from './admin/verify/reports/verify-report.component';
+import { ChatComponent } from './chat/chat.component'
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -40,6 +41,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [Role.Admin] } // Only admin account can access
   },
+  { path: 'chat', component: ChatComponent },
   { path: 'login', component: LogInComponent },
   { path: 'register', component: RegisterComponent },
   {

@@ -30,6 +30,7 @@ import { CommentsComponent } from './comments/comments.component';
 import { ProfileComponent } from './profile/profile.component';
 import { VerifyReportComponent } from './admin/verify/reports/verify-report.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     CommentsComponent,
     ProfileComponent,
     VerifyReportComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

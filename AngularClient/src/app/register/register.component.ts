@@ -4,7 +4,6 @@ import { AuthService } from '../services/auth.service'
 import { Router} from '@angular/router'
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { Role } from '../_model/role';
 
 @Component({
     selector: 'app-register',

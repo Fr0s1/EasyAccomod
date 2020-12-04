@@ -34,8 +34,8 @@ export class PostDetailsComponent implements OnInit {
 
     this.postService.getPostsByQuery(`?postID=${this.postID}`).subscribe(result => { // Get post by id in the url's params
       this.postInfo = result[0]
-      // Increment views number
 
+      // Increment views number
       this.postService.updatePost(this.postID, { viewsNumber: this.postInfo.viewsNumber + 1 }).subscribe()
 
       this.roomID = this.postInfo?.roomID // Room ID of post
