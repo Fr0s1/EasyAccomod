@@ -60,7 +60,7 @@ exports.create = async (req, res) => {
 
         res.status(201).send({ message: 'Success' })
     } catch (err) {
-        res.status(500).send({ message: err })
+        res.status(500).send({ error: err })
     }
 }
 

@@ -11,9 +11,7 @@ const cors = require("cors");
 var corsOptions = {
     origin: "http://localhost:4200",
 };
-// app.get('/', (req, res) => {
-//     res.sendFile(__dirname + '/index.html')
-// })
+
 app.use(cors(corsOptions));
 
 app.get('/', (req, res) => {

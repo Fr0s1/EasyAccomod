@@ -1,7 +1,7 @@
 <div class="container">
     <div class="account">
         <button class="btn btn-secondary accept" (click)="verifyAccount()">Duyệt tài khoản</button>
-        <button class="btn btn-danger deny">Từ chối duyệt</button>
+        <button class="btn btn-danger deny" (click)="unverifyAccount()">Từ chối duyệt</button>
         <br>
 
         <select class="form-control" (change)="getPostByType($event)">
@@ -42,6 +42,6 @@
     </div>
 
     <div class="noti" *ngIf="verifiedSuccessfully">
-        Phê duyệt thành công
+        {{message}}
     </div>
 </div>

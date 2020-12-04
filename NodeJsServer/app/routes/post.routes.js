@@ -18,8 +18,9 @@ module.exports = app => {
             savePath = path.join(__dirname, `./../../roomImages/${req.roomID}`)
 
             if (!fs.existsSync(savePath)) {
-                fs.mkdirSync(savePath)
+                fs.mkdirSync(savePath, { recursive: true })
             }
+
             cb(null, savePath)
         },
         filename: function (req, file, cb) {
@@ -53,17 +54,17 @@ module.exports = app => {
 
     // Get post upload fee
     router.get("/uploadFee", post.getUploadFee)
-    
+
     // Get post info by ID
     router.get("/:id", post.getPostInfoByID)
 
     // Get post with conditions specified in URL query string
     // find all if the req.query obj is empty
     router.get("/", post.findByQuery)
-    
+
     // Update post info with given postID 
     router.put("/:id", post.updatePostByID)
-    
+
     // Delete posts with columns satisfy conditions in query string
     router.delete("/", post.deleteByQuery)
 

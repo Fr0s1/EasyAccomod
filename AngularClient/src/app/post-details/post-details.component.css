@@ -125,10 +125,6 @@ ul:not(.list-group) li {
     object-fit: contain;
 }
 
-.price ul li {
-    flex: 1 100px
-}
-
 h3 {
     font-size: large;
 }

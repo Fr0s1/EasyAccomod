@@ -15,8 +15,8 @@ export class AccountService {
   }
 
   // Verified account with correspoding username
-  updateAccount(username: string) {
-    return this.http.put(this.accountUrl + `/${username}`, { verified: true })
+  updateAccount(username: string, option: Object) {
+    return this.http.put(this.accountUrl + `/${username}`, option)
   }
 
   // Get user information corresponding to account with given username

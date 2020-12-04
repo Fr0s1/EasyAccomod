@@ -10,6 +10,8 @@ export class AdminAccountsComponent implements OnInit {
 
   constructor(private accountService: AccountService) { }
 
+  message: string;
+
   accountInfo = {
     username: '',
     idCard: '',
@@ -49,14 +51,27 @@ export class AdminAccountsComponent implements OnInit {
   verifyAccount() {
     for (let username of this.selectedAccounts) {
       console.log(username)
-      this.accountService.updateAccount(username).subscribe(data => {
+      this.accountService.updateAccount(username, { verified: true}).subscribe(data => {
         if (Object(data).message) {
           this.verifiedSuccessfully = true
+          this.message = 'Phê duyệt thành công'
         }
       })
     }
   }
 
+  unverifyAccount() {
+    for (let username of this.selectedAccounts) {
+      console.log(username)
+      this.accountService.updateAccount(username, { verified: false }).subscribe(data => {
+        console.log(data)
+        if (Object(data).message) {
+          this.verifiedSuccessfully = true
+          this.message = 'Đã khóa tài khoản'
+        }
+      })
+    }
+  }
   showAccountInfo(event) {
     this.accountService.getAccountInfo(event.target.innerHTML).subscribe(data => this.accountInfo = data[0])
   }
