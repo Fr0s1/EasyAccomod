@@ -40,8 +40,10 @@
                 <ul>
                     <li>Điều hòa: <span>{{postInfo?.Room.airconditioner === true ? 'Có' : 'Không'}}</span></li>
                     <li>Ban công: <span>{{postInfo?.Room.balcony === true ? 'Có' : 'Không'}}</span></li>
-                    <li>Giá điện: <span>{{postInfo?.Room.electricityPrice}} đồng kW/h</span></li>
-                    <li>Giá nước: <span>{{postInfo?.Room.waterPrice}} đồng /m<sup>3</sup></span></li>
+                    <li>Giá điện: <span>{{postInfo?.Room.electricityPrice | number:'1.0':'en-US'  }} đồng kW/h</span>
+                    </li>
+                    <li>Giá nước: <span>{{postInfo?.Room.waterPrice | number:'1.0':'en-US'  }} đồng
+                            /m<sup>3</sup></span></li>
                     <li>Phòng bếp: <span>{{postInfo?.Room.kitchen}}</span></li>
                     <li>Phòng tắm: <span>{{postInfo?.Room.bathroom}}</span></li>
                 </ul>
@@ -49,9 +51,9 @@
                 <div class="price">
                     <h3>Giá phòng</h3>
                     <ul>
-                        <li>Theo tháng: <span>{{postInfo?.Room.monthPrice}} đồng</span></li>
-                        <li>Theo quý: <span>{{postInfo?.Room.quarterPrice}} đồng</span></li>
-                        <li>Theo năm: <span>{{postInfo?.Room.yearPrice}} đồng</span></li>
+                        <li>Theo tháng: <span>{{postInfo?.Room.monthPrice | number:'1.0':'en-US' }} đồng</span></li>
+                        <li>Theo quý: <span>{{postInfo?.Room.quarterPrice | number:'1.0':'en-US' }} đồng</span></li>
+                        <li>Theo năm: <span>{{postInfo?.Room.yearPrice | number:'1.0':'en-US' }} đồng</span></li>
                     </ul>
                 </div>
 

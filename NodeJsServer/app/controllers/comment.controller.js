@@ -8,7 +8,8 @@ exports.addComment = async (req, res) => {
     let comment = {
         content: data.content,
         accountUsername: data.accountUsername,
-        PostPostID: data.PostPostID
+        PostPostID: data.PostPostID,
+        verifiedStatus: data.verifiedStatus
     }
 
     try {

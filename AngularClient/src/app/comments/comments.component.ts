@@ -3,6 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { CommentService } from '../services/comment.service'
 import { ActivatedRoute } from '@angular/router';
 import { AccountService } from '../services/account.service';
+import { Role} from '../_model/role'
 
 @Component({
   selector: 'app-comments',
@@ -31,11 +32,13 @@ export class CommentsComponent implements OnInit {
     let commentContent: string = event.target.previousSibling.value;
 
     if (commentContent.length > 0) {
+      let verifiedStatus = this.currentAccount.accountType === Role.Admin ? true: false
       sendNotification.setAttribute('class', 'show')
       let comment = {
         content: commentContent,
         accountUsername: this.currentAccount.username,
-        PostPostID: this.postID
+        PostPostID: this.postID,
+        verifiedStatus
       }
 
       this.commentService.sendComment(comment).subscribe()
