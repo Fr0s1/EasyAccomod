@@ -25,8 +25,8 @@ exports.create = (req, res) => {
   // Save user in the database
   User.create(user)
     .then(data => {
-        
-        res.send(data);
+
+      res.send(data);
     })
     .catch(err => {
       res.status(500).send({
@@ -61,51 +61,6 @@ exports.findOne = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message: "Error retrieving user with id=" + id
-      });
-    });
-}
-
-//Retrieve one user from the databse by idCard
-exports.findIdCard = (req, res) => {
-  const searchIdCard = req.params.idCard;
-
-  User.findOne({ where: { idCard: searchIdCard } })
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: "No user with " + searchIdCard + " found!"
-      });
-    });
-}
-
-//Retrieve one user from the databse by phone number
-exports.findPhoneNumber = (req, res) => {
-  const searchPhoneNumber = req.params.phoneNumber;
-
-  User.findOne({ where: { phoneNumber: searchPhoneNumber } })
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: "No user with " + searchPhoneNumber + " found!"
-      });
-    });
-}
-
-//Retrieve one user from the database by email
-exports.findEmail = (req, res) => {
-  const searchEmail = req.params.email;
-
-  User.findOne({ where: { email: searchEmail } })
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: "No user with " + searchEmail + " found!"
       });
     });
 }

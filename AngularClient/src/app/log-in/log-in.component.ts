@@ -38,14 +38,14 @@ export class LogInComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  errorMessage: string
+  loginMessage: string
   signIn() {
     var form = document.querySelector('form')
 
     var formData = new FormData(form)
 
     this.authService.signIn(formData).pipe(catchError(err => {
-      this.errorMessage = err.error.message
+      this.loginMessage = err.error.message
       return throwError(err);
     })).subscribe(data => {
       if (data.token) {

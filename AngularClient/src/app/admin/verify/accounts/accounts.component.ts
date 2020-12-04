@@ -49,7 +49,7 @@ export class AdminAccountsComponent implements OnInit {
   verifyAccount() {
     for (let username of this.selectedAccounts) {
       console.log(username)
-      this.accountService.verifyAccount(username).subscribe(data => {
+      this.accountService.updateAccount(username).subscribe(data => {
         if (Object(data).message) {
           this.verifiedSuccessfully = true
         }
