@@ -18,16 +18,26 @@ app.get('/', (req, res) => {
     res.send('Hello')
 })
 
+var connectedUser = {}
+
 io.on('connection', (socket) => {
-    console.log('a user connected')
+   
+    socket.on('currentUser', data => {
+        console.log(data)
+        connectedUser[data.user] = socket
+    })
 
     socket.on('disconnect', () => {
         console.log('user disconnected')
     })
 
     socket.on('chat message', (msg) => {
-        io.emit('chat message', msg);
-        console.log('message: ' + msg);
+        // console.log(socket.id)
+        // console.log(connectedUser)
+        console.log(msg)
+        // console.log(connectedUser[msg.receiver])
+        connectedUser[msg.receiver].emit('chat message', msg);
+
     });
 })
 

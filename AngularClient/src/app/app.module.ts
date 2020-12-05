@@ -31,6 +31,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { VerifyReportComponent } from './admin/verify/reports/verify-report.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ChatComponent } from './chat/chat.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { ChatComponent } from './chat/chat.component';
     ProfileComponent,
     VerifyReportComponent,
     NotFoundComponent,
-    ChatComponent
+    ChatComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

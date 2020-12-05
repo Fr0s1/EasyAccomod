@@ -41,7 +41,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [Role.Admin] } // Only admin account can access
   },
-  { path: 'chat', component: ChatComponent },
+  { path: 'messenger', component: ChatComponent },
   { path: 'login', component: LogInComponent },
   { path: 'register', component: RegisterComponent },
   {

@@ -1,4 +1,4 @@
-.preview {
+.preview, .top-star, .top-viewed {
     margin-top: 20px;
     overflow: hidden;
 }
@@ -13,25 +13,25 @@
     margin: auto;
 }
 
-.room-preview img:hover {
+.room-preview img:hover, .room-rate img:hover, .room-view img:hover {
     transform: scale(1.25);
     cursor: pointer;
 }
 
-.room-preview div {
+.room-preview div, .room-rate div, .room-view div {
     width: 23%;
     float: left;
     margin: auto 10px;
 }
 
-.room-preview div img {
+.room-preview div img, .room-rate div img, .room-view div img {
     width: 100%;
     height: 250px;
     object-fit: cover;
     transition: transform .2s;
 }
 
-.room-preview div p {
+.room-preview div p, .room-rate div p, .room-view div img {
     text-align: center;
 }
 

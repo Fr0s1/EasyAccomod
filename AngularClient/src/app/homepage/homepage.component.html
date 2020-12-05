@@ -20,6 +20,26 @@
         </div>
     </div>
 
+    <div class="top-star">
+        <h1>
+            <img class="room" src="../../assets/room-logo.jpg" height="75px">
+
+            Đánh giá cao nhất
+        </h1>
+
+        <div class="room-rate" *ngIf="starpost?.length > 0">
+            <div *ngFor="let i of createRange(4)">
+                <a routerLink="/post/details/{{starpost[i].postID}}" *ngIf="starpostImage[i]">
+                    <img [src]="starpostImage[i]">
+                </a>
+
+                <p class="postTitle" *ngIf="starpost">{{starpost[i].postName}}</p>
+                <p *ngIf="starpost">Tạo bởi {{starpost[i].accountUsername}}</p>
+            </div>
+        </div>
+
+    </div>
+
     <div class="top-viewed">
         <h1>
             <img class="room" src="../../assets/room-logo.jpg" height="75px">
@@ -27,8 +47,15 @@
             Nhiều lượt xem nhất
         </h1>
 
-        <div>
-            <p>Test</p>
+        <div class="room-view" *ngIf="viewpost?.length > 0">
+            <div *ngFor="let i of createRange(4)">
+                <a routerLink="/post/details/{{viewpost[i].postID}}" *ngIf="viewpostImage[i]">
+                    <img [src]="viewpostImage[i]">
+                </a>
+
+                <p class="postTitle" *ngIf="viewpost">{{viewpost[i].postName}}</p>
+                <p *ngIf="viewpost">Tạo bởi {{viewpost[i].accountUsername}}</p>
+            </div>
         </div>
     </div>
 </div>

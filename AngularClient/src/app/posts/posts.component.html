@@ -13,7 +13,7 @@
             </a>
             <h2>{{post.postName}}</h2>
             <p>Thời gian đăng: {{post.postTime | date : 'short' : 'Asia/Ho_Chi_Minh'}} </p>
-            <p>Giá: {{post.Room.monthPrice}} đồng / tháng</p>
+            <p>Giá: {{post.Room.monthPrice | number:'1.0':'en-US'}} đồng / tháng</p>
             <p>Diện tích: {{post.Room.area}} m<sup>2</sup></p>
             <p>{{post.Room.city}}</p>
         </div>
