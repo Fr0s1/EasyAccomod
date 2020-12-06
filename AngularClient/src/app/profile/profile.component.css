@@ -2,6 +2,19 @@ body{margin-top:20px;}
 
 .container {
     background-color: #fff;
+    margin-top: 10px;
+}
+
+.btn {
+    margin-bottom: 10px;
+}
+
+.col-lg-4 {
+    margin-top: 20px;
+}
+
+.nav {
+    margin-top: 20px;
 }
 
 .user-info-wrapper {
@@ -18,6 +31,7 @@ body{margin-top:20px;}
 
 .user-info-wrapper .user-cover {
     position: absolute;
+    margin-top: 20px;
     top: 0;
     left: 0;
     width: 100%;
@@ -190,6 +204,7 @@ a.list-group-item, .list-group-item-action {
     display: block;
     position: relative;
     margin-bottom: 30px;
+    margin-top: 20px;
     padding-left: 66px
 }
 
