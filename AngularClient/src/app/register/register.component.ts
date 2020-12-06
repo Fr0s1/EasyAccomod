@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { AuthService } from '../services/auth.service'
 import { Router} from '@angular/router'
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Component({
     selector: 'app-register',
@@ -35,11 +37,20 @@ export class RegisterComponent implements OnInit {
         })
     }
 
+    errorMessage
+    message
     registerAccount() {
         var form = document.querySelector('form')
 
         var formData = new FormData(form)
 
-        this.authService.signUp(formData).subscribe(data => console.log(data))
+        this.authService.signUp(formData).pipe(catchError(err => {
+            this.errorMessage = err.error.message
+            return throwError(err)
+        })).subscribe(data => {
+            if (data.message) {
+                this.message = data.message + ". If you're a Landlord, please wait for verification!"
+            }
+        })
     }
 }

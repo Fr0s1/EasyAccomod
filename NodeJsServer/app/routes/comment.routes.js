@@ -1,4 +1,3 @@
-
 module.exports = app => {
     const comments = require("../controllers/comment.controller");
 
@@ -8,5 +7,9 @@ module.exports = app => {
 
     router.post('/', comments.addComment)
 
+    router.put('/:id', comments.updateComment)
+    
+    router.delete('/:id', comments.deleteComment)
+    
     app.use('/api/comments', router);
 };

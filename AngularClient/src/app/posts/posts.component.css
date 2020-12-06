@@ -51,3 +51,7 @@
 .input-group.mb-3:last-of-type {
     justify-content: space-around;
 }
+
+.no-result img {
+    margin-bottom: 10px;
+}

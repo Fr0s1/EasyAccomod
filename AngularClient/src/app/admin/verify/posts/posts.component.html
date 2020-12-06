@@ -1,12 +1,17 @@
 <div class="container">
     <div class="posts">
-        <input class="search" type="text" placeholder="Tìm kiếm bài đăng">
-        <button class="verify" (click)="verifyPost()">Duyệt bài đăng</button>
-        <button class="deny">Từ chối bài đăng</button>
+        <button class="btn btn-primary verify" (click)="verifyPost()">Duyệt bài đăng</button>
+        <button class="btn btn-warning deny" (click)="denyPost()">Từ chối bài đăng</button>
+        <button class="btn btn-danger deny" (click)="deletePost()" *ngIf="showDeleteButton">Xóa bài đăng</button>
 
-        <br>
-        <table>
-            <thead>
+        <select class="form-control" (change)="getPostByType($event)">
+            <option>Tất cả</option>
+            <option>Đã được duyệt</option>
+            <option>Chưa được duyệt</option>
+        </select>
+
+        <table class="table table-hover">
+            <thead class="thead-dark">
                 <th>
                     <input type="checkbox" (change)="addAllPost($event)">
                 </th>
@@ -18,12 +23,12 @@
             </thead>
 
             <tbody>
-                <tr *ngFor="let post of unverifiedPosts">
+                <tr *ngFor="let post of postsList">
                     <td><input type="checkbox" (click)="addPost($event)"></td>
                     <td>{{post.postID}}</td>
                     <td>{{post.postName}}</td>
                     <td>{{post.accountUsername}}</td>
-                    <td>{{post.createdAt}}</td>
+                    <td>{{post.createdAt | date : 'short' : 'Asia/Ho_Chi_Minh'}}</td>
                     <td>{{post.verifiedStatus}}</td>
                 </tr>
             </tbody>
@@ -32,5 +37,9 @@
 
     <div class="post-info">
         <h1>Thông tin phòng trọ</h1>
+    </div>
+
+    <div class="noti" *ngIf="operation">
+        {{message}}
     </div>
 </div>

@@ -1,6 +1,6 @@
 const dbConfig = require("../config/db.config.js");
-
 const { Sequelize, DataTypes } = require("sequelize");
+
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
   dialect: dbConfig.dialect,
@@ -21,6 +21,7 @@ accounts = require("./account.model")(sequelize, DataTypes)
 users = require("./user.model")(sequelize, DataTypes)
 comments = require('./comments.model')(sequelize, DataTypes)
 userFavorites = require('./userFavorite.model')(sequelize, DataTypes)
+reportedPosts = require('./reported-posts.model')(sequelize, DataTypes)
 
 // Liên kết 1 - 1
 posts.belongsTo(rooms, { foreignKey: 'roomID' })
@@ -38,9 +39,10 @@ posts.hasMany(comments)
 posts.belongsToMany(accounts, { through: userFavorites})
 accounts.belongsToMany(posts, { through: userFavorites})
 
-// Liên kết m-n
-// posts.belongsToMany(User)
-// test()
+// m-n association
+// For reported post: 1 account can report many posts, 1 posts can be reported by many accounts
+posts.belongsToMany(accounts, { through: reportedPosts})
+accounts.belongsToMany(posts, { through: reportedPosts})
 
 const db = {
   rooms,
@@ -49,7 +51,8 @@ const db = {
   accounts,
   users,
   comments,
-  userFavorites
+  userFavorites,
+  reportedPosts
 };
 
 db.Sequelize = Sequelize;

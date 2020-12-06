@@ -14,10 +14,13 @@ import { PaymentComponent } from './admin/payment/payment.component'
 import { PostsComponent } from './posts/posts.component'
 import { ProfileComponent } from './profile/profile.component'
 import { ExtendDurationComponent } from './admin/extend-duration/extend-duration.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 import { AuthGuard } from './_helpers/auth.guard'
 import { Role } from './_model/role'
 import { VerifyCommentsComponent } from './admin/verify/comments/verify-comments.component';
+import { VerifyReportComponent } from './admin/verify/reports/verify-report.component';
+import { ChatComponent } from './chat/chat.component'
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -30,24 +33,28 @@ const routes: Routes = [
         { path: '', component: HomeComponent },
         { path: 'verify/accounts', component: AdminAccountsComponent },
         { path: 'verify/posts', component: AdminPostsComponent },
-        { path: 'verify/comments', component: VerifyCommentsComponent},
+        { path: 'verify/comments', component: VerifyCommentsComponent },
+        { path: 'verify/reports', component: VerifyReportComponent },
         { path: 'payment', component: PaymentComponent },
-        { path: 'extend', component: ExtendDurationComponent}
+        { path: 'extend', component: ExtendDurationComponent }
       ],
     canActivate: [AuthGuard],
     data: { roles: [Role.Admin] } // Only admin account can access
   },
+  { path: 'messenger', component: ChatComponent },
   { path: 'login', component: LogInComponent },
   { path: 'register', component: RegisterComponent },
   {
-    path: 'post/create', component: CreatePostComponent,
+    path: 'create/post', component: CreatePostComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.Landlord, Role.Admin] } // Only account with right type can access
   },
+  { path: 'posts', component: PostsComponent },
   { path: 'post/details/:id', component: PostDetailsComponent },
   { path: ':username', component: ProfileComponent },
-  { path: 'posts', component: PostsComponent }
+  { path: '**', component: NotFoundComponent }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
