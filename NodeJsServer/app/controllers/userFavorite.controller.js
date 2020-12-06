@@ -13,8 +13,8 @@ exports.createFavorite = (req, res) => {
   
     // Create a favorite
     const userFavorite = {
-      username: req.body.username,
-      postID: req.body.postID,
+      accountUsername: req.body.username,
+      PostPostID: req.body.postID,
     };
   
     // Save favorite in the database
@@ -33,7 +33,7 @@ exports.createFavorite = (req, res) => {
 exports.getAllUserFavorite = (req, res) => {
     const searchUsername = req.params.username;
   
-    UserFavorite.findAll({ where: { username: searchUsername } })
+    UserFavorite.findAll({ where: { accountUsername: searchUsername } })
       .then(data => {
         res.send(data);
       })
@@ -48,7 +48,7 @@ exports.getAllUserFavorite = (req, res) => {
 exports.getAllPostFavorite = (req, res) => {
     const searchPostID = req.params.postID;
   
-    UserFavorite.findAndCountAll({ where: { postID: searchPostID } })
+    UserFavorite.findAndCountAll({ where: { PostPostID: searchPostID } })
       .then(data => {
         res.send(data);
       })
