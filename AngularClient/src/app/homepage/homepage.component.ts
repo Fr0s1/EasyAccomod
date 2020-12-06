@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PostService } from '../services/post.service';
 import { ImageService } from '../services/image.service';
 
@@ -11,14 +11,19 @@ export class HomepageComponent implements OnInit {
 
   constructor(private postService: PostService, private imgService: ImageService) { }
 
-  previewPosts // Thông tin về các bài đăng preview ở homepage
-  previewRoomImagesFilename = [] // Mảng lưu tên các file ảnh ứng với từng phòng trọ
-  previewImages = [] // Lưu 1 ảnh ứng với mỗi bài đăng
+  latestPosts // Thông tin về các bài đăng preview ở homepage
+  latestPostsImages = [] // Lưu 1 ảnh của phòng trọ ứng với mỗi bài đăng
+
+  starpost // thông tin về bài đăng được rate cao nhất ở homepage
+  starpostImage = [] 
+
+  viewpost // thông tin về bài đăng được view cao nhất ở homepage
+  viewpostImage = [] 
 
   // Tạo mảng để duyệt
   createRange(number) {
     var items: number[] = [];
-    for (var i = 1; i <= number; i++) {
+    for (var i = 0; i < number; i++) {
       items.push(i);
     }
     return items;
@@ -26,32 +31,81 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPreviewPost()
+    this.getStarPost()
+    this.getViewsPost()
   }
 
   getPreviewPost() {
     // Lấy 4 bài đăng mới nhất
-    this.postService.getPreviewPost('postTime').subscribe(data => {
-      this.previewPosts = data
+    this.postService.getPreviewPost('postTime').subscribe(posts => {
+      this.latestPosts = posts
 
-      this.previewPosts.forEach(post => {
+      this.latestPosts.forEach(post => {
         // Với mỗi bài đăng, lấy thông tin về ảnh của phòng trọ
-        this.postService.getRoomImagesByID(post.roomID).subscribe(data => {
-
-          // Lấy tên file ảnh đầu tiên của phòng trọ
-          this.previewRoomImagesFilename.push(data[0])
+        this.postService.getRoomImagesByID(post.roomID).subscribe(imagesList => {
 
           // Request tới server để tải ảnh
-          this.postService.getRoomImageByName(post.roomID, data[0]).subscribe(data => {
+          this.postService.getRoomImageByName(post.roomID, imagesList[0]).subscribe(image => {
 
             // Tạo ảnh từ Blob
             let reader = new FileReader();
             reader.addEventListener("load", () => {
-              this.previewImages.push(reader.result)
+              this.latestPostsImages.push(reader.result)
             }, false);
 
-            if (data) {
-              reader.readAsDataURL(data);
-            }            
+            if (image) {
+              reader.readAsDataURL(image);
+            }
+          })
+        })
+      })
+    })
+  }
+
+  getStarPost() {
+    // Lấy 4 bài đăng được rate cao nhất
+    this.postService.getPreviewPost('starsReview').subscribe(posts => {
+      this.starpost = posts
+
+      this.starpost.forEach(post => {
+
+        this.postService.getRoomImagesByID(post.roomID).subscribe(imagesList => {
+
+          this.postService.getRoomImageByName(post.roomID, imagesList[0]).subscribe(image => {
+
+            let reader = new FileReader();
+            reader.addEventListener("load", () => {
+              this.starpostImage.push(reader.result)
+            }, false);
+
+            if (image) {
+              reader.readAsDataURL(image);
+            }
+          })
+        })
+      })
+    })
+  }
+
+  getViewsPost() {
+    // Lấy 4 bài đăng có lượt view cao nhất
+    this.postService.getPreviewPost('viewsNumber').subscribe(posts => {
+      this.viewpost = posts
+
+      this.viewpost.forEach(post => {
+
+        this.postService.getRoomImagesByID(post.roomID).subscribe(imagesList => {
+
+          this.postService.getRoomImageByName(post.roomID, imagesList[0]).subscribe(image => {
+
+            let reader = new FileReader();
+            reader.addEventListener("load", () => {
+              this.viewpostImage.push(reader.result)
+            }, false);
+
+            if (image) {
+              reader.readAsDataURL(image);
+            }
           })
         })
       })

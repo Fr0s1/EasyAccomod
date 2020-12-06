@@ -49,8 +49,9 @@
                 <textarea class="form-control" id="address" name="address" rows="3"
                     formControlName="address"></textarea>
             </div>
-
             <button class="btn grey" type="submit">Register</button>
+            <span *ngIf="errorMessage">{{errorMessage}}</span>
+            <span *ngIf="message">{{message}}</span>
         </form>
 
         <span class="txt1">

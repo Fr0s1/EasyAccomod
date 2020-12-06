@@ -4,7 +4,7 @@ import { PostService } from '../services/post.service';
 import { AccountService } from '../services/account.service';
 import { AuthService } from '../services/auth.service';
 import { Account } from '../_model/account'
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Role } from '../_model/role';
 
 @Component({
   selector: 'app-create-post',
@@ -15,7 +15,7 @@ export class CreatePostComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private postService: PostService, private accountService: AccountService, private authService: AuthService) { }
 
-  currentAccount: Account // account with token
+  currentAccount // account with token
   userInfo // User information(Full name, phone number, ... ) corresponding to account
   postUploadCost: any // Cost to upload post
   roomImages = [] // mảng lưu các file ảnh của phòng trọ (Blob)
@@ -25,6 +25,7 @@ export class CreatePostComponent implements OnInit {
   ngOnInit(): void {
     this.getPostCost()
     this.currentAccount = this.authService.currentUserValue // Get current logged in account information
+    console.log(this.currentAccount)
     this.getUserInfo()
 
     // Object thể hiện các thông tin trong form 
@@ -87,13 +88,19 @@ export class CreatePostComponent implements OnInit {
 
   uploadURL = 'http://localhost:8080/api/posts'
 
+  sent: boolean = false;
   createPost() {
     var form = document.querySelector('form')
     var formData = new FormData(form)
 
-    this.postService.uploadForm(this.uploadURL, formData).subscribe(res => {
-      console.log(res)
-    })
+    if (this.postModel.valid) {
+      this.sent = true
+      this.postService.uploadForm(this.uploadURL, formData).subscribe(res => {
+        console.log(res)
+      })
+    } else {
+      console.log('Invalid')
+    }
   }
 
   updateCost() {
@@ -114,8 +121,8 @@ export class CreatePostComponent implements OnInit {
       // Fill form with logged in account data
       this.postModel.patchValue({
         owner: {
-          name: this.userInfo.fullName,
-          phoneNumber: this.userInfo.phoneNumber
+          name: this.userInfo?.fullName,
+          phoneNumber: this.userInfo?.phoneNumber
         }
       })
     })

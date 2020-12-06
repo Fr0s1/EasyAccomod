@@ -35,6 +35,7 @@
     "@angular/router": "~9.1.4",
     "bcryptjs": "^2.4.3",
     "rxjs": "~6.5.4",
+    "socket.io-client": "^3.0.3",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

@@ -4,9 +4,15 @@
     <textarea class="form-control content"></textarea>
 
     <button class="btn btn-primary" (click)="sendComment($event)">Gửi</button>
-    <span class="noti">Test</span>
+    <p class="hidden">Cảm ơn bạn đã bình luận, khi được kiểm duyệt, comment của bạn sẽ được hiện ở dưới</p>
 </div>
 
 <div class="all-comments">
-
+    <div *ngFor="let comment of verifiedCommentList" class="comment">
+        <img src="../../assets/avatar2.png">
+        <p class="name">{{comment.userInfo?.fullName }}</p>
+        <p class="username">Username: {{comment.accountUsername}}</p>
+        <p class="time">Nhận xét lúc: {{comment.createdAt | date : 'short' : 'Asia/Ho_Chi_Minh'}}</p>
+        <p class="content">{{comment.content}}</p>
+    </div>
 </div>

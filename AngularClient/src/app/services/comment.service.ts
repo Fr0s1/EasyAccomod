@@ -17,4 +17,12 @@ export class CommentService {
   getComment(queryString: string) {
     return this.http.get(this.commentURL + queryString)
   }
+
+  updateComment(id: number, content: Object) {
+    return this.http.put(this.commentURL + `/${id}`, content)
+  }
+
+  deleteComment(id: number) {
+    return this.http.delete(this.commentURL + `/${id}`)
+  }
 }

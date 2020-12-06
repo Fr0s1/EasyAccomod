@@ -1,5 +1,5 @@
 const multer = require('multer')
-const authJwt = require('../middleware/authJwt')
+
 module.exports = app => {
   const accounts = require("../controllers/account.controller.js");
   const auth = require("../controllers/auth.controller.js");

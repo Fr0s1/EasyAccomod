@@ -1,6 +1,6 @@
 .post-details {
     display: grid;
-    grid-template-areas: "postTitle postTitle " "postStats postStats " "roomImage roomDetails " "ownerInfo features" "roomDescription roomDescription" "comments comments";
+    grid-template-areas: "postTitle postTitle " "postStats postStats " "roomImage roomDetails " "ownerInfo features" "comments comments";
     grid-template-columns: 1fr 2fr;
 }
 
@@ -33,10 +33,6 @@
     grid-area: comments;
 }
 
-.roomDescription {
-    grid-area: roomDescription;
-}
-
 .thumb-bar img {
     float: left;
     display: block;
@@ -51,7 +47,7 @@
     display: inline-block;
 }
 
-.owner-info, .roomDescription, .comments, .roomPreview, .features, .post-stats, .post-title, .roomDetails {
+.owner-info, .comments, .roomPreview, .features, .post-stats, .post-title, .roomDetails {
     background-color: white;
     border-radius: 5px;
 }
@@ -69,7 +65,7 @@
     padding-left: 5px;
 }
 
-.comments h2, .roomDescription h2, .roomDetails h2 {
+.comments h2, h2, .roomDetails h2 {
     padding: 5px;
 }
 
@@ -119,7 +115,7 @@ ul {
     flex-wrap: wrap;
 }
 
-ul li {
+ul:not(.list-group) li {
     flex: 1 200px;
     margin-bottom: 10px;
 }
@@ -129,10 +125,28 @@ ul li {
     object-fit: contain;
 }
 
-.price ul li {
-    flex: 1 100px
-}
-
 h3 {
     font-size: large;
+}
+
+p {
+    margin-left: 10px;
+}
+
+.post-title h1 {
+    margin: auto 10px;
+}
+
+.list-group li {
+    margin-top: 0px;
+    flex-basis: auto;
+}
+
+.card-header {
+    font-size: large;
+    font-weight: bold;
+}
+
+.owner-info h2 {
+    margin-bottom: 0px;
 }

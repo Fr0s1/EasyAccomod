@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="posts">
+        <button class="btn btn-primary verify">Đã xem</button>
+        <button class="btn btn-danger deny">Xóa report</button>
+
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <th scope="col">
+                    <input type="checkbox" (change)="addAllReports($event)">
+                </th>
+                <th>ID report</th>
+                <th scope="col">ID bài đăng</th>
+                <th scope="col">Username</th>
+                <th scope="col">Nội dung</th>
+                <th scope="col">Thời gian report</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let report of reportsList">
+                    <td>
+                        <input type="checkbox" (change)="addReport($event)">
+                    </td>
+                    <td>{{report.reportID}}</td>
+                    <td><a routerLink="/post/details/{{report.PostPostID}}" target="_blank">{{report.PostPostID}}</a></td>
+                    <td>{{report.accountUsername}}</td>
+                    <td>{{report.content}}</td>
+                    <td>{{report.reportedAt | date : 'short' : 'Asia/Ho_Chi_Minh'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

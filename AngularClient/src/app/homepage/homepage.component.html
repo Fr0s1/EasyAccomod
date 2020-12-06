@@ -2,30 +2,42 @@
 <img src="../../assets/background3-small.jpg" class="card-img-top" alt="...">
 
 <div class="main">
-    <div class="input-group mb-3" style="margin-top: 10px">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Tìm kiếm</span>
-        </div>
-        <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-            aria-describedby="basic-addon1">
-    </div>
-
     <div class="preview">
         <h1>
             <img class="room" src="../../assets/room-logo.jpg" height="75px">
             Bài đăng mới nhất
         </h1>
 
-        <div class="room-preview" *ngIf="previewPosts">
+        <div class="room-preview" *ngIf="latestPosts?.length > 0">
             <div *ngFor="let i of createRange(4)">
-                <a routerLink="/post/details/{{previewPosts[i-1].postID}}">
-                    <img [src]="previewImages[i-1]">
+                <a routerLink="/post/details/{{latestPosts[i].postID}}" *ngIf="latestPostsImages[i]">
+                    <img [src]="latestPostsImages[i]">
                 </a>
 
-                <p class="postTitle" *ngIf="previewPosts">{{previewPosts[i-1].postName}}</p>
-                <p *ngIf="previewPosts">Tạo bởi {{previewPosts[i-1].accountUsername}}</p>
+                <p class="postTitle" *ngIf="latestPosts">{{latestPosts[i].postName}}</p>
+                <p *ngIf="latestPosts">Tạo bởi {{latestPosts[i].accountUsername}}</p>
             </div>
         </div>
+    </div>
+
+    <div class="top-star">
+        <h1>
+            <img class="room" src="../../assets/room-logo.jpg" height="75px">
+
+            Đánh giá cao nhất
+        </h1>
+
+        <div class="room-rate" *ngIf="starpost?.length > 0">
+            <div *ngFor="let i of createRange(4)">
+                <a routerLink="/post/details/{{starpost[i].postID}}" *ngIf="starpostImage[i]">
+                    <img [src]="starpostImage[i]">
+                </a>
+
+                <p class="postTitle" *ngIf="starpost">{{starpost[i].postName}}</p>
+                <p *ngIf="starpost">Tạo bởi {{starpost[i].accountUsername}}</p>
+            </div>
+        </div>
+
     </div>
 
     <div class="top-viewed">
@@ -35,8 +47,15 @@
             Nhiều lượt xem nhất
         </h1>
 
-        <div>
-            <p>Test</p>
+        <div class="room-view" *ngIf="viewpost?.length > 0">
+            <div *ngFor="let i of createRange(4)">
+                <a routerLink="/post/details/{{viewpost[i].postID}}" *ngIf="viewpostImage[i]">
+                    <img [src]="viewpostImage[i]">
+                </a>
+
+                <p class="postTitle" *ngIf="viewpost">{{viewpost[i].postName}}</p>
+                <p *ngIf="viewpost">Tạo bởi {{viewpost[i].accountUsername}}</p>
+            </div>
         </div>
     </div>
 </div>

@@ -32,6 +32,7 @@ export class PaymentComponent implements OnInit {
     return expiredDate
   }
 
+  verifiedSuccessfully: boolean = false
   updatePostPaymentStatus(event, postID: number, postCost: number) {
 
     let selectedRow = event.target.parentElement.parentElement
@@ -41,7 +42,7 @@ export class PaymentComponent implements OnInit {
     let postYear = parseInt(selectedRow.childNodes[5].innerHTML)
     let paidAmount = parseInt(selectedRow.querySelector('.paidAmount').value);
 
-    let paymentStatus = paidAmount >= postCost
+    let paymentStatus: boolean = paidAmount >= postCost
 
     let postTime = null
     let expiredTime = null
@@ -51,6 +52,11 @@ export class PaymentComponent implements OnInit {
       postTime = new Date()
     }
 
-    this.postService.updatePost(postID, { postID, paidAmount, paymentStatus, postTime, expiredTime }).subscribe(data => console.log(data))
+    this.postService.updatePost(postID, { postID, paidAmount, paymentStatus, postTime, expiredTime })
+      .subscribe(data => {
+        if (Object(data).message) {
+          this.verifiedSuccessfully = true
+        }
+      })
   }
 }

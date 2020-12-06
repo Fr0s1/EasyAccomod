@@ -9,17 +9,39 @@ export class AdminPostsComponent implements OnInit {
 
   constructor(private postService: PostService) { }
 
-  unverifiedPosts: any
+  postsList: any
   selectedPosts = []
+
   ngOnInit(): void {
-    this.getUnverifiedPosts()
+    this.getAllPosts()
   }
 
-  targetURL = "http://localhost:8080/api/posts"
-  getUnverifiedPosts() {
-    this.postService.getPostsByQuery('?verifiedStatus=0').subscribe(data => {
-      this.unverifiedPosts = data
-      console.log(this.unverifiedPosts)
+  showDeleteButton: boolean = false;
+  getPostByType(event) {
+    switch (event.target.value) {
+      case 'Tất cả':
+        this.operation = false
+        this.showDeleteButton = false;
+        this.getAllPosts()
+        break;
+      case 'Chưa được duyệt':
+        this.operation = false
+        this.showDeleteButton = true;
+        this.postService.getPostsByQuery('?verifiedStatus=0').subscribe(posts => this.postsList = posts)
+        break;
+      case 'Đã được duyệt':
+        this.operation = false
+        this.showDeleteButton = false
+        this.postService.getPostsByQuery('?verifiedStatus=1').subscribe(posts => this.postsList = posts)
+        break;
+      default:
+    }
+  }
+
+  getAllPosts() {
+    this.postService.getPostsByQuery('').subscribe(data => {
+      this.postsList = data
+      console.log(this.postsList)
     })
   }
 
@@ -37,11 +59,34 @@ export class AdminPostsComponent implements OnInit {
     console.log(this.selectedPosts)
   }
 
+  message: string
+
+  operation: boolean = false
   verifyPost() {
     this.selectedPosts.forEach(postID => {
       this.postService.updatePost(postID, { verifiedStatus: 1 }).subscribe(data => {
-        console.log(data)
+        if (Object(data).message) {
+          this.operation = true
+          this.message = 'Phê duyệt thành công'
+        }
       })
+    })
+  }
+
+  denyPost() {
+    this.selectedPosts.forEach(postID => {
+      this.postService.updatePost(postID, { verifiedStatus: 0 }).subscribe(data => {
+        if (Object(data).message) {
+          this.operation = true
+          this.message = 'Đã từ chối bài đăng'
+        }
+      })
+    })
+  }
+
+  deletePost() {
+    this.selectedPosts.forEach(postID => {
+      this.postService.deletePost(postID).subscribe()
     })
   }
 
@@ -60,11 +105,9 @@ export class AdminPostsComponent implements OnInit {
         let currentPost = (<HTMLInputElement>postList[i])
 
         currentPost.checked = true;
-        this.selectedPosts.push(this.unverifiedPosts[i].postID)
+        this.selectedPosts.push(this.postsList[i].postID)
       }
     }
-
-    console.log(this.selectedPosts);
   }
 }
 

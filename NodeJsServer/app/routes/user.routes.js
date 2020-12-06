@@ -9,18 +9,6 @@ module.exports = app => {
   // Retrieve all users
   router.get("/", users.findAll);
 
-  // Retrieve a single User with id
-  router.get("/id/:id", users.findOne);
-
-  // Retrieve a single User with phone number
-  router.get("/phone/:phoneNumber", users.findPhoneNumber);
-
-  // Retrieve a single User with email
-  router.get("/email/:email", users.findEmail);
-
-  // Retrieve a single User with idCard number
-  router.get("/idCard/:idCard", users.findIdCard);
-
   //Update/edit an user with id
   router.put("/:id", users.edit);
 
