@@ -18,6 +18,9 @@ app.get('/', (req, res) => {
     res.send('Hello')
 })
 
+const db = require("./models");
+db.Messages.sync({force: true});
+
 var connectedUser = {}
 
 io.on('connection', (socket) => {
