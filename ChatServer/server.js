@@ -1,30 +1,29 @@
-var app = require('express')()
-var http = require('http').createServer(app)
-var io = require('socket.io')(http, {
+const app = require('express')()
+const bodyParser = require("body-parser");
+const http = require('http').createServer(app)
+const io = require('socket.io')(http, {
     cors: {
         origin: "http://localhost:4200",
         methods: ["GET", "POST"]
     }
 });
+
 const cors = require("cors");
 
-var corsOptions = {
+const corsOptions = {
     origin: "http://localhost:4200",
 };
 
 app.use(cors(corsOptions));
+app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-    res.send('Hello')
-})
+// const db = require("./models");
+// db.ContactList.sync({force: true});
+require("./routes/message.routes")(app);
 
-const db = require("./models");
-db.Messages.sync({force: true});
-
-var connectedUser = {}
+const connectedUser = {}
 
 io.on('connection', (socket) => {
-   
     socket.on('currentUser', data => {
         console.log(data)
         connectedUser[data.user] = socket
@@ -35,12 +34,8 @@ io.on('connection', (socket) => {
     })
 
     socket.on('chat message', (msg) => {
-        // console.log(socket.id)
-        // console.log(connectedUser)
         console.log(msg)
-        // console.log(connectedUser[msg.receiver])
         connectedUser[msg.receiver].emit('chat message', msg);
-
     });
 })
 

@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Account } from '../_model/account'
 import { map } from 'rxjs/operators';
 import * as bcrypt from 'bcryptjs'
+import { AccountService } from '../services/account.service'
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +15,7 @@ export class AuthService {
 
     private apiUrl = 'http://localhost:8080/api/accounts'
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private accountService: AccountService) {
         this.currentAccountSubject = new BehaviorSubject<Account>(JSON.parse(localStorage.getItem('currentAccount')));
     }
 
@@ -66,6 +67,7 @@ export class AuthService {
 
     logout() {
         // remove user from local storage to log user out
+        this.accountService.updateAccount(this.currentUserValue.username, { online: false }).subscribe()
         localStorage.removeItem('currentAccount');
         this.currentAccountSubject.next(null);
         location.reload()

@@ -14,7 +14,7 @@ body {
     display: flex;
     flex-direction: column;
     max-height: 800px;
-    overflow-y: scroll
+    overflow-y: scroll;
 }
 
 .chat-message-left, .chat-message-right {
@@ -49,10 +49,22 @@ body {
     border-top: 1px solid #dee2e6!important;
 }
 
-.container {
-    width: 100%;
+.chat-messages {
+    display: none;
 }
 
-footer {
-    display: none;
+.chat-messages.selected {
+    display: flex;
+}
+
+.row.g-0, .card {
+    height: 100%;
+}
+
+.card {
+    overflow-x: hidden;
+}
+
+.position-relative {
+    height: 75%;
 }

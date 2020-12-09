@@ -14,16 +14,29 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     timezone: '+07:00'
 });
 
-const ContactList = require('../models/contactList.model')(sequelize, DataTypes)
 const Account = require('../../NodeJsServer/app/models/account.model')(sequelize, DataTypes)
 const Messages = require('../models/messages.model')(sequelize, DataTypes)
+const ContactList = require('../models/contactList.model')(sequelize, DataTypes)
 
-Account.belongsToMany(Account, { as: 'Contact', through: ContactList })
-Account.belongsToMany(Account, { as: 'Message', through: Messages, foreignKey: 'sender', otherKey: 'receiver'})
+Account.belongsToMany(Account, {
+    as: 'Message', through: {
+        model: Messages,
+        unique: false
+    },
+    foreignKey: 'sender', otherKey: 'receiver', constraint: false
+})
+
+Account.belongsToMany(Account, {
+    as: 'ContactList', through: {
+        model: ContactList,
+    },
+    foreignKey: 'sender', otherKey: 'receiver'
+})
 
 const db = {
-    ContactList,
-    Messages
+    Messages,
+    Account,
+    ContactList
 }
 
 db.Sequelize = Sequelize;

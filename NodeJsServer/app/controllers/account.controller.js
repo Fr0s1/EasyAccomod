@@ -90,7 +90,7 @@ exports.findAll = (req, res) => {
 
 exports.getUserInfo = async (req, res) => {
 	const username = req.params.username
-	const results = await sequelize.query(`SELECT username, fullName, idCard, phoneNumber, email, address FROM users JOIN accounts ON users.idCard = accounts.userIdCard WHERE username='${username}' `, { type: QueryTypes.SELECT })
+	const results = await sequelize.query(`SELECT username, fullName, idCard, phoneNumber, email, address, online FROM users JOIN accounts ON users.idCard = accounts.userIdCard WHERE username='${username}' `, { type: QueryTypes.SELECT })
 
 	res.send(results)
 }
