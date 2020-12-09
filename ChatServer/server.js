@@ -35,7 +35,10 @@ io.on('connection', (socket) => {
 
     socket.on('chat message', (msg) => {
         console.log(msg)
-        connectedUser[msg.receiver].emit('chat message', msg);
+
+        if (connectedUser[msg.receiver]) {
+            connectedUser[msg.receiver].emit('chat message', msg);
+        }
     });
 })
 

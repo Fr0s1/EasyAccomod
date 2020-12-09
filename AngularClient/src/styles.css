@@ -73,10 +73,6 @@ body {
     display: flex;
 }
 
-.row.g-0, .card {
-    height: 100%;
-}
-
 .card {
     overflow-x: hidden;
 }
