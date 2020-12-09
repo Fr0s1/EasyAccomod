@@ -69,7 +69,18 @@
 
             <div class="position-relative">
                 <div class="chat-messages p-4 {{contact.receiver}}" *ngFor="let contact of contactList">
-
+                    <div *ngFor="let message of conversationHistory"
+                        [ngClass]="message.sender === contact.receiver ? 'chat-message-left pb-4' : 'chat-message-right pb-4'">
+                        <div>
+                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1"
+                                alt="Chris Wood" width="40" height="40">
+                            <div class="text-muted small text-nowrap mt-2">{{message.createdAt | date: 'shortTime'}}</div>
+                        </div>
+                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                            <div class="font-weight-bold mb-1">{{message.sender === contact.receiver ?  message.sender : 'You'}}</div>
+                            {{message.content}}
+                        </div>
+                    </div>
                 </div>
 
                 <div class="flex-grow-0 py-3 px-4 border-top">

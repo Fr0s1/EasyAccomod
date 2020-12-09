@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { io } from 'socket.io-client'
 import { AuthService } from '../services/auth.service'
 import { MessageService } from '../services/messages.service';
 import { AccountService } from '../services/account.service'
+
 const SOCKET_ENDPOINT = 'http://localhost:3000'
 
 @Component({
@@ -12,7 +13,11 @@ const SOCKET_ENDPOINT = 'http://localhost:3000'
 })
 export class ChatComponent implements OnInit {
 
-  constructor(private authService: AuthService, private messageService: MessageService, private accountService: AccountService) { }
+  constructor(
+    private authService: AuthService,
+    private messageService: MessageService,
+    private accountService: AccountService,
+  ) { }
 
   currentAccount // Current logged in user
   receiver // The current account which logged in user is chatting
@@ -22,6 +27,7 @@ export class ChatComponent implements OnInit {
 
   messagesSendByAccount // All messages that current logged in account has sent to a specific account
   messagesSendToAccount // All messages received by current logged in account from a specific account
+  conversationHistory // Concat 2 array above
 
   ngOnInit(): void {
     this.currentAccount = this.authService.currentUserValue
@@ -39,6 +45,17 @@ export class ChatComponent implements OnInit {
     })
   }
 
+  formatAMPM(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+  }
+
   setUpConnection() {
     this.socket = io(SOCKET_ENDPOINT)
 
@@ -46,6 +63,8 @@ export class ChatComponent implements OnInit {
 
     // When receiving a new message from an account, append that new message to the conversation chat box
     this.socket.on('chat message', (data) => {
+
+
       var newMessage = document.createElement('div')
 
       newMessage.setAttribute('class', 'chat-message-left mb-4')
@@ -54,7 +73,7 @@ export class ChatComponent implements OnInit {
         ` <div>
             <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
                  class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-            <div class="text-muted small text-nowrap mt-2">2:42 am</div>
+            <div class="text-muted small text-nowrap mt-2">${data.createdAt}</div>
           </div>
           <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
             <div class="font-weight-bold mb-1">${data.sender}</div>
@@ -76,11 +95,12 @@ export class ChatComponent implements OnInit {
 
       div.setAttribute('class', 'chat-message-right mb-4')
 
+      let timeString = this.formatAMPM(new Date())
       div.innerHTML =
         ` <div>
             <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
                  class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-            <div class="text-muted small text-nowrap mt-2">2:42 am</div>
+            <div class="text-muted small text-nowrap mt-2">${timeString}</div>
           </div>
           <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
             <div class="font-weight-bold mb-1">${this.currentAccount.username}</div>
@@ -92,7 +112,7 @@ export class ChatComponent implements OnInit {
 
       this.userMessage.appendChild(div)
       this.messageService.sendMessage(this.currentAccount.username, this.receiver, messageContent.value).subscribe(data => {
-        this.socket.emit('chat message', { sender: this.currentAccount.username, content: messageContent.value, receiver: this.receiver })
+        this.socket.emit('chat message', { sender: this.currentAccount.username, content: messageContent.value, receiver: this.receiver, createdAt: timeString })
         messageContent.value = ''
         messageContent.focus()
       })
@@ -121,58 +141,10 @@ export class ChatComponent implements OnInit {
       this.messagesSendByAccount = messagesList
       this.messageService.receiverMessageInConversation(newReceiver, this.currentAccount.username).subscribe(messagesList => {
         this.messagesSendToAccount = messagesList
-        this.showMessageHistory(this.messagesSendByAccount, this.messagesSendToAccount)
+        this.conversationHistory = this.messagesSendByAccount.concat(this.messagesSendToAccount)
+        this.conversationHistory = this.conversationHistory.sort((first, second) => first.messageID < second.messageID ? -1 : 1)
+        console.log(this.conversationHistory)
       })
-    })
-  }
-
-  // Display previous messages between 2 accounts
-  showMessageHistory(messageSentByAccount, messageSentToAccount) {
-    this.userMessage.innerHTML = ''
-
-    let messageList = messageSentByAccount.concat(messageSentToAccount)
-    messageList = messageList.sort((first, second) => first.messageID < second.messageID ? -1 : 1)
-
-    messageList.forEach(message => {
-      var div = document.createElement('div')
-
-      let sentTime = new Date(message.createdAt)
-
-      let time = sentTime.getHours() + ':' + sentTime.getMinutes()
-
-      if (message.sender === this.currentAccount.username) {
-
-        div.setAttribute('class', 'chat-message-right mb-4')
-
-        div.innerHTML =
-          ` <div>
-            <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                 class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-            <div class="text-muted small text-nowrap mt-2">${time} </div>
-          </div>
-          <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-            <div class="font-weight-bold mb-1">${message.sender}</div>
-            ${message.content}
-          </div>
-        `
-      } else {
-
-        div.setAttribute('class', 'chat-message-left mb-4')
-
-        div.innerHTML =
-          ` <div>
-            <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                 class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-            <div class="text-muted small text-nowrap mt-2">${time}</div>
-          </div>
-          <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-            <div class="font-weight-bold mb-1">${message.sender}</div>
-            ${message.content}
-          </div>
-        `
-      }
-
-      this.userMessage.appendChild(div)
     })
   }
 }
