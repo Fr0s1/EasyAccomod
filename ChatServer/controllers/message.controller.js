@@ -2,6 +2,7 @@ const db = require('../models')
 const Message = db.Messages
 const Sequelize = db.Sequelize
 const ContactList = db.ContactList
+const { Op } = require('sequelize')
 
 // Save message to db
 exports.saveMessage = async (req, res) => {
@@ -50,15 +51,22 @@ exports.getMessages = async (req, res) => {
     let result = await Message.findAll({
         order: [['createdAt', 'ASC']],
         where: {
-            sender: condition.sender,
-            receiver: condition.receiver
+            [Op.or]:
+                [
+                    {
+                        [Op.and]: [{ sender: condition.sender, receiver: condition.receiver }]
+                    },
+                    {
+                        [Op.and]: [{ sender: condition.receiver, receiver: condition.sender }]
+                    }
+                ]
         }
     })
 
     res.send(result)
 }
 
-// Get all unique accounts that a current loged in account has sent messages to
+// Get all unique accounts that a current logged in account has sent messages to
 exports.getContactList = async (req, res) => {
 
     let currentUser = req.query.username

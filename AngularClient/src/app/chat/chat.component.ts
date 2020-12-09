@@ -25,9 +25,7 @@ export class ChatComponent implements OnInit {
   contactList // The list of accounts which the logged in user has sent messages before
   userMessage // Chat box to display conversation messages
 
-  messagesSendByAccount // All messages that current logged in account has sent to a specific account
-  messagesSendToAccount // All messages received by current logged in account from a specific account
-  conversationHistory // Concat 2 array above
+  conversationHistory // Messages between 2 accounts
 
   ngOnInit(): void {
     this.currentAccount = this.authService.currentUserValue
@@ -103,7 +101,7 @@ export class ChatComponent implements OnInit {
             <div class="text-muted small text-nowrap mt-2">${timeString}</div>
           </div>
           <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-            <div class="font-weight-bold mb-1">${this.currentAccount.username}</div>
+            <div class="font-weight-bold mb-1">You</div>
             ${messageContent.value}
           </div>
         `
@@ -119,11 +117,14 @@ export class ChatComponent implements OnInit {
     }
   }
 
-  // Switch to new user tab
+  // Switch to new account tab
   changeReceiver(event) {
     let newReceiver: string = event.target.innerHTML
+
+    // Change the receiver who the message is sent to
     this.receiver = newReceiver
 
+    // Change account display name at top bar
     let currentContact = document.querySelector('.current-contact')
     currentContact.innerHTML = newReceiver
 
@@ -138,13 +139,7 @@ export class ChatComponent implements OnInit {
 
     // Get conversation history with this new selected account
     this.messageService.receiverMessageInConversation(this.currentAccount.username, newReceiver).subscribe(messagesList => {
-      this.messagesSendByAccount = messagesList
-      this.messageService.receiverMessageInConversation(newReceiver, this.currentAccount.username).subscribe(messagesList => {
-        this.messagesSendToAccount = messagesList
-        this.conversationHistory = this.messagesSendByAccount.concat(this.messagesSendToAccount)
-        this.conversationHistory = this.conversationHistory.sort((first, second) => first.messageID < second.messageID ? -1 : 1)
-        console.log(this.conversationHistory)
-      })
+      this.conversationHistory = messagesList
     })
   }
 }
