@@ -17,7 +17,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
-const db = require("./models");
+// const db = require("./models");
 // db.Messages.sync({force: true});
 require("./routes/message.routes")(app);
 

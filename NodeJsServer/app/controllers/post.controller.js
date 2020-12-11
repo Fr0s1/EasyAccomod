@@ -3,11 +3,13 @@ const path = require('path')
 const PostCost = db.postCost // chi phí đăng bài
 const Post = db.posts // model của bài đăng
 const Room = db.rooms // model cho phòng trọ
+const { Op } = require('sequelize')
 
 exports.create = async (req, res) => {
     try {
         const formData = req.body // các thông tin trong http body
 
+        console.log(formData)
         const sharedOwner = formData.sharedOwner === 'Có' ? true : false;
         const airconditioner = formData.airconditioner === 'Có' ? true : false;
         const balcony = formData.balcony === 'Có' ? true : false;
@@ -36,7 +38,7 @@ exports.create = async (req, res) => {
             waterPrice: formData.waterPrice,
             imageURI: roomImagesLocalPath,
             otherUtils: formData.otherUtils,
-            accountUsername: req.username
+            accountUsername: req.username,
         }
 
         // Save room in database
@@ -45,6 +47,7 @@ exports.create = async (req, res) => {
         let postCost = await PostCost.findAll()
 
         const costs = postCost[0].dataValues;
+        console.log(formData)
         const post = {
             postName: formData.postName,
             roomID: newRoom.roomID, // Lấy id phòng trọ vừa được thêm vào database để tương ứng với bài đăng
@@ -52,7 +55,11 @@ exports.create = async (req, res) => {
             postMonth: formData.postMonth,
             postYear: formData.postYear,
             postCost: formData.postWeek * costs.weekCost + formData.postMonth * costs.monthCost + formData.postYear * costs.yearCost,
-            accountUsername: req.username
+            accountUsername: req.username,
+            verifiedStatus: formData.verifiedStatus === '1',
+            paymentStatus: formData.paymentStatus === '1',
+            postTime: formData.postTime !== undefined ? new Date(formData.postTime) : null,
+            expiredTime: formData.expiredTime !== undefined ? new Date(formData.expiredTime) : null
         }
 
         // Sau đó lưu thông tin bài đăng
@@ -94,8 +101,13 @@ exports.getPreviewPosts = async (req, res) => {
 
     let result = await Post.findAll({
         limit: 4, order: [[`${query.column}`, 'DESC']], where: {
-            verifiedStatus: true,
-            paymentStatus: true
+            [Op.and]: [{
+                verifiedStatus: true
+            },
+            { paymentStatus: true }],
+            expiredTime: {
+                [Op.gte]: new Date()
+            }
         }
     })
 

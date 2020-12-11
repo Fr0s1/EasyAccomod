@@ -48,6 +48,9 @@ export class PostsComponent implements OnInit {
     this.postService.getPostsByQuery('?verifiedStatus=1&paymentStatus=1').subscribe(postsList => {
 
       this.posts = postsList
+
+      this.posts = this.posts.filter(post => new Date(post.expiredTime) >= new Date())
+
       this.pageLength = this.posts.length
       this.previewPosts = this.posts.slice(0, this.pageSizeOptions[2]);
 
@@ -113,6 +116,9 @@ export class PostsComponent implements OnInit {
 
     this.postService.findPost(requirementObject).subscribe(data => {
       this.searchedPosts = data
+
+      this.searchedPosts = this.searchedPosts.filter(post => new Date(post.expiredTime) >= new Date())
+
       this.paginator.pageIndex = 0;
       this.pageLength = this.searchedPosts.length
 

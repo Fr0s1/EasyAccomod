@@ -14,8 +14,8 @@
                     <img [src]="latestPostsImages[i]">
                 </a>
 
-                <p class="postTitle" *ngIf="latestPosts">{{latestPosts[i].postName}}</p>
-                <p *ngIf="latestPosts">Tạo bởi {{latestPosts[i].accountUsername}}</p>
+                <p class="postTitle" *ngIf="latestPosts[i]">{{latestPosts[i].postName}}</p>
+                <p *ngIf="latestPosts[i]">Tạo bởi {{latestPosts[i].accountUsername}}</p>
             </div>
         </div>
     </div>
@@ -33,8 +33,8 @@
                     <img [src]="starpostImage[i]">
                 </a>
 
-                <p class="postTitle" *ngIf="starpost">{{starpost[i].postName}}</p>
-                <p *ngIf="starpost">Tạo bởi {{starpost[i].accountUsername}}</p>
+                <p class="postTitle" *ngIf="starpost[i]">{{starpost[i].postName}}</p>
+                <p *ngIf="starpost[i]">Tạo bởi {{starpost[i].accountUsername}}</p>
             </div>
         </div>
 
@@ -53,8 +53,8 @@
                     <img [src]="viewpostImage[i]">
                 </a>
 
-                <p class="postTitle" *ngIf="viewpost">{{viewpost[i].postName}}</p>
-                <p *ngIf="viewpost">Tạo bởi {{viewpost[i].accountUsername}}</p>
+                <p class="postTitle" *ngIf="viewpost[i]">{{viewpost[i].postName}}</p>
+                <p *ngIf="viewpost[i]">Tạo bởi {{viewpost[i].accountUsername}}</p>
             </div>
         </div>
     </div>

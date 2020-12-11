@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { AuthService } from '../services/auth.service'
-import { Router} from '@angular/router'
+import { Router } from '@angular/router'
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
@@ -37,7 +37,6 @@ export class RegisterComponent implements OnInit {
         })
     }
 
-    errorMessage
     message
     registerAccount() {
         var form = document.querySelector('form')
@@ -45,7 +44,7 @@ export class RegisterComponent implements OnInit {
         var formData = new FormData(form)
 
         this.authService.signUp(formData).pipe(catchError(err => {
-            this.errorMessage = err.error.message
+            this.message = err.error.message
             return throwError(err)
         })).subscribe(data => {
             if (data.message) {
