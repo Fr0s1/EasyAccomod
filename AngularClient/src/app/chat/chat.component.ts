@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { io } from 'socket.io-client'
 import { AuthService } from '../services/auth.service'
 import { MessageService } from '../services/messages.service';
@@ -23,9 +23,21 @@ export class ChatComponent implements OnInit {
   receiver // The current account which logged in user is chatting
   socket // Socket.io socket
   contactList // The list of accounts which the logged in user has sent messages before
-  userMessage // Chat box to display conversation messages
-
   conversationHistory // Messages between 2 accounts
+
+  @ViewChildren('messages') messages: QueryList<any>;
+  @ViewChild('content') content: ElementRef;
+
+  ngAfterViewInit() {
+    this.scrollToBottom();
+    this.messages.changes.subscribe(this.scrollToBottom);
+  }
+
+  scrollToBottom = () => {
+    try {
+      this.content.nativeElement.scrollTop = this.content.nativeElement.scrollHeight;
+    } catch (err) { }
+  }
 
   ngOnInit(): void {
     this.currentAccount = this.authService.currentUserValue
@@ -36,22 +48,15 @@ export class ChatComponent implements OnInit {
     // Receive contact list
     this.messageService.receiveContactList(this.currentAccount.username).subscribe(data => {
       this.contactList = data
+
+      this.receiver = this.contactList[0].receiver
+      this.getConversation(this.receiver)
+
       this.contactList.forEach(account => this.accountService.getAccountInfo(account.receiver).subscribe(data => {
         account.online = data[0].online
         account.name = data[0].fullname
       }))
     })
-  }
-
-  formatAMPM(date) {
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    var strTime = hours + ':' + minutes + ' ' + ampm;
-    return strTime;
   }
 
   setUpConnection() {
@@ -61,84 +66,46 @@ export class ChatComponent implements OnInit {
 
     // When receiving a new message from an account, append that new message to the conversation chat box
     this.socket.on('chat message', (data) => {
-
-
-      var newMessage = document.createElement('div')
-
-      newMessage.setAttribute('class', 'chat-message-left mb-4')
-
-      newMessage.innerHTML =
-        ` <div>
-            <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                 class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-            <div class="text-muted small text-nowrap mt-2">${data.createdAt}</div>
-          </div>
-          <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-            <div class="font-weight-bold mb-1">${data.sender}</div>
-            ${data.content}
-          </div>
-        `
-
-      this.userMessage = document.getElementsByClassName(`chat-messages ${this.receiver}`)[0]
-      this.userMessage.appendChild(newMessage)
+      this.conversationHistory.push(data)
     })
   }
-
 
   sendMessage(event) {
     var messageContent = event.target.firstChild
 
     if (messageContent.value.length > 0) {
-      var div = document.createElement('div')
 
-      div.setAttribute('class', 'chat-message-right mb-4')
+      let time = new Date()
 
-      let timeString = this.formatAMPM(new Date())
-      div.innerHTML =
-        ` <div>
-            <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                 class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-            <div class="text-muted small text-nowrap mt-2">${timeString}</div>
-          </div>
-          <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-            <div class="font-weight-bold mb-1">You</div>
-            ${messageContent.value}
-          </div>
-        `
-      this.userMessage = document.getElementsByClassName(`chat-messages p-4 ${this.receiver}`)[0]
+      let newMessage = {
+        sender: this.currentAccount.username, content: messageContent.value, receiver: this.receiver, createdAt: time
+      }
+      this.conversationHistory.push(newMessage)
 
-
-      this.userMessage.appendChild(div)
       this.messageService.sendMessage(this.currentAccount.username, this.receiver, messageContent.value).subscribe(data => {
-        this.socket.emit('chat message', { sender: this.currentAccount.username, content: messageContent.value, receiver: this.receiver, createdAt: timeString })
+        this.socket.emit('chat message', newMessage)
         messageContent.value = ''
         messageContent.focus()
       })
     }
+
   }
 
   // Switch to new account tab
   changeReceiver(event) {
-    let newReceiver: string = event.target.innerHTML
+    this.receiver = event.target.innerHTML
 
-    // Change the receiver who the message is sent to
-    this.receiver = newReceiver
+    this.getConversation(this.receiver)
 
+  }
+
+  getConversation(receiver: string) {
     // Change account display name at top bar
     let currentContact = document.querySelector('.current-contact')
-    currentContact.innerHTML = newReceiver
-
-    let userMessageList = document.querySelectorAll('.chat-messages')
-
-    // Stop showing conversation with previous account
-    userMessageList.forEach(userMessage => userMessage.classList.remove('selected'))
-
-    // Show conversation with this new selected account
-    this.userMessage = document.getElementsByClassName(`chat-messages p-4 ${newReceiver}`)[0]
-    this.userMessage.classList.add('selected')
+    currentContact.innerHTML = this.receiver
 
     // Get conversation history with this new selected account
-    this.messageService.receiverMessageInConversation(this.currentAccount.username, newReceiver).subscribe(messagesList => {
+    this.messageService.receiverMessageInConversation(this.currentAccount.username, receiver).subscribe(messagesList => {
       this.conversationHistory = messagesList
     })
   }
