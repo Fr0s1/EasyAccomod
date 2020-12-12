@@ -88,22 +88,20 @@ export class ChatComponent implements OnInit {
         messageContent.focus()
       })
     }
-
   }
 
   // Switch to new account tab
   changeReceiver(event) {
     this.receiver = event.target.innerHTML
-
+  
     this.getConversation(this.receiver)
-
   }
 
   getConversation(receiver: string) {
     // Change account display name at top bar
     let currentContact = document.querySelector('.current-contact')
     currentContact.innerHTML = this.receiver
-
+    
     // Get conversation history with this new selected account
     this.messageService.receiverMessageInConversation(this.currentAccount.username, receiver).subscribe(messagesList => {
       this.conversationHistory = messagesList

@@ -20,7 +20,6 @@ export class PostsComponent implements OnInit {
   pageLength // Tổng cộng số bài đăng ở thanh pagination
   pageSizeOptions = [1, 2, 4] // Tùy chọn số bài đăng hiển thị ở mỗi trang
 
-
   searchedPosts // Kết quả tìm kiếm bài đăng
   previewPosts  // Những bài đăng sẽ được hiển thị ở từng trang dựa theo pageSizeOptions và searchedPosts
 

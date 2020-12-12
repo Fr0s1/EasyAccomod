@@ -53,7 +53,6 @@ export class LogInComponent implements OnInit {
       if (data.token) {
         this.accountService.updateAccount(data.username, { online: true }).subscribe(data => this.router.navigate([this.returnUrl]))
       }
-      console.log(data)
     })
   }
 }
