@@ -47,14 +47,13 @@ exports.create = async (req, res) => {
         let postCost = await PostCost.findAll()
 
         const costs = postCost[0].dataValues;
-        console.log(formData)
         const post = {
             postName: formData.postName,
             roomID: newRoom.roomID, // Lấy id phòng trọ vừa được thêm vào database để tương ứng với bài đăng
             postWeek: formData.postWeek,
             postMonth: formData.postMonth,
             postYear: formData.postYear,
-            postCost: formData.postWeek * costs.weekCost + formData.postMonth * costs.monthCost + formData.postYear * costs.yearCost,
+            postCost: formData.postCost ? formData.postCost : formData.postWeek * costs.weekCost + formData.postMonth * costs.monthCost + formData.postYear * costs.yearCost,
             accountUsername: req.username,
             verifiedStatus: formData.verifiedStatus === '1',
             paymentStatus: formData.paymentStatus === '1',

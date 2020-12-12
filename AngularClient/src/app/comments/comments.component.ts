@@ -30,7 +30,7 @@ export class CommentsComponent implements OnInit {
 
 
     let commentContent: string = event.target.previousSibling.value;
-
+    
     if (commentContent.length > 0) {
       let verifiedStatus = this.currentAccount.accountType === Role.Admin ? true: false
       sendNotification.setAttribute('class', 'show')
