@@ -49,17 +49,12 @@
                 <textarea class="form-control" id="address" name="address" rows="3"
                     formControlName="address"></textarea>
             </div>
-            <button class="btn grey" type="submit">Register</button>
+            <button class="btn pink" type="submit">REGISTER</button>
+            <a routerLink="/login">
+                <button class="btn pink">ALREADY HAVE AN ACCOUNT? SIGN IN</button>
+            </a>
             <span *ngIf="errorMessage">{{errorMessage}}</span>
             <span *ngIf="message">{{message}}</span>
         </form>
-
-        <span class="txt1">
-            Already have an account?
-        </span>
-
-        <a class="txt2" routerLink="/login">
-            Sign In
-        </a>
     </div>
 </div>

@@ -11,7 +11,7 @@
 .container {
   width: 30%;
   border-radius: 1rem;
-  background-color: rgba(211, 211, 211, .2);
+  background-color: rgba(255, 255, 255);
   position: relative;
   top: 5rem;
   color: white;
@@ -42,25 +42,25 @@
   transition: all 0.2s ease-in-out 0s;
 }
 
-.grey {
-  background: #4c4c4c;
-  color: #fff;
+.pink {
+  background: rgb(230, 30, 77);
+  color: rgb(255, 255, 255);
   box-shadow: 0 3px 0 #333333;
 }
 
-.grey:hover {
-  background: #747373;
+.pink:hover {
+  background: rgb(227, 28, 95);
 }
 
-.grey:active, .grey:focus {
-  background: #444444;
+.pink:active, .pink:focus {
+  background: rgb(215, 4, 102);
 }
 
 .login100-form-title {
   display: block;
-  font-family: Poppins;
+  font-family: 'Poppins', sans-serif;
   font-size: 30px;
-  color: #ffffff;
+  color: #000000;
   line-height: 1.2;
   text-align: center;
   font-weight: bold;
@@ -72,9 +72,9 @@
 }
 
 .input100 {
-  font-family: Poppins;
-  font-size: 15px;
-  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 19px;
+  color: #000000;
   line-height: 1.2;
   display: block;
   width: 100%;
@@ -88,37 +88,39 @@ input {
   border: none;
   overflow: visible;
   touch-action: manipulation;
-  border-bottom: 3px solid white;
+  border-bottom: 3px solid rgb(0, 0, 0);
 }
 
 .input:focus {
   outline: none !important;
-  border: 3px solid white;
-  box-shadow: 0 0 10px #ffffff;
+  border: 3px solid rgb(0, 0, 0);
+  box-shadow: 0 0 10px #000000;
 }
 
 textarea:focus {
   outline: none !important;
-  border-color: #ffffff;
-  box-shadow: 0 0 10px #ffffff;
+  border-color: #000000;
+  box-shadow: 0 0 10px #000000;
 }
 
 label {
-  font-family: Poppins;
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  color:rgb(0, 0, 0);
 }
 
 .txt1 {
-  font-family: Poppins;
+  font-family: 'Poppins', sans-serif;
   font-size: 15px;
-  color: #ffffff;
+  color: #000000;
   line-height: 1.5;
   text-align: center
 }
 
 .txt2 {
-  font-family: Poppins;
+  font-family: 'Poppins', sans-serif;
   font-size: 15px;
-  color: #ffffff;
+  color: #000000;
   line-height: 1.5;
   text-align: center
 }
