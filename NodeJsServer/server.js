@@ -18,8 +18,10 @@ app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const db = require("./app/models");
+
 // const db = require("./app/models");
-// db.reportedPosts.sync({force: true});
+db.reportedPosts.sync();
 // // drop the table if it already exists
 // db.sequelize.sync({ force: true }).then(() => {
 //   console.log("Drop and re-sync db.");
@@ -36,10 +38,11 @@ require("./app/routes/post.routes")(app);
 require("./app/routes/room.routes")(app)
 require("./app/routes/comment.routes")(app);
 require("./app/routes/report.routes")(app);
-require("./app/routes/userFavorites.routes")(app);
+require("./app/routes/userFavorite.routes")(app);
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
+// const PORT = process.env.PORT || 8080;
+const PORT = 8080;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });

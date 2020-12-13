@@ -9,5 +9,7 @@ module.exports = app => {
 
     router.post('/', userFavorites.createFavorite)
 
+    router.delete('/', userFavorites.deleteFavorite)
+
     app.use('/api/userfavorites', router);
 };

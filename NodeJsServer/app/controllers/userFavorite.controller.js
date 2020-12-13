@@ -4,7 +4,7 @@ const Op = db.Sequelize.Op;
 
 exports.createFavorite = (req, res) => {
     // Validate request
-    if (!req.body.username || !req.body.postID) {
+    if (!req.body.accountUsername || !req.body.PostPostID) {
       res.status(400).send({
         message: "Content can not be empty!"
       });
@@ -13,8 +13,8 @@ exports.createFavorite = (req, res) => {
   
     // Create a favorite
     const userFavorite = {
-      accountUsername: req.body.username,
-      PostPostID: req.body.postID,
+      accountUsername: req.body.accountUsername,
+      PostPostID: req.body.PostPostID,
     };
   
     // Save favorite in the database
@@ -57,4 +57,34 @@ exports.getAllPostFavorite = (req, res) => {
           message: "No favorite with " + searchPostID + " found!"
         });
       });
+}
+
+exports.deleteFavorite = (req, res) => {
+  if (!req.body.accountUsername || !req.body.PostPostID) {
+    res.status(400).send({
+      message: "Content can not be empty!"
+    });
+    return;
+  }
+
+  // Create a favorite
+  UserFavorite.destroy({
+    where: { accountUsername: req.body.accountUsername, PostPostID: req.body.PostPostID }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "favorite was deleted successfully!"
+        });
+      } else {
+        res.send({
+          message: `Cannot delete favorite. Maybe favorite was not found!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete favorite"
+      });
+    });
 }
