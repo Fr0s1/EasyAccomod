@@ -28,7 +28,6 @@ export class CommentsComponent implements OnInit {
   sendComment(event) {
     let sendNotification = document.querySelector('.send-comment p')
 
-
     let commentContent: string = event.target.previousSibling.value;
     
     if (commentContent.length > 0) {

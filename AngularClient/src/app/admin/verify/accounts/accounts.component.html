@@ -1,14 +1,24 @@
 <div class="container">
     <div class="account">
-        <button class="btn btn-secondary accept" (click)="verifyAccount()">Duyệt tài khoản</button>
-        <button class="btn btn-danger deny" (click)="unverifyAccount()">Từ chối duyệt</button>
-        <br>
+        <div class="option">
+            <div class="verifiedStatus">
+                <span>Trạng thái duyệt</span>
+                <select class="form-control" (change)="getAccountsByStatus($event)">
+                    <option>Tất cả</option>
+                    <option>Đã được duyệt</option>
+                    <option>Chưa được duyệt</option>
+                </select>
+            </div>
 
-        <select class="form-control" (change)="getPostByType($event)">
-            <option>Tất cả</option>
-            <option>Đã được duyệt</option>
-            <option>Chưa được duyệt</option>
-        </select>
+            <div class="accountType">
+                <span>Loại tài khoản</span>
+                <select class="form-control" (change)="getAccountsByType($event)">
+                    <option>Tất cả</option>
+                    <option>Chủ trọ</option>
+                    <option>Người thuê</option>
+                </select>
+            </div>
+        </div>
 
         <table class="table table-hover">
             <thead class="thead-dark">
@@ -16,19 +26,25 @@
                     <input type="checkbox" class="selectAll" (change)="addAllAccount($event)">
                 </th>
                 <th>Username</th>
-                <th>Trạng thái duyệt</th>
+                <th>Loại tài khoản</th>
             </thead>
             <tbody>
                 <tr *ngFor="let account of accounts">
                     <td><input type="checkbox" (change)="addToVerifyList($event)"></td>
                     <td (click)="showAccountInfo($event)">{{account?.username}}</td>
-                    <td>{{account?.verified}}</td>
+                    <td>{{account?.accountType}}</td>
                 </tr>
             </tbody>
         </table>
 
+        <button class="btn btn-secondary accept" (click)="verifyAccount()">Duyệt tài khoản</button>
+        <button class="btn btn-danger deny" (click)="unverifyAccount()">Từ chối duyệt</button>
 
+        <div class="noti" *ngIf="verifiedSuccessfully">
+            {{message}}
+        </div>
     </div>
+
     <div class="account-info">
         <h1>Thông tin chi tiết</h1>
         <ul class="list-group">
@@ -41,7 +57,5 @@
         </ul>
     </div>
 
-    <div class="noti" *ngIf="verifiedSuccessfully">
-        {{message}}
-    </div>
+   
 </div>

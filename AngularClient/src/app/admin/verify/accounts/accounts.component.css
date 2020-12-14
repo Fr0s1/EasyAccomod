@@ -26,8 +26,7 @@ th, td {
 }
 
 button {
-    margin-top: 1em;
-    margin-bottom: 0.5em;
+    margin-right: 5px;
 }
 
 .noti {
@@ -36,8 +35,15 @@ button {
     border-radius: 5px;
     width: fit-content;
     padding: 10px;
+    margin-top: 5px;
 }
 
-select.form-control {
-    width: 35%;
+.option {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+.verifiedStatus {
+    margin-right: 10px;
 }

@@ -17,8 +17,7 @@ th, td {
     grid-template-columns: 2fr 1fr;
     grid-gap: 20px;
     background-color: white;
-    margin-top: auto;
-    height: 90vh;
+    height: 93vh;
 }
 
 .search, h1 {

@@ -10,7 +10,7 @@
 
         <div class="room-preview" *ngIf="latestPosts?.length > 0">
             <div *ngFor="let i of createRange(4)">
-                <a routerLink="/post/details/{{latestPosts[i].postID}}" *ngIf="latestPostsImages[i]">
+                <a routerLink="/post/{{latestPosts[i].postID}}" *ngIf="latestPostsImages[i]">
                     <img [src]="latestPostsImages[i]">
                 </a>
 
@@ -29,7 +29,7 @@
 
         <div class="room-rate" *ngIf="starpost?.length > 0">
             <div *ngFor="let i of createRange(4)">
-                <a routerLink="/post/details/{{starpost[i].postID}}" *ngIf="starpostImage[i]">
+                <a routerLink="/post/{{starpost[i].postID}}" *ngIf="starpostImage[i]">
                     <img [src]="starpostImage[i]">
                 </a>
 
@@ -49,7 +49,7 @@
 
         <div class="room-view" *ngIf="viewpost?.length > 0">
             <div *ngFor="let i of createRange(4)">
-                <a routerLink="/post/details/{{viewpost[i].postID}}" *ngIf="viewpostImage[i]">
+                <a routerLink="/post/{{viewpost[i].postID}}" *ngIf="viewpostImage[i]">
                     <img [src]="viewpostImage[i]">
                 </a>
 

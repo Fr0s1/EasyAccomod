@@ -50,7 +50,7 @@ const routes: Routes = [
     data: { roles: [Role.Landlord, Role.Admin] } // Only account with right type can access
   },
   { path: 'posts', component: PostsComponent },
-  { path: 'post/details/:id', component: PostDetailsComponent },
+  { path: 'post/:id', component: PostDetailsComponent },
   { path: ':username', component: ProfileComponent },
   { path: '**', component: NotFoundComponent }
 ];

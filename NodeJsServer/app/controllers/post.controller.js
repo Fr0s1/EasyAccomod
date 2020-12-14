@@ -8,8 +8,6 @@ const { Op } = require('sequelize')
 exports.create = async (req, res) => {
     try {
         const formData = req.body // các thông tin trong http body
-
-        console.log(formData)
         const sharedOwner = formData.sharedOwner === 'Có' ? true : false;
         const airconditioner = formData.airconditioner === 'Có' ? true : false;
         const balcony = formData.balcony === 'Có' ? true : false;
