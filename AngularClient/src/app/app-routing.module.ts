@@ -44,6 +44,7 @@ const routes: Routes = [
   { path: 'messenger', component: ChatComponent },
   { path: 'login', component: LogInComponent },
   { path: 'register', component: RegisterComponent },
+
   {
     path: 'create/post', component: CreatePostComponent,
     canActivate: [AuthGuard],

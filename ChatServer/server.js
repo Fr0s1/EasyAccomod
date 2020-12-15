@@ -25,7 +25,6 @@ const connectedUser = {}
 
 io.on('connection', (socket) => {
     socket.on('currentUser', data => {
-        console.log(data)
         connectedUser[data.user] = socket
     })
 
@@ -34,8 +33,6 @@ io.on('connection', (socket) => {
     })
 
     socket.on('chat message', (msg) => {
-        console.log(msg)
-
         if (connectedUser[msg.receiver]) {
             connectedUser[msg.receiver].emit('chat message', msg);
         }

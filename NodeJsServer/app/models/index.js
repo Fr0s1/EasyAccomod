@@ -20,11 +20,14 @@ postCost = require("./postCost.model")(sequelize, DataTypes)
 accounts = require("./account.model")(sequelize, DataTypes)
 users = require("./user.model")(sequelize, DataTypes)
 comments = require('./comments.model')(sequelize, DataTypes)
+userFavorites = require('./userFavorite.model')(sequelize, DataTypes)
 reportedPosts = require('./reported-posts.model')(sequelize, DataTypes)
 
 // Liên kết 1 - 1
 posts.belongsTo(rooms, { foreignKey: 'roomID' })
 accounts.belongsTo(users, { foreignKey: 'userIdCard' }) // 1 người dùng chỉ có 1 tài khoản duy nhất
+// userFavorites.belongsTo(accounts, {foreignKey: 'username'})
+// userFavorites.belongsTo(posts, {foreignKey: 'postID'})
 
 // Liêt kết 1 - n
 accounts.hasMany(posts) // 1 tài khoản chủ trọ có nhiều bài đăng
@@ -32,6 +35,9 @@ accounts.hasMany(rooms) // 1 chủ trọ có thể có nhiều phòng
 
 accounts.hasMany(comments)
 posts.hasMany(comments)
+//accounts.hasMany(userFavorites) // 
+posts.belongsToMany(accounts, { through: userFavorites})
+accounts.belongsToMany(posts, { through: userFavorites})
 
 // m-n association
 // For reported post: 1 account can report many posts, 1 posts can be reported by many accounts
@@ -45,6 +51,7 @@ const db = {
   accounts,
   users,
   comments,
+  userFavorites,
   reportedPosts
 };
 

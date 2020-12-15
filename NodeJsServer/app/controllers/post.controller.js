@@ -114,7 +114,6 @@ exports.getPreviewPosts = async (req, res) => {
 exports.findByQuery = async (req, res) => {
     const conditions = req.query
 
-    console.log(conditions)
     try {
         let result = await Post.findAll({
             include: {
@@ -125,7 +124,7 @@ exports.findByQuery = async (req, res) => {
         })
         res.send(result)
     } catch (err) {
-        console.log("Can't find post with given queries")
+        res.send({ error: "Can't find post with given queries" })
     }
 }
 
