@@ -41,8 +41,8 @@ accounts.belongsToMany(posts, { through: userFavorites})
 
 // m-n association
 // For reported post: 1 account can report many posts, 1 posts can be reported by many accounts
-posts.belongsToMany(accounts, { through: reportedPosts})
-accounts.belongsToMany(posts, { through: reportedPosts})
+posts.belongsToMany(accounts, { through: reportedPosts })
+accounts.belongsToMany(posts, { through: reportedPosts })
 
 const db = {
   rooms,

@@ -22,7 +22,7 @@
 label {
     font-family: 'Poppins', sans-serif;
     font-size: 20px;
-    color:rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
 }
 
 .input100 {
@@ -35,15 +35,15 @@ label {
     height: 45px;
     background: transparent;
     padding: 0 5px;
-  }
-  
-  input {
+}
+
+input {
     outline: none;
     border: none;
     overflow: visible;
     touch-action: manipulation;
     border-bottom: 3px solid rgb(0, 0, 0);
-  }
+}
 
 .btn {
     background: transparent;
@@ -73,14 +73,14 @@ label {
     background: rgb(230, 30, 77);
     color: rgb(255, 255, 255);
     box-shadow: 0 3px 0 #333333;
-  }
-  
+}
+
 .pink:hover {
-background: rgb(227, 28, 95);
+    background: rgb(227, 28, 95);
 }
 
 .pink:active, .pink:focus {
-background: rgb(215, 4, 102);
+    background: rgb(215, 4, 102);
 }
 
 .login100-form-title {
@@ -97,3 +97,4 @@ background: rgb(215, 4, 102);
     padding-bottom: 26px;
     padding-top: 26px;
 }
+

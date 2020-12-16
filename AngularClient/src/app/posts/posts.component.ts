@@ -20,7 +20,6 @@ export class PostsComponent implements OnInit {
   pageLength // Tổng cộng số bài đăng ở thanh pagination
   pageSizeOptions = [1, 2, 4] // Tùy chọn số bài đăng hiển thị ở mỗi trang
 
-
   searchedPosts // Kết quả tìm kiếm bài đăng
   previewPosts  // Những bài đăng sẽ được hiển thị ở từng trang dựa theo pageSizeOptions và searchedPosts
 
@@ -48,6 +47,9 @@ export class PostsComponent implements OnInit {
     this.postService.getPostsByQuery('?verifiedStatus=1&paymentStatus=1').subscribe(postsList => {
 
       this.posts = postsList
+
+      this.posts = this.posts.filter(post => new Date(post.expiredTime) >= new Date())
+
       this.pageLength = this.posts.length
       this.previewPosts = this.posts.slice(0, this.pageSizeOptions[2]);
 
@@ -113,6 +115,9 @@ export class PostsComponent implements OnInit {
 
     this.postService.findPost(requirementObject).subscribe(data => {
       this.searchedPosts = data
+
+      this.searchedPosts = this.searchedPosts.filter(post => new Date(post.expiredTime) >= new Date())
+
       this.paginator.pageIndex = 0;
       this.pageLength = this.searchedPosts.length
 

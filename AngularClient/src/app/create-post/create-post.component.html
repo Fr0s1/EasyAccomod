@@ -180,14 +180,14 @@
             <div class="form-group" formGroupName="postDuration">
                 <div class="row">
                     <div class="col">
-                        <label>Phí tuần: {{postUploadCost?.weekCost}} đồng</label>
+                        <label>Phí tuần: {{postUploadCost?.weekCost | number:'1.0':'en-US'}} đồng</label>
                     </div>
 
                     <div class="col">
-                        <label>Phí tháng: {{postUploadCost?.monthCost}} đồng</label>
+                        <label>Phí tháng: {{postUploadCost?.monthCost | number:'1.0':'en-US'}} đồng</label>
                     </div>
                     <div class="col">
-                        <label>Phí năm: {{postUploadCost?.yearCost}} đồng</label>
+                        <label>Phí năm: {{postUploadCost?.yearCost | number:'1.0':'en-US'}} đồng</label>
                     </div>
                 </div>
 

@@ -35,3 +35,8 @@ button {
     width: fit-content;
     padding: 10px;
 }
+
+.comments {
+    background-color: white;
+    height: 93vh;
+}

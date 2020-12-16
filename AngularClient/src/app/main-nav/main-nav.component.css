@@ -5,3 +5,8 @@ button.dropdown-item:hover {
 .dropdown-item svg {
     margin-right: 5px;
 }
+
+.card-img-top {
+    background-size: cover;
+    background-repeat: no-repeat;
+}

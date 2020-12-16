@@ -1,7 +1,8 @@
-import { ThrowStmt } from '@angular/compiler';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { io } from 'socket.io-client'
 import { AuthService } from '../services/auth.service'
+import { MessageService } from '../services/messages.service';
+import { AccountService } from '../services/account.service'
 
 const SOCKET_ENDPOINT = 'http://localhost:3000'
 
@@ -12,76 +13,98 @@ const SOCKET_ENDPOINT = 'http://localhost:3000'
 })
 export class ChatComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private messageService: MessageService,
+    private accountService: AccountService,
+  ) { }
 
-  currentAccount;
-  receiver;
-  socket
-  ngOnInit(): void {
-    this.currentAccount = this.authService.currentUserValue
-    this.setUpConnection()
-  }
-  @ViewChild('myname') input;
+  currentAccount // Current logged in user
+  receiver // The current account which logged in user is chatting
+  socket // Socket.io socket
+  contactList // The list of accounts which the logged in user has sent messages before
+  conversationHistory // Messages between 2 accounts
+
+  @ViewChildren('messages') messages: QueryList<any>;
+  @ViewChild('content') content: ElementRef;
 
   ngAfterViewInit() {
-    console.log(this.input);
+    this.scrollToBottom();
+    this.messages.changes.subscribe(this.scrollToBottom);
+  }
+
+  scrollToBottom = () => {
+    try {
+      this.content.nativeElement.scrollTop = this.content.nativeElement.scrollHeight;
+    } catch (err) { }
+  }
+
+  ngOnInit(): void {
+    this.currentAccount = this.authService.currentUserValue
+
+    // Connect to chat server
+    this.setUpConnection()
+
+    // Receive contact list
+    this.messageService.receiveContactList(this.currentAccount.username).subscribe(data => {
+      this.contactList = data
+
+      this.receiver = this.contactList[0].receiver
+      this.getConversation(this.receiver)
+
+      this.contactList.forEach(account => this.accountService.getAccountInfo(account.receiver).subscribe(data => {
+        account.online = data[0].online
+        account.name = data[0].fullname
+      }))
+    })
   }
 
   setUpConnection() {
     this.socket = io(SOCKET_ENDPOINT)
-    this.socket.on("connect", () => {
-      console.log(this.socket.id);
-      this.socket.emit('currentUser', { user: this.currentAccount.username, id: this.socket.id })
-    });
+
+    this.socket.on("connect", () => this.socket.emit('currentUser', { user: this.currentAccount.username, id: this.socket.id }));
+
+    // When receiving a new message from an account, append that new message to the conversation chat box
     this.socket.on('chat message', (data) => {
-      var div = document.createElement('div')
-
-      div.setAttribute('class', 'chat-message-left mb-4')
-
-      div.innerHTML =
-        ` <div>
-            <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                 class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-            <div class="text-muted small text-nowrap mt-2">2:42 am</div>
-          </div>
-          <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-            <div class="font-weight-bold mb-1">${data.sender}</div>
-            ${data.content}
-          </div>
-        `
-
-      // console.log(messageBox)
-      this.input.nativeElement.appendChild(div)
+      this.conversationHistory.push(data)
     })
   }
 
   sendMessage(event) {
-    var messageContent = event.target.parentElement.firstChild
-    console.log(messageContent)
+    var messageContent = event.target.firstChild
 
-    var div = document.createElement('div')
+    if (messageContent.value.length > 0) {
 
-    div.setAttribute('class', 'chat-message-right mb-4')
+      let time = new Date()
 
-    div.innerHTML =
-      ` <div>
-            <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                 class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-            <div class="text-muted small text-nowrap mt-2">2:42 am</div>
-          </div>
-          <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-            <div class="font-weight-bold mb-1">${this.currentAccount.username}</div>
-            ${messageContent.value}
-          </div>
-        `
-    this.input.nativeElement.appendChild(div)
+      let newMessage = {
+        sender: this.currentAccount.username, content: messageContent.value, receiver: this.receiver, createdAt: time
+      }
+      this.conversationHistory.push(newMessage)
 
-    this.socket.emit('chat message', { id: this.socket.id, sender: this.currentAccount.username, content: messageContent.value, receiver: 'admin' })
+      this.messageService.sendMessage(this.currentAccount.username, this.receiver, messageContent.value).subscribe(data => {
+        this.socket.emit('chat message', newMessage)
+        messageContent.value = ''
+        messageContent.focus()
+      })
+    }
   }
 
+  // Switch to new account tab
   changeReceiver(event) {
-    let username: string = event.target.previousSibling.innerHTML
-    this.receiver = username
-    console.log(username)
+    this.receiver = event.target.innerHTML
+  
+    this.getConversation(this.receiver)
+  }
+
+  getConversation(receiver: string) {
+    // Change account display name at top bar
+    let currentContact = document.querySelector('.current-contact')
+    currentContact.innerHTML = this.receiver
+    
+    // Get conversation history with this new selected account
+    this.messageService.receiverMessageInConversation(this.currentAccount.username, receiver).subscribe(messagesList => {
+      this.conversationHistory = messagesList
+    })
   }
 }

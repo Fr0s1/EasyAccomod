@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from '../services/post.service';
 import { AccountService } from '../services/account.service';
@@ -13,7 +13,7 @@ import { Account } from '../_model/account';
 export class PostDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private postService: PostService,
-    private accountService: AccountService, private authService: AuthService) {  }
+    private accountService: AccountService, private authService: AuthService) { }
 
   currentAccount: Account
   postID: number // Current post
@@ -28,6 +28,13 @@ export class PostDetailsComponent implements OnInit {
 
   postUrl = 'http://localhost:8080/api/posts'
 
+  createRange(number) {
+    var items: number[] = [];
+    for (var i = 0; i < number; i++) {
+      items.push(i);
+    }
+    return items;
+  }
   ngOnInit(): void {
     this.currentAccount = this.authService.currentUserValue
     this.route.paramMap.subscribe(params => this.postID = +params.get('id')) // Get id in url's params
@@ -88,4 +95,6 @@ export class PostDetailsComponent implements OnInit {
       this.postService.sendReport(newReport).subscribe(data => this.sent = true)
     }
   }
+
+ 
 }

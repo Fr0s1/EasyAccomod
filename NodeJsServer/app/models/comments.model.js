@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
         verifiedStatus: {
             type: DataTypes.BOOLEAN,
             defaultValue: false
+        },
+        starsReview: {
+            type: DataTypes.FLOAT
         }
     }, {
         timestamps: true,

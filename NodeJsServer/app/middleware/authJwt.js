@@ -9,7 +9,6 @@ verifyToken = async (req, res, next) => {
 
         const decoded = jwt.verify(token, authConfig.secret)
 
-        console.log(decoded)
         let account = await Account.findAll({
             where: {
                 username: decoded.username
@@ -19,7 +18,6 @@ verifyToken = async (req, res, next) => {
         if (account) {
             req.username = decoded.username
         }
-        console.log(req)
         next()
     } catch (err) {
         res.send('Invalid token')

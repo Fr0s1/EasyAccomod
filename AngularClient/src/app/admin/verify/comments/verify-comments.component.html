@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="posts">
+    <div class="comments">
         <button class="btn btn-primary" (click)="verifyComment()">Duyệt bình luận</button>
         <button class="btn btn-secondary" (click)="denyComment()">Từ chối bình luận</button>
 
@@ -15,6 +15,7 @@
                 <th>Thời gian comment</th>
                 <th>ID bài đăng</th>
                 <th>Tên bài đăng</th>
+                <th>Số sao</th>
             </thead>
 
             <tbody>
@@ -27,18 +28,11 @@
                         <td>{{comment.createdAt | date : 'short' : 'Asia/Ho_Chi_Minh'}}</td>
                         <td>{{comment.PostPostID}}</td>
                         <td>{{post.postName}}</td>
+                        <td>{{comment.starsReview}}</td>
                     </tr>
                 </ng-container>
 
             </tbody>
         </table>
-    </div>
-
-    <div class="noti" *ngIf="verifiedSuccessfully">
-        Phê duyệt thành công
-    </div>
-
-    <div class="deny" *ngIf="denied">
-        Đã xóa comment
     </div>
 </div>

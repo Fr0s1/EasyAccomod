@@ -9,7 +9,8 @@ exports.addComment = async (req, res) => {
         content: data.content,
         accountUsername: data.accountUsername,
         PostPostID: data.PostPostID,
-        verifiedStatus: data.verifiedStatus
+        verifiedStatus: data.verifiedStatus,
+        starsReview: data.starsReview
     }
 
     try {
@@ -54,7 +55,6 @@ exports.updateComment = async (req, res) => {
         } else {
             res.status(400).send({ message: 'No comment exists with given id' })
         }
-        console.log(result)
     } catch (err) {
         res.send({ error: err })
     }

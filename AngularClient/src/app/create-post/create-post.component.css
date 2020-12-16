@@ -32,5 +32,6 @@ legend {
     border: 2px solid rgb(79, 185, 227);
     border-radius: 5px;
     width: fit-content;
+    height: fit-content;
     padding: 10px;
 }

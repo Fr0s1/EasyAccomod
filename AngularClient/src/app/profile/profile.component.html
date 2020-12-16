@@ -51,9 +51,9 @@
 
             <!-- Reply Form-->
             <h5 class="mb-30 padding-top-1x">Gửi tin nhắn cho Tran Viet Anh</h5>
-            <form method="post">
+            <form method="post" (ngSubmit)="sendMessage()">
                 <div class="form-group">
-                    <textarea class="form-control form-control-rounded" id="review_text" rows="8" placeholder="Write your message here..." required=""></textarea>
+                    <textarea class="form-control form-control-rounded" id="review_text" rows="8" placeholder="Write your message here..." required="" name="content" [formControl]="messageContent"></textarea>
                 </div>
                 <div class="text-right">
                     <button class="btn btn-outline-primary" type="submit">Gửi tin nhắn </button>

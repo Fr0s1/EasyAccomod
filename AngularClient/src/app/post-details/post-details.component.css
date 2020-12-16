@@ -83,6 +83,10 @@ ul li {
     list-style-type: disc;
 }
 
+i {
+    margin-right: 5px;
+}
+
 .roomDetails {
     border-left: 1px solid rgb(226, 221, 221);
 }
@@ -149,4 +153,8 @@ p {
 
 .owner-info h2 {
     margin-bottom: 0px;
+}
+
+.checked {
+    color: orange;
 }

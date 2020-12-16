@@ -10,12 +10,12 @@
 
         <div class="room-preview" *ngIf="latestPosts?.length > 0">
             <div *ngFor="let i of createRange(4)">
-                <a routerLink="/post/details/{{latestPosts[i].postID}}" *ngIf="latestPostsImages[i]">
+                <a routerLink="/post/{{latestPosts[i].postID}}" *ngIf="latestPostsImages[i]">
                     <img [src]="latestPostsImages[i]">
                 </a>
 
-                <p class="postTitle" *ngIf="latestPosts">{{latestPosts[i].postName}}</p>
-                <p *ngIf="latestPosts">Tạo bởi {{latestPosts[i].accountUsername}}</p>
+                <p class="postTitle" *ngIf="latestPosts[i]">{{latestPosts[i].postName}}</p>
+                <p *ngIf="latestPosts[i]">Tạo bởi {{latestPosts[i].accountUsername}}</p>
             </div>
         </div>
     </div>
@@ -29,12 +29,12 @@
 
         <div class="room-rate" *ngIf="starpost?.length > 0">
             <div *ngFor="let i of createRange(4)">
-                <a routerLink="/post/details/{{starpost[i].postID}}" *ngIf="starpostImage[i]">
+                <a routerLink="/post/{{starpost[i].postID}}" *ngIf="starpostImage[i]">
                     <img [src]="starpostImage[i]">
                 </a>
 
-                <p class="postTitle" *ngIf="starpost">{{starpost[i].postName}}</p>
-                <p *ngIf="starpost">Tạo bởi {{starpost[i].accountUsername}}</p>
+                <p class="postTitle" *ngIf="starpost[i]">{{starpost[i].postName}}</p>
+                <p *ngIf="starpost[i]">Tạo bởi {{starpost[i].accountUsername}}</p>
             </div>
         </div>
 
@@ -49,13 +49,15 @@
 
         <div class="room-view" *ngIf="viewpost?.length > 0">
             <div *ngFor="let i of createRange(4)">
-                <a routerLink="/post/details/{{viewpost[i].postID}}" *ngIf="viewpostImage[i]">
+                <a routerLink="/post/{{viewpost[i].postID}}" *ngIf="viewpostImage[i]">
                     <img [src]="viewpostImage[i]">
                 </a>
 
-                <p class="postTitle" *ngIf="viewpost">{{viewpost[i].postName}}</p>
-                <p *ngIf="viewpost">Tạo bởi {{viewpost[i].accountUsername}}</p>
+                <p class="postTitle" *ngIf="viewpost[i]">{{viewpost[i].postName}}</p>
+                <p *ngIf="viewpost[i]">Tạo bởi {{viewpost[i].accountUsername}}</p>
             </div>
         </div>
     </div>
 </div>
+
+<app-footer></app-footer>

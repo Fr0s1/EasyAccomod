@@ -5,6 +5,7 @@ import { throwError } from 'rxjs';
 
 import { catchError } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service'
+import { AccountService } from '../services/account.service'
 
 @Component({
   selector: 'app-log-in',
@@ -18,7 +19,8 @@ export class LogInComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private accountService: AccountService
   ) {
     if (this.authService.currentUserValue) {
       this.router.navigate(['/home'])
@@ -49,9 +51,8 @@ export class LogInComponent implements OnInit {
       return throwError(err);
     })).subscribe(data => {
       if (data.token) {
-        this.router.navigate([this.returnUrl])
+        this.accountService.updateAccount(data.username, { online: true }).subscribe(data => this.router.navigate([this.returnUrl]))
       }
-      console.log(data)
     })
   }
 }
