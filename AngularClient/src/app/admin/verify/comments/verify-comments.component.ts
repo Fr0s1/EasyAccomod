@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommentService } from '../../../services/comment.service'
-
+import { PostService } from '../../../services/post.service'
 
 @Component({
   selector: 'app-verify-comments',
@@ -9,7 +9,7 @@ import { CommentService } from '../../../services/comment.service'
 })
 export class VerifyCommentsComponent implements OnInit {
 
-  constructor(private commentService: CommentService) { }
+  constructor(private commentService: CommentService, private postService: PostService) { }
 
   postsHaveUnverifiedComments: any
 
@@ -23,15 +23,15 @@ export class VerifyCommentsComponent implements OnInit {
   getUnverifiedComments() {
     this.commentService.getComment('?verifiedStatus=0').subscribe(data => {
       this.postsHaveUnverifiedComments = data
-      console.log(this.postsHaveUnverifiedComments)
-      this.postsHaveUnverifiedComments.forEach(post => post.comments.forEach(comment => this.unverifiedComments.push(comment)))
-      console.log(this.unverifiedComments)
+      this.postsHaveUnverifiedComments.forEach(post => post.comments.forEach(comment => {
+        this.unverifiedComments.push(comment)
+      }))
     })
   }
 
   addAllComments(event) {
     let commentsList = document.querySelectorAll('td input')
-    this.selectedComments = []
+    this.selectedComments = this.unverifiedComments
 
     if (!event.target.checked) {
       for (let i = 0; i < commentsList.length; i++) {
@@ -44,11 +44,8 @@ export class VerifyCommentsComponent implements OnInit {
         let currentComment = (<HTMLInputElement>commentsList[i])
 
         currentComment.checked = true;
-        this.selectedComments.push(this.unverifiedComments[i].commentID)
       }
     }
-
-    console.log(this.selectedComments);
   }
 
 
@@ -56,23 +53,25 @@ export class VerifyCommentsComponent implements OnInit {
     let commentID = parseInt(event.target.parentElement.nextSibling.innerHTML);
 
     if (event.target.checked) {
-      if (!this.selectedComments.includes(commentID)) {
-        this.selectedComments.push(commentID)
+      if (!this.selectedComments.find(comment => comment.commentID == commentID)) {
+        this.selectedComments.push(this.unverifiedComments.find(comment => comment.commentID == commentID))
       }
     } else {
-      this.selectedComments = this.selectedComments.filter(value => value != commentID)
+      this.selectedComments = this.selectedComments.filter(value => value.commentID != commentID)
     }
-
     console.log(this.selectedComments)
+
   }
 
   verifiedSuccessfully: boolean = false
   verifyComment() {
-    this.selectedComments.forEach(commentID => this.commentService.updateComment(commentID, { verifiedStatus: true }).subscribe(data => {
-      if (Object(data).message) {
-        this.verifiedSuccessfully = true
-      }
-    }))
+    this.selectedComments.forEach(c => {
+      let post = this.postsHaveUnverifiedComments.find(post => post.comments.find(comment => comment.commentID = c.commentID))
+
+      let star = post.starsReview == '0' ? parseInt(c.starsReview) : (parseFloat(post.starsReview) + parseFloat(c.starsReview)) / 2
+
+      this.commentService.updateComment(c.commentID, { verifiedStatus: true }).subscribe(data => this.postService.updatePost(c.PostPostID, { starsReview: star }).subscribe())
+    })
   }
 
   denied: boolean = false;

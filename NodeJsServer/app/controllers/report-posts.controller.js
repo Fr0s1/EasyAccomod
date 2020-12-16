@@ -29,7 +29,6 @@ exports.getReport = async (req, res) => {
             where: conditions
         })
 
-        console.log(result)
         res.status(200).send(result)
     } catch (err) {
         res.status(500).send({ error: err })

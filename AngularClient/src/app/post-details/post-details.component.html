@@ -64,16 +64,20 @@
             </div>
         </div>
 
+
         <div class="features">
             <h2>Thông tin bài đăng</h2>
-
             <div class="post-stats">
                 <span><i class="fas fa-globe-asia" style="color:rgb(10, 109, 155)"></i>Lượt xem: {{postInfo?.viewsNumber
                     + 1}}</span>
                 <span><i class="fas fa-thumbs-up" style="color: rgb(10, 109, 155)"></i>Số lượt yêu thích:
                     {{postInfo?.likesNumber}}</span>
-                <span><i class="fas fa-star" style="color: yellow"></i>Số sao: {{postInfo?.starsReview}}</span>
+                <span>Số sao: <span class="fa fa-star checked"
+                        *ngFor="let i of createRange(postInfo?.starsReview)"></span>
+                </span>
             </div>
+
+
             <div>
                 <button type="button" class="btn btn-primary">Favorite</button>
                 <button type="button" class="btn btn-danger" (click)="showReportInput()"

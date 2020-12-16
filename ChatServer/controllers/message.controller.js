@@ -9,7 +9,6 @@ exports.saveMessage = async (req, res) => {
     let data = req.body
 
     try {
-        console.log(data)
         let newMessage = {
             content: data.content,
             sender: data.sender,
@@ -40,7 +39,6 @@ exports.saveMessage = async (req, res) => {
 
         res.status(200).send({ message: 'Save message successfully' })
     } catch (err) {
-        console.log(err)
         res.status(500).send({ error: 'Internal server error' })
     }
 }
