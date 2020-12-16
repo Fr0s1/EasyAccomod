@@ -48,6 +48,13 @@ span.noti {
     color: orange;
 }
 
-.rating .fa.fa-star:hover {
+.rating {
+    float: left;
+}
+
+.rating .fa.fa-star {
+    float: right
+}
+.rating .fa.fa-star:hover, .rating .fa.fa-star:hover~span {
     color: orange;
 }

@@ -3,7 +3,7 @@
 <div class="send-comment" *ngIf="currentAccount">
     <div class="rating" #rating>
         <span>Đánh giá</span>
-        <span class="fa fa-star" *ngFor="let i of createRange(5)" id="{{i+1}}" (click)="showRate($event)"></span>
+        <span class="fa fa-star" *ngFor="let i of createRange(5)" id="{{5-i}}" (click)="showRate($event)"></span>
     </div>
 
     <textarea class="form-control content"></textarea>

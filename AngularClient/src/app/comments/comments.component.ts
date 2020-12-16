@@ -37,6 +37,7 @@ export class CommentsComponent implements OnInit {
   ngAfterViewInit() {
     console.log(this.rating.nativeElement.children)
   }
+  
   postID
   postInfo
 
@@ -94,7 +95,7 @@ export class CommentsComponent implements OnInit {
     let id: number = event.target.id
 
     for (let i = 1; i <= id; i++) {
-      this.rating.nativeElement.children[i].className += ' checked';
+      this.rating.nativeElement.children[5-i+1].className = 'fa fa-star checked';
     }
   }
 }

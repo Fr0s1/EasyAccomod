@@ -72,8 +72,7 @@
                     + 1}}</span>
                 <span><i class="fas fa-thumbs-up" style="color: rgb(10, 109, 155)"></i>Số lượt yêu thích:
                     {{postInfo?.likesNumber}}</span>
-                <span>Số sao: <span class="fa fa-star checked"
-                        *ngFor="let i of createRange(postInfo?.starsReview)"></span>
+                <span><span class="fa fa-star checked"></span>Số sao: {{postInfo?.starsReview}} / 5
                 </span>
             </div>
 
