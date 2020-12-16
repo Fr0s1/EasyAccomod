@@ -55,6 +55,11 @@ span.noti {
 .rating .fa.fa-star {
     float: right
 }
+
 .rating .fa.fa-star:hover, .rating .fa.fa-star:hover~span {
-    color: orange;
+    color: #FFED85;
+}
+
+textarea {
+    clear: both;
 }
