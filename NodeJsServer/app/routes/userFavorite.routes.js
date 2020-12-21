@@ -7,6 +7,8 @@ module.exports = app => {
 
     router.get('/post/:postID', userFavorites.getAllPostFavorite)
 
+    router.get('/user/', userFavorites.checkUserFavorite)
+
     router.post('/', userFavorites.createFavorite)
 
     router.delete('/', userFavorites.deleteFavorite)

@@ -59,6 +59,24 @@ exports.getAllPostFavorite = (req, res) => {
       });
 }
 
+exports.checkUserFavorite = (req, res) => {
+  const searchPostID = req.body.PostPostID;
+  const searchUsername = req.body.accountUsername;
+
+  UserFavorite.findAndCountAll({ where: { PostPostID: searchPostID, accountUsername: searchUsername} })
+    .then(data => {
+      if (data.count == 1)
+        res.send({liked: true});
+      else 
+        res.send({liked: false});
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error!"
+      });
+    });
+}
+
 exports.deleteFavorite = (req, res) => {
   if (!req.body.accountUsername || !req.body.PostPostID) {
     res.status(400).send({
