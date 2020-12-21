@@ -60,8 +60,8 @@ exports.getAllPostFavorite = (req, res) => {
 }
 
 exports.checkUserFavorite = (req, res) => {
-  const searchPostID = req.body.PostPostID;
-  const searchUsername = req.body.accountUsername;
+  const searchPostID = req.params.id;
+  const searchUsername = req.params.username;
 
   UserFavorite.findAndCountAll({ where: { PostPostID: searchPostID, accountUsername: searchUsername} })
     .then(data => {
