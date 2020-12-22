@@ -6,6 +6,8 @@ module.exports = app => {
     router.post('/', reportedPost.addReport)
 
     router.get('/', reportedPost.getReport)
+
+    router.delete('/:id', reportedPost.deleteReport)
     
     app.use("/api/report", router)
 }

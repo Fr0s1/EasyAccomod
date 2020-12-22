@@ -13,4 +13,8 @@ export class ReportService {
     getAllReport(queryString: string) {
         return this.http.get(this.reportUrl + queryString)
     }
+
+    deleteReport(reportID: number) {
+        return this.http.delete(this.reportUrl + `/${reportID}`)
+    }
 }

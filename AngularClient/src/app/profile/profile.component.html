@@ -11,15 +11,15 @@
                         <img src="https://www.bootdey.com/img/Content/avatar/avatar1.png" alt="User">
                     </div>
                     <div class="user-data">
-                        <h4>Tran Viet Anh</h4><span>@vietanhtran</span>
+                        <h1>{{accountInfo.fullName}}</h1>
                     </div>
                 </div>
             </aside>
             <nav class="list-group"><a class="list-group-item with-badge" href="#"><i
-                        class="fa fa-phone"></i>0345107596</a>
-                <a class="list-group-item" href="#"><i class="fa fa-envelope-square"></i>vietanhtran.uet@gmail.com</a>
-                <a class="list-group-item" href="#"><i class="fa fa-user"></i>Tester</a>
-                <a class="list-group-item with-badge" href="#"><i class="fa fa-group"></i>Employee</a>
+                        class="fa fa-phone"></i>{{accountInfo.phoneNumber}}</a>
+                <a class="list-group-item" href="#"><i class="fa fa-envelope-square"></i>{{accountInfo.email}}</a>
+                <a class="list-group-item" href="#"><i class="fa fa-user"></i>@{{receiver}}</a>
+                <a class="list-group-item with-badge" href="#"><i class="fa fa-group"></i>{{accountType}}</a>
             </nav>
         </div>
         <div class="col-lg-8">
@@ -47,19 +47,16 @@
                     </div>
                 </div>
                 <div id="menu1" class="tab-pane fade">
-                    <h3>Menu 1</h3>
-                    <p>Some content in menu 1.</p>
                     <div class="comment" *ngFor="let post of postsOfUser">
                         <div class="comment-author-ava"><img
                                 src="https://www.bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar">
                         </div>
-                        <div class="comment-body" >
+                        <div class="comment-body">
                             <ul>
                                 <li>{{post.postID + ": " + post.postName}}</li>
                             </ul>
                         </div>
                     </div>
-
                 </div>
             </div>
 
