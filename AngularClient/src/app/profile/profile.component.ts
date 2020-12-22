@@ -6,7 +6,6 @@ import { MessageService } from '../services/messages.service';
 import { PostService } from '../services/post.service';
 import { AccountService } from '../services/account.service';
 import { FavoriteService } from '../services/favorite.service';
-import { PostService} from '../services/post.service';
 
 @Component({
   selector: 'app-profile',
