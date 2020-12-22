@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service'
 import { MessageService } from '../services/messages.service';
+import { PostService } from '../services/post.service';
 import { AccountService } from '../services/account.service';
 import { FavoriteService } from '../services/favorite.service';
 import { PostService} from '../services/post.service';
@@ -27,6 +28,7 @@ export class ProfileComponent implements OnInit {
   likedPostsID
   likedPosts
   receiver
+  postsOfUser // List of posts which posted by currentAccount
 
   ngOnInit(): void {
     this.likedPostsID = [];
@@ -41,6 +43,7 @@ export class ProfileComponent implements OnInit {
       .subscribe(data => {
         this.accountType = data[0].accountType;
       })
+    this.getPostsOfUser()
     this.favoriteService.getAllUserFavorite(this.receiver)
       .subscribe(data => {
         for (let index in data) {
@@ -56,12 +59,18 @@ export class ProfileComponent implements OnInit {
 
   messageContent = new FormControl('');
 
-
   sendMessage() {
     const sender = this.currentAccount.username
     const receiver = this.receiver
     const content = this.messageContent.value
 
     this.messageService.sendMessage(sender, receiver, content).subscribe(data => console.log(data))
+  }
+
+  getPostsOfUser() {
+    this.postService.getPostsByQuery(`?accountUsername=${this.currentAccount.username}`).subscribe(posts => {
+      this.postsOfUser = posts;
+      console.log(this.postsOfUser)
+    })
   }
 }

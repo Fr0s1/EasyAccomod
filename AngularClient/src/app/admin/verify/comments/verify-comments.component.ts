@@ -31,7 +31,7 @@ export class VerifyCommentsComponent implements OnInit {
 
   addAllComments(event) {
     let commentsList = document.querySelectorAll('td input')
-    this.selectedComments = this.unverifiedComments
+    
 
     if (!event.target.checked) {
       for (let i = 0; i < commentsList.length; i++) {
@@ -39,13 +39,18 @@ export class VerifyCommentsComponent implements OnInit {
 
         currentComment.checked = false;
       }
+      this.selectedComments = []
+
     } else {
       for (let i = 0; i < commentsList.length; i++) {
         let currentComment = (<HTMLInputElement>commentsList[i])
 
         currentComment.checked = true;
       }
+      this.selectedComments = this.unverifiedComments
     }
+
+    console.log(this.selectedComments)
   }
 
 
@@ -76,6 +81,6 @@ export class VerifyCommentsComponent implements OnInit {
 
   denied: boolean = false;
   denyComment() {
-    this.selectedComments.forEach(commentID => this.commentService.deleteComment(commentID).subscribe(message => this.denied = true))
+    this.selectedComments.forEach(comment => this.commentService.deleteComment(comment.commentID).subscribe(message => this.denied = true))
   }
 }
