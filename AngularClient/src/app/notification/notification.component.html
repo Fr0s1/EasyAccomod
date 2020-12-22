@@ -22,24 +22,11 @@
         </div>
         <div class="col-lg-8">
 
-            <!-- <div class="col-md-5 col-lg-5"> -->
                 <div class="panel panel-default">
                   <div class="panel-heading">
                     <h1 class="panel-title">Notifications</h1>
                     </div>
                     <div class="panel-body">
-                        <!-- <div class="alert alert-success">
-                          <strong class="default"><i class="fa fa-road"></i> Well done,</strong> You have finished job!
-                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        </div>
-                        <div class="alert alert-info">
-                          <strong class="default"><i class="fa fa-user"></i> John</strong> sent you friend request.
-                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        </div>
-                        <div class="alert alert-danger">
-                          <strong class="default"><i class="fa fa-hdd-o"></i> Server </strong> reported problems.
-                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        </div> -->
                         <div *ngFor="let noti of notifications">
                             <div *ngIf="noti.type==1">
                                 <div class="alert alert-success">
@@ -62,7 +49,6 @@
                         </div>
                   </div>
                 </div>
-            <!-- </div> -->
         </div>
     </div>
 </div>
