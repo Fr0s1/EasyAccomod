@@ -26,7 +26,7 @@ export class FavoriteService {
     return this.http.post(baseUrl, data);
   }
 
-  deleteFavorite(data) {
-    return this.http.delete(baseUrl, data);
+  deleteFavorite(id, username) {
+    return this.http.delete(`${baseUrl}/${username}/${id}`);
   }
 }
