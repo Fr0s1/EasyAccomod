@@ -33,7 +33,7 @@ accounts.belongsTo(users, { foreignKey: 'userIdCard' }) // 1 người dùng ch�
 // Liêt kết 1 - n
 accounts.hasMany(posts) // 1 tài khoản chủ trọ có nhiều bài đăng
 accounts.hasMany(rooms) // 1 chủ trọ có thể có nhiều phòng
-account.hasMany(notifications)
+accounts.hasMany(notifications) 
 
 accounts.hasMany(comments)
 posts.hasMany(comments)
@@ -54,7 +54,8 @@ const db = {
   users,
   comments,
   userFavorites,
-  reportedPosts
+  reportedPosts,
+  notifications
 };
 
 db.Sequelize = Sequelize;
