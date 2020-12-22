@@ -8,34 +8,37 @@
                 <div class="user-cover" style="background-image: url('./../../assets/background3-small.jpg');"></div>
                 <div class="user-info">
                     <div class="user-avatar">
-                        <img src="https://www.bootdey.com/img/Content/avatar/avatar1.png" alt="User"></div>
+                        <img src="https://www.bootdey.com/img/Content/avatar/avatar1.png" alt="User">
+                    </div>
                     <div class="user-data">
                         <h4>Tran Viet Anh</h4><span>@vietanhtran</span>
                     </div>
                 </div>
             </aside>
-            <nav class="list-group"><a class="list-group-item with-badge" href="#"><i class="fa fa-phone"></i>0345107596</a>
+            <nav class="list-group"><a class="list-group-item with-badge" href="#"><i
+                        class="fa fa-phone"></i>0345107596</a>
                 <a class="list-group-item" href="#"><i class="fa fa-envelope-square"></i>vietanhtran.uet@gmail.com</a>
                 <a class="list-group-item" href="#"><i class="fa fa-user"></i>Tester</a>
                 <a class="list-group-item with-badge" href="#"><i class="fa fa-group"></i>Employee</a>
             </nav>
         </div>
         <div class="col-lg-8">
-            
+
             <!-- Messages -->
-              <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs">
                 <li class="nav-item active">
-                  <a class="nav-link active" data-toggle="tab" href="#home">Favorite</a>
+                    <a class="nav-link active" data-toggle="tab" href="#home">Favorite</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#menu1">Post</a>
+                    <a class="nav-link" data-toggle="tab" href="#menu1">Post</a>
                 </li>
-              </ul>
+            </ul>
 
-              <div class="tab-content">
+            <div class="tab-content">
                 <div id="home" class="tab-pane fade in active">
                     <div class="comment">
-                        <div class="comment-author-ava"><img src="https://www.bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar"></div>
+                        <div class="comment-author-ava"><img
+                                src="https://www.bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar"></div>
                         <div class="comment-body">
                             <h3>Viet Anh has liked a post</h3>
                             <p class="comment-text">Luxury Apartment</p>
@@ -44,19 +47,29 @@
                     </div>
                 </div>
                 <div id="menu1" class="tab-pane fade">
-                  <h3>Menu 1</h3>
-                  <p>Some content in menu 1.</p>
-                  <ul>
-                      <li *ngFor="let post of postsOfUser">{{post.postID + ": " + post.postName}}</li>
-                  </ul>
+                    <h3>Menu 1</h3>
+                    <p>Some content in menu 1.</p>
+                    <div class="comment" *ngFor="let post of postsOfUser">
+                        <div class="comment-author-ava"><img
+                                src="https://www.bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar">
+                        </div>
+                        <div class="comment-body" >
+                            <ul>
+                                <li>{{post.postID + ": " + post.postName}}</li>
+                            </ul>
+                        </div>
+                    </div>
+
                 </div>
-              </div>
+            </div>
 
             <!-- Reply Form-->
             <h5 class="mb-30 padding-top-1x">Gửi tin nhắn cho Tran Viet Anh</h5>
             <form method="post" (ngSubmit)="sendMessage()">
                 <div class="form-group">
-                    <textarea class="form-control form-control-rounded" id="review_text" rows="8" placeholder="Write your message here..." required="" name="content" [formControl]="messageContent"></textarea>
+                    <textarea class="form-control form-control-rounded" id="review_text" rows="8"
+                        placeholder="Write your message here..." required="" name="content"
+                        [formControl]="messageContent"></textarea>
                 </div>
                 <div class="text-right">
                     <button class="btn btn-outline-primary" type="submit">Gửi tin nhắn </button>

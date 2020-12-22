@@ -78,16 +78,16 @@ exports.checkUserFavorite = (req, res) => {
 }
 
 exports.deleteFavorite = (req, res) => {
-  if (!req.body.accountUsername || !req.body.PostPostID) {
+  if (!req.params.username || !req.params.id) {
     res.status(400).send({
       message: "Content can not be empty!"
     });
     return;
   }
 
-  // Create a favorite
+  // Delete a favorite
   UserFavorite.destroy({
-    where: { accountUsername: req.body.accountUsername, PostPostID: req.body.PostPostID }
+    where: { accountUsername: req.params.username, PostPostID: req.params.id }
   })
     .then(num => {
       if (num == 1) {

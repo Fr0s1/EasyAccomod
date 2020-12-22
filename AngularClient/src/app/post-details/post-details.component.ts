@@ -5,7 +5,6 @@ import { AccountService } from '../services/account.service';
 import { FavoriteService } from '../services/favorite.service'
 import { AuthService } from '../services/auth.service';
 import { Account } from '../_model/account';
-import { CDK_CONNECTED_OVERLAY_SCROLL_STRATEGY_FACTORY } from '@angular/cdk/overlay/overlay-directives';
 
 @Component({
   selector: 'app-post-details',
@@ -49,8 +48,8 @@ export class PostDetailsComponent implements OnInit {
 
     this.favoriteSerive.checkUserFavorite(this.postID, this.currentAccount.username)
       .subscribe(result => {
-        if ((result as any).liked == true) this.favoriteButtonText = "Unfavorite"
-        else this.favoriteButtonText = "Favorite"
+        if ((result as any).liked == true) this.favoriteButtonText = "Unfavorite";
+        else this.favoriteButtonText = "Favorite";
         this.textLoaded = true;
         console.log(result)
       });
@@ -92,17 +91,42 @@ export class PostDetailsComponent implements OnInit {
     mainImage.setAttribute('src', event.target.getAttribute('src'))
   }
 
-  like() {
+  changeFavorite() {
     const data = {
       PostPostID: this.postID,
       accountUsername: this.currentAccount.username
     }
     console.log(data)
-
-    this.favoriteSerive.createFavorite(data)
+    if (this.favoriteButtonText == "Unfavorite") {
+      this.favoriteButtonText = "Favorite";
+      this.favoriteSerive.deleteFavorite(this.postID, this.currentAccount.username)
+      .subscribe(result => {
+        console.log("delete");
+        this.postInfo.likesNumber--;
+        let like_data = {
+          likesNumber: this.postInfo.likesNumber
+        }
+        this.postService.updatePost(this.postID, like_data)
+        .subscribe(result => {
+          console.log("Decreased");
+        })
+      });
+    }
+    else {
+      this.favoriteButtonText = "Unfavorite";
+      this.favoriteSerive.createFavorite(data)
       .subscribe(result => {
         console.log("create");
+        this.postInfo.likesNumber++;
+        let like_data = {
+          likesNumber: this.postInfo.likesNumber
+        }
+        this.postService.updatePost(this.postID, like_data)
+        .subscribe(result => {
+          console.log("Increased");
+        })
       });
+    }
   }
 
   showReportArea: boolean = false;
