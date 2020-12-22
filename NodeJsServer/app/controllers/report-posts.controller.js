@@ -1,9 +1,7 @@
 const db = require('../models')
+const ReportedPosts = db.reportedPosts
 
 exports.addReport = async (req, res) => {
-    const Account = db.accounts
-    const Post = db.posts
-
     try {
         let data = req.body;
 
@@ -13,7 +11,7 @@ exports.addReport = async (req, res) => {
             accountUsername: data.username
         }
 
-        await Post.findByPk(newReport.PostPostID).then(post => Account.findByPk(newReport.accountUsername).then(account => post.addAccount(account, { through: { content: newReport.content } })))
+        await ReportedPosts.create(newReport)
         res.status(200).send({ message: 'Add report successfully' })
     } catch (err) {
         res.status(400).send({ error: 'Server error, check eager loading requirement' })
@@ -22,7 +20,6 @@ exports.addReport = async (req, res) => {
 
 exports.getReport = async (req, res) => {
     const conditions = req.query
-    const ReportedPosts = db.reportedPosts
 
     try {
         let result = await ReportedPosts.findAll({
@@ -40,13 +37,14 @@ exports.deleteReport = async (req, res) => {
 
     try {
         let rowsDeleted = await ReportedPosts.destroy({
-            reportID: id
+            where: { reportID: id }
         })
 
         if (rowsDeleted > 0) {
             res.send({ message: 'Deleted' })
         }
     } catch (err) {
+        console.log(err)
         res.status(500).send({ error: err })
     }
 }

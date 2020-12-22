@@ -8,7 +8,8 @@
                 <div class="user-cover" style="background-image: url('./../../assets/background3-small.jpg');"></div>
                 <div class="user-info">
                     <div class="user-avatar">
-                        <img src="https://www.bootdey.com/img/Content/avatar/avatar1.png" alt="User"></div>
+                        <img src="https://www.bootdey.com/img/Content/avatar/avatar1.png" alt="User">
+                    </div>
                     <div class="user-data">
                         <h1>{{accountInfo?.fullName}}</h1>
                     </div>
@@ -21,7 +22,7 @@
             </nav>
         </div>
         <div class="col-lg-8">
-            
+
             <!-- Messages -->
               <ul class="nav nav-tabs">
                 <li class="nav-item active"><a class="nav-link active" data-toggle="tab" href="#home">Favorite</a></li>
@@ -44,9 +45,18 @@
                 </div>
 
                 <div id="menu1" class="tab-pane fade">
-                  <h3>Menu 1</h3>
-                  <p>Some content in menu 1.</p>
+                    <div class="comment" *ngFor="let post of postsOfUser">
+                        <div class="comment-author-ava"><img
+                                src="https://www.bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar">
+                        </div>
+                        <div class="comment-body">
+                            <ul>
+                                <li>{{post.postID + ": " + post.postName}}</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
+            </div>
 
               </div>
 
@@ -54,7 +64,9 @@
             <h5 class="mb-30 padding-top-1x">Gửi tin nhắn cho Tran Viet Anh</h5>
             <form method="post" (ngSubmit)="sendMessage()">
                 <div class="form-group">
-                    <textarea class="form-control form-control-rounded" id="review_text" rows="8" placeholder="Write your message here..." required="" name="content" [formControl]="messageContent"></textarea>
+                    <textarea class="form-control form-control-rounded" id="review_text" rows="8"
+                        placeholder="Write your message here..." required="" name="content"
+                        [formControl]="messageContent"></textarea>
                 </div>
                 <div class="text-right">
                     <button class="btn btn-outline-primary" type="submit">Gửi tin nhắn </button>

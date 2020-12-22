@@ -30,6 +30,7 @@ export class PostDetailsComponent implements OnInit {
 
   favoriteButtonText
   textLoaded = false
+  result
 
   postUrl = 'http://localhost:8080/api/posts'
 
@@ -42,7 +43,7 @@ export class PostDetailsComponent implements OnInit {
   }
   ngOnInit(): void {
     this.currentAccount = this.authService.currentUserValue;
-    
+
     this.route.paramMap.subscribe(params => this.postID = +params.get('id')) // Get id in url's params
 
     if (this.currentAccount) {
@@ -150,5 +151,5 @@ export class PostDetailsComponent implements OnInit {
     }
   }
 
- 
+
 }
