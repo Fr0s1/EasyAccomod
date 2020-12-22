@@ -21,6 +21,7 @@ import { Role } from './_model/role'
 import { VerifyCommentsComponent } from './admin/verify/comments/verify-comments.component';
 import { VerifyReportComponent } from './admin/verify/reports/verify-report.component';
 import { ChatComponent } from './chat/chat.component'
+import { NotificationComponent } from './notification/notification.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -49,6 +50,11 @@ const routes: Routes = [
     path: 'create/post', component: CreatePostComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.Landlord, Role.Admin] } // Only account with right type can access
+  },
+  {
+    path: 'notification', component: NotificationComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Landlord, Role.Admin, Role.Renter] } // Only account with right type can access
   },
   { path: 'posts', component: PostsComponent },
   { path: 'post/:id', component: PostDetailsComponent },
