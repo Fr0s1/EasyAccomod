@@ -82,7 +82,7 @@ body{margin-top:20px;}
 .user-info-wrapper .user-info .user-avatar,
 .user-info-wrapper .user-info .user-data {
     display: table-cell;
-    vertical-align: top
+    vertical-align: middle;
 }
 
 .user-info-wrapper .user-info .user-avatar {

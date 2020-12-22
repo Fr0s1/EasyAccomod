@@ -45,13 +45,15 @@ export class PostDetailsComponent implements OnInit {
     
     this.route.paramMap.subscribe(params => this.postID = +params.get('id')) // Get id in url's params
 
-    this.favoriteSerive.checkUserFavorite(this.postID, this.currentAccount.username)
-      .subscribe(result => {
-        if ((result as any).liked == true) this.favoriteButtonText = "Unfavorite";
-        else this.favoriteButtonText = "Favorite";
-        this.textLoaded = true;
-        console.log(result)
-      });
+    if (this.currentAccount) {
+      this.favoriteSerive.checkUserFavorite(this.postID, this.currentAccount.username)
+        .subscribe(result => {
+          if ((result as any).liked == true) this.favoriteButtonText = "Unfavorite";
+          else this.favoriteButtonText = "Favorite";
+          this.textLoaded = true;
+          console.log(result)
+        });
+    }
 
     this.postService.getPostsByQuery(`?postID=${this.postID}`).subscribe(result => { // Get post by id in the url's params
       this.postInfo = result[0]
