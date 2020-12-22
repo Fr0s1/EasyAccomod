@@ -2,8 +2,10 @@ import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from '../services/post.service';
 import { AccountService } from '../services/account.service';
+import { FavoriteService } from '../services/favorite.service'
 import { AuthService } from '../services/auth.service';
 import { Account } from '../_model/account';
+import { CDK_CONNECTED_OVERLAY_SCROLL_STRATEGY_FACTORY } from '@angular/cdk/overlay/overlay-directives';
 
 @Component({
   selector: 'app-post-details',
@@ -13,7 +15,8 @@ import { Account } from '../_model/account';
 export class PostDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private postService: PostService,
-    private accountService: AccountService, private authService: AuthService) { }
+    private accountService: AccountService, private authService: AuthService,
+    private favoriteSerive: FavoriteService) { }
 
   currentAccount: Account
   postID: number // Current post
@@ -26,6 +29,9 @@ export class PostDetailsComponent implements OnInit {
   roomInfo
   ownerInfo
 
+  favoriteButtonText
+  textLoaded = false
+
   postUrl = 'http://localhost:8080/api/posts'
 
   createRange(number) {
@@ -36,8 +42,17 @@ export class PostDetailsComponent implements OnInit {
     return items;
   }
   ngOnInit(): void {
-    this.currentAccount = this.authService.currentUserValue
+    this.currentAccount = this.authService.currentUserValue;
+    
     this.route.paramMap.subscribe(params => this.postID = +params.get('id')) // Get id in url's params
+
+    this.favoriteSerive.checkUserFavorite(this.postID, this.currentAccount.username)
+      .subscribe(result => {
+        // if ((result as any).liked == true) this.favoriteButtonText = {liked: "Unfavorite"};
+        // else this.favoriteButtonText = {liked: "Favorite"};
+        // this.textLoaded = true;
+        console.log(result)
+      });
 
     this.postService.getPostsByQuery(`?postID=${this.postID}`).subscribe(result => { // Get post by id in the url's params
       this.postInfo = result[0]
@@ -74,6 +89,19 @@ export class PostDetailsComponent implements OnInit {
     let mainImage = event.target.parentElement.parentElement.firstChild
 
     mainImage.setAttribute('src', event.target.getAttribute('src'))
+  }
+
+  like() {
+    const data = {
+      PostPostID: this.postID,
+      accountUsername: this.currentAccount.username
+    }
+    console.log(data)
+
+    this.favoriteSerive.createFavorite(data)
+      .subscribe(result => {
+        console.log("create");
+      });
   }
 
   showReportArea: boolean = false;

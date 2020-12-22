@@ -18,6 +18,10 @@ export class FavoriteService {
     return this.http.get(`${baseUrl}/post/${id}`);
   }
 
+  checkUserFavorite(id, username) {
+    return this.http.get(`${baseUrl}/like/${username}/${id}`);
+  }
+
   createFavorite(data) {
     return this.http.post(baseUrl, data);
   }
