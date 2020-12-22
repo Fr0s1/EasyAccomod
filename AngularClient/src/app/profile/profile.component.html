@@ -46,6 +46,9 @@
                 <div id="menu1" class="tab-pane fade">
                   <h3>Menu 1</h3>
                   <p>Some content in menu 1.</p>
+                  <ul>
+                      <li *ngFor="let post of postsOfUser">{{post.postID + ": " + post.postName}}</li>
+                  </ul>
                 </div>
               </div>
 

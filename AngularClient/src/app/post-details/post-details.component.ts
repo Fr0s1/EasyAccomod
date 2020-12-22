@@ -31,6 +31,7 @@ export class PostDetailsComponent implements OnInit {
 
   favoriteButtonText
   textLoaded = false
+  result
 
   postUrl = 'http://localhost:8080/api/posts'
 
@@ -43,14 +44,14 @@ export class PostDetailsComponent implements OnInit {
   }
   ngOnInit(): void {
     this.currentAccount = this.authService.currentUserValue;
-    
+
     this.route.paramMap.subscribe(params => this.postID = +params.get('id')) // Get id in url's params
 
     this.favoriteSerive.checkUserFavorite(this.postID, this.currentAccount.username)
       .subscribe(result => {
-        // if ((result as any).liked == true) this.favoriteButtonText = {liked: "Unfavorite"};
-        // else this.favoriteButtonText = {liked: "Favorite"};
-        // this.textLoaded = true;
+        if ((result as any).liked == true) this.favoriteButtonText = "Unfavorite"
+        else this.favoriteButtonText = "Favorite"
+        this.textLoaded = true;
         console.log(result)
       });
 
@@ -124,5 +125,5 @@ export class PostDetailsComponent implements OnInit {
     }
   }
 
- 
+
 }
