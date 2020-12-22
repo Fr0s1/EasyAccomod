@@ -10,13 +10,18 @@ import { AuthService } from '../services/auth.service';
 export class NotificationComponent implements OnInit {
 
   currentAccount
+  notifications
 
   constructor(private notficationService: NotificationService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.currentAccount = this.authService.currentUserValue;
     console.log(this.currentAccount);
-    // this.notficationService.getUserNotification(this.currentAccount.username);
+    this.notficationService.getUserNotification(this.currentAccount.username)
+      .subscribe(data => {
+        this.notifications = data;
+        console.log(this.notifications)
+      });
   }
 
 }
