@@ -11,13 +11,12 @@
                         <img src="https://www.bootdey.com/img/Content/avatar/avatar1.png" alt="User">
                     </div>
                     <div class="user-data">
-                        <h1>{{accountInfo.fullName}}</h1>
+                        <h1>{{accountInfo?.fullName}}</h1>
                     </div>
                 </div>
             </aside>
-            <nav class="list-group"><a class="list-group-item with-badge" href="#"><i
-                        class="fa fa-phone"></i>{{accountInfo.phoneNumber}}</a>
-                <a class="list-group-item" href="#"><i class="fa fa-envelope-square"></i>{{accountInfo.email}}</a>
+            <nav class="list-group"><a class="list-group-item with-badge" href="#"><i class="fa fa-phone"></i>{{accountInfo?.phoneNumber}}</a>
+                <a class="list-group-item" href="#"><i class="fa fa-envelope-square"></i>{{accountInfo?.email}}</a>
                 <a class="list-group-item" href="#"><i class="fa fa-user"></i>@{{receiver}}</a>
                 <a class="list-group-item with-badge" href="#"><i class="fa fa-group"></i>{{accountType}}</a>
             </nav>
@@ -25,27 +24,26 @@
         <div class="col-lg-8">
 
             <!-- Messages -->
-            <ul class="nav nav-tabs">
-                <li class="nav-item active">
-                    <a class="nav-link active" data-toggle="tab" href="#home">Favorite</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#menu1">Post</a>
-                </li>
-            </ul>
+              <ul class="nav nav-tabs">
+                <li class="nav-item active"><a class="nav-link active" data-toggle="tab" href="#home">Favorite</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu1">Post</a></li>
+              </ul>
 
-            <div class="tab-content">
-                <div id="home" class="tab-pane fade in active">
-                    <div class="comment">
-                        <div class="comment-author-ava"><img
-                                src="https://www.bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar"></div>
-                        <div class="comment-body">
-                            <h3>Viet Anh has liked a post</h3>
-                            <p class="comment-text">Luxury Apartment</p>
-                            <a href="javascript:void(0);">Luxury Apartment</a>
+              <div class="tab-content">
+
+                <div id="home" class="tab-pane in active">
+                    <div *ngFor="let post of likedPosts">
+                        <div class="comment">
+                            <div class="comment-author-ava"><img src="https://www.bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar"></div>
+                            <div class="comment-body">
+                                <h3>{{accountInfo?.fullName}} has liked a post</h3>
+                                <p class="comment-text">{{post.postName}}</p>
+                                <a routerLink="/post/{{post.postID}}" routerLinkActive="active">See post</a>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <div id="menu1" class="tab-pane fade">
                     <div class="comment" *ngFor="let post of postsOfUser">
                         <div class="comment-author-ava"><img
@@ -59,6 +57,8 @@
                     </div>
                 </div>
             </div>
+
+              </div>
 
             <!-- Reply Form-->
             <h5 class="mb-30 padding-top-1x">Gửi tin nhắn cho Tran Viet Anh</h5>
