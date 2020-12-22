@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service'
 import { MessageService } from '../services/messages.service';
 import { AccountService } from '../services/account.service';
+import { FavoriteService } from '../services/favorite.service';
+import { PostService} from '../services/post.service';
 
 @Component({
   selector: 'app-profile',
@@ -12,25 +14,43 @@ import { AccountService } from '../services/account.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private accountService: AccountService, private authService: AuthService, private messageService: MessageService, private route: ActivatedRoute) { }
+  constructor(private accountService: AccountService, 
+              private authService: AuthService, 
+              private messageService: MessageService, 
+              private route: ActivatedRoute,
+              private favoriteService: FavoriteService,
+              private postService: PostService) { }
 
   currentAccount
   accountInfo
   accountType
+  likedPostsID
   likedPosts
   receiver
 
   ngOnInit(): void {
+    this.likedPostsID = [];
+    this.likedPosts = [];
     this.route.paramMap.subscribe(params => this.receiver = params.get('username'))
     this.currentAccount = this.authService.currentUserValue;
     this.accountService.getAccountInfo(this.receiver)
       .subscribe(data => {
         this.accountInfo = data[0];
-        console.log(this.accountInfo)
       })
     this.accountService.getAccountByQuery(`?username=${this.receiver}`)
       .subscribe(data => {
         this.accountType = data[0].accountType;
+      })
+    this.favoriteService.getAllUserFavorite(this.receiver)
+      .subscribe(data => {
+        for (let index in data) {
+          // this.likedPostsID.push((data[index] as any).PostPostID);
+          this.postService.getPostsByQuery(`?postID=${(data[index] as any).PostPostID}`)
+            .subscribe(data => {
+              this.likedPosts.push((data[0]));
+            })
+        }
+        console.log(this.likedPosts);
       })
   };
 
