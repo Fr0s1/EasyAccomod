@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../../../services/post.service'
 import { NotificationService} from '../../../services/notification.service'
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'admin-posts',
@@ -90,7 +91,14 @@ export class AdminPostsComponent implements OnInit {
           if (Object(data).message) {
 
             this.operation = true
-            this.message = 'Phê duyệt thành công'
+            // this.message = 'Phê duyệt thành công'
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Phê duyệt thành công',
+              showConfirmButton: false,
+              timer: 1500
+            })
 
             let notificationData = {
               accountUsername: accountUsername,
@@ -130,7 +138,14 @@ export class AdminPostsComponent implements OnInit {
         let postName = this.selectedPostsName[index];
         let accountUsername = this.selectedUsername[index];
         this.operation = true
-        this.message = 'Đã từ chối bài đăng'
+        // this.message = 'Đã từ chối bài đăng'
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Đã từ chối bài đăng',
+          showConfirmButton: false,
+          timer: 1500
+        })
 
         let notificationData = {
           accountUsername: accountUsername,

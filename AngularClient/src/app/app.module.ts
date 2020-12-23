@@ -33,6 +33,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ChatComponent } from './chat/chat.component';
 import { FooterComponent } from './footer/footer.component';
 import { NotificationComponent } from './notification/notification.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { NotificationComponent } from './notification/notification.component';
     MatPaginatorModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    SweetAlert2Module.forRoot()
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
