@@ -20,7 +20,6 @@ export class VerifyReportComponent implements OnInit {
   fetchAllReport() {
     this.reportService.getAllReport('').subscribe(data => {
       this.reportsList = data
-      console.log(this.reportsList)
     })
   }
 
@@ -62,7 +61,5 @@ export class VerifyReportComponent implements OnInit {
 
       this.selectedReports = this.reportsList
     }
-
-    console.log(this.selectedReports);
   }
 }
