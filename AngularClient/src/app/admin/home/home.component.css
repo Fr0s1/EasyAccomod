@@ -1,0 +1,32 @@
+.stats-all-time {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background-color: white;
+}
+
+.most-views {
+    overflow: hidden;
+    border-right: 1px solid rgb(226, 221, 221);
+    
+}
+
+.most-views img {
+    height: 150px;
+    width: 150px;
+    float: left;
+}
+
+.most-likes {
+    overflow: hidden;
+}
+
+.most-likes img {
+    height: 150px;
+    width: 150px;
+    float: left;
+}
+
+div {
+    margin-top: 10px;
+    padding: 5px;
+}

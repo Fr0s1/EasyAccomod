@@ -10,8 +10,8 @@ export class FavoriteService {
 
   constructor(private http: HttpClient) { }
 
-  getAllUserFavorite(id) {
-    return this.http.get(`${baseUrl}/user/${id}`);
+  getAllUserFavorite(username) {
+    return this.http.get(`${baseUrl}/user/${username}`);
   }
 
   getAllPostFavorite(id) {

@@ -150,6 +150,4 @@ export class PostDetailsComponent implements OnInit {
       this.postService.sendReport(newReport).subscribe(data => this.sent = true)
     }
   }
-
-
 }

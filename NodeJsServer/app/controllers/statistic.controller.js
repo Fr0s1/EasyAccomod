@@ -49,6 +49,7 @@ exports.getNumberOfPostsInTimeRange = async (req, res) => {
     FROM posts 
     GROUP BY intervals
     ORDER BY numberOfPosts DESC
+    LIMIT 1
     `, { type: QueryTypes.SELECT })
 
     res.send(result)
