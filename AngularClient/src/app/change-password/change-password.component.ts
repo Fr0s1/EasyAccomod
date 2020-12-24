@@ -26,14 +26,6 @@ export class ChangePasswordComponent implements OnInit {
 
     var formData = new FormData(form)
 
-    console.log(formData)
-
-    console.log(this.pwd.value)
-
-    for (var pair of formData.entries()) {
-      console.log(pair[0] + ', ' + pair[1]);
-    }
-
     this.authService.changePassword(formData)
   }
 }

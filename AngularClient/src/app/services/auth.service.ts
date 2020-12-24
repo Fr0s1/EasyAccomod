@@ -79,6 +79,7 @@ export class AuthService {
         loginInfo.set('username', this.currentUserValue.username)
         loginInfo.set('password', form.get('currentpwd'))
 
+        // Try to login with current password, if current password is correct, change to new password
         this.signIn(loginInfo).subscribe(data => {
             if (data.token) {
                 const salt: string = bcrypt.genSaltSync(10)

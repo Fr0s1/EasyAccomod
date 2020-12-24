@@ -207,6 +207,7 @@ export class AdminPostsComponent implements OnInit {
       this.postService.getRoomImagesByID(roomID).subscribe(result => {
         this.selectedRoomImagesNameList = result // Array contains file names
 
+        this.selectedRoomImages = []
         // Get image files associated with filename and convert from Blob to HTML displayable image
         this.selectedRoomImagesNameList.forEach(filename => this.postService.getRoomImageByName(roomID, filename).subscribe(data => {
           // Create image in html file

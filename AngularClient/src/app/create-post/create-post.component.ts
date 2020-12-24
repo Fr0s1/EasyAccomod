@@ -143,6 +143,7 @@ export class CreatePostComponent implements OnInit {
     this.postService.getUploadFee(this.uploadURL + '/uploadFee').subscribe(data => this.postUploadCost = data)
   }
 
+  // Show name and phone number of landlord when creating post
   getUserInfo() {
     this.accountService.getAccountInfo(this.currentAccount.username).subscribe(data => {
       this.userInfo = data[0]
