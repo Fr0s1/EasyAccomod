@@ -4,16 +4,13 @@ const { QueryTypes, Op } = require('sequelize');
 
 exports.getPostsOrderByColumn = async (req, res) => {
     let columnName = req.params.column
-    const results = await sequelize.query(`SELECT * FROM posts ORDER BY ${columnName} DESC`, { type: QueryTypes.SELECT })
-
-    console.log(results)
-
+    const results = await sequelize.query(`SELECT * FROM posts WHERE verifiedStatus = 1 AND paymentStatus = 1 ORDER BY ${columnName} DESC`, { type: QueryTypes.SELECT })
     res.send(results)
 }
 
-exports.getPostsOrderByColumnInMonth = async (req, res) => {
+exports.getPostsOrderByColumnInMonthAndYear = async (req, res) => {
     let data = req.params
-    const results = await sequelize.query(`SELECT * FROM posts WHERE month(postTime)=${data.month} ORDER BY ${data.column} DESC`, { type: QueryTypes.SELECT })
+    const results = await sequelize.query(`SELECT * FROM posts WHERE month(postTime)=${data.month} AND year(postTime) = ${data.year} AND verifiedStatus = 1 AND paymentStatus = 1 ORDER BY ${data.column} DESC`, { type: QueryTypes.SELECT })
     res.send(results)
 }
 
@@ -47,6 +44,7 @@ exports.getNumberOfPostsInTimeRange = async (req, res) => {
         WHEN hour(postTime) BETWEEN 23 and 0 THEN '11:00 PM - 12:00 AM' 
     END AS intervals 
     FROM posts 
+    WHERE verifiedStatus = 1 AND paymentStatus = 1
     GROUP BY intervals
     ORDER BY numberOfPosts DESC
     LIMIT 1
@@ -54,3 +52,5 @@ exports.getNumberOfPostsInTimeRange = async (req, res) => {
 
     res.send(result)
 }
+
+// exports.getDistrictHas

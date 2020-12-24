@@ -12,6 +12,10 @@ export class AdminPostsComponent implements OnInit {
   postsList: any
   selectedPosts = []
 
+  selectedPostInfo // Detail of a clicked post
+  selectedRoomImagesNameList // Get room image's file name saved in server directory
+  selectedRoomImages = [] // Array saves images file
+
   ngOnInit(): void {
     this.getAllPosts()
   }
@@ -108,6 +112,32 @@ export class AdminPostsComponent implements OnInit {
         this.selectedPosts.push(this.postsList[i].postID)
       }
     }
+  }
+
+  showRoomInfo(event) {
+    this.postService.getPostsByQuery(`?postID=${event.target.innerHTML}`).subscribe(data => {
+      this.selectedPostInfo = data[0]
+      console.log(this.selectedPostInfo)
+
+      let roomID: number = this.selectedPostInfo?.roomID // Room ID of post
+
+      this.postService.getRoomImagesByID(roomID).subscribe(result => {
+        this.selectedRoomImagesNameList = result // Array contains file names
+
+        // Get image files associated with filename and convert from Blob to HTML displayable image
+        this.selectedRoomImagesNameList.forEach(filename => this.postService.getRoomImageByName(roomID, filename).subscribe(data => {
+          // Create image in html file
+          let reader = new FileReader();
+          reader.addEventListener("load", () => {
+            this.selectedRoomImages.push(reader.result)
+          }, false);
+
+          if (data) {
+            reader.readAsDataURL(data);
+          }
+        }))
+      })
+    })
   }
 }
 

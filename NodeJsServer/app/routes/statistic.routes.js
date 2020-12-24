@@ -5,7 +5,7 @@ module.exports = app => {
 
     router.get('/', stats.getNumberOfPostsInTimeRange)
 
-    router.get('/:column/:month', stats.getPostsOrderByColumnInMonth)
+    router.get('/:column/:month/:year', stats.getPostsOrderByColumnInMonthAndYear)
 
     router.get('/:column', stats.getPostsOrderByColumn)
 

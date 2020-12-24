@@ -18,16 +18,39 @@ export class HomeComponent implements OnInit {
   mostLikesPostImage
 
   timeInfo // Object contain time range and number of posts
+
+  monthList // List of months displayed in select
+  selectedMonth
+
+  year = 2020
+
+  postColumnList = [
+    { name: 'Lượt xem', value: 'viewsNumber' },
+    { name: 'Lượt yêu thích', value: 'likesNumber' }
+  ];
+  selectedColumn
+
+  filteredPost
+  filteredPostImage
+
   ngOnInit(): void {
     this.getMostViewedPost()
     this.getMostLikesPost()
     this.getTimeRangeHasMostPost()
+    this.monthList = this.createRange(12)
+  }
+
+  createRange(number) {
+    var items: number[] = [];
+    for (var i = 1; i <= number; i++) {
+      items.push(i);
+    }
+    return items;
   }
 
   getMostViewedPost() {
     this.statService.getPostOrderByColumn('viewsNumber').subscribe(postList => {
       this.mostViewedPost = postList[0]
-      console.log(this.mostViewedPost)
 
       this.postService.getRoomImagesByID(this.mostViewedPost.roomID).subscribe(imageLists => {
 
@@ -51,7 +74,6 @@ export class HomeComponent implements OnInit {
   getMostLikesPost() {
     this.statService.getPostOrderByColumn('likesNumber').subscribe(postList => {
       this.mostLikesPost = postList[0]
-      console.log(this.mostLikesPost)
 
       this.postService.getRoomImagesByID(this.mostLikesPost.roomID).subscribe(imageLists => {
 
@@ -74,5 +96,32 @@ export class HomeComponent implements OnInit {
 
   getTimeRangeHasMostPost() {
     this.statService.getTimeRangeHasMostPosts().subscribe(result => this.timeInfo = result[0])
+  }
+
+  search() {
+    if (this.selectedColumn && this.selectedMonth) {
+      let column = this.postColumnList.find(e => e.name == this.selectedColumn)
+      this.statService.getPostOrderByColumInMonthAndYearDESC(column.value, this.selectedMonth, this.year).subscribe(postList => {
+        this.filteredPost = postList[0]
+
+        console.log(this.filteredPost)
+        this.postService.getRoomImagesByID(this.filteredPost.roomID).subscribe(imageLists => {
+
+          // Request tới server để tải ảnh
+          this.postService.getRoomImageByName(this.filteredPost.roomID, imageLists[0]).subscribe(image => {
+
+            // Tạo ảnh từ Blob
+            let reader = new FileReader();
+            reader.addEventListener("load", () => {
+              this.filteredPostImage = reader.result // Khi load ảnh xong, lưu vào mảng  
+            }, false);
+
+            if (image) {
+              reader.readAsDataURL(image);
+            }
+          })
+        })
+      })
+    }
   }
 }

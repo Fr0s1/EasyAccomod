@@ -13,8 +13,8 @@ export class StatisticService {
         return this.http.get(this.route + `/${columName}`)
     }
 
-    getPostOrderByColumInMonth(column: string, month: number) {
-        return this.http.get(this.route + `/${column}/${month}`)
+    getPostOrderByColumInMonthAndYearDESC(column: string, month: number, year: number) {
+        return this.http.get(this.route + `/${column}/${month}/${year}`)
     }
 
     getTimeRangeHasMostPosts() {
