@@ -111,6 +111,7 @@ exports.getPreviewPosts = async (req, res) => {
     res.send(result)
 }
 
+
 exports.findByQuery = async (req, res) => {
     const conditions = req.query
 

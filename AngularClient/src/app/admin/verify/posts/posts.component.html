@@ -25,7 +25,7 @@
             <tbody>
                 <tr *ngFor="let post of postsList">
                     <td><input type="checkbox" (click)="addPost($event)"></td>
-                    <td>{{post.postID}}</td>
+                    <td (click)="showRoomInfo($event)">{{post.postID}}</td>
                     <td>{{post.postName}}</td>
                     <td>{{post.accountUsername}}</td>
                     <td>{{post.createdAt | date : 'short' : 'Asia/Ho_Chi_Minh'}}</td>
@@ -37,5 +37,39 @@
 
     <div class="post-info">
         <h1>Thông tin phòng trọ</h1>
+        <ul>
+            <li>Trạng thái thuê:
+                <span>{{selectedPostInfo?.Room.rented === false ? 'Chưa được thuê' : 'Đã được thuê'}}</span>
+            </li>
+
+            <li>Địa chỉ:
+                <span> số nhà {{selectedPostInfo?.Room.homeNumber}}, đường {{selectedPostInfo?.Room.street}}, phường
+                    {{selectedPostInfo?.Room.ward}},
+                    quận {{selectedPostInfo?.Room.district}},
+                    {{selectedPostInfo?.Room.city}}
+                </span>
+            </li>
+            <li>Chung chủ: <span>{{selectedPostInfo?.Room.sharedOwner === false ? 'Không' : 'Có'}}</span></li>
+            <li>Diện tích: <span>{{selectedPostInfo?.Room.area}} m<sup>2</sup></span> </li>
+            <li>Loại phòng: <span>{{selectedPostInfo?.Room.roomType}}</span></li>
+
+            <li>Cơ sở vật chất
+                <ul>
+                    <li>Điều hòa: <span>{{selectedPostInfo?.Room.airconditioner === true ? 'Có' : 'Không'}}</span></li>
+                    <li>Ban công: <span>{{selectedPostInfo?.Room.balcony === true ? 'Có' : 'Không'}}</span></li>
+                    <li>Giá điện: <span>{{selectedPostInfo?.Room.electricityPrice | number:'1.0':'en-US' }} đồng
+                            kW/h</span>
+                    </li>
+                    <li>Giá nước: <span>{{selectedPostInfo?.Room.waterPrice | number:'1.0':'en-US' }} đồng
+                            /m<sup>3</sup></span></li>
+                    <li>Phòng bếp: <span>{{selectedPostInfo?.Room.kitchen}}</span></li>
+                    <li>Phòng tắm: <span>{{selectedPostInfo?.Room.bathroom}}</span></li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="room-images">
+            <img *ngFor="let img of selectedRoomImages" [src]="img" [ngStyle]="{'height': '100px'}">
+        </div>
     </div>
 </div>
