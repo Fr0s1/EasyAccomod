@@ -23,16 +23,15 @@
         </div>
         <div class="col-lg-8">
 
-            <!-- Messages -->
-              <ul class="nav nav-tabs">
-                <li class="nav-item active"><a class="nav-link active" data-toggle="tab" href="#home">Favorite</a></li>
-                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu1">Post</a></li>
-                
-              </ul>
+            <!-- <ul class="nav nav-tabs">
+                <li class="nav-item active"><a class="nav-link active" data-toggle="tab" href="#favorite">Favorite</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#post">Post</a></li>
+                <li *ngIf="currentAccount.username == receiver" li class="nav-item"><a class="nav-link" data-toggle="tab" href="#unverified">Unverified post</a></li>
+            </ul>
 
-              <div class="tab-content">
+            <div class="tab-content">
 
-                <div id="home" class="tab-pane in active">
+                <div id="favorite" class="tab-pane in active">
                     <div *ngFor="let post of likedPosts">
                         <div class="comment">
                             <div class="comment-author-ava"><img src="https://www.bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar"></div>
@@ -45,7 +44,7 @@
                     </div>
                 </div>
 
-                <div id="menu1" class="tab-pane fade">
+                <div id="post" class="tab-pane fade">
                     <div class="comment" *ngFor="let post of postsOfUser">
                         <div class="comment-author-ava"><img
                                 src="https://www.bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar">
@@ -57,10 +56,45 @@
                         </div>
                     </div>
                 </div>
+
+                <div id="unverified" class="tab-pane fade">
+                    <div class="comment" *ngFor="let post of unverifiedPosts">
+                        <div class="comment-author-ava"><img
+                                src="https://www.bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar">
+                        </div>
+                        <div class="comment-body">
+                            <ul>
+                                <li>{{post.postID + ": " + post.postName}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="tab-vertical">
+                <ul class="nav nav-tabs" id="myTab3" role="tablist">
+                    <li class="nav-item"> <a class="nav-link active" id="home-vertical-tab" data-toggle="tab" href="#home-vertical" role="tab" aria-controls="home" aria-selected="true">Favorite</a> </li>
+                    <li class="nav-item"> <a class="nav-link" id="profile-vertical-tab" data-toggle="tab" href="#profile-vertical" role="tab" aria-controls="profile" aria-selected="false">Post</a> </li>
+                    <li class="nav-item"> <a class="nav-link" id="contact-vertical-tab" data-toggle="tab" href="#contact-vertical" role="tab" aria-controls="contact" aria-selected="false">Unverified Post</a> </li>
+                </ul>
+                <div class="tab-content" id="myTabContent3">
+                    <div class="tab-pane fade show active" id="home-vertical" role="tabpanel" aria-labelledby="home-vertical-tab">
+                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nunc id cursus metus aliquam eleifend mi in. At consectetur lorem donec massa. Nunc scelerisque viverra mauris in aliquam sem fringilla ut. Molestie nunc non blandit massa enim nec dui nunc mattis. Cursus mattis molestie a iaculis at erat pellentesque adipiscing. Augue eget arcu dictum varius duis.</p>
+                    </div>
+                    <div class="tab-pane fade" id="profile-vertical" role="tabpanel" aria-labelledby="profile-vertical-tab">
+                        <h3>Tab Content 1</h3>
+                        <p>Integer malesuada nunc vel risus commodo. Enim eu turpis egestas pretium aenean pharetra magna. Feugiat in fermentum posuere urna nec tincidunt praesent semper feugiat. Diam vulputate ut pharetra sit amet. At ultrices mi tempus imperdiet.</p>
+                    </div>
+                    <div class="tab-pane fade" id="contact-vertical" role="tabpanel" aria-labelledby="contact-vertical-tab">
+                        <h3>Tab Heading</h3>
+                        <p>Sit amet nisl suscipit adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras pulvinar mattis. Amet risus nullam eget felis eget nunc lobortis mattis. Lacus viverra vitae congue eu. Eu tincidunt tortor aliquam nulla facilisi cras fermentum odio eu. Est placerat in egestas erat imperdiet sed euismod.</p>
+                    </div>
+                </div>
             </div>
 
             <!-- Reply Form-->
-            <h5 class="mb-30 padding-top-1x">Gửi tin nhắn cho Tran Viet Anh</h5>
+            <h1 class="mb-30 padding-top-1x">Gửi tin nhắn cho {{accountInfo?.fullName}}</h1>
             <form method="post" (ngSubmit)="sendMessage()">
                 <div class="form-group">
                     <textarea class="form-control form-control-rounded" id="review_text" rows="8"

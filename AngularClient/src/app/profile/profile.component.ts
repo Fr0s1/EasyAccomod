@@ -28,6 +28,7 @@ export class ProfileComponent implements OnInit {
   likedPosts
   receiver
   postsOfUser // List of posts which posted by currentAccount
+  unverifiedPosts
 
   ngOnInit(): void {
     this.likedPostsID = [];
@@ -43,17 +44,11 @@ export class ProfileComponent implements OnInit {
         this.accountType = data[0].accountType;
       })
     this.getPostsOfUser()
-    this.favoriteService.getAllUserFavorite(this.receiver)
-      .subscribe(data => {
-        for (let index in data) {
-          // this.likedPostsID.push((data[index] as any).PostPostID);
-          this.postService.getPostsByQuery(`?postID=${(data[index] as any).PostPostID}`)
-            .subscribe(data => {
-              this.likedPosts.push((data[0]));
-            })
-        }
-        console.log(this.likedPosts);
-      })
+    if (this.currentAccount.username == this.receiver) {
+      this.getUnverifiedPosts()
+    }
+    this.getFavoritedPosts()
+    
   };
 
   messageContent = new FormControl('');
@@ -66,8 +61,29 @@ export class ProfileComponent implements OnInit {
     this.messageService.sendMessage(sender, receiver, content).subscribe(data => console.log(data))
   }
 
+  getUnverifiedPosts() {
+    this.postService.getPostsByQuery(`?accountUsername=${this.currentAccount.username}&verifiedStatus=0`)
+      .subscribe(posts => {
+        this.unverifiedPosts = posts;
+      });
+  }
+
+  getFavoritedPosts() {
+    this.favoriteService.getAllUserFavorite(this.receiver)
+      .subscribe(data => {
+        for (let index in data) {
+          // this.likedPostsID.push((data[index] as any).PostPostID);
+          this.postService.getPostsByQuery(`?postID=${(data[index] as any).PostPostID}`)
+            .subscribe(data => {
+              this.likedPosts.push((data[0]));
+            })
+        }
+        console.log(this.likedPosts);
+      })
+  }
+
   getPostsOfUser() {
-    this.postService.getPostsByQuery(`?accountUsername=${this.currentAccount.username}`).subscribe(posts => {
+    this.postService.getPostsByQuery(`?accountUsername=${this.receiver}&verifiedStatus=1`).subscribe(posts => {
       this.postsOfUser = posts;
       console.log(this.postsOfUser)
     })
