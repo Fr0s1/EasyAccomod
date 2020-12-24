@@ -34,6 +34,7 @@ import { ChatComponent } from './chat/chat.component';
 import { FooterComponent } from './footer/footer.component';
 import { NotificationComponent } from './notification/notification.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     NotFoundComponent,
     ChatComponent,
     FooterComponent,
-    NotificationComponent
+    NotificationComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
