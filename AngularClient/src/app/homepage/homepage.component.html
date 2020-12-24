@@ -15,10 +15,16 @@
                 </a>
 
                 <p class="postTitle" *ngIf="latestPosts[i]">{{latestPosts[i].postName}}</p>
-                <p *ngIf="latestPosts[i]">Tạo bởi {{latestPosts[i].accountUsername}}</p>
+
+                <div class="room-info" *ngIf="latestPosts[i]">
+                    <p><i class="fas fa-home"></i>{{latestPosts[i].Room.city}}</p>
+                    <p><i class="fas fa-money-bill-wave"></i>{{latestPosts[i].Room.monthPrice | number:'1.0':'en-US' }}
+                        / tháng</p>
+                </div>
             </div>
         </div>
     </div>
+
 
     <div class="top-star">
         <h1>
@@ -34,7 +40,12 @@
                 </a>
 
                 <p class="postTitle" *ngIf="starpost[i]">{{starpost[i].postName}}</p>
-                <p *ngIf="starpost[i]">Tạo bởi {{starpost[i].accountUsername}}</p>
+
+                <div class="room-info" *ngIf="starpost[i]">
+                    <p><i class="fas fa-home"></i>{{starpost[i].Room.city}}</p>
+                    <p><i class="fas fa-money-bill-wave"></i>{{starpost[i].Room.monthPrice | number:'1.0':'en-US' }} /
+                        tháng</p>
+                </div>
             </div>
         </div>
 
@@ -54,9 +65,20 @@
                 </a>
 
                 <p class="postTitle" *ngIf="viewpost[i]">{{viewpost[i].postName}}</p>
-                <p *ngIf="viewpost[i]">Tạo bởi {{viewpost[i].accountUsername}}</p>
+
+                <div class="room-info" *ngIf="viewpost[i]">
+                    <p><i class="fas fa-home"></i>{{viewpost[i].Room.city}}</p>
+                    <p><i class="fas fa-money-bill-wave"></i>{{viewpost[i].Room.monthPrice | number:'1.0':'en-US' }} /
+                        tháng</p>
+                </div>
             </div>
         </div>
+    </div>
+
+    <div class="join">
+        <img src="../../assets/background3_cut.jpg" id="to-post">
+        <div class="slogan">Chưa đúng phòng trọ bạn cần?</div>
+        <div class="middle-left"><button class="btn btn-light">Tìm phòng trọ ngay</button></div>
     </div>
 </div>
 

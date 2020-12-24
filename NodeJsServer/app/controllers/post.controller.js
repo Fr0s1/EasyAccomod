@@ -97,6 +97,9 @@ exports.getPreviewPosts = async (req, res) => {
     let query = req.query
 
     let result = await Post.findAll({
+        include: {
+            model: Room
+        },
         limit: 4, order: [[`${query.column}`, 'DESC']], where: {
             [Op.and]: [{
                 verifiedStatus: true
