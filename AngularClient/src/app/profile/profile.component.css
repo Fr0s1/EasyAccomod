@@ -283,10 +283,6 @@ a:hover {
     margin-top: 20px;
 }
 
-.chatbox {
-    background-color: #71748d;
-}
-
 @media (max-width: 576px) {
     .comment {
         padding-left: 0
