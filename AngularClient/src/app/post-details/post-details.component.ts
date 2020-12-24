@@ -5,6 +5,7 @@ import { AccountService } from '../services/account.service';
 import { FavoriteService } from '../services/favorite.service'
 import { AuthService } from '../services/auth.service';
 import { Account } from '../_model/account';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-post-details',
@@ -147,7 +148,15 @@ export class PostDetailsComponent implements OnInit {
         username: this.currentAccount.username
       }
 
-      this.postService.sendReport(newReport).subscribe(data => this.sent = true)
+      this.postService.sendReport(newReport).subscribe(data => {
+        this.sent = true;
+        Swal.fire({
+          icon: 'success',
+          title: 'Cảm ơn bạn đã report, chúng tôi sẽ xem xét nhanh nhất có thể',
+          showConfirmButton: true,
+        })
+        
+      })
     }
   }
 }

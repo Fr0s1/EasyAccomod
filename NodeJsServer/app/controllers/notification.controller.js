@@ -35,7 +35,14 @@ exports.createNotification = (req, res) => {
 exports.getUserNotification = (req, res) => {
     const searchUsername = req.params.username;
   
-    Notification.findAll({ where: { accountUsername: searchUsername } })
+    Notification.findAll({ 
+        where: { 
+          accountUsername: searchUsername 
+        },
+        order: [
+          ['createdAt', 'DESC']
+        ],
+    })
       .then(data => {
         res.send(data);
       })

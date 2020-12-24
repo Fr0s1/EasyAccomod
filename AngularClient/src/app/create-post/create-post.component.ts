@@ -5,6 +5,7 @@ import { AccountService } from '../services/account.service';
 import { AuthService } from '../services/auth.service';
 import { Role } from '../_model/role';
 import { formatDate } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-post',
@@ -115,9 +116,19 @@ export class CreatePostComponent implements OnInit {
       this.sent = true
       this.postService.uploadForm(this.uploadURL, formData).subscribe(res => {
         console.log(res)
+        Swal.fire({
+          icon: 'success',
+          title: 'Đăng kí bài đăng cho phòng trọ thành công. Khi được phê duyệt, bạn sẽ nhận được thông báo',
+          showConfirmButton: true,
+        })
       })
     } else {
-      console.log('Invalid')
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid form information',
+        text: 'Please check your form again',
+        footer: '<a href>What are the form condition?</a>',
+      })
     }
   }
 
