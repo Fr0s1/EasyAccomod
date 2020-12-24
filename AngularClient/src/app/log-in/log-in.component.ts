@@ -6,6 +6,7 @@ import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service'
 import { AccountService } from '../services/account.service'
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-log-in',
@@ -48,6 +49,14 @@ export class LogInComponent implements OnInit {
 
     this.authService.signIn(formData).pipe(catchError(err => {
       this.loginMessage = err.error.message
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Wrong username or password!',
+        footer: '<a href>Forgor password?</a>',
+        width: "400px",
+      })
       return throwError(err);
     })).subscribe(data => {
       if (data.token) {
