@@ -34,54 +34,11 @@
             </form>
         </div>
         <div class="col-lg-8">
-            <!-- Reply Form-->
-            
-
-            <!-- <div class="tab-vertical">
-                <ul class="nav nav-tabs" id="myTab3" role="tablist">
-                    <li class="nav-item"> <a class="nav-link active" id="home-vertical-tab" data-toggle="tab" href="#home-vertical" role="tab" aria-controls="home" aria-selected="true">Favorite</a> </li>
-                    <li class="nav-item"> <a class="nav-link" id="profile-vertical-tab" data-toggle="tab" href="#profile-vertical" role="tab" aria-controls="profile" aria-selected="false">Post</a> </li>
-                    <li class="nav-item"> <a class="nav-link" id="contact-vertical-tab" data-toggle="tab" href="#contact-vertical" role="tab" aria-controls="contact" aria-selected="false">Unverified Post</a> </li>
-                </ul>
-                
-                <div class="tab-content" id="myTabContent3">
-                    <div class="tab-pane fade show active" id="home-vertical" role="tabpanel" aria-labelledby="home-vertical-tab">
-                        <div *ngFor="let post of likedPosts">
-                            <div class="comment">
-                                <div class="comment-body">
-                                    <h3>{{accountInfo?.fullName}} has liked a post</h3>
-                                    <p class="comment-text">{{post.postName}}</p>
-                                    <a routerLink="/post/{{post.postID}}" routerLinkActive="active">See post</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="profile-vertical" role="tabpanel" aria-labelledby="profile-vertical-tab">
-                        <div class="comment" *ngFor="let post of postsOfUser">
-                            <div class="comment-body">
-                                <ul>
-                                    <li>{{post.postID + ": " + post.postName}}</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="contact-vertical" role="tabpanel" aria-labelledby="contact-vertical-tab">
-                        <div class="comment" *ngFor="let post of unverifiedPosts">
-                            <div class="comment-body">
-                                <ul>
-                                    <li>{{post.postID + ": " + post.postName}}</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
             <nav>
                 <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Project Tab 1</a>
-                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Project Tab 2</a>
-                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Project Tab 3</a>
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Favorited Post</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">User's Post</a>
+                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Unverified Post</a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
@@ -89,26 +46,18 @@
                     <table class="table" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Project Name</th>
-                                <th>Employer</th>
-                                <th>Awards</th>
+                                <th>Post Name</th>
+                                <th>Landlord</th>
+                                <th>Views</th>
+                                <th>Likes</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><a href="#">Work 1</a></td>
-                                <td>Doe</td>
-                                <td>john@example.com</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">Work 2</a></td>
-                                <td>Moe</td>
-                                <td>mary@example.com</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">Work 3</a></td>
-                                <td>Dooley</td>
-                                <td>july@example.com</td>
+                            <tr *ngFor="let post of likedPosts">
+                                <td><a>{{post.postName}}</a></td>
+                                <td>{{post.accountUsername}}</td>
+                                <td>{{post.viewsNumber}}</td>
+                                <td>{{post.likesNumber}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -117,26 +66,20 @@
                     <table class="table" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Project Name</th>
-                                <th>Employer</th>
-                                <th>Time</th>
+                                <th>Post Name</th>
+                                <th>Landlord</th>
+                                <th>Views</th>
+                                <th>Likes</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><a href="#">Work 1</a></td>
-                                <td>Doe</td>
-                                <td>john@example.com</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">Work 2</a></td>
-                                <td>Moe</td>
-                                <td>mary@example.com</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">Work 3</a></td>
-                                <td>Dooley</td>
-                                <td>july@example.com</td>
+                            <tr *ngFor="let post of postsOfUser">
+                                <td><a href="#">{{post.postName}}</a></td>
+                                <td>{{post.accountUsername}}</td>
+                                <td>{{post.viewsNumber}}</td>
+                                <td>{{post.likesNumber}}</td>
+                                <td><a routerLink="/" routerLinkActive="active">Extend duration</a></td>
                             </tr>
                         </tbody>
                     </table>
@@ -145,26 +88,14 @@
                     <table class="table" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Contest Name</th>
-                                <th>Date</th>
-                                <th>Award Position</th>
+                                <th>Post Name</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><a href="#">Work 1</a></td>
-                                <td>Doe</td>
-                                <td>john@example.com</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">Work 2</a></td>
-                                <td>Moe</td>
-                                <td>mary@example.com</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">Work 3</a></td>
-                                <td>Dooley</td>
-                                <td>july@example.com</td>
+                            <tr *ngFor="let post of unverifiedPosts">
+                                <td><a href="#">{{post.postName}}</a></td>
+                                <td><a routerLink="/" routerLinkActive="active">Edit</a></td>
                             </tr>
                         </tbody>
                     </table>
