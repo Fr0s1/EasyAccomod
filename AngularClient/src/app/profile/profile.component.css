@@ -6,6 +6,7 @@ body {
 
 .row {
     background-color: #efeff6;
+    width: 100%;
 }
 
 .container {
@@ -207,94 +208,35 @@ a.list-group-item, .list-group-item-action {
     font-size: 1.1em;
 }
 
-a {
-    color: #71748d
+ #tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #0062cc;
+    background-color: transparent;
+    border-color: transparent transparent #f3f3f3;
+    border-bottom: 3px solid !important;
+    font-size: 16px;
+    font-weight: bold;
 }
-
-a:hover {
-    color: #ff407b;
-    text-decoration: none
-}
-
-a:active,
-a:hover {
-    outline: 0;
-    text-decoration: none
-}
-
-.btn-secondary {
-    color: #fff;
-    background-color: #ff407b;
-    border-color: #ff407b
-}
-
-.btn {
-    font-size: 14px;
-    padding: 9px 16px;
-    border-radius: 2px
-}
-
-.tab-vertical .nav.nav-tabs {
-    float: left;
-    display: block;
-    margin-right: 0px;
-    border-bottom: 0
-}
-
-.tab-vertical .nav.nav-tabs .nav-item {
-    margin-bottom: 6px
-}
-
-.tab-vertical .nav-tabs .nav-link {
+ .nav-link {
     border: 1px solid transparent;
     border-top-left-radius: .25rem;
     border-top-right-radius: .25rem;
-    background: #fff;
-    padding: 17px 49px;
-    color: #71748d;
-    background-color: #dddde8;
-    -webkit-border-radius: 4px 0px 0px 4px;
-    -moz-border-radius: 4px 0px 0px 4px;
-    border-radius: 4px 0px 0px 4px
+    color: #0062cc;
+    font-size: 16px;
+    font-weight: 600;
 }
-
-.tab-vertical .nav-tabs .nav-link.active {
-    color: #5969ff;
-    background-color: #fff !important;
-    border-color: transparent !important
+ .nav-link:hover {
+    border: none;
 }
-
-.tab-vertical .nav-tabs .nav-link {
-    border: 1px solid transparent;
-    border-top-left-radius: 4px !important;
-    border-top-right-radius: 0px !important
+ thead{
+    background: #f3f3f3;
+    color: #333;
 }
-
-.tab-vertical .tab-content {
-    overflow: auto;
-    -webkit-border-radius: 0px 4px 4px 4px;
-    -moz-border-radius: 0px 4px 4px 4px;
-    border-radius: 0px 4px 4px 4px;
-    background: #fff;
-    padding: 30px
+ a{
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
 }
 
 .mb-30 {
     margin-top: 20px;
-}
-
-@media (max-width: 576px) {
-    .comment {
-        padding-left: 0
-    }
-    .comment .comment-author-ava {
-        display: none
-    }
-    .comment .comment-body {
-        padding: 15px
-    }
-    .comment .comment-body::before,
-    .comment .comment-body::after {
-        display: none
-    }
 }

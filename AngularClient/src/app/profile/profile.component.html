@@ -20,27 +20,30 @@
                 <a class="list-group-item" href="#"><i class="fa fa-user"></i>@{{receiver}}</a>
                 <a class="list-group-item with-badge" href="#"><i class="fa fa-group"></i>{{accountType}}</a>
             </nav>
-        </div>
-        <div class="col-lg-8">
-            <!-- Reply Form-->
+
             <h1 class="mb-30 padding-top-1x">Gửi tin nhắn cho {{accountInfo?.fullName}}</h1>
             <form method="post" (ngSubmit)="sendMessage()">
                 <div class="form-group">
-                    <input class="form-control form-control-rounded" id="review_text" rows="8"
+                    <textarea rows="4" class="form-control form-control-rounded" id="review_text" rows="8"
                         placeholder="Write your message here..." required="" name="content"
-                        [formControl]="messageContent">
+                        [formControl]="messageContent"></textarea>
                 </div>
                 <div class="text-right">
                     <button class="btn btn-outline-primary" type="submit">Gửi tin nhắn </button>
                 </div>
             </form>
+        </div>
+        <div class="col-lg-8">
+            <!-- Reply Form-->
+            
 
-            <div class="tab-vertical">
+            <!-- <div class="tab-vertical">
                 <ul class="nav nav-tabs" id="myTab3" role="tablist">
                     <li class="nav-item"> <a class="nav-link active" id="home-vertical-tab" data-toggle="tab" href="#home-vertical" role="tab" aria-controls="home" aria-selected="true">Favorite</a> </li>
                     <li class="nav-item"> <a class="nav-link" id="profile-vertical-tab" data-toggle="tab" href="#profile-vertical" role="tab" aria-controls="profile" aria-selected="false">Post</a> </li>
                     <li class="nav-item"> <a class="nav-link" id="contact-vertical-tab" data-toggle="tab" href="#contact-vertical" role="tab" aria-controls="contact" aria-selected="false">Unverified Post</a> </li>
                 </ul>
+                
                 <div class="tab-content" id="myTabContent3">
                     <div class="tab-pane fade show active" id="home-vertical" role="tabpanel" aria-labelledby="home-vertical-tab">
                         <div *ngFor="let post of likedPosts">
@@ -72,9 +75,101 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
-            
+            <nav>
+                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Project Tab 1</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Project Tab 2</a>
+                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Project Tab 3</a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <table class="table" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Project Name</th>
+                                <th>Employer</th>
+                                <th>Awards</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="#">Work 1</a></td>
+                                <td>Doe</td>
+                                <td>john@example.com</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Work 2</a></td>
+                                <td>Moe</td>
+                                <td>mary@example.com</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Work 3</a></td>
+                                <td>Dooley</td>
+                                <td>july@example.com</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <table class="table" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Project Name</th>
+                                <th>Employer</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="#">Work 1</a></td>
+                                <td>Doe</td>
+                                <td>john@example.com</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Work 2</a></td>
+                                <td>Moe</td>
+                                <td>mary@example.com</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Work 3</a></td>
+                                <td>Dooley</td>
+                                <td>july@example.com</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                    <table class="table" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Contest Name</th>
+                                <th>Date</th>
+                                <th>Award Position</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="#">Work 1</a></td>
+                                <td>Doe</td>
+                                <td>john@example.com</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Work 2</a></td>
+                                <td>Moe</td>
+                                <td>mary@example.com</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Work 3</a></td>
+                                <td>Dooley</td>
+                                <td>july@example.com</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
