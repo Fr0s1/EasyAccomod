@@ -33,6 +33,7 @@ export class HomeComponent implements OnInit {
   filteredPost
   filteredPostImage
 
+  
   ngOnInit(): void {
     this.getMostViewedPost()
     this.getMostLikesPost()

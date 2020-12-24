@@ -13,7 +13,7 @@ module.exports = app => {
 
   // Login account
   router.post("/login", upload.none(), auth.signIn)
-
+  
   //Retrieve all accounts
   router.get("/", accounts.findAll);
 
