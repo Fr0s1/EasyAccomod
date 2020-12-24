@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PostService } from '../services/post.service';
 
 @Component({
@@ -8,7 +9,8 @@ import { PostService } from '../services/post.service';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService, private router: Router,
+) { }
 
   latestPosts // Thông tin về các bài đăng preview ở homepage
   latestPostsImages = [] // Lưu 1 ảnh của phòng trọ ứng với mỗi bài đăng
@@ -116,5 +118,9 @@ export class HomepageComponent implements OnInit {
         })
       })
     })
+  }
+
+  toPostPage() {
+    this.router.navigate(['/posts'])
   }
 }
