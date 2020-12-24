@@ -1,2 +1,67 @@
-<p>Thông kê luôn ở trang này</p>
+<div class="container">
+    <div class="stats-all-time">
+        <div class="most-views">
+            <h1>Post có nhiều lượt xem nhất</h1>
+            <a routerLink="/post/{{mostViewedPost?.postID}}" target="_blank"><img [src]="mostViewedPostImage"></a>
+            <p>Post ID: {{mostViewedPost?.postID}}</p>
+            <p>Tên bài đăng: {{mostViewedPost?.postName}}</p>
+            <p>Tài khoản: {{mostViewedPost?.accountUsername}}</p>
+            <p>Lượt xem: {{mostViewedPost?.viewsNumber}}</p>
+        </div>
 
+        <div class="most-likes">
+            <h1>Post có nhiều lượt yêu thích nhất</h1>
+            <a routerLink="/post/{{mostLikesPost?.postID}}" target="_blank"><img [src]="mostLikesPostImage"></a>
+            <p>Post ID: {{mostLikesPost?.postID}}</p>
+            <p>Tên bài đăng: {{mostLikesPost?.postName}}</p>
+            <p>Tài khoản: {{mostLikesPost?.accountUsername}}</p>
+            <p>Lượt yêu thích: {{mostLikesPost?.likesNumber}}</p>
+        </div>
+
+        <div class="most-posts-time-range">
+            <h1>Khoảng thời gian có nhiều bài xem nhất: </h1>
+            <ul>
+                <li>Thời gian: {{timeInfo?.intervals}}</li>
+                <li>Số lượng bài viết: {{timeInfo?.numberOfPosts}}</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="stats-filter">
+        <div class="filter-bar">
+
+            <div class="postColumn">
+                <span>Tiêu chí</span>
+                <select class="form-control" [(ngModel)]="selectedColumn">
+                    <option *ngFor="let e of postColumnList">{{e.name}}</option>
+                </select>
+            </div>
+
+            <div class="month">
+                <span>Tháng</span>
+                <select class="form-control" [(ngModel)]="selectedMonth">
+                    <option *ngFor="let month of monthList">{{month}}</option>
+                </select>
+            </div>
+
+            <div class="year">
+                <span>Năm</span>
+                <select class="form-control">
+                    <option>2020</option>
+                </select>
+            </div>
+
+            <div class="search-button">
+                <button class="btn btn-primary search" (click)="search()">Tìm kiếm</button>
+            </div>
+        </div>
+
+        <div class="result" *ngIf="filteredPost">
+            <a routerLink="/post/{{filteredPost?.postID}}" target="_blank"><img [src]="filteredPostImage"></a>
+            <p>Post ID: {{filteredPost?.postID}}</p>
+            <p>Tên bài đăng: {{filteredPost?.postName}}</p>
+            <p>Tài khoản: {{filteredPost?.accountUsername}}</p>
+            <p>Lượt xem: {{filteredPost?.viewsNumber}}</p>
+        </div>
+    </div>
+</div>

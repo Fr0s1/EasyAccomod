@@ -1,0 +1,44 @@
+.stats-all-time {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background-color: white;
+}
+
+.most-views {
+    overflow: hidden;
+    border-right: 1px solid rgb(226, 221, 221);
+}
+
+.most-views img, .most-likes img, .result img {
+    height: 150px;
+    width: 150px;
+    float: left;
+    margin-right: 5px;
+}
+
+.most-likes, .result {
+    overflow: hidden;
+}
+
+div {
+    margin-top: 10px;
+    padding: 5px;
+}
+
+.filter-bar {
+    display: flex;
+    flex-direction: row;
+}
+
+.stats-filter {
+    background-color: white;
+}
+
+.search-button {
+    display: flex;
+}
+
+button.search {
+    height: fit-content;
+    align-self: flex-end;
+}

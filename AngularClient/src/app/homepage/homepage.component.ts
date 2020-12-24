@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../services/post.service';
-import { ImageService } from '../services/image.service';
 
 @Component({
   selector: 'app-homepage',
@@ -9,7 +8,7 @@ import { ImageService } from '../services/image.service';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor(private postService: PostService, private imgService: ImageService) { }
+  constructor(private postService: PostService) { }
 
   latestPosts // Thông tin về các bài đăng preview ở homepage
   latestPostsImages = [] // Lưu 1 ảnh của phòng trọ ứng với mỗi bài đăng
