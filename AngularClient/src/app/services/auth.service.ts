@@ -76,6 +76,8 @@ export class AuthService {
     changePassword(form: FormData) {
         var loginInfo = new FormData()
 
+        let result = 1;
+
         loginInfo.set('username', this.currentUserValue.username)
         loginInfo.set('password', form.get('currentpwd'))
 
@@ -87,8 +89,17 @@ export class AuthService {
                 var hasedPsw = bcrypt.hashSync(form.get('newpwd'), salt)
                 form.set('newpwd', hasedPsw)
 
-                this.accountService.updateAccount(this.currentUserValue.username, { password: form.get('newpwd') }).subscribe(data => console.log(data))
+                this.accountService.updateAccount(
+                    this.currentUserValue.username, 
+                    { 
+                        password: form.get('newpwd') 
+                    }).
+                subscribe(data => { console.log("Changed") })
+            }
+            else {
+                return 2;
             }
         })
+        return result;
     }
 }
