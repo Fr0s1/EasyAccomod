@@ -24,7 +24,8 @@ module.exports = app => {
             cb(null, savePath)
         },
         filename: function (req, file, cb) {
-            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname)) // paht.extname: add right file extension
+            // Add date to make sure that new file's name isn't duplicated
+            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname)) // path.extname: add right file extension
         }
     })
 
@@ -36,6 +37,7 @@ module.exports = app => {
             await sequelize.query('ALTER TABLE rooms AUTO_INCREMENT = 1')
             roomID = 1
         } else {
+            // To make sure that new roomID in database equal new id in roomImages folder
             await sequelize.query(`ALTER TABLE rooms AUTO_INCREMENT = ${roomID}`)
             roomID += 1
         }
