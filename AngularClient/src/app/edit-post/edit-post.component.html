@@ -1,0 +1,247 @@
+<app-main-nav></app-main-nav>
+
+<div *ngIf="loaded" class="container">
+    <form [formGroup]="postModel" (ngSubmit)="editPost()" enctype="multipart/form-data">
+        <div class="form-row" formGroupName="owner">
+            <div class="col">
+                <label for="ownerName">Họ và tên</label>
+                <input type="text" class="form-control" id="ownerName" name="ownerName" formControlName="name" readonly>
+            </div>
+
+            <div class="col">
+                <label for="ownerNumber">Số điện thoại</label>
+                <input type="text" class="form-control" id="ownerNumber" formControlName="phoneNumber"
+                    name="ownerPhoneNumber" readonly>
+            </div>
+        </div>
+
+        <fieldset class="title">
+            <legend for="postName">Tên bài đăng</legend>
+            <input type="text" class="form-control" id="postName" name="postName" formControlName="postName">
+        </fieldset>
+
+        <fieldset>
+            <legend>Địa chỉ phòng trọ</legend>
+            <div class="form-row" formGroupName="address">
+                <div class="col">
+                    <label for="homeNumber">Số nhà</label>
+                    <input type="text" class="form-control" id="homeNumber" name="homeNumber"
+                        formControlName="homeNumber">
+                </div>
+
+                <div class="col">
+                    <label for="street">Đường</label>
+                    <input type="text" class="form-control" id="street" name="street" formControlName="street">
+                </div>
+
+                <div class="col">
+                    <label for="ward">Phường</label>
+                    <input type="text" class="form-control" id="ward" name="ward" formControlName="ward">
+                </div>
+            </div>
+
+            <div class="form-row" formGroupName="address">
+                <div class="col">
+                    <label for="district">Quận</label>
+                    <input type="text" class="form-control" id="district" formControlName="district" name="district">
+                </div>
+
+                <div class="col">
+                    <label for="city">Tỉnh (Thành phố)</label>
+                    <input type="text" class="form-control" id="city" formControlName="city" name="city">
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="form-group">
+            <label for="description">Mô tả</label>
+            <textarea class="form-control" id="description" formControlName="description" name="description"></textarea>
+        </div>
+
+        <div class="form-row">
+            <div class="col">
+                <label for="roomType">Loại phòng</label>
+                <select id="roomType" class="form-control" formControlName="roomType" name="roomType">
+                    <option>Phòng trọ</option>
+                    <option>Chung cư mini</option>
+                    <option>Nhà nguyên căn</option>
+                    <option>Chung cư nguyên căn</option>
+                </select>
+            </div>
+
+            <div class="col">
+                <label for="sharedOwner">Chung chủ</label>
+                <select id="sharedOwner" class="form-control" formControlName="sharedOwner" name="sharedOwner">
+                    <option>Có</option>
+                    <option>Không</option>
+                </select>
+            </div>
+
+            <div class="col">
+                <label for="area">Diện tích</label>
+                <input type="text" class="form-control" id="area" formControlName="area" name="area">
+            </div>
+        </div>
+
+        <fieldset>
+            <div class="form-group" formGroupName="roomUtils">
+                <legend>Điều kiện vật chất</legend>
+                <div class="row">
+                    <legend class="col-form-label col-sm-2 pt-0">Điều hòa</legend>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="ac" id="aircondition1" name="airconditioner"
+                            value="Có" formControlName="airconditioner">
+                        <label class="form-check-label" for="aircondition1">Có</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="ac" id="aircondition2" name="airconditioner"
+                            value="Không" formControlName="airconditioner">
+                        <label class="form-check-label" for="aircondition2">Không</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <legend class="col-form-label col-sm-2 pt-0">Ban công</legend>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="balcony" id="balcony1"
+                            formControlName="balcony" value="Có">
+                        <label class="form-check-label" for="balcony1">Có</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="balcony" id="balcony2"
+                            formControlName="balcony" value="Không">
+                        <label class="form-check-label" for="balcony2">Không</label>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col">
+                        <label for="bathroom">Phòng tắm</label>
+                        <input type="text" class="form-control" id="bathroom" name="bathroom"
+                            placeholder="Mô tả phòng tắm" formControlName="bathroom">
+                    </div>
+
+                    <div class="col">
+                        <label for="kitchen">Phòng bếp</label>
+                        <input type="text" class="form-control" id="kitchen" name="kitchen"
+                            placeholder="Mô tả phòng bếp" formControlName="kitchen">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col">
+                        <label for="electrictyPrice">Giá điện</label>
+                        <input type="text" class="form-control" id="electrictyPrice" name="electricityPrice"
+                            formControlName="electricPrice">
+                    </div>
+
+                    <div class="col">
+                        <label for="waterPrice">Giá nước</label>
+                        <input type="text" class="form-control" id="waterPrice" name="waterPrice"
+                            formControlName="waterPrice">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="otherUtils">Tiện ích khác</label>
+                    <textarea class="form-control" id="otherUtils" rows="3" formControlName="otherUtils"
+                        name="otherUtils"></textarea>
+                </div>
+            </div>
+
+        </fieldset>
+
+        <fieldset>
+            <legend>Giá phòng</legend>
+            <div class="form-group" formGroupName="roomCost">
+                <div class="form-row">
+                    <div class="col">
+                        <label for="monthlyPrice">Theo tháng</label>
+                        <input type="text" class="form-control" id="monthlyPrice" formControlName="month"
+                            name="monthPrice">
+                    </div>
+                    <div class="col">
+                        <label for="quarterPrice">Theo quý</label>
+                        <input type="text" class="form-control" id="quarterPrice" formControlName="quarter"
+                            name="quarterPrice">
+                    </div>
+
+                    <div class="col">
+                        <label for="yearlyPrice">Theo năm</label>
+                        <input type="text" class="form-control" id="yearlyPrice" formControlName="year"
+                            name="yearPrice">
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Thời gian hiển thị bài đăng</legend>
+            <div class="form-group" formGroupName="postDuration">
+                <div class="row">
+                    <div class="col">
+                        <label>Phí tuần: {{postUploadCost?.weekCost | number:'1.0':'en-US'}} đồng</label>
+                    </div>
+
+                    <div class="col">
+                        <label>Phí tháng: {{postUploadCost?.monthCost | number:'1.0':'en-US'}} đồng</label>
+                    </div>
+                    <div class="col">
+                        <label>Phí năm: {{postUploadCost?.yearCost | number:'1.0':'en-US'}} đồng</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label for="postWeek">Tuần</label>
+                        <input type="text" class="form-control" id="postWeek" formControlName="week" name="postWeek"
+                            (change)="updateCost()">
+                    </div>
+
+                    <div class="col">
+                        <label for="postMonth">Tháng</label>
+                        <input type="text" class="form-control" id="postMonth" formControlName="month" name="postMonth"
+                            (change)="updateCost()">
+                    </div>
+
+                    <div class="col">
+                        <label for="postYear">Năm</label>
+                        <input type="text" class="form-control" id="postYear" formControlName="year" name="postYear"
+                            (change)="updateCost()">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label for="postCost">Số tiền phải trả</label>
+                    <input type="text" class="form-control" id="postCost" formControlName="postCost" name="postCost"
+                        readonly>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Hình ảnh phòng trọ</legend>
+            <div class="form-group">
+                <input #imgs type="file" class="form-control-file" id="images" name="roomImages"
+                    (change)=displayImage(imgs.files) multiple>
+                <div class="row">
+                    <div *ngFor=" let img of imagesUrl; let i = index" class="col">
+                        <div class="image-container">
+                            <img [src]="imagesUrl[i]" height="200px" (click)="deleteImage(img)">
+                            <div class="overlay">
+                                <div class="text">{{roomImagesNameList[i]}}</div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <button type="submit" class="btn btn-primary">Cập nhật thông tin phòng trọ</button>
+    </form>
+
+</div>
+
+<app-footer></app-footer>

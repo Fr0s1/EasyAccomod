@@ -1,0 +1,76 @@
+form {
+    width: 50%;
+    margin: auto;
+}
+
+.btn {
+    margin-bottom: 20px;
+}
+
+.container div .ng-touched.ng-valid, .title .ng-touched.ng-valid {
+    border-left: 5px solid #42A948;
+}
+
+.container div .ng-touched.ng-invalid, .title .ng-touched.ng-invalid {
+    border-left: 5px solid #a94442;
+}
+
+.container {
+    width: 90%;
+    background-color: white;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.image-container {
+    position: relative;
+    width: 50%;
+  }
+  
+  
+.overlay {
+position: absolute;
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+height: 100%;
+width: 100%;
+opacity: 0;
+transition: .5s ease;
+background-color: white;
+}
+
+.text {
+    color: black;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+.image-container:hover .overlay{
+    opacity: 1;
+}
+
+form {
+    width: fit-content;
+}
+
+legend {
+    padding-top: 10px;
+}
+
+.noti {
+    margin-top: 5px;
+    background-color: rgb(207, 232, 220);
+    border: 2px solid rgb(79, 185, 227);
+    border-radius: 5px;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
+}
