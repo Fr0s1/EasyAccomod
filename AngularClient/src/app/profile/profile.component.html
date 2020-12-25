@@ -36,9 +36,12 @@
         <div class="col-lg-8">
             <nav>
                 <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Bài đăng đã thích</a>
-                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Bài đăng của người dùng</a>
-                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Bài đăng chưa được duyệt</a>
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" 
+                    role="tab" aria-controls="nav-home" aria-selected="true">Bài đăng đã thích</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" 
+                    role="tab" aria-controls="nav-profile" aria-selected="false">Bài đăng của người dùng</a>
+                    <a *ngIf="receiver==currentAccount.username" class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" 
+                    role="tab" aria-controls="nav-contact" aria-selected="false">Bài đăng chưa được duyệt</a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
@@ -78,7 +81,7 @@
                                 <th>Lượt xem</th>
                                 <th>Lượt thích</th>
                                 <th>Xem bài đăng</th>
-                                <th>Gia hạn</th>
+                                <th *ngIf="receiver==currentAccount.username">Gia hạn</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -93,7 +96,7 @@
 										<i class="fa fa-eye fa-stack-1x fa-inverse"></i>
 									</span>
                                 Xem</a></td>
-                                <td><a href="javascript:void(0)">
+                                <td *ngIf="receiver==currentAccount.username"><a href="javascript:void(0)">
 									<span class="fa-stack">
 										<i class="fa fa-square fa-stack-2x"></i>
 										<i class="fa fa-clock fa-stack-1x fa-inverse"></i>
@@ -103,7 +106,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                <div *ngIf="receiver==currentAccount.username" class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                     <table class="table" cellspacing="0">
                         <thead>
                             <tr>
