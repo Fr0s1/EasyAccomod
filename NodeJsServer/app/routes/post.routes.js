@@ -24,7 +24,7 @@ module.exports = app => {
             cb(null, savePath)
         },
         filename: function (req, file, cb) {
-            cb(null, file.originalname)
+            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname)) // paht.extname: add right file extension
         }
     })
 
@@ -36,6 +36,7 @@ module.exports = app => {
             await sequelize.query('ALTER TABLE rooms AUTO_INCREMENT = 1')
             roomID = 1
         } else {
+            await sequelize.query(`ALTER TABLE rooms AUTO_INCREMENT = ${roomID}`)
             roomID += 1
         }
 

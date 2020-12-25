@@ -25,7 +25,6 @@ import { NotificationComponent } from './notification/notification.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 
 const routes: Routes = [
-  // { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '', component: HomepageComponent },
   {
     path: 'ea/admin',
@@ -46,7 +45,6 @@ const routes: Routes = [
   { path: 'messenger', component: ChatComponent },
   { path: 'login', component: LogInComponent },
   { path: 'register', component: RegisterComponent },
-
   {
     path: 'create/post', component: CreatePostComponent,
     canActivate: [AuthGuard],
@@ -68,7 +66,6 @@ const routes: Routes = [
   { path: ':username', component: ProfileComponent },
   { path: '**', redirectTo: '/404'}
 ];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
