@@ -25,8 +25,8 @@ import { NotificationComponent } from './notification/notification.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomepageComponent },
+  // { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', component: HomepageComponent },
   {
     path: 'ea/admin',
     component: AdminComponent,
