@@ -26,6 +26,8 @@ th, td {
 button {
     margin-top: 1em;
     margin-bottom: 0.5em;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .noti, .deny {

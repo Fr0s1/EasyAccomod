@@ -10,7 +10,7 @@
                         <img src="https://www.bootdey.com/img/Content/avatar/avatar1.png" alt="User">
                     </div>
                     <div class="user-data">
-                        <h1>Contact Admin</h1>
+                        <h1>Liên hệ admin</h1>
                     </div>
                 </div>
             </aside>
@@ -24,25 +24,25 @@
 
                 <div class="panel panel-default">
                   <div class="panel-heading">
-                    <h1 class="panel-title">Notifications</h1>
+                    <h1 class="panel-title">Thông báo</h1>
                     </div>
                     <div class="panel-body">
                         <div *ngFor="let noti of notifications">
                             <div *ngIf="noti.type==1">
                                 <div class="alert alert-success">
-                                    <strong class="default"><i class="fa fa-check"></i></strong> Admin accepted your <strong>{{noti.postName}}</strong> post.
+                                    <strong class="default"><i class="fa fa-check"></i></strong> Admin đã phê duyệt bài đăng <strong>{{noti.postName}}</strong> của bạn.
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                 </div>
                             </div>
                             <div *ngIf="noti.type==3">
                                 <div class="alert alert-info">
-                                    <strong class="default"><i class="fa fa-exclamation"></i></strong> The state of post <strong>{{noti.postName}}</strong> has changed.
+                                    <strong class="default"><i class="fa fa-exclamation"></i></strong> Trạng thái phòng trọ của bài <strong>{{noti.postName}}</strong> đã thay đổi.
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                 </div>
                             </div>
                             <div *ngIf="noti.type==2">
                                 <div class="alert alert-danger">
-                                    <strong class="default"><i class="fa fa-close"></i></strong> Admin rejected your <strong>{{noti.postName}}</strong> post.
+                                    <strong class="default"><i class="fa fa-close"></i></strong> Admin đã từ chối bài đăng <strong>{{noti.postName}}</strong> của bạn.
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                 </div>
                             </div>

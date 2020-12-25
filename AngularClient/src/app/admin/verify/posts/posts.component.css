@@ -42,6 +42,10 @@ button {
     padding: 10px;
 }
 
+.form-control {
+    margin-bottom: 10px;
+}
+
 select.form-control {
     width: 25%;
 }

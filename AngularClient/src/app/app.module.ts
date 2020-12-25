@@ -35,6 +35,7 @@ import { FooterComponent } from './footer/footer.component';
 import { NotificationComponent } from './notification/notification.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { EditPostComponent } from './edit-post/edit-post.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     ChatComponent,
     FooterComponent,
     NotificationComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    EditPostComponent
   ],
   imports: [
     BrowserModule,

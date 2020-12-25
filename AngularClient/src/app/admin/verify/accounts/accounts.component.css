@@ -29,6 +29,10 @@ button {
     margin-right: 5px;
 }
 
+.form-control {
+    margin-bottom: 10px;
+}
+
 .noti {
     background-color: rgb(207, 232, 220);
     border: 2px solid rgb(79, 185, 227);
