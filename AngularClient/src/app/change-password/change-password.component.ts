@@ -39,8 +39,8 @@ export class ChangePasswordComponent implements OnInit {
       Swal.fire({
         position: 'top-end',
         icon: 'error',
-        title: 'New password can\'t be old password',
-        text: 'Please check again',
+        title: 'Mật khẩu mới không thể trùng mật khẩu cũ',
+        text: 'Xin vui lòng kiểm tra lại',
         showConfirmButton: false,
         timer: 5500
       })
@@ -50,8 +50,8 @@ export class ChangePasswordComponent implements OnInit {
         Swal.fire({
           position: 'top-end',
           icon: 'error',
-          title: 'Wrong confirmation password',
-          text: 'Please check again',
+          title: 'Xác nhận mật khẩu mới không đúng',
+          text: 'Xin vui lòng kiểm tra lại',
           showConfirmButton: false,
           timer: 5500
         })
@@ -61,7 +61,7 @@ export class ChangePasswordComponent implements OnInit {
         if (result == 1) {
           Swal.fire({
             icon: 'success',
-            title: 'Your password has been changed',
+            title: 'Thay đổi mật khẩu thành công',
             showConfirmButton: true,
           }).then((result) => {
             if (result.isConfirmed) {
@@ -75,8 +75,8 @@ export class ChangePasswordComponent implements OnInit {
             Swal.fire({
               position: 'top-end',
               icon: 'error',
-              title: 'Wrong current password',
-              text: 'Please check again',
+              title: 'Mật khẩu hiện tại không đúng',
+              text: 'Xin vui lòng kiểm tra lại',
               showConfirmButton: false,
               timer: 5500
             })
@@ -85,8 +85,8 @@ export class ChangePasswordComponent implements OnInit {
             Swal.fire({
               position: 'top-end',
               icon: 'error',
-              title: 'An error occurred',
-              text: 'We will fix this as soon as possible',
+              title: 'Đã xảy ra lỗi',
+              text: 'Chúng tôi sẽ khắc phục sớm nhất có thể',
               showConfirmButton: false,
               timer: 5500
             })
