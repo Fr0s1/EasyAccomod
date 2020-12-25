@@ -222,18 +222,36 @@
         </fieldset>
 
         <fieldset>
-            <legend>Hình ảnh phòng trọ</legend>
+            <legend>Ảnh phòng trọ đã đăng</legend>
+            <h3>Click vào ảnh để xóa</h3>
             <div class="form-group">
-                <input #imgs type="file" class="form-control-file" id="images" name="roomImages"
-                    (change)=displayImage(imgs.files) multiple>
                 <div class="row">
                     <div *ngFor=" let img of imagesUrl; let i = index" class="col">
                         <div class="image-container">
-                            <img [src]="imagesUrl[i]" height="200px" (click)="deleteImage(img)">
+                            <img [src]="imagesUrl[i]" (click)="deleteImage(img)" class="image">
                             <div class="overlay">
                                 <div class="text">{{roomImagesNameList[i]}}</div>
                               </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <legend>Ảnh đã chọn để xóa</legend>
+            <h3>Click vào tên để hủy xóa </h3>
+        </fieldset>
+
+        <fieldset>
+            <legend>Thêm ảnh mới</legend>
+            <h3>Click vào ảnh để hủy đăng</h3>
+            <div class="form-group">
+                <input #imgs type="file" class="form-control-file" id="images" name="roomImages"
+                    (change)=displayImage(imgs.files) multiple>
+                <div class="row">
+                    <div *ngFor=" let img of newImagesUrl; let i = index" class="col">
+                            <img [src]="imagesUrl[i]" (click)="deleteNewImage(img)" class="image">
+                            <div class="overlay">
+                                <div class="text">{{roomImagesNameList[i]}}</div>
+                            </div>
                     </div>
                 </div>
             </div>

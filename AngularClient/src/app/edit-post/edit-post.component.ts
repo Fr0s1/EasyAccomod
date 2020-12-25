@@ -93,6 +93,10 @@ export class EditPostComponent implements OnInit {
     console.log(img)
   }
 
+  deleteNewImage(img) {
+    
+  }
+
   updateCost() {
     var week = parseInt(this.postModel.get('postDuration.week').value)
     var month = parseInt(this.postModel.get('postDuration.month').value)

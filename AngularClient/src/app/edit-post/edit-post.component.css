@@ -25,7 +25,13 @@ form {
 .image-container {
     position: relative;
     width: 50%;
-  }
+}
+
+.image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
   
   
 .overlay {
@@ -51,7 +57,7 @@ background-color: white;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     text-align: center;
-  }
+ }
 
 .image-container:hover .overlay{
     opacity: 1;
