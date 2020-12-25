@@ -1,6 +1,6 @@
 body { 
     margin-top:20px; 
-    color: #71748d;
+    color: #efeff6;
     background-color: #efeff6;
 }
 
@@ -16,7 +16,7 @@ tr:nth-child(even) {background-color: #dce6f5;}
 }
 
 .container {
-    background-color: #fff;
+    background-color: #efeff6;
     margin-top: 10px;
 }
 

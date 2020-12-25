@@ -36,9 +36,9 @@
         <div class="col-lg-8">
             <nav>
                 <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Favorited Post</a>
-                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">User's Post</a>
-                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Unverified Post</a>
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Bài đăng đã thích</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Bài đăng của người dùng</a>
+                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Bài đăng chưa được duyệt</a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
@@ -46,10 +46,11 @@
                     <table class="table" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Post Name</th>
-                                <th>Landlord</th>
-                                <th>Views</th>
-                                <th>Likes</th>
+                                <th>Tên bài đăng</th>
+                                <th>Chủ nhà</th>
+                                <th>Lượt xem</th>
+                                <th>Lượt thích</th>
+                                <th>Xem bài đăng</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -58,6 +59,12 @@
                                 <td>{{post.accountUsername}}</td>
                                 <td>{{post.viewsNumber}}</td>
                                 <td>{{post.likesNumber}}</td>
+                                <td><a href="javascript:void(0)">
+									<span class="fa-stack">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-eye fa-stack-1x fa-inverse"></i>
+									</span>
+                                </a></td>
                             </tr>
                         </tbody>
                     </table>
@@ -66,11 +73,12 @@
                     <table class="table" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Post Name</th>
-                                <th>Landlord</th>
-                                <th>Views</th>
-                                <th>Likes</th>
-                                <th></th>
+                                <th>Tên bài đăng</th>
+                                <th>Chủ nhà</th>
+                                <th>Lượt xem</th>
+                                <th>Lượt thích</th>
+                                <th>Xem bài đăng</th>
+                                <th>Gia hạn</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -82,7 +90,13 @@
                                 <td><a href="javascript:void(0)">
 									<span class="fa-stack">
 										<i class="fa fa-square fa-stack-2x"></i>
-										<i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+										<i class="fa fa-eye fa-stack-1x fa-inverse"></i>
+									</span>
+                                Xem</a></td>
+                                <td><a href="javascript:void(0)">
+									<span class="fa-stack">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-clock fa-stack-1x fa-inverse"></i>
 									</span>
 								</a></td>
                             </tr>
@@ -93,14 +107,21 @@
                     <table class="table" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Post Name</th>
-                                <th></th>
+                                <th>Tên bài đăng</th>
+                                <th>Ngày tạo</th>
+                                <th>Chỉnh sửa thông tin bài đăng</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let post of unverifiedPosts">
                                 <td><a href="#">{{post.postName}}</a></td>
-                                <td><a routerLink="/" routerLinkActive="active">Edit</a></td>
+                                <td><a href="#">{{post.createdAt}}</a></td>
+                                <td><a href="javascript:void(0)">
+									<span class="fa-stack">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+									</span>
+                                Chỉnh sửa</a></td>
                             </tr>
                         </tbody>
                     </table>
