@@ -54,7 +54,7 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let post of likedPosts">
-                                <td><a>{{post.postName}}</a></td>
+                                <a href="#"><td>{{post.postName}}</td></a>
                                 <td>{{post.accountUsername}}</td>
                                 <td>{{post.viewsNumber}}</td>
                                 <td>{{post.likesNumber}}</td>
@@ -79,7 +79,12 @@
                                 <td>{{post.accountUsername}}</td>
                                 <td>{{post.viewsNumber}}</td>
                                 <td>{{post.likesNumber}}</td>
-                                <td><a routerLink="/" routerLinkActive="active">Extend duration</a></td>
+                                <td><a href="javascript:void(0)">
+									<span class="fa-stack">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+									</span>
+								</a></td>
                             </tr>
                         </tbody>
                     </table>

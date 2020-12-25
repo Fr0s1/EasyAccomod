@@ -4,6 +4,12 @@ body {
     background-color: #efeff6;
 }
 
+.fa {
+    font: bold;
+}
+
+tr:nth-child(even) {background-color: #dce6f5;}
+
 .row {
     background-color: #efeff6;
     width: 100%;

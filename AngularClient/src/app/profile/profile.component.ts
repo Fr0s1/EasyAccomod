@@ -33,22 +33,23 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.likedPostsID = [];
     this.likedPosts = [];
-    this.route.paramMap.subscribe(params => this.receiver = params.get('username'))
-    this.currentAccount = this.authService.currentUserValue;
-    this.accountService.getAccountInfo(this.receiver)
-      .subscribe(data => {
-        this.accountInfo = data[0];
-      })
-    this.accountService.getAccountByQuery(`?username=${this.receiver}`)
-      .subscribe(data => {
-        this.accountType = data[0].accountType;
-      })
-    this.getPostsOfUser()
-    if (this.currentAccount.username == this.receiver) {
-      this.getUnverifiedPosts()
-    }
-    this.getFavoritedPosts()
-    
+    this.route.paramMap.subscribe(params => { 
+      this.receiver = params.get('username');
+      this.currentAccount = this.authService.currentUserValue;
+      this.accountService.getAccountInfo(this.receiver)
+        .subscribe(data => {
+          this.accountInfo = data[0];
+        })
+      this.accountService.getAccountByQuery(`?username=${this.receiver}`)
+        .subscribe(data => {
+          this.accountType = data[0].accountType;
+        })
+      this.getPostsOfUser()
+      if (this.currentAccount.username == this.receiver) {
+        this.getUnverifiedPosts()
+      }
+      this.getFavoritedPosts()
+    })
   };
 
   messageContent = new FormControl('');
