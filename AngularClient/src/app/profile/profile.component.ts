@@ -85,7 +85,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getPostsOfUser() {
-    this.postService.getPostsByQuery(`?accountUsername=${this.receiver}&verifiedStatus=1`).subscribe(posts => {
+    this.postService.getPostsByQuery(`?accountUsername=${this.receiver}&verifiedStatus=1&paymentStatus=1`).subscribe(posts => {
       this.postsOfUser = posts;
       console.log(this.postsOfUser)
     })
