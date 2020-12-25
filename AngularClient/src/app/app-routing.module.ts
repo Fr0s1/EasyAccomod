@@ -26,8 +26,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { EditPostComponent } from './edit-post/edit-post.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomepageComponent },
+  { path: '', component: HomepageComponent },
   {
     path: 'ea/admin',
     component: AdminComponent,
@@ -47,7 +46,6 @@ const routes: Routes = [
   { path: 'messenger', component: ChatComponent },
   { path: 'login', component: LogInComponent },
   { path: 'register', component: RegisterComponent },
-
   {
     path: 'create/post', component: CreatePostComponent,
     canActivate: [AuthGuard],
@@ -70,10 +68,10 @@ const routes: Routes = [
   },
   { path: 'posts', component: PostsComponent },
   { path: 'post/:id', component: PostDetailsComponent },
+  { path: '404', component: NotFoundComponent },
   { path: ':username', component: ProfileComponent },
-  { path: '**', component: NotFoundComponent }
+  { path: '**', redirectTo: '/404'}
 ];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

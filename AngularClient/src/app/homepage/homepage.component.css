@@ -29,15 +29,58 @@
     height: 250px;
     object-fit: cover;
     transition: transform .2s;
+    border-radius: 5px;
 }
 
 .room-preview div p, .room-rate div p, .room-view div p {
-    text-align: center;
+    font-size: 1.1em;
 }
 
-.postTitle {
-    background-color: rgb(57, 61, 65);
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    color: rgb(248, 248, 248);
+.checked {
+    color: #FF5A5F
+}
+
+.no-review {
+    color: rgb(113, 113, 113);
+}
+
+div div.room-info {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin: auto;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.room-info p i {
+    margin-right: 2px;
+}
+
+div.join {
+    position: relative;
+    margin-top: 1em;
+}
+
+.middle-left {
+    position: absolute;
+    top: 60%;
+    transform: translate(-50%, -50%);
+    left: 10%;
+}
+
+#to-post {
+    border-radius: 5px;
+    max-width: 100%;
+    max-height: 50%;
+    padding-bottom: 1em;
+}
+
+.join .slogan {
+    position: absolute;
+    top: 45%;
+    left: 30px;
+    color: white;
+    font-size: larger;
+    font-weight: bold;
 }

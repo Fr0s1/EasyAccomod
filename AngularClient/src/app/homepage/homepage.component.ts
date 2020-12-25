@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PostService } from '../services/post.service';
 
 @Component({
@@ -8,7 +9,8 @@ import { PostService } from '../services/post.service';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService, private router: Router,
+) { }
 
   latestPosts // Thông tin về các bài đăng preview ở homepage
   latestPostsImages = [] // Lưu 1 ảnh của phòng trọ ứng với mỗi bài đăng
@@ -40,6 +42,8 @@ export class HomepageComponent implements OnInit {
     // Lấy 4 bài đăng mới nhất
     this.postService.getPreviewPost('postTime').subscribe(posts => {
       this.latestPosts = posts
+
+      console.log(this.latestPosts)
       this.latestPosts = this.latestPosts.filter(post => new Date(post.expiredTime) >= this.currentTime)
       this.latestPosts.forEach(post => {
         // Với mỗi bài đăng, lấy thông tin về ảnh của phòng trọ
@@ -114,5 +118,9 @@ export class HomepageComponent implements OnInit {
         })
       })
     })
+  }
+
+  toPostPage() {
+    this.router.navigate(['/posts'])
   }
 }

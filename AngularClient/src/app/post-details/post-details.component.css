@@ -158,3 +158,7 @@ p {
 .checked {
     color: orange;
 }
+
+li {
+    margin-right: 10px;
+}
