@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service'
 import { MessageService } from '../services/messages.service';
 import { PostService } from '../services/post.service';
 import { AccountService } from '../services/account.service';
 import { FavoriteService } from '../services/favorite.service';
+import { ActivatedRoute, Router } from '@angular/router'
 
 @Component({
   selector: 'app-profile',
@@ -19,7 +19,8 @@ export class ProfileComponent implements OnInit {
               private messageService: MessageService, 
               private route: ActivatedRoute,
               private favoriteService: FavoriteService,
-              private postService: PostService) { }
+              private postService: PostService,
+              private router: Router) { }
 
   currentAccount
   accountInfo
@@ -88,5 +89,9 @@ export class ProfileComponent implements OnInit {
       this.postsOfUser = posts;
       console.log(this.postsOfUser)
     })
+  }
+
+  seePost(postID) {
+    this.router.navigate([`/post/${postID}`])
   }
 }

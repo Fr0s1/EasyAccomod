@@ -62,7 +62,7 @@
                                 <td>{{post.accountUsername}}</td>
                                 <td>{{post.viewsNumber}}</td>
                                 <td>{{post.likesNumber}}</td>
-                                <td><a href="javascript:void(0)">
+                                <td><a href="javascript:void(0)" (click)="seePost(post.postID)">
 									<span class="fa-stack">
 										<i class="fa fa-square fa-stack-2x"></i>
 										<i class="fa fa-eye fa-stack-1x fa-inverse"></i>
@@ -90,7 +90,7 @@
                                 <td>{{post.accountUsername}}</td>
                                 <td>{{post.viewsNumber}}</td>
                                 <td>{{post.likesNumber}}</td>
-                                <td><a href="javascript:void(0)">
+                                <td><a href="javascript:void(0)" (click)="seePost(post.postID)">
 									<span class="fa-stack">
 										<i class="fa fa-square fa-stack-2x"></i>
 										<i class="fa fa-eye fa-stack-1x fa-inverse"></i>
