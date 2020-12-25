@@ -64,8 +64,9 @@ const routes: Routes = [
   },
   { path: 'posts', component: PostsComponent },
   { path: 'post/:id', component: PostDetailsComponent },
+  { path: '404', component: NotFoundComponent },
   { path: ':username', component: ProfileComponent },
-  { path: '**', component: NotFoundComponent }
+  { path: '**', redirectTo: '/404'}
 ];
 
 

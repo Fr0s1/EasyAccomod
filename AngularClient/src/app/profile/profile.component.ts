@@ -14,12 +14,12 @@ import { FavoriteService } from '../services/favorite.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private accountService: AccountService, 
-              private authService: AuthService, 
-              private messageService: MessageService, 
-              private route: ActivatedRoute,
-              private favoriteService: FavoriteService,
-              private postService: PostService) { }
+  constructor(private accountService: AccountService,
+    private authService: AuthService,
+    private messageService: MessageService,
+    private route: ActivatedRoute,
+    private favoriteService: FavoriteService,
+    private postService: PostService) { }
 
   currentAccount
   accountInfo
@@ -32,28 +32,30 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.likedPostsID = [];
     this.likedPosts = [];
-    this.route.paramMap.subscribe(params => this.receiver = params.get('username'))
-    this.currentAccount = this.authService.currentUserValue;
-    this.accountService.getAccountInfo(this.receiver)
-      .subscribe(data => {
-        this.accountInfo = data[0];
-      })
-    this.accountService.getAccountByQuery(`?username=${this.receiver}`)
-      .subscribe(data => {
-        this.accountType = data[0].accountType;
-      })
-    this.getPostsOfUser()
-    this.favoriteService.getAllUserFavorite(this.receiver)
-      .subscribe(data => {
-        for (let index in data) {
-          // this.likedPostsID.push((data[index] as any).PostPostID);
-          this.postService.getPostsByQuery(`?postID=${(data[index] as any).PostPostID}`)
-            .subscribe(data => {
-              this.likedPosts.push((data[0]));
-            })
-        }
-        console.log(this.likedPosts);
-      })
+    this.route.paramMap.subscribe(params => {
+      this.receiver = params.get('username')
+      this.currentAccount = this.authService.currentUserValue;
+      this.accountService.getAccountInfo(this.receiver)
+        .subscribe(data => {
+          this.accountInfo = data[0];
+        })
+      this.accountService.getAccountByQuery(`?username=${this.receiver}`)
+        .subscribe(data => {
+          this.accountType = data[0].accountType;
+        })
+      this.getPostsOfUser()
+      this.favoriteService.getAllUserFavorite(this.receiver)
+        .subscribe(data => {
+          for (let index in data) {
+            // this.likedPostsID.push((data[index] as any).PostPostID);
+            this.postService.getPostsByQuery(`?postID=${(data[index] as any).PostPostID}`)
+              .subscribe(data => {
+                this.likedPosts.push((data[0]));
+              })
+          }
+          console.log(this.likedPosts);
+        })
+    })
   };
 
   messageContent = new FormControl('');
