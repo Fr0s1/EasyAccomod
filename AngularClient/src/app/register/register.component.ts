@@ -42,6 +42,13 @@ export class RegisterComponent implements OnInit {
         var form = document.querySelector('form')
 
         var formData = new FormData(form)
+        let accountType = formData.get('accountType')
+        if (accountType == "Chủ nhà trọ") {
+            formData.set('accountType', "Landlord")
+        }
+        else {
+            formData.set('accountType', "Renter")
+        }
 
         this.authService.signUp(formData).pipe(catchError(err => {
             this.message = err.error.message
