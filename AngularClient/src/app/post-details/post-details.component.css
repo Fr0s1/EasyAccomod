@@ -149,9 +149,11 @@ p {
 .post-title p {
     margin-top: 10px;
 }
+
 .list-group li {
     margin-top: 0px;
     flex-basis: auto;
+    width: 100%;
 }
 
 .card-header {
