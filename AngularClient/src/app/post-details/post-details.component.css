@@ -137,10 +137,18 @@ p {
     margin-left: 10px;
 }
 
+.post-title {
+    display: flex;
+    justify-content: space-between;
+}
+
 .post-title h1 {
     margin: auto 10px;
 }
 
+.post-title p {
+    margin-top: 10px;
+}
 .list-group li {
     margin-top: 0px;
     flex-basis: auto;

@@ -104,7 +104,7 @@
                     <legend class="col-form-label col-sm-2 pt-0">Ban công</legend>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="balcony" id="balcony1"
-                            formControlName="balcony" value="Có">
+                            formControlName="balcony" value="Có" [checked]="this.postModel.controls['roomUtils'].get('balcony')">
                         <label class="form-check-label" for="balcony1">Có</label>
                     </div>
                     <div class="form-check form-check-inline">
@@ -247,7 +247,7 @@
                     (change)=displayImage(imgs.files) multiple>
                 <div class="row">
                     <div *ngFor=" let img of newImagesUrl; let i = index" class="col">
-                            <img [src]="newImagesUrl[i]" class="image" (click)="deleteNewImage(newImagesUrl[i])">
+                        <img [src]="newImagesUrl[i]" class="image" (click)="deleteNewImage(newImagesUrl[i])">
                     </div>
                 </div>
             </div>

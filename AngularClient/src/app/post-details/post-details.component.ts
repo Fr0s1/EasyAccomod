@@ -61,6 +61,7 @@ export class PostDetailsComponent implements OnInit {
       this.postService.getPostsByQuery(`?postID=${this.postID}`).subscribe(result => { // Get post by id in the url's params
         this.postInfo = result[0]
 
+        console.log(this.postInfo)
         if (!this.postInfo) {
           this.router.navigate(['/404'])
         }

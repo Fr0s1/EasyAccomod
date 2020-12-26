@@ -53,3 +53,8 @@ select.form-control {
 .room-images {
     overflow: hidden;
 }
+
+.room-images img {
+    height: 150px;
+    object-fit: cover;
+}

@@ -140,6 +140,8 @@ export class EditPostComponent implements OnInit {
     var formData = new FormData(form)
     console.log(this.oldImagesToDelete);
     console.log(this.postModel.value)
+
+
   }
 
   uploadURL = 'http://localhost:8080/api/posts'
@@ -205,6 +207,7 @@ export class EditPostComponent implements OnInit {
           },
         })
 
+        console.log(this.postModel.value)
         this.postService.getRoomImagesByID(this.roomInfo.roomID).subscribe(result => {
           this.roomImagesNameList = result // Array contains file names
           console.log(this.roomImagesNameList)
