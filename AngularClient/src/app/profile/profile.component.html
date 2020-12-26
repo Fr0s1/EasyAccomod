@@ -1,7 +1,7 @@
-<app-main-nav> </app-main-nav>
+<app-main-nav *ngIf="validLoaded"> </app-main-nav>
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container padding-bottom-3x mb-2">
+<div *ngIf="validLoaded" class="container padding-bottom-3x mb-2">
     <div class="row">
         <div class="col-lg-4">
             <aside class="user-info-wrapper">
@@ -134,4 +134,4 @@
     </div>
 </div>
 
-<app-footer></app-footer>
+<app-footer *ngIf="validLoaded"></app-footer>

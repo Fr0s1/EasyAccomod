@@ -31,6 +31,7 @@ export class ProfileComponent implements OnInit {
   receiver
   postsOfUser // List of posts which posted by currentAccount
   unverifiedPosts
+  validLoaded = false
 
   ngOnInit(): void {
     
@@ -39,6 +40,7 @@ export class ProfileComponent implements OnInit {
       this.accountService.getAccountByQuery(`?username=${this.receiver}`)
         .subscribe(data => {
           if (data[0].verified == 0) this.router.navigate([`/404`])
+          this.validLoaded = true;
           this.accountType = data[0].accountType;
         })
       this.accountService.getAccountInfo(this.receiver)
