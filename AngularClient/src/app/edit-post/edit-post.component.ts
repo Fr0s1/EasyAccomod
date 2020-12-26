@@ -79,8 +79,8 @@ export class EditPostComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
 
       this.postID = params.get("id");
-      this.getInfo(this.postID);
       this.currentAccount = this.authService.currentUserValue // Get current logged in account information
+      this.getInfo(this.postID);
       this.getUserInfo()
 
       this.loaded = true;
@@ -170,6 +170,9 @@ export class EditPostComponent implements OnInit {
   getInfo(postID) {
     this.postService.getPostsByQuery(`?postID=${postID}`)
       .subscribe(data => {
+        if (data[0].accountUsername != this.currentAccount.username) {
+          this.router.navigate([`/404`]);
+        }
         this.postInfo = data[0];
         console.log(this.postInfo);
         this.roomInfo = this.postInfo.Room;

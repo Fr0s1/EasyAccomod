@@ -31,6 +31,7 @@ export class ProfileComponent implements OnInit {
   receiver
   postsOfUser // List of posts which posted by currentAccount
   unverifiedPosts
+  validLoaded = false
 
   ngOnInit(): void {
     
@@ -39,6 +40,7 @@ export class ProfileComponent implements OnInit {
       this.accountService.getAccountByQuery(`?username=${this.receiver}`)
         .subscribe(data => {
           if (data[0].verified == 0) this.router.navigate([`/404`])
+          this.validLoaded = true;
           this.accountType = data[0].accountType;
         })
       this.accountService.getAccountInfo(this.receiver)
@@ -94,11 +96,32 @@ export class ProfileComponent implements OnInit {
       })
   }
 
+  editPost(postID) {
+    this.router.navigate([`/edit/${postID}`])
+  }
+
+  reformatDate(dateTime) {
+    let dateTimeArr = dateTime.split("T")
+    let date = dateTimeArr[0].split("-")
+    let day = date[2]
+    let month = date[1]
+    let year = date[0]
+    let time = dateTimeArr[1].split(":")
+    let hour = time[0]
+    let minute = time[1]
+    let second = time[2].split(".")[0]
+    return `${day}-${month}-${year} ${hour}:${minute}:${second}`
+  }
+
   getPostsOfUser() {
     this.postService.getPostsByQuery(`?accountUsername=${this.receiver}&verifiedStatus=1&paymentStatus=1`).subscribe(posts => {
       this.postsOfUser = posts;
       console.log(this.postsOfUser)
     })
+  }
+
+  getExtendPostInfo(postID) {
+    
   }
 
   seePost(postID) {
