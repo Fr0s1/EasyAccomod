@@ -94,6 +94,10 @@ export class ProfileComponent implements OnInit {
       })
   }
 
+  editPost(postID) {
+    this.router.navigate([`/edit/${postID}`])
+  }
+
   getPostsOfUser() {
     this.postService.getPostsByQuery(`?accountUsername=${this.receiver}&verifiedStatus=1&paymentStatus=1`).subscribe(posts => {
       this.postsOfUser = posts;

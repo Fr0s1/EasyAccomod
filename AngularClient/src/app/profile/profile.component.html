@@ -119,7 +119,7 @@
                             <tr *ngFor="let post of unverifiedPosts">
                                 <td><a href="#">{{post.postName}}</a></td>
                                 <td><a href="#">{{post.createdAt}}</a></td>
-                                <td><a href="javascript:void(0)">
+                                <td><a href="javascript:void(0)" (click)=editPost(post.postID)>
 									<span class="fa-stack">
 										<i class="fa fa-square fa-stack-2x"></i>
 										<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
