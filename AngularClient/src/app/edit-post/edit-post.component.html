@@ -228,30 +228,26 @@
                 <div class="row">
                     <div *ngFor=" let img of imagesUrl; let i = index" class="col">
                         <div class="image-container">
-                            <img [src]="imagesUrl[i]" (click)="deleteImage(img)" class="image">
-                            <div class="overlay">
-                                <div class="text">{{roomImagesNameList[i]}}</div>
-                              </div>
+                            <img [src]="imagesUrl[i]" (click)="deleteImage(roomImagesNameList[i])" class="image">
+                            <div class="text">{{roomImagesNameList[i]}}</div>
                         </div>
                     </div>
                 </div>
             </div>
             <legend>Ảnh đã chọn để xóa</legend>
             <h3>Click vào tên để hủy xóa </h3>
+            <h2 *ngFor="let img of oldImagesToDelete" (click)="cancelDeleteImage(img)">{{img}}</h2>
         </fieldset>
 
         <fieldset>
             <legend>Thêm ảnh mới</legend>
             <h3>Click vào ảnh để hủy đăng</h3>
             <div class="form-group">
-                <input #imgs type="file" class="form-control-file" id="images" name="roomImages"
+                <input #imgs type="file" class="form-control-file" id="newImages" name="newRoomImages"
                     (change)=displayImage(imgs.files) multiple>
                 <div class="row">
                     <div *ngFor=" let img of newImagesUrl; let i = index" class="col">
-                            <img [src]="imagesUrl[i]" (click)="deleteNewImage(img)" class="image">
-                            <div class="overlay">
-                                <div class="text">{{roomImagesNameList[i]}}</div>
-                            </div>
+                            <img [src]="newImagesUrl[i]" class="image" (click)="deleteNewImage(newImagesUrl[i])">
                     </div>
                 </div>
             </div>

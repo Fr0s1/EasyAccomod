@@ -33,6 +33,7 @@ export class EditPostComponent implements OnInit {
   imagesUrl = []
   newImagesUrl = []
   roomImages = []
+  oldImagesToDelete = []
 
   ngOnInit(): void {
     this.postModel = this.fb.group({
@@ -82,19 +83,31 @@ export class EditPostComponent implements OnInit {
       this.currentAccount = this.authService.currentUserValue // Get current logged in account information
       this.getUserInfo()
 
-      
-
       this.loaded = true;
     })
     
   }
 
+  // User want to delete old image
   deleteImage(img) {
-    console.log(img)
+    if (!this.oldImagesToDelete.includes(img))
+      this.oldImagesToDelete.push(img)
   }
 
+  // User cancel deleting old image
+  cancelDeleteImage(img) {
+    this.oldImagesToDelete.splice(this.oldImagesToDelete.indexOf(img), 1)
+  }
+
+
+  // User want to cancel uploading a new image
   deleteNewImage(img) {
-    
+    let index = this.newImagesUrl.indexOf(img);
+    this.newImagesUrl.splice(index, 1);
+    this.roomImages.splice(index, 1);
+    this.postModel.patchValue({
+      images: this.roomImages // thêm ảnh vào model để tạo FormData
+    })
   }
 
   updateCost() {
@@ -104,6 +117,7 @@ export class EditPostComponent implements OnInit {
     this.postModel.get('postCost').setValue(this.postUploadCost.weekCost * week + this.postUploadCost.monthCost * month + this.postUploadCost.yearCost * year)
   }
 
+  // Add new image to upload
   displayImage(files) {
     for (let i = 0; i < files.length; i++) {
       var reader = new FileReader();
@@ -119,9 +133,12 @@ export class EditPostComponent implements OnInit {
     }
   }
 
+  // oldImagesToDelete: Array containing list of old images's name user want to delete
+  // this.postModel.value.get('images'): New images user want to upload
   editPost() {
     var form = document.querySelector('form')
     var formData = new FormData(form)
+    console.log(this.oldImagesToDelete);
     console.log(this.postModel.value)
   }
 
@@ -190,6 +207,7 @@ export class EditPostComponent implements OnInit {
 
         this.postService.getRoomImagesByID(this.roomInfo.roomID).subscribe(result => {
           this.roomImagesNameList = result // Array contains file names
+          console.log(this.roomImagesNameList)
           var imageLoaded = 0;
   
           // Get image files associated with filename and convert from Blob to HTML displayable image
@@ -203,21 +221,11 @@ export class EditPostComponent implements OnInit {
                 }, false);
       
                 if (data) {
-                  this.roomImages.push(data);
                   reader.readAsDataURL(data);
                   imageLoaded++;
-                  if (imageLoaded == this.roomImagesNameList.length) {
-                    console.log("loaded", this.roomImages)
-                    console.log(this.imagesUrl)
-                    this.postModel.patchValue({
-                      images: this.roomImages // thêm ảnh vào model để tạo FormData
-                    })
-                  }
                 }
               })
-            
           })
-
           
         })
 
