@@ -128,6 +128,8 @@ exports.findByQuery = async (req, res) => {
     const conditions = req.query
     const Post = db.posts
 
+    console.log(conditions)
+
     let priceRange
     let areaRange
 
@@ -148,6 +150,9 @@ exports.findByQuery = async (req, res) => {
         conditions.sharedOwner = (conditions.sharedOwner === 'Có' ? true : false)
     }
 
+    console.log(priceRange)
+    console.log(areaRange)
+
     try {
         let result = []
         if (areaRange && priceRange) {
@@ -165,7 +170,7 @@ exports.findByQuery = async (req, res) => {
                         {
                             area: {
                                 [Op.between]:
-                                    [area[0], area[2]],
+                                    [areaRange[0], areaRange[2]],
                             }
                         }]
                     }
