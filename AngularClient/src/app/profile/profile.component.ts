@@ -6,6 +6,7 @@ import { PostService } from '../services/post.service';
 import { AccountService } from '../services/account.service';
 import { FavoriteService } from '../services/favorite.service';
 import { ActivatedRoute, Router } from '@angular/router'
+import { throwIfEmpty } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
@@ -32,19 +33,28 @@ export class ProfileComponent implements OnInit {
   unverifiedPosts
 
   ngOnInit(): void {
-    this.likedPostsID = [];
-    this.likedPosts = [];
-    this.route.paramMap.subscribe(params => { 
+    
+    this.route.paramMap.subscribe(params => {
       this.receiver = params.get('username');
-      this.currentAccount = this.authService.currentUserValue;
+      this.accountService.getAccountByQuery(`?username=${this.receiver}`)
+        .subscribe(data => {
+          if (data[0].verified == 0) this.router.navigate([`/404`])
+          this.accountType = data[0].accountType;
+        })
       this.accountService.getAccountInfo(this.receiver)
         .subscribe(data => {
           this.accountInfo = data[0];
+
         })
-      this.accountService.getAccountByQuery(`?username=${this.receiver}`)
-        .subscribe(data => {
-          this.accountType = data[0].accountType;
-        })
+      this.likedPostsID = [];
+      this.likedPosts = [];
+      this.currentAccount = this.authService.currentUserValue;
+      if (!this.currentAccount) {
+        this.currentAccount = {
+          username: ""
+        }
+      }
+      
       this.getPostsOfUser()
       if (this.currentAccount.username == this.receiver) {
         this.getUnverifiedPosts()
