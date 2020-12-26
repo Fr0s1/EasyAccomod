@@ -27,6 +27,11 @@ export class PostService {
     return this.http.put(this.postUrl + `/${postID}`, option)
   }
 
+  // Update room info
+  updateRoom(roomID: number, option: Object) {
+    return this.http.put(this.roomUrl + `/${roomID}`, option)
+  }
+
   getPostPaymentInfo(url: string) {
     return this.http.get(url)
   }
