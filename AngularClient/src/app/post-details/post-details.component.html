@@ -82,6 +82,8 @@
                     *ngIf="currentAccount">Report</button>
                 <button type="button" class="btn btn-info"
                     *ngIf="postInfo?.accountUsername === currentAccount?.username">Gia hạn </button>
+                <button type="button" class="btn btn-info" (click)="changeRoomState()"
+                    *ngIf="postInfo?.accountUsername === currentAccount?.username">Chuyển trạng thái thành {{roomState}}</button>
             </div>
 
             <div class="report-content" *ngIf="showReportArea">

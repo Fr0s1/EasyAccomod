@@ -28,6 +28,7 @@ export class PostDetailsComponent implements OnInit {
   postInfo
   roomInfo
   ownerInfo
+  roomState
 
   favoriteButtonText
   textLoaded = false
@@ -64,8 +65,16 @@ export class PostDetailsComponent implements OnInit {
         if (!this.postInfo) {
           this.router.navigate(['/404'])
         }
+
         // Increment views number
         this.postService.updatePost(this.postID, { viewsNumber: this.postInfo.viewsNumber + 1 }).subscribe()
+
+        if (this.postInfo.Room.rented) {
+          this.roomState = "CHƯA CHO THUÊ";
+        }
+        else {
+          this.roomState = "ĐÃ CHO THUÊ";
+        }
 
         this.roomID = this.postInfo?.roomID // Room ID of post
 
@@ -97,6 +106,22 @@ export class PostDetailsComponent implements OnInit {
     let mainImage = event.target.parentElement.parentElement.firstChild
 
     mainImage.setAttribute('src', event.target.getAttribute('src'))
+  }
+
+  changeRoomState() {
+    Swal.fire({
+      title: `Bạn có chắc chắn muốn chuyển trạng thái phòng thành ${this.roomState}?`,
+      showDenyButton: true,
+      confirmButtonText: `Chắc chắn`,
+      denyButtonText: `Hủy bỏ`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        
+        Swal.fire('Đã xong !', 'Chuyển trạng thái thành công', 'success')
+      } else if (result.isDenied) {
+        
+      }
+    })
   }
 
   changeFavorite() {
