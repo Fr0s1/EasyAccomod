@@ -83,6 +83,10 @@ ul li {
     list-style-type: disc;
 }
 
+i {
+    margin-right: 5px;
+}
+
 .roomDetails {
     border-left: 1px solid rgb(226, 221, 221);
 }
@@ -133,10 +137,18 @@ p {
     margin-left: 10px;
 }
 
+.post-title {
+    display: flex;
+    justify-content: space-between;
+}
+
 .post-title h1 {
     margin: auto 10px;
 }
 
+.post-title p {
+    margin-top: 10px;
+}
 .list-group li {
     margin-top: 0px;
     flex-basis: auto;
@@ -149,4 +161,12 @@ p {
 
 .owner-info h2 {
     margin-bottom: 0px;
+}
+
+.checked {
+    color: orange;
+}
+
+li {
+    margin-right: 10px;
 }

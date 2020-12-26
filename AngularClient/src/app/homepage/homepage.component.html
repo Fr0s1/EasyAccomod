@@ -10,15 +10,22 @@
 
         <div class="room-preview" *ngIf="latestPosts?.length > 0">
             <div *ngFor="let i of createRange(4)">
-                <a routerLink="/post/details/{{latestPosts[i].postID}}" *ngIf="latestPostsImages[i]">
+                <a routerLink="/post/{{latestPosts[i].postID}}" *ngIf="latestPostsImages[i]">
                     <img [src]="latestPostsImages[i]">
                 </a>
 
-                <p class="postTitle" *ngIf="latestPosts">{{latestPosts[i].postName}}</p>
-                <p *ngIf="latestPosts">Tạo bởi {{latestPosts[i].accountUsername}}</p>
+                <div class="room-info" *ngIf="latestPosts[i]">
+                    <p *ngIf="latestPosts[i].starsReview != '0'; else showStar"><span class="fa fa-star checked" style="margin-right: 2px;"></span>{{latestPosts[i].starsReview | number : '1.1-1'}}</p>
+                    <ng-template #showStar><p class="no-review">No review yet</p></ng-template>
+                    <p class="postTitle" *ngIf="latestPosts[i]">{{latestPosts[i].postName}}</p>
+                    <p><i class="fas fa-home"></i>{{latestPosts[i].Room.city}}</p>
+                    <p><i class="fas fa-money-bill-wave"></i>{{latestPosts[i].Room.monthPrice | number:'1.0':'en-US' }}
+                        / tháng</p>
+                </div>
             </div>
         </div>
     </div>
+
 
     <div class="top-star">
         <h1>
@@ -29,12 +36,20 @@
 
         <div class="room-rate" *ngIf="starpost?.length > 0">
             <div *ngFor="let i of createRange(4)">
-                <a routerLink="/post/details/{{starpost[i].postID}}" *ngIf="starpostImage[i]">
+                <a routerLink="/post/{{starpost[i].postID}}" *ngIf="starpostImage[i]">
                     <img [src]="starpostImage[i]">
                 </a>
 
-                <p class="postTitle" *ngIf="starpost">{{starpost[i].postName}}</p>
-                <p *ngIf="starpost">Tạo bởi {{starpost[i].accountUsername}}</p>
+                <div class="room-info" *ngIf="starpost[i]">
+                    <p *ngIf="starpost[i].starsReview != '0'; else showStar"><span class="fa fa-star checked"
+                            style="margin-right: 2px;"></span>{{starpost[i].starsReview | number : '1.1-1'}}</p>
+                    <ng-template #showStar>
+                        <p class="no-review">No review yet</p>
+                    </ng-template>
+                    <p><i class="fas fa-home"></i>{{starpost[i].Room.city}}</p>
+                    <p><i class="fas fa-money-bill-wave"></i>{{starpost[i].Room.monthPrice | number:'1.0':'en-US' }} /
+                        tháng</p>
+                </div>
             </div>
         </div>
 
@@ -49,14 +64,28 @@
 
         <div class="room-view" *ngIf="viewpost?.length > 0">
             <div *ngFor="let i of createRange(4)">
-                <a routerLink="/post/details/{{viewpost[i].postID}}" *ngIf="viewpostImage[i]">
+                <a routerLink="/post/{{viewpost[i].postID}}" *ngIf="viewpostImage[i]">
                     <img [src]="viewpostImage[i]">
                 </a>
 
-                <p class="postTitle" *ngIf="viewpost">{{viewpost[i].postName}}</p>
-                <p *ngIf="viewpost">Tạo bởi {{viewpost[i].accountUsername}}</p>
+                <div class="room-info" *ngIf="viewpost[i]">
+                    <p *ngIf="viewpost[i].starsReview != '0'; else showStar"><span class="fa fa-star checked"
+                            style="margin-right: 2px;"></span>{{viewpost[i].starsReview | number : '1.1-1'}}</p>
+                    <ng-template #showStar>
+                        <p class="no-review">No review yet</p>
+                    </ng-template>
+                    <p><i class="fas fa-home"></i>{{viewpost[i].Room.city}}</p>
+                    <p><i class="fas fa-money-bill-wave"></i>{{viewpost[i].Room.monthPrice | number:'1.0':'en-US' }} /
+                        tháng</p>
+                </div>
             </div>
         </div>
+    </div>
+
+    <div class="join">
+        <img src="../../assets/background3_cut.jpg" id="to-post">
+        <div class="slogan">Chưa đúng phòng trọ bạn cần?</div>
+        <div class="middle-left"><button class="btn btn-light" (click)="toPostPage()">Tìm phòng trọ ngay</button></div>
     </div>
 </div>
 

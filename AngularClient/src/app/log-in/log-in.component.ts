@@ -6,6 +6,7 @@ import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service'
 import { AccountService } from '../services/account.service'
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-log-in',
@@ -48,12 +49,19 @@ export class LogInComponent implements OnInit {
 
     this.authService.signIn(formData).pipe(catchError(err => {
       this.loginMessage = err.error.message
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Không thể đăng nhập',
+        text: 'Tên người dùng hoặc mật khẩu không chính xác!',
+        footer: '<a href>Quên mật khẩu?</a>',
+        width: "400px",
+      })
       return throwError(err);
     })).subscribe(data => {
       if (data.token) {
         this.accountService.updateAccount(data.username, { online: true }).subscribe(data => this.router.navigate([this.returnUrl]))
       }
-      console.log(data)
     })
   }
 }

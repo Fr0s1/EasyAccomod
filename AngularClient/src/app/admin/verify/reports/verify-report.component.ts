@@ -11,7 +11,7 @@ export class VerifyReportComponent implements OnInit {
   constructor(private reportService: ReportService) { }
 
   reportsList
-  seletedReports = []
+  selectedReports = []
 
   ngOnInit(): void {
     this.fetchAllReport()
@@ -20,35 +20,29 @@ export class VerifyReportComponent implements OnInit {
   fetchAllReport() {
     this.reportService.getAllReport('').subscribe(data => {
       this.reportsList = data
-      console.log(this.reportsList)
     })
   }
 
   deleteReport() {
-
-  }
-
-  updateReport() {
-
+    this.selectedReports.forEach(report => this.reportService.deleteReport(report.reportID).subscribe(data => console.log(data)))
   }
 
   addReport(event) {
     let reportID = parseInt(event.target.parentElement.nextSibling.innerHTML);
 
     if (event.target.checked) {
-      if (!this.seletedReports.includes(reportID)) {
-        this.seletedReports.push(reportID)
+      if (!this.selectedReports.includes(reportID)) {
+        this.selectedReports.push(this.reportsList.find(report => report.reportID == reportID))
       }
     } else {
-      this.seletedReports = this.seletedReports.filter(value => value != reportID)
+      this.selectedReports = this.selectedReports.filter(report => report.reportID != reportID)
     }
 
-    console.log(this.seletedReports)
+    console.log(this.selectedReports)
   }
-  
+
   addAllReports(event) {
     let reportList = document.querySelectorAll('td input')
-    this.seletedReports = []
 
     if (!event.target.checked) {
       for (let i = 0; i < reportList.length; i++) {
@@ -56,15 +50,16 @@ export class VerifyReportComponent implements OnInit {
 
         currentReport.checked = false;
       }
+
+      this.selectedReports = []
     } else {
       for (let i = 0; i < reportList.length; i++) {
         let currentReport = (<HTMLInputElement>reportList[i])
 
         currentReport.checked = true;
-        this.seletedReports.push(this.reportsList[i].reportID)
       }
-    }
 
-    console.log(this.seletedReports);
+      this.selectedReports = this.reportsList
+    }
   }
 }

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { AuthService } from '../services/auth.service'
-import { Router} from '@angular/router'
+import { Router } from '@angular/router'
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-register',
@@ -37,19 +38,42 @@ export class RegisterComponent implements OnInit {
         })
     }
 
-    errorMessage
     message
     registerAccount() {
         var form = document.querySelector('form')
 
         var formData = new FormData(form)
+        let accountType = formData.get('accountType')
+        if (accountType == "Chủ nhà trọ") {
+            formData.set('accountType', "Landlord")
+        }
+        else {
+            formData.set('accountType', "Renter")
+        }
 
+        let swalMessage = ""
         this.authService.signUp(formData).pipe(catchError(err => {
-            this.errorMessage = err.error.message
-            return throwError(err)
+            this.message = err.error.message;
+            if (this.message == "There is an account registered with given information. Please check username, idCard, phone number or email") {
+                swalMessage = "Đã tồn tại tài khoản với thông tin bạn nhập. Xin vui lòng kiểm tra lại tên tài khoản, chứng minh thư, số điện thoại hoặc email."    
+            }
+            else {
+                swalMessage = "Đã xảy ra lỗi bên server, chúng tôi sẽ khắc phục sớm nhất có thể ."
+            }
+            return Swal.fire({
+                icon: 'error',
+                title: 'Đăng ký không thành công',
+                text: swalMessage,
+                showConfirmButton: true,
+            })
         })).subscribe(data => {
             if (data.message) {
-                this.message = data.message + ". If you're a Landlord, please wait for verification!"
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Đăng ký tài khoản thành công',
+                    text: 'Nếu bạn là chủ nhà trọ, hãy đợi tài khoản được phê duyệt ',
+                    showConfirmButton: true,
+                  })
             }
         })
     }

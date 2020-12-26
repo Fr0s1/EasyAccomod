@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PostService } from '../services/post.service';
-import { ImageService } from '../services/image.service';
 
 @Component({
   selector: 'app-homepage',
@@ -9,17 +9,19 @@ import { ImageService } from '../services/image.service';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor(private postService: PostService, private imgService: ImageService) { }
+  constructor(private postService: PostService, private router: Router,
+) { }
 
   latestPosts // Thông tin về các bài đăng preview ở homepage
   latestPostsImages = [] // Lưu 1 ảnh của phòng trọ ứng với mỗi bài đăng
 
   starpost // thông tin về bài đăng được rate cao nhất ở homepage
-  starpostImage = [] 
+  starpostImage = []
 
   viewpost // thông tin về bài đăng được view cao nhất ở homepage
-  viewpostImage = [] 
+  viewpostImage = []
 
+  currentTime
   // Tạo mảng để duyệt
   createRange(number) {
     var items: number[] = [];
@@ -30,6 +32,7 @@ export class HomepageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.currentTime = new Date()
     this.getPreviewPost()
     this.getStarPost()
     this.getViewsPost()
@@ -40,6 +43,8 @@ export class HomepageComponent implements OnInit {
     this.postService.getPreviewPost('postTime').subscribe(posts => {
       this.latestPosts = posts
 
+      console.log(this.latestPosts)
+      this.latestPosts = this.latestPosts.filter(post => new Date(post.expiredTime) >= this.currentTime)
       this.latestPosts.forEach(post => {
         // Với mỗi bài đăng, lấy thông tin về ảnh của phòng trọ
         this.postService.getRoomImagesByID(post.roomID).subscribe(imagesList => {
@@ -66,6 +71,7 @@ export class HomepageComponent implements OnInit {
     // Lấy 4 bài đăng được rate cao nhất
     this.postService.getPreviewPost('starsReview').subscribe(posts => {
       this.starpost = posts
+      this.starpost = this.starpost.filter(post => new Date(post.expiredTime) >= this.currentTime)
 
       this.starpost.forEach(post => {
 
@@ -91,7 +97,9 @@ export class HomepageComponent implements OnInit {
     // Lấy 4 bài đăng có lượt view cao nhất
     this.postService.getPreviewPost('viewsNumber').subscribe(posts => {
       this.viewpost = posts
-
+      
+      this.viewpost = this.viewpost.filter(post => new Date(post.expiredTime) >= this.currentTime)
+      
       this.viewpost.forEach(post => {
 
         this.postService.getRoomImagesByID(post.roomID).subscribe(imagesList => {
@@ -110,5 +118,9 @@ export class HomepageComponent implements OnInit {
         })
       })
     })
+  }
+
+  toPostPage() {
+    this.router.navigate(['/posts'])
   }
 }

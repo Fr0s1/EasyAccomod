@@ -26,7 +26,7 @@ export class PaymentComponent implements OnInit {
     const today = new Date()
     let expiredDate = today
 
-    expiredDate.setDate(today.getDate() + week * 30);
+    expiredDate.setDate(today.getDate() + week * 7);
     expiredDate.setMonth(today.getMonth() + month)
     expiredDate.setFullYear(today.getFullYear() + year)
     return expiredDate

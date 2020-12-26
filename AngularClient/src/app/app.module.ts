@@ -32,6 +32,10 @@ import { VerifyReportComponent } from './admin/verify/reports/verify-report.comp
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ChatComponent } from './chat/chat.component';
 import { FooterComponent } from './footer/footer.component';
+import { NotificationComponent } from './notification/notification.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { EditPostComponent } from './edit-post/edit-post.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +61,10 @@ import { FooterComponent } from './footer/footer.component';
     VerifyReportComponent,
     NotFoundComponent,
     ChatComponent,
-    FooterComponent
+    FooterComponent,
+    NotificationComponent,
+    ChangePasswordComponent,
+    EditPostComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +75,8 @@ import { FooterComponent } from './footer/footer.component';
     MatPaginatorModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    SweetAlert2Module.forRoot()
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

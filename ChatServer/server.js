@@ -18,14 +18,13 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 // const db = require("./models");
-// db.ContactList.sync({force: true});
+// db.Messages.sync({force: true});
 require("./routes/message.routes")(app);
 
 const connectedUser = {}
 
 io.on('connection', (socket) => {
     socket.on('currentUser', data => {
-        console.log(data)
         connectedUser[data.user] = socket
     })
 
@@ -34,8 +33,6 @@ io.on('connection', (socket) => {
     })
 
     socket.on('chat message', (msg) => {
-        console.log(msg)
-
         if (connectedUser[msg.receiver]) {
             connectedUser[msg.receiver].emit('chat message', msg);
         }

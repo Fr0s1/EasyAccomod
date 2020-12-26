@@ -147,7 +147,6 @@ exports.delete = (req, res) => {
 		});
 };
 
-
 exports.edit = (req, res) => {
 	const username = req.params.username;
 

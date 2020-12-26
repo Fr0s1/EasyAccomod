@@ -3,11 +3,12 @@ const path = require('path')
 const PostCost = db.postCost // chi phí đăng bài
 const Post = db.posts // model của bài đăng
 const Room = db.rooms // model cho phòng trọ
+const sequelize = db.sequelize
+const { Op } = require('sequelize')
 
 exports.create = async (req, res) => {
     try {
         const formData = req.body // các thông tin trong http body
-
         const sharedOwner = formData.sharedOwner === 'Có' ? true : false;
         const airconditioner = formData.airconditioner === 'Có' ? true : false;
         const balcony = formData.balcony === 'Có' ? true : false;
@@ -36,7 +37,7 @@ exports.create = async (req, res) => {
             waterPrice: formData.waterPrice,
             imageURI: roomImagesLocalPath,
             otherUtils: formData.otherUtils,
-            accountUsername: req.username
+            accountUsername: req.username,
         }
 
         // Save room in database
@@ -51,8 +52,12 @@ exports.create = async (req, res) => {
             postWeek: formData.postWeek,
             postMonth: formData.postMonth,
             postYear: formData.postYear,
-            postCost: formData.postWeek * costs.weekCost + formData.postMonth * costs.monthCost + formData.postYear * costs.yearCost,
-            accountUsername: req.username
+            postCost: formData.postCost ? formData.postCost : formData.postWeek * costs.weekCost + formData.postMonth * costs.monthCost + formData.postYear * costs.yearCost,
+            accountUsername: req.username,
+            verifiedStatus: formData.verifiedStatus === '1',
+            paymentStatus: formData.paymentStatus === '1',
+            postTime: formData.postTime !== undefined ? new Date(formData.postTime) : null,
+            expiredTime: formData.expiredTime !== undefined ? new Date(formData.expiredTime) : null
         }
 
         // Sau đó lưu thông tin bài đăng
@@ -93,19 +98,27 @@ exports.getPreviewPosts = async (req, res) => {
     let query = req.query
 
     let result = await Post.findAll({
+        include: {
+            model: Room
+        },
         limit: 4, order: [[`${query.column}`, 'DESC']], where: {
-            verifiedStatus: true,
-            paymentStatus: true
+            [Op.and]: [{
+                verifiedStatus: true
+            },
+            { paymentStatus: true }],
+            expiredTime: {
+                [Op.gte]: new Date()
+            }
         }
     })
 
     res.send(result)
 }
 
+
 exports.findByQuery = async (req, res) => {
     const conditions = req.query
 
-    console.log(conditions)
     try {
         let result = await Post.findAll({
             include: {
@@ -116,7 +129,7 @@ exports.findByQuery = async (req, res) => {
         })
         res.send(result)
     } catch (err) {
-        console.log("Can't find post with given queries")
+        res.send({ error: "Can't find post with given queries" })
     }
 }
 

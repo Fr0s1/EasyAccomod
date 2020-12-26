@@ -72,4 +72,34 @@ export class AuthService {
         this.currentAccountSubject.next(null);
         location.reload()
     }
+
+    changePassword(form: FormData) {
+        var loginInfo = new FormData()
+
+        let result = 1;
+
+        loginInfo.set('username', this.currentUserValue.username)
+        loginInfo.set('password', form.get('currentpwd'))
+
+        // Try to login with current password, if current password is correct, change to new password
+        this.signIn(loginInfo).subscribe(data => {
+            if (data.token) {
+                const salt: string = bcrypt.genSaltSync(10)
+
+                var hasedPsw = bcrypt.hashSync(form.get('newpwd'), salt)
+                form.set('newpwd', hasedPsw)
+
+                this.accountService.updateAccount(
+                    this.currentUserValue.username, 
+                    { 
+                        password: form.get('newpwd') 
+                    }).
+                subscribe(data => { console.log("Changed") })
+            }
+            else {
+                return 2;
+            }
+        })
+        return result;
+    }
 }

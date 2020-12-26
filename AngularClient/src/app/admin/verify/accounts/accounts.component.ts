@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Role } from 'src/app/_model/role';
 import { AccountService } from './../../../services/account.service'
 
 @Component({
@@ -28,30 +29,54 @@ export class AdminAccountsComponent implements OnInit {
     this.getAllAccount()
   }
 
-  getPostByType(event) {
+  getAccountsByStatus(event) {
     switch (event.target.value) {
       case 'Tất cả':
         this.getAllAccount()
         break;
       case 'Chưa được duyệt':
-        this.accountService.getAccountByQuery('?accountType=Landlord&verified=0').subscribe(accounts => this.accounts = accounts)
+        this.accountService.getAccountByQuery('?verified=0').subscribe(accounts => {
+          this.accounts = accounts
+          this.accounts = this.accounts.filter(account => account.accountType != Role.Admin)
+        })
         break;
       case 'Đã được duyệt':
-        this.accountService.getAccountByQuery('?accountType=Landlord&verified=1').subscribe(accounts => this.accounts = accounts)
+        this.accountService.getAccountByQuery('?verified=1').subscribe(accounts => {
+          this.accounts = accounts
+          this.accounts = this.accounts.filter(account => account.accountType != Role.Admin)
+        })
+        break;
+      default:
+    }
+  }
+
+  getAccountsByType(event) {
+    switch (event.target.value) {
+      case 'Tất cả':
+        this.getAllAccount()
+        break;
+      case 'Chủ trọ':
+        this.accountService.getAccountByQuery('?accountType=Landlord').subscribe(accounts => this.accounts = accounts)
+        break;
+      case 'Người thuê':
+        this.accountService.getAccountByQuery('?accountType=Renter').subscribe(accounts => this.accounts = accounts)
         break;
       default:
     }
   }
 
   getAllAccount() {
-    this.accountService.getAccountByQuery('?accountType=Landlord').subscribe(accounts => this.accounts = accounts)
+    this.accountService.getAccountByQuery('').subscribe(accounts => {
+      this.accounts = accounts
+      this.accounts = this.accounts.filter(account => account.accountType != Role.Admin)
+    })
   }
 
   verifiedSuccessfully: boolean = false
   verifyAccount() {
     for (let username of this.selectedAccounts) {
       console.log(username)
-      this.accountService.updateAccount(username, { verified: true}).subscribe(data => {
+      this.accountService.updateAccount(username, { verified: true }).subscribe(data => {
         if (Object(data).message) {
           this.verifiedSuccessfully = true
           this.message = 'Phê duyệt thành công'
@@ -72,6 +97,7 @@ export class AdminAccountsComponent implements OnInit {
       })
     }
   }
+
   showAccountInfo(event) {
     this.accountService.getAccountInfo(event.target.innerHTML).subscribe(data => this.accountInfo = data[0])
   }
@@ -86,8 +112,6 @@ export class AdminAccountsComponent implements OnInit {
     } else {
       this.selectedAccounts = this.selectedAccounts.filter(value => value != username)
     }
-
-    console.log(this.selectedAccounts)
   }
 
   addAllAccount(event) {
@@ -106,7 +130,5 @@ export class AdminAccountsComponent implements OnInit {
         input.checked = false
       }
     }
-
-    console.log(this.selectedAccounts)
   }
 }

@@ -1,31 +1,29 @@
 <div class="page">
     <div class="part container">
         <span class="login100-form-title p-b-26">
-            EasyAccomod
+            EASYACCOMOD
         </span>
 
         <form [formGroup]="account" (ngSubmit)="signIn()" enctype="multipart/form-data">
             <div class="cross-validation">
-                <label for="name"><b>Username</b></label>
+                <label for="name"><b>Tên người dùng</b></label>
 
                 <input class="input100 form-control" id="name" name="username" type="text" formControlName="username">
 
-                <label for="password"><b>Password</b></label>
+                <label for="password"><b>Mật khẩu</b></label>
 
                 <input class="input100 form-control" id="password" name="password" type="password"
                     formControlName="password">
             </div>
-            <button class="btn grey" type="submit">Sign In</button>
+            <button class="btn pink" type="submit">ĐĂNG NHẬP</button>
+            <a routerLink="/register">
+                <button class="btn pink">CHƯA CÓ TÀI KHOẢN? ĐĂNG KÝ NGAY!</button>
+            </a>
             <span *ngIf="loginMessage">{{loginMessage}}</span>
         </form>
 
-        <span class="txt1">
-            Don’t have an account?
-        </span>
-
-        <a class="txt2" routerLink="/register">
-            Sign Up
-        </a>
-
     </div>
+    
 </div>
+
+

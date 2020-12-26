@@ -44,7 +44,22 @@ span.noti {
     display: block;
 }
 
-.content {
-    padding-top: 1em;
-    text-align: unset;
+.checked {
+    color: orange;
+}
+
+.rating {
+    float: left;
+}
+
+.rating .fa.fa-star {
+    float: right
+}
+
+.rating .fa.fa-star:hover, .rating .fa.fa-star:hover~span {
+    color: #FFED85;
+}
+
+textarea {
+    clear: both;
 }

@@ -1,6 +1,11 @@
-<h2>Bình luận</h2>
+<h2><i class="far fa-comment" style="margin-right: 5px; color: rgb(46, 76, 80)"></i>Nhận xét</h2>
 
 <div class="send-comment" *ngIf="currentAccount">
+    <div class="rating" #rating>
+        <span>Đánh giá</span>
+        <span class="fa fa-star" *ngFor="let i of createRange(5)" id="{{5-i}}" (click)="showRate($event)"></span>
+    </div>
+
     <textarea class="form-control content"></textarea>
 
     <button class="btn btn-primary" (click)="sendComment($event)">Gửi</button>
@@ -10,9 +15,12 @@
 <div class="all-comments">
     <div *ngFor="let comment of verifiedCommentList" class="comment">
         <img src="../../assets/avatar2.png">
+
         <p class="name">{{comment.userInfo?.fullName }}</p>
         <p class="username">Username: {{comment.accountUsername}}</p>
         <p class="time">Nhận xét lúc: {{comment.createdAt | date : 'short' : 'Asia/Ho_Chi_Minh'}}</p>
+        <span class="fa fa-star checked" *ngFor="let i of createRange(comment.starsReview)"></span>
         <p class="content">{{comment.content}}</p>
+
     </div>
 </div>

@@ -14,10 +14,9 @@ th, td {
 
 .container {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    /* grid-template-columns: 2fr 1fr; */
     grid-gap: 20px;
     background-color: white;
-    margin-top: auto;
 }
 
 .search, h1 {
@@ -39,9 +38,23 @@ button {
     border: 2px solid rgb(79, 185, 227);
     border-radius: 5px;
     width: fit-content;
+    height: fit-content;
     padding: 10px;
+}
+
+.form-control {
+    margin-bottom: 10px;
 }
 
 select.form-control {
     width: 25%;
+}
+
+.room-images {
+    overflow: hidden;
+}
+
+.room-images img {
+    height: 150px;
+    object-fit: cover;
 }

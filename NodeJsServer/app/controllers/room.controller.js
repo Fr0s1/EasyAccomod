@@ -2,6 +2,7 @@ const fs = require('fs')
 const { Op } = require('sequelize')
 const db = require('../models')
 const Room = db.rooms
+const path = require('path')
 
 exports.getRoomImagesByID = async (req, res) => {
     let _id = req.params.id
@@ -82,6 +83,44 @@ exports.deleteByID = async (req, res) => {
         res.send(`Deleted room with id = ${_id}`)
     } catch (err) {
         res.send("can't deleted room")
+    }
+}
+
+exports.addRoomImage = async (req, res) => {
+    console.log(req.files)
+
+    if (req.files.length != 0) {
+        res.send({ message: 'Success' })
+
+    } else {
+        res.send({ error: "Can't add new image " })
+    }
+}
+
+exports.deleteRoomImageByFileName = async (req, res) => {
+    let data = req.params
+
+    try {
+        let folderPath = await Room.findAll({
+            attributes: ['imageURI'],
+            where: {
+                roomID: data.id
+            },
+            raw: true,
+        })
+
+        let imageFolderPath = folderPath[0].imageURI
+
+        let imagePath = path.join(imageFolderPath, data.fileName)
+
+        if (fs.existsSync(imagePath)) {
+            fs.unlinkSync(imagePath)
+            res.send({ message: 'Deleted file with given name' })
+        } else {
+            res.send({ message: "File doesn't exist" })
+        }
+    } catch (err) {
+        res.send({ error: "Internal server error" })
     }
 }
 

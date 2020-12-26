@@ -33,15 +33,16 @@ exports.signIn = async (req, res) => {
                         token
                     })
                 } else {
-                    res.status(401).send({ message: 'Unauthorized' })
+                    res.status(401).send({ message: 'Thông tin đăng nhập chưa đúng hoặc tài khoản đang chờ kiểm duyệt' })
                 }
             } else {
-                res.status(401).send({ message: 'Unauthorized' })
+                res.status(401).send({ message: 'Thông tin đăng nhập chưa đúng hoặc tài khoản đang chờ kiểm duyệt' })
             }
         } else {
-            res.status(400).send({message: 'Unauthorized'})
+            res.status(400).send({ message: 'Thông tin đăng nhập chưa đúng hoặc tài khoản đang chờ kiểm duyệt' })
         }
     } catch (err) {
         res.status(500).send({ error: err })
     }
 }
+

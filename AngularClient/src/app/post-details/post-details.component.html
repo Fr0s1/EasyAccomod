@@ -3,6 +3,7 @@
 <div class="container">
     <div class="post-title">
         <h1>{{postInfo?.postName}}</h1>
+        <p>Username: <a routerLink="/{{postInfo?.accountUsername}}" target="_blank">{{postInfo?.accountUsername}}</a></p>
     </div>
 
     <div class="post-details">
@@ -36,20 +37,20 @@
             </div>
 
             <div class="utils">
-                <h3>Cơ sở vật chất</h3>
+                <h3><i class="fas fa-house-user" style="color: rgb(80, 168, 146)"></i>Cơ sở vật chất</h3>
                 <ul>
                     <li>Điều hòa: <span>{{postInfo?.Room.airconditioner === true ? 'Có' : 'Không'}}</span></li>
                     <li>Ban công: <span>{{postInfo?.Room.balcony === true ? 'Có' : 'Không'}}</span></li>
-                    <li>Giá điện: <span>{{postInfo?.Room.electricityPrice | number:'1.0':'en-US'  }} đồng kW/h</span>
+                    <li>Giá điện: <span>{{postInfo?.Room.electricityPrice | number:'1.0':'en-US' }} đồng kW/h</span>
                     </li>
-                    <li>Giá nước: <span>{{postInfo?.Room.waterPrice | number:'1.0':'en-US'  }} đồng
+                    <li>Giá nước: <span>{{postInfo?.Room.waterPrice | number:'1.0':'en-US' }} đồng
                             /m<sup>3</sup></span></li>
                     <li>Phòng bếp: <span>{{postInfo?.Room.kitchen}}</span></li>
                     <li>Phòng tắm: <span>{{postInfo?.Room.bathroom}}</span></li>
                 </ul>
 
                 <div class="price">
-                    <h3>Giá phòng</h3>
+                    <h3><i class="far fa-credit-card" style="color: rgb(88, 182, 169)"></i>Giá phòng</h3>
                     <ul>
                         <li>Theo tháng: <span>{{postInfo?.Room.monthPrice | number:'1.0':'en-US' }} đồng</span></li>
                         <li>Theo quý: <span>{{postInfo?.Room.quarterPrice | number:'1.0':'en-US' }} đồng</span></li>
@@ -58,22 +59,26 @@
                 </div>
 
                 <div class="otherUtils">
-                    <h3>Tiện ích khác: </h3>
+                    <h3><i class="fas fa-spa" style="color: rgb(87, 180, 192)"></i>Tiện ích khác: </h3>
                     <span>{{postInfo?.Room.otherUtils}}</span>
                 </div>
             </div>
         </div>
 
+
         <div class="features">
             <h2>Thông tin bài đăng</h2>
-
             <div class="post-stats">
-                <span>Lượt xem: {{postInfo?.viewsNumber + 1}}</span>
-                <span>Số lượt yêu thích: {{postInfo?.likesNumber}}</span>
-                <span>Số sao: {{postInfo?.starsReview}}</span>
+                <span><i class="fas fa-globe-asia" style="color:rgb(10, 109, 155)"></i>Lượt xem: {{postInfo?.viewsNumber
+                    + 1}}</span>
+                <span><i class="fas fa-thumbs-up" style="color: rgb(10, 109, 155)"></i>Số lượt yêu thích:
+                    {{postInfo?.likesNumber}}</span>
+                <span><span class="fa fa-star checked"></span>Số sao: {{postInfo?.starsReview | number : '1.2-2'}} / 5
+                </span>
             </div>
+
             <div>
-                <button type="button" class="btn btn-primary">Favorite</button>
+                <button type="button" class="btn btn-primary" (click)="changeFavorite()" *ngIf="currentAccount">{{favoriteButtonText}}</button>
                 <button type="button" class="btn btn-danger" (click)="showReportInput()"
                     *ngIf="currentAccount">Report</button>
                 <button type="button" class="btn btn-info"
@@ -83,16 +88,15 @@
             <div class="report-content" *ngIf="showReportArea">
                 <textarea class="form-control"></textarea>
                 <button class="btn btn-warning" (click)="sendReport()">Report bài đăng</button>
-                <span *ngIf="sent">Cảm ơn bạn đã report, chúng tôi sẽ xem xét nhanh nhất có thể</span>
             </div>
         </div>
 
         <div class="owner-info">
-            <h2>Thông tin liên lạc</h2>
+            <h2><i class="far fa-address-card" style="margin-left: 10px"></i>Thông tin liên lạc</h2>
 
             <ul class="list-group">
-                <li class="list-group-item">Họ tên: {{ownerInfo?.fullName}}</li>
-                <li class="list-group-item">Số điện thoại: {{ownerInfo?.phoneNumber}}</li>
+                <li class="list-group-item"><i class="fas fa-user-alt"></i>Họ tên: {{ownerInfo?.fullName}}</li>
+                <li class="list-group-item"><i class="fas fa-phone"></i> SDT: {{ownerInfo?.phoneNumber}}</li>
             </ul>
         </div>
     </div>
