@@ -11,12 +11,12 @@ body {
 tr:nth-child(even) {background-color: #dce6f5;}
 
 .row {
-    background-color: #efeff6;
+    background-color: white;
     width: 100%;
 }
 
 .container {
-    background-color: #efeff6;
+    background-color: white;
     margin-top: 10px;
 }
 
@@ -151,7 +151,7 @@ tr:nth-child(even) {background-color: #dce6f5;}
 
 .user-info-wrapper .user-info .user-data span {
     display: block;
-    color: #9da9b9;
+    color: rgba(212, 208, 208, 0.425);
     font-size: 13px
 }
 

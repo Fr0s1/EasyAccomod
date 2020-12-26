@@ -36,6 +36,7 @@
     "@sweetalert2/ngx-sweetalert2": "^8.1.1",
     "animate.css": "^4.1.1",
     "bcryptjs": "^2.4.3",
+    "bootstrap": "^4.5.3",
     "rxjs": "~6.5.4",
     "socket.io-client": "^3.0.3",
     "sweetalert2": "^10.12.6",
