@@ -5,6 +5,7 @@ import { AccountService } from '../services/account.service';
 import { FavoriteService } from '../services/favorite.service'
 import { AuthService } from '../services/auth.service';
 import { Account } from '../_model/account';
+import { NotificationService} from '../services/notification.service'
 import Swal from 'sweetalert2';
 
 @Component({
@@ -16,7 +17,8 @@ export class PostDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private postService: PostService,
     private accountService: AccountService, private authService: AuthService,
-    private favoriteSerive: FavoriteService, private router: Router) { }
+    private favoriteSerive: FavoriteService, private router: Router,
+    private notificationService: NotificationService) { }
 
   currentAccount: Account
   postID: number // Current post
@@ -117,8 +119,27 @@ export class PostDetailsComponent implements OnInit {
       denyButtonText: `Hủy bỏ`,
     }).then((result) => {
       if (result.isConfirmed) {
-        
-        Swal.fire('Đã xong !', 'Chuyển trạng thái thành công', 'success')
+        let newState = this.postInfo.Room.rented ? 0: 1;
+        let updateData = {
+          rented: newState
+        }
+        this.postService.updateRoom(this.roomID, updateData)
+          .subscribe(data => {
+            Swal.fire('Đã xong !', 'Chuyển trạng thái thành công', 'success')
+            .then((result) => {
+              let notiData = {
+                accountUsername: "admin",
+                postName: this.postInfo.postName,
+                type: 3,
+                postID: this.postInfo.postID
+              }
+              this.notificationService.createNotification(notiData)
+                .subscribe(notiResult => {
+
+                })
+              location.reload();
+            })
+          })
       } else if (result.isDenied) {
         
       }
