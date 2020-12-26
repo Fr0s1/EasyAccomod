@@ -3,6 +3,7 @@ const path = require('path')
 const PostCost = db.postCost // chi phí đăng bài
 const Post = db.posts // model của bài đăng
 const Room = db.rooms // model cho phòng trọ
+const sequelize = db.sequelize
 const { Op } = require('sequelize')
 
 exports.create = async (req, res) => {

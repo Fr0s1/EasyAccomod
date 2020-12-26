@@ -20,7 +20,7 @@ export class CreatePostComponent implements OnInit {
   userInfo // User information(Full name, phone number, ... ) corresponding to account
   postUploadCost: any // Cost to upload post
   roomImages = [] // mảng lưu các file ảnh của phòng trọ (Blob)
-  imgUrls = []
+  imgUrls = [] // Array of converted Blobs to [src] url in img tag
   postModel: FormGroup
 
   ngOnInit(): void {

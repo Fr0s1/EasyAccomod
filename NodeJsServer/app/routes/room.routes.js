@@ -5,6 +5,9 @@ module.exports = app => {
 
     const router = require('express').Router()
 
+    // Update room info by room ID 
+    router.put('/:id', room.updateRoomInfo)
+    
     router.get('/', room.findByQuery)
 
     router.get('/:id/image/:name', room.getImageByName)

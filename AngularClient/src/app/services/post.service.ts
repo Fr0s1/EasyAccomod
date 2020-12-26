@@ -27,6 +27,11 @@ export class PostService {
     return this.http.put(this.postUrl + `/${postID}`, option)
   }
 
+  // Update room info
+  updateRoom(roomID: number, option: Object) {
+    return this.http.put(this.roomUrl + `/${roomID}`, option)
+  }
+
   getPostPaymentInfo(url: string) {
     return this.http.get(url)
   }
@@ -70,5 +75,9 @@ export class PostService {
 
   deletePost(postID: number) {
     return this.http.delete(this.postUrl + `?postID=${postID}`)
+  }
+
+  deleteRoomImage(roomID: number, fileName: string) {
+    return this.http.delete(this.roomUrl + `/${roomID}/image/${fileName}`)
   }
 }

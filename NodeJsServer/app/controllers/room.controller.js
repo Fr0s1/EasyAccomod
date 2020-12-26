@@ -4,6 +4,24 @@ const db = require('../models')
 const Room = db.rooms
 const path = require('path')
 
+exports.updateRoomInfo = async (req, res) => {
+    const info = req.body
+    const roomID = req.params.id
+
+    try {
+        let result = await Room.update(info, {
+            where: {
+                roomID
+            }
+        })
+        if (result == 1) {
+            res.send({ message: `Updated room with ${roomID} successfully` })
+        }
+    } catch (err) {
+        res.send(err)
+    }
+}
+
 exports.getRoomImagesByID = async (req, res) => {
     let _id = req.params.id
 
@@ -128,6 +146,8 @@ exports.findByQuery = async (req, res) => {
     const conditions = req.query
     const Post = db.posts
 
+    console.log(conditions)
+
     let priceRange
     let areaRange
 
@@ -148,6 +168,9 @@ exports.findByQuery = async (req, res) => {
         conditions.sharedOwner = (conditions.sharedOwner === 'Có' ? true : false)
     }
 
+    console.log(priceRange)
+    console.log(areaRange)
+
     try {
         let result = []
         if (areaRange && priceRange) {
@@ -165,7 +188,7 @@ exports.findByQuery = async (req, res) => {
                         {
                             area: {
                                 [Op.between]:
-                                    [area[0], area[2]],
+                                    [areaRange[0], areaRange[2]],
                             }
                         }]
                     }
