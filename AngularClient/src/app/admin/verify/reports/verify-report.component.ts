@@ -37,8 +37,6 @@ export class VerifyReportComponent implements OnInit {
     } else {
       this.selectedReports = this.selectedReports.filter(report => report.reportID != reportID)
     }
-
-    console.log(this.selectedReports)
   }
 
   addAllReports(event) {

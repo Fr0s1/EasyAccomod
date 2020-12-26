@@ -26,7 +26,6 @@ export class CreatePostComponent implements OnInit {
   ngOnInit(): void {
     this.getPostCost()
     this.currentAccount = this.authService.currentUserValue // Get current logged in account information
-    console.log(this.currentAccount)
     this.getUserInfo()
 
     // Object thể hiện các thông tin trong form 
@@ -115,7 +114,6 @@ export class CreatePostComponent implements OnInit {
     if (this.postModel.valid) {
       this.sent = true
       this.postService.uploadForm(this.uploadURL, formData).subscribe(res => {
-        console.log(res)
         Swal.fire({
           icon: 'success',
           title: 'Đăng kí bài đăng cho phòng trọ thành công. Khi được phê duyệt, bạn sẽ nhận được thông báo',

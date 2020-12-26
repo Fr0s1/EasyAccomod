@@ -52,7 +52,6 @@ export class AdminPostsComponent implements OnInit {
   getAllPosts() {
     this.postService.getPostsByQuery('').subscribe(data => {
       this.postsList = data
-      console.log(this.postsList)
     })
   }
 
@@ -61,7 +60,6 @@ export class AdminPostsComponent implements OnInit {
     let postName = event.target.parentElement.nextSibling.nextSibling.innerHTML;
     let username = event.target.parentElement.nextSibling.nextSibling.nextSibling.innerHTML;
     let status = event.target.parentElement.parentElement.lastChild.innerHTML;
-    console.log(status);
 
     if (event.target.checked) {
       if (!this.selectedPostsID.includes(postID)) {
@@ -76,8 +74,6 @@ export class AdminPostsComponent implements OnInit {
       this.selectedUsername = this.selectedUsername.filter(value => value != username)
       this.selectedPostsStatus = this.selectedPostsStatus.filter(value => value != status)
     }
-
-    console.log(this.selectedPostsID)
   }
 
   message: string
@@ -122,13 +118,11 @@ export class AdminPostsComponent implements OnInit {
   }
 
   denyPost() {
-    console.log("click")
     for (let index in this.selectedPostsID) {
       if (this.selectedPostsStatus[index] == "true") {
         let postID = this.selectedPostsID[index];
         this.postService.updatePost(postID, { verifiedStatus: 0 })
         .subscribe(data => {
-          console.log(data)
           if (Object(data).message) {
             this.operation = true
             this.message = 'Đã từ chối bài đăng'
@@ -200,7 +194,6 @@ export class AdminPostsComponent implements OnInit {
   showRoomInfo(event) {
     this.postService.getPostsByQuery(`?postID=${event.target.innerHTML}`).subscribe(data => {
       this.selectedPostInfo = data[0]
-      console.log(this.selectedPostInfo)
 
       let roomID: number = this.selectedPostInfo?.roomID // Room ID of post
 

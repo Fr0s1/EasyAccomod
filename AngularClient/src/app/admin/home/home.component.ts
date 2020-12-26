@@ -105,7 +105,6 @@ export class HomeComponent implements OnInit {
       this.statService.getPostOrderByColumInMonthAndYearDESC(column.value, this.selectedMonth, this.year).subscribe(postList => {
         this.filteredPost = postList[0]
 
-        console.log(this.filteredPost)
         this.postService.getRoomImagesByID(this.filteredPost.roomID).subscribe(imageLists => {
 
           // Request tới server để tải ảnh

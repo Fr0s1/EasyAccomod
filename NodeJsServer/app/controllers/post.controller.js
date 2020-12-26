@@ -164,3 +164,63 @@ exports.updatePostByID = async (req, res) => {
         res.send(err)
     }
 }
+
+exports.updatePostByForm = async (req, res) => {
+
+    try {
+        const formData = req.body // các thông tin trong http body
+        console.log(formData)
+
+        const sharedOwner = formData.sharedOwner === 'Có' ? true : false;
+        const airconditioner = formData.airconditioner === 'on' ? true : false;
+        const balcony = formData.balcony === 'on' ? true : false;
+
+        // Create room instance 
+        const newRoomInfo = {
+            roomType: formData.roomType,
+            sharedOwner,
+            area: formData.area,
+            description: formData.description,
+            homeNumber: formData.homeNumber,
+            street: formData.street,
+            ward: formData.ward,
+            district: formData.district,
+            city: formData.city,
+            monthPrice: formData.monthPrice,
+            quarterPrice: formData.quarterPrice,
+            yearPrice: formData.yearPrice,
+            bathroom: formData.bathroom,
+            kitchen: formData.kitchen,
+            airconditioner,
+            balcony,
+            electricityPrice: formData.electricityPrice,
+            waterPrice: formData.waterPrice,
+            otherUtils: formData.otherUtils,
+        }
+
+        // Save newRoomInfo in database
+        let newRoom = await Room.update(newRoomInfo, {
+            where: {
+                roomID: formData.roomID
+            }
+        })
+
+        const post = {
+            postName: formData.postName,
+            postWeek: formData.postWeek,
+            postMonth: formData.postMonth,
+            postYear: formData.postYear,
+            postCost: formData.postCost ? formData.postCost : formData.postWeek * costs.weekCost + formData.postMonth * costs.monthCost + formData.postYear * costs.yearCost,
+        }
+
+        let result = await Post.update(post, {
+            where: {
+                postID: formData.postID
+            }
+        })
+
+        res.send({ message: 'Updated post successfully' })
+    } catch (err) {
+        res.send({ error: "Can't update post" })
+    }
+}

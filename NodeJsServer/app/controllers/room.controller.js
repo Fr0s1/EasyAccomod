@@ -105,8 +105,6 @@ exports.deleteByID = async (req, res) => {
 }
 
 exports.addRoomImage = async (req, res) => {
-    console.log(req.files)
-
     if (req.files.length != 0) {
         res.send({ message: 'Success' })
 
@@ -146,8 +144,6 @@ exports.findByQuery = async (req, res) => {
     const conditions = req.query
     const Post = db.posts
 
-    console.log(conditions)
-
     let priceRange
     let areaRange
 
@@ -167,9 +163,6 @@ exports.findByQuery = async (req, res) => {
     if (conditions.sharedOwner) {
         conditions.sharedOwner = (conditions.sharedOwner === 'Có' ? true : false)
     }
-
-    console.log(priceRange)
-    console.log(areaRange)
 
     try {
         let result = []

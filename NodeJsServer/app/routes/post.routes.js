@@ -15,7 +15,14 @@ module.exports = app => {
     var storage = multer.diskStorage({
         destination: function (req, file, cb) {
             // Tạo thư mục với tên là id của phòng trọ để lưu ảnh của phòng trọ
-            savePath = path.join(__dirname, `./../../roomImages/${req.roomID}`)
+            let savePath
+            if (req.roomID) {
+                // For creating new post
+                savePath = path.join(__dirname, `./../../roomImages/${req.roomID}`)
+            } else {
+                // For saving new image to existing room
+                savePath = path.join(__dirname, `./../../roomImages/${req.body.roomID}`)
+            }
 
             if (!fs.existsSync(savePath)) {
                 fs.mkdirSync(savePath, { recursive: true })
@@ -51,6 +58,9 @@ module.exports = app => {
 
     // Create new post with corresponding roomID
     router.post("/", authJwt.verifyToken, getNextRoomID, upload.any(), post.create)
+
+    // Update post and room info by submitting form
+    router.put("/:id", upload.any(), post.updatePostByForm)
 
     // Get preview posts by requirement for homepage
     router.get("/preview", post.getPreviewPosts)

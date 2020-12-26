@@ -49,8 +49,6 @@ export class VerifyCommentsComponent implements OnInit {
       }
       this.selectedComments = this.unverifiedComments
     }
-
-    console.log(this.selectedComments)
   }
 
 
@@ -64,8 +62,6 @@ export class VerifyCommentsComponent implements OnInit {
     } else {
       this.selectedComments = this.selectedComments.filter(value => value.commentID != commentID)
     }
-    console.log(this.selectedComments)
-
   }
 
   verifiedSuccessfully: boolean = false

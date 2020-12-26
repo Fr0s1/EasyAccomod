@@ -75,7 +75,6 @@ export class AdminAccountsComponent implements OnInit {
   verifiedSuccessfully: boolean = false
   verifyAccount() {
     for (let username of this.selectedAccounts) {
-      console.log(username)
       this.accountService.updateAccount(username, { verified: true }).subscribe(data => {
         if (Object(data).message) {
           this.verifiedSuccessfully = true
@@ -87,9 +86,7 @@ export class AdminAccountsComponent implements OnInit {
 
   unverifyAccount() {
     for (let username of this.selectedAccounts) {
-      console.log(username)
       this.accountService.updateAccount(username, { verified: false }).subscribe(data => {
-        console.log(data)
         if (Object(data).message) {
           this.verifiedSuccessfully = true
           this.message = 'Đã khóa tài khoản'

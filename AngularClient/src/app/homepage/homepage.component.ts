@@ -43,7 +43,6 @@ export class HomepageComponent implements OnInit {
     this.postService.getPreviewPost('postTime').subscribe(posts => {
       this.latestPosts = posts
 
-      console.log(this.latestPosts)
       this.latestPosts = this.latestPosts.filter(post => new Date(post.expiredTime) >= this.currentTime)
       this.latestPosts.forEach(post => {
         // Với mỗi bài đăng, lấy thông tin về ảnh của phòng trọ

@@ -29,7 +29,7 @@ module.exports = app => {
 
     upload = multer({ storage, preservePath: true })
 
-    router.post('/:id/image/:fileName', upload.array(), room.addRoomImage)
+    router.post('/:id/image', upload.array(), room.addRoomImage)
 
     // Delete specific room's image
     router.delete('/:id/image/:fileName', room.deleteRoomImageByFileName)

@@ -13,11 +13,11 @@ import { ActivatedRoute, Router } from '@angular/router'
 export class EditPostComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
-              private postService: PostService,
-              private accountService: AccountService,
-              private authService: AuthService,
-              private route: ActivatedRoute,
-              private router: Router) { }
+    private postService: PostService,
+    private accountService: AccountService,
+    private authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   loaded = false
   currentAccount
@@ -37,6 +37,8 @@ export class EditPostComponent implements OnInit {
 
   ngOnInit(): void {
     this.postModel = this.fb.group({
+      postID: [''],
+      roomID: [''],
       owner: this.fb.group({
         name: [''],
         phoneNumber: [''],
@@ -85,7 +87,7 @@ export class EditPostComponent implements OnInit {
 
       this.loaded = true;
     })
-    
+
   }
 
   // User want to delete old image
@@ -138,10 +140,8 @@ export class EditPostComponent implements OnInit {
   editPost() {
     var form = document.querySelector('form')
     var formData = new FormData(form)
-    console.log(this.oldImagesToDelete);
-    console.log(this.postModel.value)
 
-
+    this.postService.updatePostAndRoomInfo(this.postID, formData).subscribe(data => this.oldImagesToDelete.forEach(fileName => this.postService.deleteRoomImage(this.postInfo.roomID, fileName).subscribe()))
   }
 
   uploadURL = 'http://localhost:8080/api/posts'
@@ -174,16 +174,17 @@ export class EditPostComponent implements OnInit {
           this.router.navigate([`/404`]);
         }
         this.postInfo = data[0];
-        console.log(this.postInfo);
         this.roomInfo = this.postInfo.Room;
         this.postModel.patchValue({
+          postID: this.postInfo.postID,
+          roomID: this.postInfo.roomID,
           postName: this.postInfo.postName,
           address: {
             homeNumber: this.roomInfo.homeNumber,
             street: this.roomInfo.street,
             ward: this.roomInfo.ward, // phường
             district: this.roomInfo.district,
-            city:  this.roomInfo.city, // tỉnh/thành phố
+            city: this.roomInfo.city, // tỉnh/thành phố
           },
           description: this.roomInfo.description,
           roomType: this.roomInfo.roomType,
@@ -210,12 +211,10 @@ export class EditPostComponent implements OnInit {
           },
         })
 
-        console.log(this.postModel.value)
         this.postService.getRoomImagesByID(this.roomInfo.roomID).subscribe(result => {
           this.roomImagesNameList = result // Array contains file names
-          console.log(this.roomImagesNameList)
           var imageLoaded = 0;
-  
+
           // Get image files associated with filename and convert from Blob to HTML displayable image
           this.roomImagesNameList.forEach(filename => {
             this.postService.getRoomImageByName(this.roomInfo.roomID, filename)
@@ -225,14 +224,14 @@ export class EditPostComponent implements OnInit {
                 reader.addEventListener("load", () => {
                   this.imagesUrl.push(reader.result);
                 }, false);
-      
+
                 if (data) {
                   reader.readAsDataURL(data);
                   imageLoaded++;
                 }
               })
           })
-          
+
         })
 
         this.getPostCost()

@@ -2,6 +2,18 @@
 
 <div *ngIf="loaded" class="container">
     <form [formGroup]="postModel" (ngSubmit)="editPost()" enctype="multipart/form-data">
+        <div class="form-row" [ngStyle]="{'display': 'none'}">
+            <div class="col">
+                <label for="postID">ID bài đăng</label>
+                <input type="text" class="form-control" id="postID" name="postID" formControlName="postID" readonly>
+            </div>
+
+            <div class="col">
+                <label for="roomID">ID phòng trọ</label>
+                <input type="text" class="form-control" id="roomID" formControlName="roomID" name="roomID" readonly>
+            </div>
+        </div>
+
         <div class="form-row" formGroupName="owner">
             <div class="col">
                 <label for="ownerName">Họ và tên</label>
@@ -247,7 +259,8 @@
                     (change)=displayImage(imgs.files) multiple>
                 <div class="row">
                     <div *ngFor=" let img of newImagesUrl; let i = index" class="col">
-                        <img [src]="newImagesUrl[i]" class="image" (click)="deleteNewImage(newImagesUrl[i])">
+                        <img [src]="newImagesUrl[i]" class="image" (click)="deleteNewImage(newImagesUrl[i])"
+                            [ngStyle]="{'height': '200px', 'object-fit': 'cover', 'width': '200px'}">
                     </div>
                 </div>
             </div>

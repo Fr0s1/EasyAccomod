@@ -92,7 +92,6 @@ export class ProfileComponent implements OnInit {
               this.likedPosts.push((data[0]));
             })
         }
-        console.log(this.likedPosts);
       })
   }
 
@@ -116,7 +115,6 @@ export class ProfileComponent implements OnInit {
   getPostsOfUser() {
     this.postService.getPostsByQuery(`?accountUsername=${this.receiver}&verifiedStatus=1&paymentStatus=1`).subscribe(posts => {
       this.postsOfUser = posts;
-      console.log(this.postsOfUser)
     })
   }
 

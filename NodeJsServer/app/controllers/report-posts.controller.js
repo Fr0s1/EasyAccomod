@@ -44,7 +44,6 @@ exports.deleteReport = async (req, res) => {
             res.send({ message: 'Deleted' })
         }
     } catch (err) {
-        console.log(err)
         res.status(500).send({ error: err })
     }
 }
