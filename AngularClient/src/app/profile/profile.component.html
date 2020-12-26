@@ -96,7 +96,8 @@
 										<i class="fa fa-eye fa-stack-1x fa-inverse"></i>
 									</span>
                                 Xem</a></td>
-                                <td *ngIf="receiver==currentAccount.username"><a href="javascript:void(0)">
+                                <td *ngIf="receiver==currentAccount.username"><a href="javascript:void(0)" 
+                                    data-toggle="modal" data-target="#extendModal" (click)="getExtendPostInfo(post.postID)">
 									<span class="fa-stack">
 										<i class="fa fa-square fa-stack-2x"></i>
 										<i class="fa fa-clock fa-stack-1x fa-inverse"></i>
@@ -118,7 +119,7 @@
                         <tbody>
                             <tr *ngFor="let post of unverifiedPosts">
                                 <td><a href="#">{{post.postName}}</a></td>
-                                <td><a href="#">{{post.createdAt}}</a></td>
+                                <td><a href="#">{{reformatDate(post.createdAt)}}</a></td>
                                 <td><a href="javascript:void(0)" (click)=editPost(post.postID)>
 									<span class="fa-stack">
 										<i class="fa fa-square fa-stack-2x"></i>
@@ -135,3 +136,36 @@
 </div>
 
 <app-footer *ngIf="validLoaded"></app-footer>
+
+<div class="modal fade" id="extendModal" tabindex="-1" role="dialog" 
+    aria-labelledby="extendModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+		<div class="modal-header">
+			<h1 class="modal-title" id="extendModalLabel">
+				Gia hạn bài đăng
+			</h1>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			<form>
+				<div class="form-group">
+				  <label for="deletePassword">Nhập hạn mới cho bài đăng</label>
+				  <input type="date" class="form-control" name="newExpireDate"
+				  id="newExpireDate">
+				</div>
+            </form>
+            <h1>Giá cần thanh toán: </h1>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+			<button type="button" class="btn btn-primary"
+              data-dismiss="modal">
+                  Xác nhận
+            </button>
+		</div>
+		</div>
+	</div>
+</div>
