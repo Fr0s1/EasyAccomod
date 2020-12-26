@@ -6,18 +6,18 @@
 
         <form [formGroup]="account" (ngSubmit)="signIn()" enctype="multipart/form-data">
             <div class="cross-validation">
-                <label for="name"><b>Username</b></label>
+                <label for="name"><b>Tên người dùng</b></label>
 
                 <input class="input100 form-control" id="name" name="username" type="text" formControlName="username">
 
-                <label for="password"><b>Password</b></label>
+                <label for="password"><b>Mật khẩu</b></label>
 
                 <input class="input100 form-control" id="password" name="password" type="password"
                     formControlName="password">
             </div>
-            <button class="btn pink" type="submit">SIGN IN</button>
+            <button class="btn pink" type="submit">ĐĂNG NHẬP</button>
             <a routerLink="/register">
-                <button class="btn pink">DON'T HAVE AN ACCOUNT? SIGN UP</button>
+                <button class="btn pink">CHƯA CÓ TÀI KHOẢN? ĐĂNG KÝ NGAY!</button>
             </a>
             <span *ngIf="loginMessage">{{loginMessage}}</span>
         </form>

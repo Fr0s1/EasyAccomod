@@ -52,9 +52,9 @@ export class LogInComponent implements OnInit {
       Swal.fire({
         position: 'top-end',
         icon: 'error',
-        title: 'Oops...',
-        text: 'Wrong username or password!',
-        footer: '<a href>Forgor password?</a>',
+        title: 'Không thể đăng nhập',
+        text: 'Tên người dùng hoặc mật khẩu không chính xác!',
+        footer: '<a href>Quên mật khẩu?</a>',
         width: "400px",
       })
       return throwError(err);

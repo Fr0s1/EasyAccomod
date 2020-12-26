@@ -23,6 +23,7 @@ import { VerifyReportComponent } from './admin/verify/reports/verify-report.comp
 import { ChatComponent } from './chat/chat.component'
 import { NotificationComponent } from './notification/notification.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { EditPostComponent } from './edit-post/edit-post.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
@@ -47,6 +48,11 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   {
     path: 'create/post', component: CreatePostComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Landlord, Role.Admin] } // Only account with right type can access
+  },
+  {
+    path: 'edit/:id', component: EditPostComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.Landlord, Role.Admin] } // Only account with right type can access
   },

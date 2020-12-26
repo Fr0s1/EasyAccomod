@@ -8,54 +8,52 @@
             <div class="cross-validation">
                 <div class="form-row" formGroupName="name">
                     <div class="col">
-                        <label for="firstName"><b>First Name</b></label>
+                        <label for="firstName"><b>Họ</b></label>
                         <input type="text" class="form-control" placeholder="First name" name="firstName"
                             formControlName="firstName">
                     </div>
                     <div class="col">
-                        <label for="lastName"><b>Last Name</b></label>
+                        <label for="lastName"><b>Tên</b></label>
                         <input type="text" class="form-control" placeholder="Last name" name="lastName"
                             formControlName="lastName">
                     </div>
                 </div>
 
-                <label for="name"><b>Username</b></label>
+                <label for="name"><b>Tên tài khoản</b></label>
                 <input class="input100 form-control" id="name" name="username" type="text" formControlName="username">
 
-                <label for="psw"><b>Password</b></label>
+                <label for="psw"><b>Mật khẩu</b></label>
                 <input class="input100 form-control" id="password" name="password" type="password"
                     formControlName="password">
 
-                <label for="confirmPsw"><b>Confirm Password</b></label>
+                <label for="confirmPsw"><b>Xác nhận mật khẩu</b></label>
                 <input class="input100 form-control" id="confirmPassword" name="confirmPassword" type="password">
 
-                <label for="accountType"><b>Account Type</b></label>
+                <label for="accountType"><b>Loại tài khoản</b></label>
                 <select class="form-control" name="accountType" formControlName="accountType">
-                    <option>Landlord</option>
-                    <option>Renter</option>
+                    <option>Chủ nhà trọ</option>
+                    <option>Người đi thuê</option>
                 </select>
 
-                <label for="idCard"><b>ID Card Number</b></label>
+                <label for="idCard"><b>Số chứng minh thư</b></label>
                 <input class="input100 form-control" id="idCard" name="idCard" type="text" formControlName="idCard">
 
-                <label for="phoneNumber"><b>Phone number</b></label>
+                <label for="phoneNumber"><b>Số điện thoại</b></label>
                 <input class="input100 form-control" id="phoneNumber" name="phoneNumber" type="text"
                     formControlName="phoneNumber">
 
                 <label for="email"><b>Email</b></label>
                 <input class="input100 form-control" id="email" name="email" type="email" formControlName="email">
 
-                <label for="address"><b>Address</b></label>
+                <label for="address"><b>Địa chỉ</b></label>
                 <textarea class="form-control" id="address" name="address" rows="3"
                     formControlName="address"></textarea>
             </div>
-            <button class="btn pink" type="submit">REGISTER</button>
+            <button class="btn pink" type="submit">ĐĂNG KÝ</button>
             <a routerLink="/login">
-                <button class="btn pink">ALREADY HAVE AN ACCOUNT? SIGN IN</button>
+                <button class="btn pink">ĐÃ CÓ TÀI KHOẢN? ĐĂNG NHẬP</button>
             </a>
             <span *ngIf="message">{{message}}</span>
         </form>
     </div>
 </div>
-
-<app-footer></app-footer>
