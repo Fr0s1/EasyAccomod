@@ -90,12 +90,12 @@
                     <legend class="col-form-label col-sm-2 pt-0">Điều hòa</legend>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="ac" id="aircondition1" name="airconditioner"
-                            value="Có" formControlName="airconditioner">
+                            [value]="true" formControlName="airconditioner">
                         <label class="form-check-label" for="aircondition1">Có</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="ac" id="aircondition2" name="airconditioner"
-                            value="Không" formControlName="airconditioner">
+                            [value]="false" formControlName="airconditioner">
                         <label class="form-check-label" for="aircondition2">Không</label>
                     </div>
                 </div>
@@ -104,12 +104,12 @@
                     <legend class="col-form-label col-sm-2 pt-0">Ban công</legend>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="balcony" id="balcony1"
-                            formControlName="balcony" value="Có">
+                            formControlName="balcony" [value]="true">
                         <label class="form-check-label" for="balcony1">Có</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="balcony" id="balcony2"
-                            formControlName="balcony" value="Không">
+                            formControlName="balcony" [value]="false">
                         <label class="form-check-label" for="balcony2">Không</label>
                     </div>
                 </div>
