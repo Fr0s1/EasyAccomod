@@ -53,7 +53,7 @@ export class ExtendDurationComponent implements OnInit {
     let hour = time[0]
     let minute = time[1]
     let second = time[2].split(".")[0]
-    return `${parseInt(day) + 1}-${month}-${year}`
+    return `${day}-${month}-${year}`
   }
 
   resultDate(dateTime) {
@@ -66,7 +66,7 @@ export class ExtendDurationComponent implements OnInit {
     let hour = time[0]
     let minute = time[1]
     let second = time[2].split(".")[0]
-    return `${year}-${month}-${parseInt(day) + 1}`
+    return `${year}-${month}-${day}`
   }
 
   updatePayment(postID, postName, username, newDate) {

@@ -165,8 +165,13 @@ export class ProfileComponent implements OnInit {
       .subscribe(data => {
         this.extendPostID = postID
         this.postExpiredTime = this.reformatDate(data[0].expiredTime);
-        this.HTMLminDate = this.getHTMLDateFormat(this.postExpiredTime)
-        console.log(this.postExpiredTime);
+        let date = new Date(this.processDateForCalculation(this.postExpiredTime));
+        console.log(date)
+        date.setDate(date.getDate() + 1);
+        date.setHours(7);
+        console.log(date)
+        this.HTMLminDate = date.toISOString().split('T')[0];
+        console.log(this.HTMLminDate)
       })
   }
 
@@ -195,7 +200,7 @@ export class ProfileComponent implements OnInit {
             let requestData = {
               postID: this.extendPostID,
               price: this.extendCost,
-              newExpireDate: input.value + " " + "00:00:00",
+              newExpireDate: input.value + " " + "07:00:00",
             }
             this.extendService.createRequest(requestData)
               .subscribe(result => {
