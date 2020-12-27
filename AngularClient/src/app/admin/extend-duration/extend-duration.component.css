@@ -1,0 +1,28 @@
+.container {
+    margin-top: 20px;
+}
+
+th, td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+th, td {
+    border: 1px solid black;
+    text-align: center;
+    width: fit-content;
+}
+
+.noti {
+    background-color: rgb(207, 232, 220);
+    border: 2px solid rgb(79, 185, 227);
+    border-radius: 5px;
+    width: fit-content;
+    padding: 10px;
+    height: fit-content;
+}

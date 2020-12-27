@@ -46,6 +46,18 @@
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                 </div>
                             </div>
+                            <div *ngIf="noti.type==4">
+                                <div class="alert alert-success">
+                                    <strong class="default"><i class="fa fa-check"></i></strong> Admin đã phê duyệt gia hạn bài đăng <strong>{{noti.postName}}</strong> của bạn.
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                </div>
+                            </div>
+                            <div *ngIf="noti.type==5">
+                                <div class="alert alert-danger">
+                                    <strong class="default"><i class="fa fa-check"></i></strong> Admin đã từ chối gia hạn bài đăng <strong>{{noti.postName}}</strong> của bạn.
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                </div>
+                            </div>
                         </div>
                   </div>
                 </div>

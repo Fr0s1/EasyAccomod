@@ -1,1 +1,37 @@
-<p>extend-duration works!</p>
+<div  class="container">
+    <div>
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>username</th>
+                    <th>ID bài đăng</th>
+                    <th>Tên bài đăng</th>
+                    <th>Hạn bài đăng mới </th>
+                    <th>Số tiền cần trả</th>
+                    <th>Chấp nhận</th>
+                    <th>Hủy bỏ</th>
+                </tr>
+            </thead>
+
+            <tbody *ngIf="loaded">
+                <tr *ngFor="let post of postOfRequests; let i = index">
+                    <td>{{post.accountUsername}}</td>
+                    <td>{{post.postID}}</td>
+                    <td>{{post.postName}}</td>
+                    <td>{{reformatDate(extendRequests[i].newExpireDate)}}</td>
+                    <td>{{extendRequests[i].price}}</td>
+                    <td>
+                        <button class="btn btn-primary"
+                            (click)="updatePayment(post.postID, post.postName, post.accountUsername, extendRequests[i].newExpireDate)">Đã thanh toán và phê duyệt
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary"
+                            (click)="denyPayment(post.postID, post.postName, post.accountUsername)">Từ chối 
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
