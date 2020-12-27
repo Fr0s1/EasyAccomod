@@ -23,7 +23,7 @@ comments = require('./comments.model')(sequelize, DataTypes)
 userFavorites = require('./userFavorite.model')(sequelize, DataTypes)
 reportedPosts = require('./reported-posts.model')(sequelize, DataTypes)
 notifications = require('./notification.model')(sequelize, DataTypes)
-extendRequests = require('./extendRequests.model')(sequelize, DataTypes)
+extendRequests = require('./extendRequest.model')(sequelize, DataTypes)
 
 // Liên kết 1 - 1
 posts.belongsTo(rooms, { foreignKey: 'roomID' })

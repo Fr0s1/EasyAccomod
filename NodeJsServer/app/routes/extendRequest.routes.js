@@ -4,7 +4,7 @@ module.exports = app => {
     var router = require("express").Router();
   
     // Create a new extend duration request
-    router.post("/", extendRequests.create);
+    router.post("/", extendRequests.createRequest);
   
     // Retrieve all request
     router.get("/", extendRequests.getAll);

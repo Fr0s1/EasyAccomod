@@ -4,17 +4,19 @@ const Op = db.Sequelize.Op;
 
 exports.createRequest = (req, res) => {
     // Validate request
-    if (!req.body.postID || !req.body.newExpireTime || !req.body.price) {
+    if (!req.body.postID || !req.body.newExpireDate || !req.body.price) {
       res.status(400).send({
         message: "Content can not be empty!"
       });
       return;
     }
+
+    console.log(req.body.newExpireTime)
   
     // Create a notification
     const extendRequest = {
       postID: req.body.postID,
-      newExpireTime: req.body.newExpireTime,
+      newExpireDate: req.body.newExpireDate,
       price: req.body.price
     };
   
@@ -48,15 +50,19 @@ exports.getAll = (req, res) => {
 exports.getOne = (req, res) => {
     const id = req.params.id;
 
-    ExtendRequest.findByPk(id)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error retrieving request with id=" + id
-            });
+    ExtendRequest.findOne({
+        where: {
+            postID: id
+        }
+    })
+    .then(data => {
+        res.send(data);
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: "Error retrieving request with id=" + id
         });
+    });
 }
 
 exports.delete = (req, res) => {
