@@ -86,6 +86,6 @@ export class PostService {
   }
 
   updatePostAndRoomInfo(form: FormData) {
-    return this.http.put(this.postUrl + `form`, form)
+    return this.http.put(this.postUrl + `/form`, form)
   }
 }
