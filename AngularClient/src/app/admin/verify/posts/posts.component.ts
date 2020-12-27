@@ -61,6 +61,7 @@ export class AdminPostsComponent implements OnInit {
     let username = event.target.parentElement.nextSibling.nextSibling.nextSibling.innerHTML;
     let status = event.target.parentElement.parentElement.lastChild.innerHTML;
 
+
     if (event.target.checked) {
       if (!this.selectedPostsID.includes(postID)) {
         this.selectedPostsID.push(postID);
@@ -74,6 +75,8 @@ export class AdminPostsComponent implements OnInit {
       this.selectedUsername = this.selectedUsername.filter(value => value != username)
       this.selectedPostsStatus = this.selectedPostsStatus.filter(value => value != status)
     }
+
+    console.log(this.selectedPostsID)
   }
 
   message: string
@@ -81,13 +84,14 @@ export class AdminPostsComponent implements OnInit {
   operation: boolean = false
   verifyPost() {
     for (let index in this.selectedPostsID) {
+      console.log(index)
       let postID = this.selectedPostsID[index];
       let postName = this.selectedPostsName[index];
       let accountUsername = this.selectedUsername[index];
 
-      this.postService.updatePost(postID, { verifiedStatus: 1 })
+      this.postService.updatePost(postID, { verifiedStatus: true })
         .subscribe(data => {
-
+          console.log(data)
           if (Object(data).message) {
 
             this.operation = true

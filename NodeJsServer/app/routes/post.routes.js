@@ -60,7 +60,7 @@ module.exports = app => {
     router.post("/", authJwt.verifyToken, getNextRoomID, upload.any(), post.create)
 
     // Update post and room info by submitting form
-    router.put("/:id", upload.any(), post.updatePostByForm)
+    router.put("edit/:id", upload.any(), post.updatePostByForm)
 
     // Get preview posts by requirement for homepage
     router.get("/preview", post.getPreviewPosts)

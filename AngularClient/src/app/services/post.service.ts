@@ -86,6 +86,6 @@ export class PostService {
   }
 
   updatePostAndRoomInfo(postID: number, form: FormData) {
-    return this.http.put(this.postUrl + `/${postID}`, form)
+    return this.http.put(this.postUrl + `edit/${postID}`, form)
   }
 }
