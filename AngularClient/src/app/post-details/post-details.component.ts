@@ -36,6 +36,9 @@ export class PostDetailsComponent implements OnInit {
   textLoaded = false
   result
 
+  postExpiredTime
+  HTMLminDate
+
   postUrl = 'http://localhost:8080/api/posts'
 
   createRange(number) {
@@ -184,9 +187,36 @@ export class PostDetailsComponent implements OnInit {
     }
   }
 
+  reformatDate(dateTime) {
+    let dateTimeArr = dateTime.split("T")
+    let date = dateTimeArr[0].split("-")
+    let day = date[2]
+    let month = date[1]
+    let year = date[0]
+    let time = dateTimeArr[1].split(":")
+    let hour = time[0]
+    let minute = time[1]
+    let second = time[2].split(".")[0]
+    return `${day}-${month}-${year} ${hour}:${minute}:${second}`
+  }
+
+  getHTMLDateFormat(dateTime) {
+    let date = dateTime.split(" ")[0].split("-")
+    return `${date[2]}-${date[1]}-${date[0]}`
+  }
+
   showReportArea: boolean = false;
   showReportInput() {
     this.showReportArea = !this.showReportArea
+  }
+
+  getExtendPostInfo(postID) {
+    this.postService.getPostsByQuery(`?postID=${postID}`)
+      .subscribe(data => {
+        this.postExpiredTime = this.reformatDate(data[0].expiredTime);
+        this.HTMLminDate = this.getHTMLDateFormat(this.postExpiredTime)
+        console.log(this.postExpiredTime);
+      })
   }
 
   sent: boolean = false;
