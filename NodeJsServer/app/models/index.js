@@ -23,9 +23,11 @@ comments = require('./comments.model')(sequelize, DataTypes)
 userFavorites = require('./userFavorite.model')(sequelize, DataTypes)
 reportedPosts = require('./reported-posts.model')(sequelize, DataTypes)
 notifications = require('./notification.model')(sequelize, DataTypes)
+extendRequests = require('./extendRequest.model')(sequelize, DataTypes)
 
 // Liên kết 1 - 1
 posts.belongsTo(rooms, { foreignKey: 'roomID' })
+extendRequests.belongsTo(posts, { foreignKey: 'postID' })
 accounts.belongsTo(users, { foreignKey: 'userIdCard' }) // 1 người dùng chỉ có 1 tài khoản duy nhất
 // userFavorites.belongsTo(accounts, {foreignKey: 'username'})
 // userFavorites.belongsTo(posts, {foreignKey: 'postID'})
@@ -55,7 +57,8 @@ const db = {
   comments,
   userFavorites,
   reportedPosts,
-  notifications
+  notifications,
+  extendRequests
 };
 
 db.Sequelize = Sequelize;

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 import { PostService } from '../../services/post.service'
 
 @Component({
@@ -55,7 +56,14 @@ export class PaymentComponent implements OnInit {
     this.postService.updatePost(postID, { postID, paidAmount, paymentStatus, postTime, expiredTime })
       .subscribe(data => {
         if (Object(data).message) {
-          this.verifiedSuccessfully = true
+          Swal.fire({
+            icon: 'success',
+            title: 'Thanh toán thành công',
+            showConfirmButton: true,
+          })
+          .then((result) => {
+            location.reload();
+          })
         }
       })
   }
