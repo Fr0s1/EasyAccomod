@@ -5,6 +5,7 @@ import { AccountService } from '../services/account.service';
 import { FavoriteService } from '../services/favorite.service'
 import { AuthService } from '../services/auth.service';
 import { Account } from '../_model/account';
+import { ExtendService} from '../services/extend.service'
 import { NotificationService} from '../services/notification.service'
 import Swal from 'sweetalert2';
 
@@ -18,7 +19,8 @@ export class PostDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private postService: PostService,
     private accountService: AccountService, private authService: AuthService,
     private favoriteSerive: FavoriteService, private router: Router,
-    private notificationService: NotificationService) { }
+    private notificationService: NotificationService,
+    private extendService: ExtendService) { }
 
   currentAccount: Account
   postID: number // Current post
@@ -36,6 +38,12 @@ export class PostDetailsComponent implements OnInit {
   textLoaded = false
   result
 
+  postExpiredTime
+  HTMLminDate
+  extendCost
+  extendPostID
+  postDayCost
+
   postUrl = 'http://localhost:8080/api/posts'
 
   createRange(number) {
@@ -49,6 +57,8 @@ export class PostDetailsComponent implements OnInit {
     this.currentAccount = this.authService.currentUserValue;
 
     this.route.paramMap.subscribe(params => {
+      this.getPostCost()
+
       this.postID = +params.get('id')
 
       if (this.currentAccount) {
@@ -184,9 +194,107 @@ export class PostDetailsComponent implements OnInit {
     }
   }
 
+  reformatDate(dateTime) {
+    let dateTimeArr = dateTime.split("T")
+    let date = dateTimeArr[0].split("-")
+    let day = date[2]
+    let month = date[1]
+    let year = date[0]
+    let time = dateTimeArr[1].split(":")
+    let hour = time[0]
+    let minute = time[1]
+    let second = time[2].split(".")[0]
+    return `${day}-${month}-${year}`
+  }
+
+  processDateForCalculation(dateTime) {
+    let date = dateTime.split("-")
+    let day = date[0]
+    let month = date[1]
+    let year = date[2]
+    return `${month}-${day}-${year}`
+  }
+
+  getHTMLDateFormat(dateTime) {
+    let date = dateTime.split("-")
+    return `${date[2]}-${date[1]}-${date[0]}`
+  }
+
+  uploadURL = 'http://localhost:8080/api/posts'
+  getPostCost() {
+    this.postService.getUploadFee(this.uploadURL + '/uploadFee')
+      .subscribe(data => { 
+        this.postDayCost = (data as any).weekCost / 7;
+        console.log(this.postDayCost);
+      });
+  }
+
+  calculateCost() {
+    let input = document.querySelector('input')
+    let newDate = new Date(input.value + " " + "07:00:00")
+    let oldDate = new Date(this.processDateForCalculation(this.postExpiredTime))
+    console.log("New: ", newDate);
+    console.log("Old: ", oldDate);
+    this.extendCost = this.postDayCost * (newDate.getTime() - oldDate.getTime()) / (1000 * 3600 * 24);
+  }
+
+
   showReportArea: boolean = false;
   showReportInput() {
     this.showReportArea = !this.showReportArea
+  }
+
+  getExtendPostInfo() {
+    this.extendPostID = this.postID
+    this.postExpiredTime = this.reformatDate(this.postInfo.expiredTime);
+    let date = new Date(this.processDateForCalculation(this.postExpiredTime));
+    console.log(date)
+    date.setDate(date.getDate() + 1);
+    date.setHours(7);
+    console.log(date)
+    this.HTMLminDate = date.toISOString().split('T')[0];
+    console.log(this.HTMLminDate)
+  }
+
+  createExtendRequest() {
+    if (this.extendCost <= 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Dữ liệu không hợp lệ',
+        text: 'Vui lòng chọn ngày hợp lệ cho hạn mới',
+        showConfirmButton: true
+      })
+    }
+    else {
+      this.extendService.getOneRequest(this.extendPostID)
+        .subscribe(data => {
+          if (data) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Đã tồn tại yêu cầu gia hạn cho bài đăng này',
+              text: 'Bạn chỉ có thể có tối đa 1 yêu cầu gia hạn cho mỗi bài đăng',
+              showConfirmButton: true
+            })
+          }
+          else {
+            let input = document.querySelector('input')
+            let requestData = {
+              postID: this.extendPostID,
+              price: this.extendCost,
+              newExpireDate: input.value + " " + "07:00:00",
+            }
+            this.extendService.createRequest(requestData)
+              .subscribe(result => {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Gửi yêu cầu gia hạn thành công',
+                  text: 'Bạn sẽ nhận được thông báo khi thanh toán và yêu cầu được admin phê duyệt',
+                  showConfirmButton: true
+                })
+              })
+          }
+        })
+    }
   }
 
   sent: boolean = false;
