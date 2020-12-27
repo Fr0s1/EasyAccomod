@@ -141,7 +141,7 @@ export class EditPostComponent implements OnInit {
     var form = document.querySelector('form')
     var formData = new FormData(form)
 
-    this.postService.updatePostAndRoomInfo(this.postID, formData).subscribe(data => this.oldImagesToDelete.forEach(fileName => this.postService.deleteRoomImage(this.postInfo.roomID, fileName).subscribe()))
+    this.postService.updatePostAndRoomInfo(formData).subscribe(data => this.oldImagesToDelete.forEach(fileName => this.postService.deleteRoomImage(this.postInfo.roomID, fileName).subscribe()))
   }
 
   uploadURL = 'http://localhost:8080/api/posts'

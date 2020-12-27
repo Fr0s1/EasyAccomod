@@ -166,7 +166,6 @@ exports.updatePostByID = async (req, res) => {
 }
 
 exports.updatePostByForm = async (req, res) => {
-
     try {
         const formData = req.body // các thông tin trong http body
         console.log(formData)
