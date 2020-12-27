@@ -19,11 +19,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require("./app/models");
-// db.sequelize.sync();
+// db.reportedPosts.sync();
 // // drop the table if it already exists
-// db.sequelize.sync({ force: true }).then(() => {
-//   console.log("Drop and re-sync db.");
-// });
+db.reportedPosts.sync({ force: true }).then(() => {
+  console.log("Drop and re-sync db.");
+});
 
 // simple route
 app.get("/", (req, res) => {
