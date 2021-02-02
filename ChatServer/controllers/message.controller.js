@@ -3,6 +3,8 @@ const Message = db.Messages
 const Sequelize = db.Sequelize
 const ContactList = db.ContactList
 const { Op } = require('sequelize')
+const path = require('path')
+const fs = require('fs')
 
 // Save message to db
 exports.saveMessage = async (req, res) => {
@@ -12,7 +14,7 @@ exports.saveMessage = async (req, res) => {
         let newMessage = {
             content: data.content,
             sender: data.sender,
-            receiver: data.receiver
+            receiver: data.receiver,
         }
 
         let contact = await ContactList.findAll({
@@ -79,4 +81,37 @@ exports.getContactList = async (req, res) => {
     })
 
     res.send(result)
+}
+
+exports.getImagesByMessageID = (req, res) => {
+    let messageID = req.params.messageID
+
+    let messageImagesPath = path.join(__dirname, `../messageImages/${messageID}`)
+
+
+    if (fs.existsSync(messageImagesPath)) {
+        let messageImagesDir = fs.readdirSync(messageImagesPath)
+
+        res.send(messageImagesDir)
+
+    } else {
+        res.send({ error: "Directory not exist" })
+    }
+}
+
+exports.getImageByFileName = async (req, res) => {
+    let fileName = req.params.fileName
+    let messageID = req.params.messageID
+
+    try {
+        let imagePath = path.join(__dirname, `../messageImages/${messageID}/${fileName}`)
+
+        if (fs.existsSync(imagePath)) {
+            res.sendFile(imagePath)
+        } else {
+            res.send({ message: "Can't find image with given name" })
+        }
+    } catch (err) {
+        res.send({ error: "Can't get image" })
+    }
 }

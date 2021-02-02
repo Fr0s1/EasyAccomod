@@ -69,3 +69,8 @@ body {
 .card {
     overflow-x: hidden;
 }
+
+.message-image {
+    width: 100px;
+    object-fit: contain;
+}

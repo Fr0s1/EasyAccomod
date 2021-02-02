@@ -3,6 +3,8 @@ import { io } from 'socket.io-client'
 import { AuthService } from '../services/auth.service'
 import { MessageService } from '../services/messages.service';
 import { AccountService } from '../services/account.service'
+import { DomSanitizer } from '@angular/platform-browser'
+import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 const SOCKET_ENDPOINT = 'http://localhost:3000'
 
@@ -17,6 +19,8 @@ export class ChatComponent implements OnInit {
     private authService: AuthService,
     private messageService: MessageService,
     private accountService: AccountService,
+    private sanitizer: DomSanitizer,
+    private fb: FormBuilder
   ) { }
 
   currentAccount // Current logged in user
@@ -24,6 +28,9 @@ export class ChatComponent implements OnInit {
   socket // Socket.io socket
   contactList // The list of accounts which the logged in user has sent messages before
   conversationHistory // Messages between 2 accounts
+  imgUrls = []
+
+  message: FormGroup
 
   @ViewChildren('messages') messages: QueryList<any>;
   @ViewChild('content') content: ElementRef;
@@ -40,6 +47,11 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.message = this.fb.group({
+      content: [''],
+      image: ['']
+    })
+
     this.currentAccount = this.authService.currentUserValue
 
     // Connect to chat server
@@ -73,27 +85,48 @@ export class ChatComponent implements OnInit {
   sendMessage(event) {
     var messageContent = event.target.firstChild
 
-    if (messageContent.value.length > 0) {
+    let message: FormData = new FormData(event.target)
+
+    message.append('sender', this.currentAccount.username)
+    message.append('receiver', this.receiver)
+
+    if (messageContent.value.length > 0 || this.imgUrls.length > 0) {
 
       let time = new Date()
 
       let newMessage = {
-        sender: this.currentAccount.username, content: messageContent.value, receiver: this.receiver, createdAt: time
+        sender: this.currentAccount.username, content: messageContent.value, receiver: this.receiver, createdAt: time, images: this.imgUrls
       }
+
       this.conversationHistory.push(newMessage)
 
-      this.messageService.sendMessage(this.currentAccount.username, this.receiver, messageContent.value).subscribe(data => {
+      this.messageService.sendMessage(message).subscribe(data => {
         this.socket.emit('chat message', newMessage)
-        messageContent.value = ''
-        messageContent.focus()
       })
+
+      this.imgUrls = []
+      this.message.reset()
     }
+  }
+
+  displayImage(files) {
+    for (let i = 0; i < files.length; i++) {
+      let reader = new FileReader()
+
+      reader.readAsDataURL(files[i])
+
+      reader.onloadend = () => {
+        this.imgUrls.push(reader.result)
+      }
+    }
+
+    console.log(this.imgUrls)
   }
 
   // Switch to new account tab
   changeReceiver(event) {
     this.receiver = event.target.innerHTML
-  
+
     this.getConversation(this.receiver)
   }
 
@@ -101,10 +134,54 @@ export class ChatComponent implements OnInit {
     // Change account display name at top bar
     let currentContact = document.querySelector('.current-contact')
     currentContact.innerHTML = this.receiver
-    
+
     // Get conversation history with this new selected account
-    this.messageService.receiverMessageInConversation(this.currentAccount.username, receiver).subscribe(messagesList => {
+    this.messageService.receiveMessageInConversation(this.currentAccount.username, receiver).subscribe(messagesList => {
       this.conversationHistory = messagesList
+      // For each message, get all images in message by message's id
+      this.conversationHistory.forEach(message => {
+        message.images = []
+
+        this.messageService.getImagesInMessageByID(message.messageID).subscribe(fileNames => {
+          // After receiving an array of filenames, make http request to get each image
+          let array: any
+          array = fileNames
+
+          if (array.length > 0) {
+            array.forEach(fileName => {
+              this.messageService.getImageInMessage(message.messageID, fileName).subscribe(file => {
+                // Convert from Blob to img [src] tag
+                let reader = new FileReader()
+
+                reader.readAsDataURL(file)
+
+                reader.onloadend = () => {
+                  message.images.push(reader.result)
+                }
+              })
+            })
+          }
+        })
+      })
     })
+  }
+
+
+  changeModal(event) {
+    let modal = document.getElementById("myModal");
+
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    let modalImg = document.getElementById("img01");
+
+    console.log(modalImg)
+    modal.style.display = "block";
+    modalImg.src = event.target.src;
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  closeModal() {
+    let modal = document.getElementById("myModal");
+
+    modal.style.display = "none";
   }
 }

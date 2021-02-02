@@ -83,14 +83,38 @@
                             <div class="font-weight-bold mb-1">
                                 {{message.sender === receiver ? message.sender : 'You'}}</div>
                             {{message.content}}
+
+                            <div>
+                                <img *ngFor="let img of message.images" [src]="img" [ngClass]="'message-image'"
+                                    (click)="changeModal($event)">
+
+                                <div id="myModal" class="modal">
+
+                                    <!-- The Close Button -->
+                                    <span class="close" (click)="closeModal()">&times;</span>
+
+                                    <!-- Modal Content (The Image) -->
+                                    <img #modalImg class="modal-content" id="img01">
+
+                                    <!-- Modal Caption (Image Text) -->
+                                    <div id="caption"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="flex-grow-0 py-3 px-4 border-top">
-                    <form class="input-group" (ngSubmit)="sendMessage($event)" *ngIf="receiver">
-                        <input type="text" class="form-control" placeholder="Type your message">
+                    <form class="input-group" (ngSubmit)="sendMessage($event)" *ngIf="receiver" [formGroup]="message"
+                        enctype="multipart/form-data">
+                        <input type="text" class="form-control" placeholder="Type your message"
+                            formControlName="content" name="content">
                         <button class="btn btn-primary" type="submit">Send</button>
+                        <input #imgs type="file" class="form-control-file" multiple (change)=displayImage(imgs.files)
+                            formControlName="image" name="images">
+                        <div class="row">
+                            <img *ngFor="let imgUrl of imgUrls" [src]="imgUrl" height="100px">
+                        </div>
                     </form>
                 </div>
             </div>

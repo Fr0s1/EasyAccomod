@@ -81,7 +81,12 @@ export class ProfileComponent implements OnInit {
     const receiver = this.receiver
     const content = this.messageContent.value
 
-    this.messageService.sendMessage(sender, receiver, content).subscribe(data => console.log(data))
+    let message = new FormData()
+
+    message.append('sender', sender)
+    message.append('receiver', receiver)
+    message.append('content', content)
+    this.messageService.sendMessage(message).subscribe(data => console.log(data))
   }
 
   uploadURL = 'http://localhost:8080/api/posts'

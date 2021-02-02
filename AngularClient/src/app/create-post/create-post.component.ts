@@ -4,8 +4,8 @@ import { PostService } from '../services/post.service';
 import { AccountService } from '../services/account.service';
 import { AuthService } from '../services/auth.service';
 import { Role } from '../_model/role';
-import { formatDate } from '@angular/common';
 import Swal from 'sweetalert2';
+import * as validator from '../_helpers/validators'
 
 @Component({
   selector: 'app-create-post',
@@ -76,7 +76,7 @@ export class CreatePostComponent implements OnInit {
       var reader = new FileReader();
       this.roomImages.push(files[i])
       reader.readAsDataURL(files[i]); // read file as data url
-
+      
       reader.onload = (event) => { // called once readAsDataURL is completed
         this.imgUrls.push(event.target.result)
         this.postModel.patchValue({
