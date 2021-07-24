@@ -1,6 +1,6 @@
 const Backend = {
-    url: 'localhost:8081',
-    chat_server_backend: 'localhost:3000'    
+    url: 'ea-backend:8081',
+    chat_server_backend: 'ea-chatapp:3000'    
 }
 
 export { Backend }

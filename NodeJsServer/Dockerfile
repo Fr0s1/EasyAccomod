@@ -1,6 +1,6 @@
 FROM node:16-alpine3.11
 
-WORKDIR /nodejs-server
+WORKDIR /nodejsserver
 
 COPY package.json .
 

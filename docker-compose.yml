@@ -1,47 +1,62 @@
 version: "3.7"
 
 services:    
-    ea-chat:
-        image: ea-chatapp
-        working_dir: /chat-server
-        command: npm run server
-        ports: 
-            - 3000:3000
-        environment: 
-            MYSQL_HOST: ea-db
-            MYSQL_USER: root
-            MYSQL_PASSWORD: 123456
-            MYSQL_DB: easyaccomod
-        volumes: 
-            - message-images:/ea-chatapp/messageImages
+    ea-angular:
+        image: frost2203/ea-angular
+        working_dir: /angular
+        ports:
+            - 4200:80
         networks: 
-            - ea-network
-            
-    ea-backend:
-        image: ea-backend
-        working_dir: /nodejs-server
-        command: npm run server
-        ports: 
-            - 8081:8081
-        environment: 
-            MYSQL_HOST: ea-db
-            MYSQL_USER: root
-            MYSQL_PASSWORD: 123456
-            MYSQL_DB: easyaccomod
-        volumes: 
-            - backend-room-images:/nodejs-server/roomImages
-        networks: 
-            - ea-network
+            - ea-network 
+        build: AngularClient
 
     ea-db:
         image: mysql
         volumes: 
             - ea-mysql-data:/var/lib/mysql
         environment: 
-            MYSQL_ROOT_PASSWORD: 123456
+            MYSQL_ROOT_PASSWORD: hieu123
             MYSQL_DATABASE: easyaccomod
         networks: 
             - ea-network
+            
+    ea-chatapp:
+        image: frost2203/ea-chatapp
+        working_dir: /chatserver
+        command: npm run server
+        ports: 
+            - 3000:3000
+        environment: 
+            MYSQL_HOST: ea-db
+            MYSQL_USER: root
+            MYSQL_PASSWORD: hieu123
+            MYSQL_DB: easyaccomod
+        volumes: 
+            - message-images:/chatserver/messageImages
+        networks: 
+            - ea-network
+        build: ChatServer
+        depends_on: 
+            - ea-db
+            
+    ea-backend:
+        image: frost2203/ea-backend
+        working_dir: /nodejsserver
+        command: npm run server
+        ports: 
+            - 8081:8081
+        environment: 
+            MYSQL_HOST: ea-db
+            MYSQL_USER: root
+            MYSQL_PASSWORD: hieu123
+            MYSQL_DB: easyaccomod
+        volumes: 
+            - backend-room-images:/nodejsserver/roomImages
+        networks: 
+            - ea-network
+        build: NodeJsServer
+        depends_on: 
+            - ea-db
 
 volumes:
     message-images:
