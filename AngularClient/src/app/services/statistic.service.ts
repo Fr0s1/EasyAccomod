@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Backend } from '../_helpers/backend';
 
 @Injectable({
     providedIn: 'root'
 })
 export class StatisticService {
-    route = 'http://localhost:8080/api/stats'
+    route = `http://${Backend.url}/api/stats`
 
     constructor(private http: HttpClient) { }
 

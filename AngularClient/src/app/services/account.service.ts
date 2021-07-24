@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Backend } from '../_helpers/backend';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +8,9 @@ import { HttpClient } from '@angular/common/http';
 export class AccountService {
   constructor(private http: HttpClient) { }
 
-  accountUrl = 'http://localhost:8080/api/accounts'
-  userUrl = 'http://localhost:8080/api/users'
+  
+  accountUrl = `http://${Backend.url}/api/accounts`
+  userUrl = `http://${Backend.url}/api/users`
 
   getAccountByQuery(query: string) {
     return this.http.get(this.accountUrl + query, { responseType: 'json' })

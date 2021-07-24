@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Backend } from '../_helpers/backend';
 
-const baseUrl = 'http://localhost:8080/api/userfavorites';
+const baseUrl = `http://${Backend.url}/api/userfavorites`;
 
 @Injectable({
   providedIn: 'root'

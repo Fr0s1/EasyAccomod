@@ -1,0 +1,52 @@
+version: "3.7"
+
+services:    
+    ea-chat:
+        image: ea-chatapp
+        working_dir: /chat-server
+        command: npm run server
+        ports: 
+            - 3000:3000
+        environment: 
+            MYSQL_HOST: ea-db
+            MYSQL_USER: root
+            MYSQL_PASSWORD: 123456
+            MYSQL_DB: easyaccomod
+        volumes: 
+            - message-images:/ea-chatapp/messageImages
+        networks: 
+            - ea-network
+            
+    ea-backend:
+        image: ea-backend
+        working_dir: /nodejs-server
+        command: npm run server
+        ports: 
+            - 8081:8081
+        environment: 
+            MYSQL_HOST: ea-db
+            MYSQL_USER: root
+            MYSQL_PASSWORD: 123456
+            MYSQL_DB: easyaccomod
+        volumes: 
+            - backend-room-images:/nodejs-server/roomImages
+        networks: 
+            - ea-network
+
+    ea-db:
+        image: mysql
+        volumes: 
+            - ea-mysql-data:/var/lib/mysql
+        environment: 
+            MYSQL_ROOT_PASSWORD: 123456
+            MYSQL_DATABASE: easyaccomod
+        networks: 
+            - ea-network
+
+volumes:
+    message-images:
+    backend-room-images:
+    ea-mysql-data:
+
+networks: 
+    ea-network:

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { PostService } from '../../services/post.service'
+import { Backend } from '../../_helpers/backend'
+
 
 @Component({
   selector: 'app-payment',
@@ -17,7 +19,7 @@ export class PaymentComponent implements OnInit {
 
   unpaidPostsList: any
 
-  targetURL = "http://localhost:8080/api/posts"
+  targetURL = `http://${Backend.url}/api/posts`
   getPostPaymentInfo() {
     this.postService.getPostPaymentInfo(this.targetURL + '?verifiedStatus=1&paymentStatus=0').subscribe(data => this.unpaidPostsList = data)
   }

@@ -1,9 +1,12 @@
 const app = require('express')()
 const bodyParser = require("body-parser");
 const http = require('http').createServer(app)
+
+const aws_config = require('./config/aws.config')
+
 const io = require('socket.io')(http, {
     cors: {
-        origin: "http://localhost:4200",
+        origin: aws_config.angular_url,
         methods: ["GET", "POST"]
     }
 });
@@ -11,13 +14,15 @@ const io = require('socket.io')(http, {
 const cors = require("cors");
 
 const corsOptions = {
-    origin: "http://localhost:4200",
+    origin: aws_config.angular_url
 };
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
-// const db = require("./models");
+const db = require("./models");
 // db.Messages.sync({force: true});
+db.sequelize.sync();
+
 require("./routes/message.routes")(app);
 
 const connectedUser = {}

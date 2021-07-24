@@ -5,7 +5,7 @@ import { AccountService } from '../services/account.service';
 import { AuthService } from '../services/auth.service';
 import { Role } from '../_model/role';
 import Swal from 'sweetalert2';
-import * as validator from '../_helpers/validators'
+import { Backend } from '../_helpers/backend';
 
 @Component({
   selector: 'app-create-post',
@@ -86,7 +86,7 @@ export class CreatePostComponent implements OnInit {
     }
   }
 
-  uploadURL = 'http://localhost:8080/api/posts'
+  uploadURL = `http://${Backend.url}/api/posts`
 
   sent: boolean = false;
   createPost() {

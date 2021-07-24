@@ -8,12 +8,14 @@ import { Account } from '../_model/account';
 import { ExtendService} from '../services/extend.service'
 import { NotificationService} from '../services/notification.service'
 import Swal from 'sweetalert2';
+import { Backend } from '../_helpers/backend';
 
 @Component({
   selector: 'app-post-details',
   templateUrl: './post-details.component.html',
   styleUrls: ['./post-details.component.css']
 })
+
 export class PostDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private postService: PostService,
@@ -44,7 +46,7 @@ export class PostDetailsComponent implements OnInit {
   extendPostID
   postDayCost
 
-  postUrl = 'http://localhost:8080/api/posts'
+  postUrl = `http://${Backend.url}/api/posts`
 
   createRange(number) {
     var items: number[] = [];
@@ -220,7 +222,8 @@ export class PostDetailsComponent implements OnInit {
     return `${date[2]}-${date[1]}-${date[0]}`
   }
 
-  uploadURL = 'http://localhost:8080/api/posts'
+  uploadURL = `http://${Backend.url}/api/posts`
+
   getPostCost() {
     this.postService.getUploadFee(this.uploadURL + '/uploadFee')
       .subscribe(data => { 

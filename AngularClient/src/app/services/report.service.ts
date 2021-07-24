@@ -1,12 +1,13 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
+import { Backend } from "../_helpers/backend";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ReportService {
 
-    reportUrl = 'http://localhost:8080/api/report'
+    reportUrl = `http://${Backend.url}/api/report`
 
     constructor(private http: HttpClient) { }
 

@@ -6,6 +6,7 @@ import { Account } from '../_model/account'
 import { map } from 'rxjs/operators';
 import * as bcrypt from 'bcryptjs'
 import { AccountService } from '../services/account.service'
+import { Backend } from "../_helpers/backend";
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +14,7 @@ import { AccountService } from '../services/account.service'
 export class AuthService {
     private currentAccountSubject: BehaviorSubject<Account>;
 
-    private apiUrl = 'http://localhost:8080/api/accounts'
+    private apiUrl = `http://${Backend.url}/api/accounts`
 
     constructor(private http: HttpClient, private accountService: AccountService) {
         this.currentAccountSubject = new BehaviorSubject<Account>(JSON.parse(localStorage.getItem('currentAccount')));

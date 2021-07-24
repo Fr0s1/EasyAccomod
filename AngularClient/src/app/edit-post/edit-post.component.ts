@@ -4,6 +4,7 @@ import { AccountService } from '../services/account.service';
 import { PostService } from '../services/post.service';
 import { AuthService } from '../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router'
+import { Backend } from '../_helpers/backend';
 
 @Component({
   selector: 'app-edit-post',
@@ -144,7 +145,7 @@ export class EditPostComponent implements OnInit {
     this.postService.updatePostAndRoomInfo(formData).subscribe(data => this.oldImagesToDelete.forEach(fileName => this.postService.deleteRoomImage(this.postInfo.roomID, fileName).subscribe()))
   }
 
-  uploadURL = 'http://localhost:8080/api/posts'
+  uploadURL = `http://${Backend.url}/api/posts`
 
   getPostCost() {
     this.postService.getUploadFee(this.uploadURL + '/uploadFee').subscribe(data => {

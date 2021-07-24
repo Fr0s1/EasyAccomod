@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { ExtendService} from '../services/extend.service'
 import { throwIfEmpty } from 'rxjs/operators';
 import Swal from 'sweetalert2';
+import { Backend } from '../_helpers/backend';
 
 @Component({
   selector: 'app-profile',
@@ -89,7 +90,7 @@ export class ProfileComponent implements OnInit {
     this.messageService.sendMessage(message).subscribe(data => console.log(data))
   }
 
-  uploadURL = 'http://localhost:8080/api/posts'
+  uploadURL = `http://${Backend.url}/api/posts`
   getPostCost() {
     this.postService.getUploadFee(this.uploadURL + '/uploadFee')
       .subscribe(data => { 

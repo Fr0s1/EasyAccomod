@@ -4,7 +4,7 @@ import { AuthService } from '../services/auth.service'
 import { MessageService } from '../services/messages.service';
 import { AccountService } from '../services/account.service'
 import { DomSanitizer } from '@angular/platform-browser'
-import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 const SOCKET_ENDPOINT = 'http://localhost:3000'
 
@@ -166,14 +166,12 @@ export class ChatComponent implements OnInit {
     })
   }
 
-
   changeModal(event) {
     let modal = document.getElementById("myModal");
 
     // Get the image and insert it inside the modal - use its "alt" text as a caption
-    let modalImg = document.getElementById("img01");
+    let modalImg: any = document.getElementById("img01");
 
-    console.log(modalImg)
     modal.style.display = "block";
     modalImg.src = event.target.src;
   }
