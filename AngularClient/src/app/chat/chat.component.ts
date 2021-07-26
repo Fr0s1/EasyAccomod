@@ -6,7 +6,9 @@ import { AccountService } from '../services/account.service'
 import { DomSanitizer } from '@angular/platform-browser'
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-const SOCKET_ENDPOINT = 'http://localhost:3000'
+import { Backend } from '../_helpers/backend';
+
+const SOCKET_ENDPOINT = Backend.chat_server;
 
 @Component({
   selector: 'app-chat',

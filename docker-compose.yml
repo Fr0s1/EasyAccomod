@@ -1,15 +1,15 @@
 version: "3.7"
 
 services:    
-    ea-angular:
-        image: frost2203/ea-angular
-        working_dir: /angular
-        ports:
-            - 4200:80
-        networks: 
-            - ea-network 
-        build: AngularClient
-
+    # ea-angular:
+    #     image: frost2203/ea-angular
+    #     build: AngularClient
+    #     working_dir: /angular
+    #     ports: 
+    #         - 80:80
+    #     networks:
+    #         - ea-network
+        
     ea-db:
         image: mysql
         volumes: 
