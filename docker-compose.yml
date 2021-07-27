@@ -1,67 +1,65 @@
 version: "3.7"
 
 services:    
-    # ea-angular:
-    #     image: frost2203/ea-angular
-    #     build: AngularClient
-    #     working_dir: /angular
-    #     ports: 
-    #         - 80:80
-    #     networks:
-    #         - ea-network
-        
-    ea-db:
-        image: mysql
-        volumes: 
-            - ea-mysql-data:/var/lib/mysql
-        environment: 
-            MYSQL_ROOT_PASSWORD: hieu123
-            MYSQL_DATABASE: easyaccomod
-        networks: 
-            - ea-network
-            
     ea-chatapp:
         image: frost2203/ea-chatapp
         working_dir: /chatserver
-        command: npm run server
+        command: ["npm", "run", "server"]
         ports: 
             - 3000:3000
         environment: 
-            MYSQL_HOST: ea-db
-            MYSQL_USER: root
-            MYSQL_PASSWORD: hieu123
+            MYSQL_HOST: database-1.cifxv6cgbxnq.ap-southeast-1.rds.amazonaws.com
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: hieu2203
             MYSQL_DB: easyaccomod
         volumes: 
             - message-images:/chatserver/messageImages
         networks: 
             - ea-network
         build: ChatServer
-        depends_on: 
-            - ea-db
             
     ea-backend:
         image: frost2203/ea-backend
         working_dir: /nodejsserver
-        command: npm run server
+        command: ["npm", "run", "server"]
         ports: 
             - 8081:8081
         environment: 
-            MYSQL_HOST: ea-db
-            MYSQL_USER: root
-            MYSQL_PASSWORD: hieu123
+            MYSQL_HOST: database-1.cifxv6cgbxnq.ap-southeast-1.rds.amazonaws.com
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: hieu2203
             MYSQL_DB: easyaccomod
         volumes: 
             - backend-room-images:/nodejsserver/roomImages
         networks: 
             - ea-network
         build: NodeJsServer
-        depends_on: 
-            - ea-db
-
+        
 volumes:
     message-images:
     backend-room-images:
-    ea-mysql-data:
 
+x-aws-cloudformation:
+    Resources:
+        EachatappTCP3000TargetGroup:
+            Properties:
+                HealthCheckPath: /
+                HealthCheckIntervalSeconds: 10
+                HealthyThresholdCount: 2
+                UnhealthyThresholdCount: 2
+                HealthCheckPort: 3000
+                HealthCheckProtocol: HTTP
+               
+        
+        EabackendTCP8081TargetGroup:
+            Properties:
+                HealthCheckPath: /
+                HealthCheckIntervalSeconds: 10
+                HealthyThresholdCount: 2
+                UnhealthyThresholdCount: 2
+                HealthCheckPort: 8081
+                HealthCheckProtocol: HTTP
+            
 networks: 
     ea-network:
+        

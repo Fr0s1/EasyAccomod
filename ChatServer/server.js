@@ -20,8 +20,9 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 const db = require("./models");
-const { angular_url } = require('./config/aws.config');
+
 // db.Messages.sync({force: true});
+
 db.sequelize.sync();
 
 require("./routes/message.routes")(app);
@@ -43,6 +44,11 @@ io.on('connection', (socket) => {
         }
     });
 })
+
+// Container health check route
+app.get("/", (req, res) => {
+    res.status(200).json({ message: "Server is running" });
+});
 
 http.listen(3000, () => {
     console.log(`listening on port ${3000}`)
