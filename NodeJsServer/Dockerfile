@@ -1,7 +1,8 @@
 FROM node:16-alpine3.11
 
 RUN apk update \
-    && apk upgrade 
+    && apk upgrade \
+    && apk add curl
 
 WORKDIR /nodejsserver
 

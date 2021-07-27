@@ -1,13 +1,12 @@
 FROM node:16-alpine3.11
 
 RUN apk update \
-    && apk upgrade 
+    && apk upgrade \
+    && apk add curl
 
 WORKDIR /chatserver
 
 COPY package.json .
-
-RUN apk update && apk upgrade && apk add curl
 
 RUN npm install
 
