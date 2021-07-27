@@ -7,7 +7,7 @@ import { Backend } from "../_helpers/backend";
 })
 export class ReportService {
 
-    reportUrl = `http://${Backend.url}/api/report`
+    reportUrl = `${Backend.url}/api/report`
 
     constructor(private http: HttpClient) { }
 

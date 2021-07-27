@@ -10,9 +10,9 @@ export class PostService {
 
   constructor(private http: HttpClient) { }
   
-  roomUrl = `http://${Backend.url}/api/rooms`
-  postUrl = `http://${Backend.url}/api/posts`
-  reportUrl = `http://${Backend.url}/api/report`
+  roomUrl = `${Backend.url}/api/rooms`
+  postUrl = `${Backend.url}/api/posts`
+  reportUrl = `${Backend.url}/api/report`
   
   // Upload form containg room and post data to server
   uploadForm(url: string, form: FormData) {

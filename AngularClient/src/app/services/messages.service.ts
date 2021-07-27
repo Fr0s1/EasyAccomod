@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { Backend } from '../_helpers/backend';
 @Injectable({
     providedIn: 'root'
 })
 export class MessageService {
     constructor(private http: HttpClient) { }
 
-    messageUrl = 'http://localhost:3000/api/message'
+    messageUrl = `${Backend.chat_server}/api/message`
+    
     sendMessage(message: FormData) {
         return this.http.post(this.messageUrl, message)
     }

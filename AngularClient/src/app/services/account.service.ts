@@ -9,8 +9,8 @@ export class AccountService {
   constructor(private http: HttpClient) { }
 
   
-  accountUrl = `http://${Backend.url}/api/accounts`
-  userUrl = `http://${Backend.url}/api/users`
+  accountUrl = `${Backend.url}/api/accounts`
+  userUrl = `${Backend.url}/api/users`
 
   getAccountByQuery(query: string) {
     return this.http.get(this.accountUrl + query, { responseType: 'json' })

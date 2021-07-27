@@ -9,7 +9,7 @@ export class CommentService {
 
   constructor(private http: HttpClient) { }
 
-  commentURL = `http://${Backend.url}/api/comments`
+  commentURL = `${Backend.url}/api/comments`
 
   sendComment(comment: Object) {
     return this.http.post(this.commentURL, comment)

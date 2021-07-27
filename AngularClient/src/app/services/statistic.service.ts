@@ -6,7 +6,7 @@ import { Backend } from '../_helpers/backend';
     providedIn: 'root'
 })
 export class StatisticService {
-    route = `http://${Backend.url}/api/stats`
+    route = `${Backend.url}/api/stats`
 
     constructor(private http: HttpClient) { }
 

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Backend } from '../_helpers/backend';
 
-const baseUrl = `http://${Backend.url}/api/notifications`;
+const baseUrl = `${Backend.url}/api/notifications`;
 
 @Injectable({
   providedIn: 'root'
