@@ -1,7 +1,8 @@
 const dbConfig = require("../config/db.config.js");
 const { Sequelize, DataTypes } = require("sequelize");
 
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const { user } = require("../config/db.config.js");
 
 const sequelize = new Sequelize(dbConfig.db, dbConfig.user, dbConfig.password, {
   host: dbConfig.host,
@@ -26,7 +27,7 @@ extendRequests = require('./extendRequest.model')(sequelize, DataTypes)
 // Liên kết 1 - 1
 posts.belongsTo(rooms, { foreignKey: 'roomID' })
 extendRequests.belongsTo(posts, { foreignKey: 'postID' })
-accounts.belongsTo(users, { foreignKey: 'userIdCard' }) // 1 người dùng chỉ có 1 tài khoản duy nhất
+accounts.belongsTo(users, { foreignKey: 'userIdCard'}) // 1 người dùng chỉ có 1 tài khoản duy nhất
 // userFavorites.belongsTo(accounts, {foreignKey: 'username'})
 // userFavorites.belongsTo(posts, {foreignKey: 'postID'})
 
@@ -69,6 +70,14 @@ const initAdmin = async () => {
   })
 
   if (admin.length == 0) {
+    await users.create({
+      idCard: '0',
+      fullName: 'Admin',
+      phoneNumber: '09123495',
+      email: 'easyaccomod@gmail.com',
+      address: '144 Xuan Thuy, Ha Noi'
+    })
+
     const initAdminPasswd = '#hieu123|-|'
 
     const salt = bcrypt.genSaltSync(10)
@@ -79,7 +88,8 @@ const initAdmin = async () => {
       username: 'admin',
       password: hasedPsw,
       accountType: 'Admin',
-      verified: true
+      verified: true,
+      userIdCard: '0'
     })
   }
 }
