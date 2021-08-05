@@ -35,7 +35,6 @@ export class CommentsComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    console.log(this.rating.nativeElement.children)
   }
 
   postID

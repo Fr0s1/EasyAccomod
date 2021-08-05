@@ -27,16 +27,14 @@ export class ExtendDurationComponent implements OnInit {
         var length = (data as any).length;
         var count = 0;
         (this.extendRequests as any) = data;
-        console.log(this.extendRequests)
+
         this.extendRequests.forEach(request => {
           this.postService.getPostsByQuery(`?postID=${request.postID}`)
             .subscribe(result => {
-              console.log(result)
               this.postOfRequests.push(result[0]);
               count++;
               if (count == length) {
                 this.loaded = true;
-                console.log(this.postOfRequests.length);
               }
             })
         });

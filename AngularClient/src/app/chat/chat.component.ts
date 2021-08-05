@@ -121,8 +121,6 @@ export class ChatComponent implements OnInit {
         this.imgUrls.push(reader.result)
       }
     }
-
-    console.log(this.imgUrls)
   }
 
   // Switch to new account tab

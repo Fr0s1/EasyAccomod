@@ -24,7 +24,7 @@ export class VerifyReportComponent implements OnInit {
   }
 
   deleteReport() {
-    this.selectedReports.forEach(report => this.reportService.deleteReport(report.reportID).subscribe(data => console.log(data)))
+    this.selectedReports.forEach(report => this.reportService.deleteReport(report.reportID).subscribe()
   }
 
   addReport(event) {

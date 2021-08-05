@@ -87,7 +87,7 @@ export class ProfileComponent implements OnInit {
     message.append('sender', sender)
     message.append('receiver', receiver)
     message.append('content', content)
-    this.messageService.sendMessage(message).subscribe(data => console.log(data))
+    this.messageService.sendMessage(message).subscribe()
   }
 
   uploadURL = `${Backend.url}/api/posts`
@@ -95,7 +95,6 @@ export class ProfileComponent implements OnInit {
     this.postService.getUploadFee(this.uploadURL + '/uploadFee')
       .subscribe(data => { 
         this.postDayCost = (data as any).weekCost / 7;
-        console.log(this.postDayCost);
       });
   }
 
@@ -137,7 +136,6 @@ export class ProfileComponent implements OnInit {
   }
 
   processDateForCalculation(dateTime) {
-    console.log("d: ", dateTime)
     let date = dateTime.split("-")
     let day = date[0]
     let month = date[1]
@@ -154,8 +152,6 @@ export class ProfileComponent implements OnInit {
     let input = document.querySelector('input')
     let newDate = new Date(input.value + " " + "00:00:00")
     let oldDate = new Date(this.processDateForCalculation(this.postExpiredTime))
-    console.log("New: ", newDate);
-    console.log("Old: ", oldDate);
     this.extendCost = this.postDayCost * (newDate.getTime() - oldDate.getTime()) / (1000 * 3600 * 24);
   }
 
@@ -171,12 +167,9 @@ export class ProfileComponent implements OnInit {
         this.extendPostID = postID
         this.postExpiredTime = this.reformatDate(data[0].expiredTime);
         let date = new Date(this.processDateForCalculation(this.postExpiredTime));
-        console.log(date)
         date.setDate(date.getDate() + 1);
         date.setHours(7);
-        console.log(date)
         this.HTMLminDate = date.toISOString().split('T')[0];
-        console.log(this.HTMLminDate)
       })
   }
 

@@ -69,14 +69,12 @@ export class PostDetailsComponent implements OnInit {
             if ((result as any).liked == true) this.favoriteButtonText = "Unfavorite";
             else this.favoriteButtonText = "Favorite";
             this.textLoaded = true;
-            console.log(result)
           });
       }
 
       this.postService.getPostsByQuery(`?postID=${this.postID}`).subscribe(result => { // Get post by id in the url's params
         this.postInfo = result[0]
 
-        console.log(this.postInfo)
         if (!this.postInfo) {
           this.router.navigate(['/404'])
         }
@@ -163,19 +161,17 @@ export class PostDetailsComponent implements OnInit {
       PostPostID: this.postID,
       accountUsername: this.currentAccount.username
     }
-    console.log(data)
+
     if (this.favoriteButtonText == "Unfavorite") {
       this.favoriteButtonText = "Favorite";
       this.favoriteSerive.deleteFavorite(this.postID, this.currentAccount.username)
         .subscribe(result => {
-          console.log("delete");
           this.postInfo.likesNumber--;
           let like_data = {
             likesNumber: this.postInfo.likesNumber
           }
           this.postService.updatePost(this.postID, like_data)
             .subscribe(result => {
-              console.log("Decreased");
             })
         });
     }
@@ -183,14 +179,12 @@ export class PostDetailsComponent implements OnInit {
       this.favoriteButtonText = "Unfavorite";
       this.favoriteSerive.createFavorite(data)
         .subscribe(result => {
-          console.log("create");
           this.postInfo.likesNumber++;
           let like_data = {
             likesNumber: this.postInfo.likesNumber
           }
           this.postService.updatePost(this.postID, like_data)
             .subscribe(result => {
-              console.log("Increased");
             })
         });
     }
@@ -228,7 +222,6 @@ export class PostDetailsComponent implements OnInit {
     this.postService.getUploadFee(this.uploadURL + '/uploadFee')
       .subscribe(data => { 
         this.postDayCost = (data as any).weekCost / 7;
-        console.log(this.postDayCost);
       });
   }
 
@@ -236,8 +229,6 @@ export class PostDetailsComponent implements OnInit {
     let input = document.querySelector('input')
     let newDate = new Date(input.value + " " + "07:00:00")
     let oldDate = new Date(this.processDateForCalculation(this.postExpiredTime))
-    console.log("New: ", newDate);
-    console.log("Old: ", oldDate);
     this.extendCost = this.postDayCost * (newDate.getTime() - oldDate.getTime()) / (1000 * 3600 * 24);
   }
 
@@ -251,12 +242,9 @@ export class PostDetailsComponent implements OnInit {
     this.extendPostID = this.postID
     this.postExpiredTime = this.reformatDate(this.postInfo.expiredTime);
     let date = new Date(this.processDateForCalculation(this.postExpiredTime));
-    console.log(date)
     date.setDate(date.getDate() + 1);
     date.setHours(7);
-    console.log(date)
     this.HTMLminDate = date.toISOString().split('T')[0];
-    console.log(this.HTMLminDate)
   }
 
   createExtendRequest() {

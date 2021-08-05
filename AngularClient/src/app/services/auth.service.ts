@@ -41,7 +41,6 @@ export class AuthService {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('currentAccount', JSON.stringify(user));
                 this.currentAccountSubject.next(user);
-                console.log('Logged in')
             }
 
             return user;
@@ -95,7 +94,7 @@ export class AuthService {
                     { 
                         password: form.get('newpwd') 
                     }).
-                subscribe(data => { console.log("Changed") })
+                subscribe()
             }
             else {
                 return 2;

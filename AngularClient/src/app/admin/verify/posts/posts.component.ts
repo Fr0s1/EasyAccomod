@@ -76,7 +76,6 @@ export class AdminPostsComponent implements OnInit {
       this.selectedPostsStatus = this.selectedPostsStatus.filter(value => value != status)
     }
 
-    console.log(this.selectedPostsID)
   }
 
   message: string
@@ -84,14 +83,12 @@ export class AdminPostsComponent implements OnInit {
   operation: boolean = false
   verifyPost() {
     for (let index in this.selectedPostsID) {
-      console.log(index)
       let postID = this.selectedPostsID[index];
       let postName = this.selectedPostsName[index];
       let accountUsername = this.selectedUsername[index];
 
       this.postService.updatePost(postID, { verifiedStatus: true })
         .subscribe(data => {
-          console.log(data)
           if (Object(data).message) {
 
             this.operation = true
@@ -113,7 +110,6 @@ export class AdminPostsComponent implements OnInit {
 
             this.notificationService.createNotification(notificationData)
               .subscribe(data => {
-                console.log("Created notification");
               })
 
           }
@@ -158,7 +154,6 @@ export class AdminPostsComponent implements OnInit {
 
         this.notificationService.createNotification(notificationData)
           .subscribe(data => {
-            console.log("Created notification");
           })
 
       }

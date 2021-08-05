@@ -16,11 +16,9 @@ export class NotificationComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentAccount = this.authService.currentUserValue;
-    console.log(this.currentAccount);
     this.notficationService.getUserNotification(this.currentAccount.username)
       .subscribe(data => {
         this.notifications = data;
-        console.log(this.notifications)
       });
   }
 
