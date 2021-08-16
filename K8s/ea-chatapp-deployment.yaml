@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\Users\dthie\kompose\kompose.exe -f docker-compose-local.yml convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: ea-chatapp
+  name: ea-chatapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: ea-chatapp
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\Users\dthie\kompose\kompose.exe -f docker-compose-local.yml
+          convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/ea-network: "true"
+        io.kompose.service: ea-chatapp
+    spec:
+      containers:
+      - args:
+        - npm
+        - run
+        - server
+        env:
+        - name: MYSQL_DB
+          value: easyaccomod
+        - name: MYSQL_HOST
+          value: ea-db
+        - name: MYSQL_PASSWORD
+          value: hieu2203
+        - name: MYSQL_USER
+          value: root
+        image: frost2203/ea-chatapp:local
+        imagePullPolicy: ""
+        name: ea-chatapp
+        livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 10
+            timeoutSeconds: 1
+        ports:
+        - containerPort: 3000
+        resources: {}
+        volumeMounts:
+        - mountPath: /chatserver/messageImages
+          name: message-images
+        workingDir: /chatserver
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+      - name: message-images
+        persistentVolumeClaim:
+          claimName: message-images
+status: {}
