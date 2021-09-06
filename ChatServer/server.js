@@ -47,7 +47,9 @@ io.on('connection', (socket) => {
 
 // Container health check route
 app.get("/", (req, res) => {
-    res.status(200).json({ message: "Server is running" });
+    const os = require('os')
+    const hostname = os.hostname()
+    res.status(200).json({ message: `Chat server is running on host ${hostname}` });
 });
 
 http.listen(3000, () => {

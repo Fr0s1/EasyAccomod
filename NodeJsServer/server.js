@@ -34,7 +34,9 @@ db.sequelize.sync().then(data => {
 
 // Health check route
 app.get("/", (req, res) => {
-    res.status(200).json({ message: "Server is running" });
+    const os = require('os')
+    const hostname = os.hostname()
+    res.status(200).json({ message: `Backend server is running on host ${hostname}` });
 });
 
 require("./app/routes/user.routes")(app);

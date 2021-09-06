@@ -10,6 +10,8 @@ services:
             MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_password
             MYSQL_PASSWORD_FILE: /run/secrets/db_password
             MYSQL_DATABASE_FILE: /run/secrets/db_database
+        volumes:
+            - ea-db-data:/var/lib/mysql
         secrets:
             - db_password
             - db_endpoint
