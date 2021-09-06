@@ -1,0 +1,78 @@
+version: "3.7"
+
+services:       
+    ea-db:     
+        image: mysql:latest
+        ports:
+            - 3306:3306
+        volumes:
+            - ea-db-data:/var/lib/mysql
+        environment: 
+            MYSQL_HOST: /run/secrets/db_endpoint
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: /run/secrets/db_password
+            MYSQL_DB: /run/secrets/db_database
+        secrets:
+            - db_password
+            - db_endpoint
+            - db_database
+        deploy:
+            mode: replicated
+            replicas: 3
+
+    ea-backend:
+        image: frost2203/ea-backend:swarm
+        working_dir: /nodejsserver
+        command: ["npm", "run", "server"]
+        ports: 
+            - 8080:8080
+        environment: 
+            MYSQL_HOST: /run/secrets/db_endpoint
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: /run/secrets/db_password
+            MYSQL_DB: /run/secrets/db_database
+        volumes: 
+            - backend-room-images:/nodejsserver/roomImages
+        secrets:
+            - db_password
+            - db_endpoint
+            - db_database
+        build: NodeJsServer
+        deploy:
+            mode: replicated
+            replicas: 3
+    
+    ea-chatapp:
+        image: frost2203/ea-chatapp:swarm
+        working_dir: /chatserver
+        command: ["npm", "run", "server"]
+        ports: 
+            - 3000:3000
+        environment: 
+            MYSQL_HOST: /run/secrets/db_endpoint
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: /run/secrets/db_password
+            MYSQL_DB: /run/secrets/db_database
+        volumes: 
+            - message-images:/chatserver/messageImages
+        secrets:
+            - db_password
+            - db_endpoint
+            - db_database
+        build: ChatServer
+        deploy:
+            mode: replicated
+            replicas: 3
+        
+volumes:
+    message-images:
+    backend-room-images:
+    ea-db-data:
+
+secrets:
+    db_password:
+        file: secrets/db_password.txt
+    db_endpoint:
+        file: secrets/db_endpoint.txt
+    db_database:
+        file: secrets/db_database.txt
