@@ -5,20 +5,18 @@ services:
         image: mysql:latest
         ports:
             - 3306:3306
-        volumes:
-            - ea-db-data:/var/lib/mysql
         environment: 
-            MYSQL_HOST: /run/secrets/db_endpoint
             MYSQL_USER: admin
-            MYSQL_PASSWORD: /run/secrets/db_password
-            MYSQL_DB: /run/secrets/db_database
+            MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_password
+            MYSQL_PASSWORD_FILE: /run/secrets/db_password
+            MYSQL_DATABASE_FILE: /run/secrets/db_database
         secrets:
             - db_password
             - db_endpoint
             - db_database
         deploy:
             mode: replicated
-            replicas: 3
+            replicas: 1
 
     ea-backend:
         image: frost2203/ea-backend:swarm
@@ -27,10 +25,10 @@ services:
         ports: 
             - 8080:8080
         environment: 
-            MYSQL_HOST: /run/secrets/db_endpoint
+            MYSQL_HOST_FILE: /run/secrets/db_endpoint
             MYSQL_USER: admin
-            MYSQL_PASSWORD: /run/secrets/db_password
-            MYSQL_DB: /run/secrets/db_database
+            MYSQL_PASSWORD_FILE: /run/secrets/db_password
+            MYSQL_DB_FILE: /run/secrets/db_database
         volumes: 
             - backend-room-images:/nodejsserver/roomImages
         secrets:
@@ -41,6 +39,14 @@ services:
         deploy:
             mode: replicated
             replicas: 3
+        depends_on: 
+            - ea-db
+        healthcheck:
+            test: ["CMD", "curl", "localhost:8080"]
+            start_period: 10s
+            timeout: 2s
+            interval: 5s
+            retries: 2
     
     ea-chatapp:
         image: frost2203/ea-chatapp:swarm
@@ -49,10 +55,10 @@ services:
         ports: 
             - 3000:3000
         environment: 
-            MYSQL_HOST: /run/secrets/db_endpoint
+            MYSQL_HOST_FILE: /run/secrets/db_endpoint
             MYSQL_USER: admin
-            MYSQL_PASSWORD: /run/secrets/db_password
-            MYSQL_DB: /run/secrets/db_database
+            MYSQL_PASSWORD_FILE: /run/secrets/db_password
+            MYSQL_DB_FILE: /run/secrets/db_database
         volumes: 
             - message-images:/chatserver/messageImages
         secrets:
@@ -63,6 +69,14 @@ services:
         deploy:
             mode: replicated
             replicas: 3
+        depends_on: 
+            - ea-db
+        healthcheck:
+            test: ["CMD", "curl", "localhost:3000"]
+            start_period: 10s
+            timeout: 2s
+            interval: 5s
+            retries: 2
         
 volumes:
     message-images:

@@ -1,3 +1,5 @@
+const fs = require('fs')
+
 const {
 	MYSQL_HOST: HOST,
 	MYSQL_HOST_FILE: HOST_FILE,
@@ -9,10 +11,10 @@ const {
 	MYSQL_DB_FILE: DB_FILE,
 } = process.env;
 
-const host = HOST_FILE ? fs.readFileSync(HOST_FILE) : HOST;
-const user = USER_FILE ? fs.readFileSync(USER_FILE) : USER;
-const password = PASSWORD_FILE ? fs.readFileSync(PASSWORD_FILE) : PASSWORD;
-const db = DB_FILE ? fs.readFileSync(DB_FILE) : DB;
+const host = HOST_FILE ? fs.readFileSync(HOST_FILE).toString('utf-8') : HOST;
+const user = USER_FILE ? fs.readFileSync(USER_FILE).toString('utf-8') : USER;
+const password = PASSWORD_FILE ? fs.readFileSync(PASSWORD_FILE).toString('utf-8') : PASSWORD;
+const db = DB_FILE ? fs.readFileSync(DB_FILE).toString('utf-8') : DB;
 
 module.exports = {
 	host,
