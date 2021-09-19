@@ -1,0 +1,85 @@
+version: "3.7"
+
+services:       
+    ea-db:     
+        image: mysql:latest
+        ports:
+            - 3306:3306
+        environment: 
+            MYSQL_USER: admin
+            MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_password
+            MYSQL_PASSWORD_FILE: /run/secrets/db_password
+            MYSQL_DATABASE_FILE: /run/secrets/db_database
+        volumes:
+            - ea-db-data:/var/lib/mysql
+        secrets:
+            - db_password
+            - db_endpoint
+            - db_database
+
+    ea-backend:
+        image: frost2203/ea-backend:swarm
+        working_dir: /nodejsserver
+        command: ["npm", "run", "server"]
+        ports: 
+            - 8080:8080
+        environment: 
+            MYSQL_HOST_FILE: /run/secrets/db_endpoint
+            MYSQL_USER: admin
+            MYSQL_PASSWORD_FILE: /run/secrets/db_password
+            MYSQL_DB_FILE: /run/secrets/db_database
+        volumes: 
+            - backend-room-images:/nodejsserver/roomImages
+        secrets:
+            - db_password
+            - db_endpoint
+            - db_database
+        build: NodeJsServer
+        depends_on: 
+            - ea-db
+        healthcheck:
+            test: ["CMD", "curl", "localhost:8080"]
+            start_period: 10s
+            timeout: 2s
+            interval: 5s
+            retries: 2
+    
+    ea-chatapp:
+        image: frost2203/ea-chatapp:swarm
+        working_dir: /chatserver
+        command: ["npm", "run", "server"]
+        ports: 
+            - 3000:3000
+        environment: 
+            MYSQL_HOST_FILE: /run/secrets/db_endpoint
+            MYSQL_USER: admin
+            MYSQL_PASSWORD_FILE: /run/secrets/db_password
+            MYSQL_DB_FILE: /run/secrets/db_database
+        volumes: 
+            - message-images:/chatserver/messageImages
+        secrets:
+            - db_password
+            - db_endpoint
+            - db_database
+        build: ChatServer
+        depends_on: 
+            - ea-db
+        healthcheck:
+            test: ["CMD", "curl", "localhost:3000"]
+            start_period: 10s
+            timeout: 2s
+            interval: 5s
+            retries: 2
+        
+volumes:
+    message-images:
+    backend-room-images:
+    ea-db-data:
+
+secrets:
+    db_password:
+        file: secrets/db_password.txt
+    db_endpoint:
+        file: secrets/db_endpoint.txt
+    db_database:
+        file: secrets/db_database.txt

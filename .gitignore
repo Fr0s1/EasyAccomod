@@ -2,8 +2,6 @@
 
 docker-compose.yml
 
-secrets/*
-
 # Logs
 logs
 *.log
