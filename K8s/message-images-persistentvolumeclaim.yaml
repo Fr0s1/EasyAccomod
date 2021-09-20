@@ -5,6 +5,7 @@ metadata:
     io.kompose.service: message-images
   name: message-images
 spec:
+  storageClassName: standard
   accessModes:
   - ReadWriteOnce
   resources:

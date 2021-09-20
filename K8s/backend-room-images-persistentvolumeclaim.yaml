@@ -5,6 +5,7 @@ metadata:
     io.kompose.service: backend-room-images
   name: backend-room-images
 spec:
+  storageClassName: standard
   accessModes:
   - ReadWriteOnce
   resources:

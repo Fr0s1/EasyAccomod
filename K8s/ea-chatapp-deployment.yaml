@@ -63,8 +63,8 @@ spec:
           name: db-endpoint
         - mountPath: /run/secrets/db-database
           name: db-database
-        - mountPath: /chatserver/messageImages
-          name: message-images
+        # - mountPath: /chatserver/messageImages
+        #   name: message-images
         workingDir: /chatserver
       restartPolicy: Always
       serviceAccountName: ""
@@ -78,7 +78,7 @@ spec:
       - name: db-database
         secret:
           secretName: db-database
-      - name: message-images
-        persistentVolumeClaim:
-          claimName: message-images
+      # - name: message-images
+      #   persistentVolumeClaim:
+      #     claimName: message-images
 status: {}

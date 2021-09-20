@@ -1,16 +1,24 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: myingress
+  name: ea-ingress
   labels:
-    name: myingress
+    name: ea-ingress
   annotations:
-    kubernetes.io/ingress.class: "nginx"
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
 spec:
   rules:
-  - host: ea
-    http:
+  - http:
       paths:
+      - pathType: Prefix
+        path: "/socket.io"
+        backend:
+          service:
+            name: ea-chatapp
+            port: 
+              number: 3000
       - pathType: Prefix
         path: "/api/chat"
         backend:
