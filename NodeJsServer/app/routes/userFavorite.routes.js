@@ -13,5 +13,5 @@ module.exports = app => {
 
     router.delete('/:username/:id', userFavorites.deleteFavorite)
 
-    app.use('/api/userfavorites', router);
+    app.use('/api/backend/userfavorites', router);
 };

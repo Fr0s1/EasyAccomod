@@ -4,18 +4,18 @@ const http = require('http').createServer(app)
 
 const aws_config = require('./config/aws.config')
 
+const cors = require("cors");
+
+const corsOptions = {
+    origin: aws_config.angular_url
+};
+
 const io = require('socket.io')(http, {
     cors: {
         origin: aws_config.angular_url,
         methods: ["GET", "POST"]
     }
 });
-
-const cors = require("cors");
-
-const corsOptions = {
-    origin: aws_config.angular_url
-};
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
@@ -29,7 +29,14 @@ require("./routes/message.routes")(app);
 
 const connectedUser = {}
 
-io.on('connection', (socket) => {
+const nsp= io.of('/api/chat');
+
+nsp.use((socket, next) => {
+  // ensure the user has sufficient rights
+  next();
+});
+
+nsp.on('connection', (socket) => {
     socket.on('currentUser', data => {
         connectedUser[data.user] = socket
     })

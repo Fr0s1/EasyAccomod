@@ -66,5 +66,5 @@ module.exports = app => {
 
     router.get('/contact', messages.getContactList)
     
-    app.use('/api/message', router);
+    app.use('/api/chat/message', router);
 };

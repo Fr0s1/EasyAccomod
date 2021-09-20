@@ -19,7 +19,7 @@ export class PaymentComponent implements OnInit {
 
   unpaidPostsList: any
 
-  targetURL = `${Backend.url}/api/posts`
+  targetURL = `${Backend.url}/posts`
   getPostPaymentInfo() {
     this.postService.getPostPaymentInfo(this.targetURL + '?verifiedStatus=1&paymentStatus=0').subscribe(data => this.unpaidPostsList = data)
   }

@@ -90,7 +90,7 @@ export class ProfileComponent implements OnInit {
     this.messageService.sendMessage(message).subscribe()
   }
 
-  uploadURL = `${Backend.url}/api/posts`
+  uploadURL = `${Backend.url}/posts`
   getPostCost() {
     this.postService.getUploadFee(this.uploadURL + '/uploadFee')
       .subscribe(data => { 

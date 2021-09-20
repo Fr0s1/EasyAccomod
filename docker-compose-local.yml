@@ -18,7 +18,7 @@ services:
             - db_database
 
     ea-backend:
-        image: frost2203/ea-backend:swarm
+        image: frost2203/ea-backend:local
         working_dir: /nodejsserver
         command: ["npm", "run", "server"]
         ports: 
@@ -45,7 +45,7 @@ services:
             retries: 2
     
     ea-chatapp:
-        image: frost2203/ea-chatapp:swarm
+        image: frost2203/ea-chatapp:local
         working_dir: /chatserver
         command: ["npm", "run", "server"]
         ports: 

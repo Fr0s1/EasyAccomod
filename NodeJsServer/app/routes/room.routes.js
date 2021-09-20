@@ -37,5 +37,5 @@ module.exports = app => {
     // Delete a room
     router.delete('/:id', room.deleteByID)
 
-    app.use('/api/rooms', router)
+    app.use('/api/backend/rooms', router)
 }

@@ -46,7 +46,7 @@ export class PostDetailsComponent implements OnInit {
   extendPostID
   postDayCost
 
-  postUrl = `${Backend.url}/api/posts`
+  postUrl = `${Backend.url}/posts`
 
   createRange(number) {
     var items: number[] = [];
@@ -216,7 +216,7 @@ export class PostDetailsComponent implements OnInit {
     return `${date[2]}-${date[1]}-${date[0]}`
   }
 
-  uploadURL = `${Backend.url}/api/posts`
+  uploadURL = `${Backend.url}/posts`
 
   getPostCost() {
     this.postService.getUploadFee(this.uploadURL + '/uploadFee')

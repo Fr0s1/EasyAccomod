@@ -9,5 +9,5 @@ module.exports = app => {
 
     router.get('/:column', stats.getPostsOrderByColumn)
 
-    app.use('/api/stats', router)
+    app.use('/api/backend/stats', router)
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Backend } from '../_helpers/backend';
 
-const baseUrl = `${Backend.url}/api/userfavorites`;
+const baseUrl = `${Backend.url}/userfavorites`;
 
 @Injectable({
   providedIn: 'root'

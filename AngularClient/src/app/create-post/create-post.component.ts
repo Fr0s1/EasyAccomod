@@ -86,7 +86,7 @@ export class CreatePostComponent implements OnInit {
     }
   }
 
-  uploadURL = `${Backend.url}/api/posts`
+  uploadURL = `${Backend.url}/posts`
 
   sent: boolean = false;
   createPost() {

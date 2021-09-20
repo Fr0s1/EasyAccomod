@@ -3,7 +3,6 @@ import { io } from 'socket.io-client'
 import { AuthService } from '../services/auth.service'
 import { MessageService } from '../services/messages.service';
 import { AccountService } from '../services/account.service'
-import { DomSanitizer } from '@angular/platform-browser'
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { Backend } from '../_helpers/backend';
@@ -21,7 +20,6 @@ export class ChatComponent implements OnInit {
     private authService: AuthService,
     private messageService: MessageService,
     private accountService: AccountService,
-    private sanitizer: DomSanitizer,
     private fb: FormBuilder
   ) { }
 
@@ -74,7 +72,7 @@ export class ChatComponent implements OnInit {
   }
 
   setUpConnection() {
-    this.socket = io(SOCKET_ENDPOINT)
+    this.socket = io(Backend.socketio_endpoint)
 
     this.socket.on("connect", () => this.socket.emit('currentUser', { user: this.currentAccount.username, id: this.socket.id }));
 

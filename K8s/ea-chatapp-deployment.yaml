@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: C:\Users\dthie\kompose\kompose.exe -f docker-compose-local.yml convert
+    kompose.cmd: C:\Users\dthie\kompose\kompose.exe -f docker-compose.yml convert
     kompose.version: 1.21.0 (992df58d8)
   creationTimestamp: null
   labels:
@@ -18,8 +18,7 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: C:\Users\dthie\kompose\kompose.exe -f docker-compose-local.yml
-          convert
+        kompose.cmd: C:\Users\dthie\kompose\kompose.exe -f docker-compose.yml convert
         kompose.version: 1.21.0 (992df58d8)
       creationTimestamp: null
       labels:
@@ -32,34 +31,49 @@ spec:
         - run
         - server
         env:
-        - name: MYSQL_DB
-          value: easyaccomod
-        - name: MYSQL_HOST
-          value: ea-db
-        - name: MYSQL_PASSWORD
-          value: hieu2203
+        - name: MYSQL_DB_FILE
+          value: /run/secrets/db-database
+        - name: MYSQL_HOST_FILE
+          value: /run/secrets/db-endpoint
+        - name: MYSQL_PASSWORD_FILE
+          value: /run/secrets/db-password
         - name: MYSQL_USER
-          value: root
-        image: frost2203/ea-chatapp:local
+          value: admin
+        image: frost2203/ea-chatapp:aws
         imagePullPolicy: ""
         name: ea-chatapp
-        livenessProbe:
-            httpGet:
-              path: /
-              port: 3000
-            initialDelaySeconds: 10
-            timeoutSeconds: 1
         ports:
         - containerPort: 3000
         resources: {}
         volumeMounts:
+        - mountPath: /run/secrets/db-password
+          name: db-password
+        - mountPath: /run/secrets/db-endpoint
+          name: db-endpoint
+        - mountPath: /run/secrets/db-database
+          name: db-database
         - mountPath: /chatserver/messageImages
           name: message-images
         workingDir: /chatserver
       restartPolicy: Always
       serviceAccountName: ""
       volumes:
-      - name: message-images
-        persistentVolumeClaim:
-          claimName: message-images
+      - name: db-password
+        secret:
+          items:
+          - key: db-password
+            path: db-password
+          secretName: db-password
+      - name: db-endpoint
+        secret:
+          items:
+          - key: db-endpoint
+            path: db-endpoint
+          secretName: db-endpoint
+      - name: db-database
+        secret:
+          items:
+          - key: db-database
+            path: db-database
+          secretName: db-database
 status: {}

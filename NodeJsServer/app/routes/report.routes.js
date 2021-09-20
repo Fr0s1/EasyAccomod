@@ -9,5 +9,5 @@ module.exports = app => {
 
     router.delete('/:id', reportedPost.deleteReport)
     
-    app.use("/api/report", router)
+    app.use("/api/backend/report", router)
 }

@@ -14,7 +14,7 @@ import { Backend } from "../_helpers/backend";
 export class AuthService {
     private currentAccountSubject: BehaviorSubject<Account>;
 
-    private apiUrl = `${Backend.url}/api/accounts`
+    private apiUrl = `${Backend.url}/accounts`
 
     constructor(private http: HttpClient, private accountService: AccountService) {
         this.currentAccountSubject = new BehaviorSubject<Account>(JSON.parse(localStorage.getItem('currentAccount')));

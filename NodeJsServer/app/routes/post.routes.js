@@ -81,5 +81,5 @@ module.exports = app => {
     // Delete posts with columns satisfy conditions in query string
     router.delete("/", post.deleteByQuery)
 
-    app.use("/api/posts", router)
+    app.use("/api/backend/posts", router)
 }

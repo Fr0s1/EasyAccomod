@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    kompose.cmd: C:\Users\dthie\kompose\kompose.exe -f docker-compose-local.yml convert
+    kompose.cmd: C:\Users\dthie\kompose\kompose.exe -f docker-compose.yml convert
     kompose.version: 1.21.0 (992df58d8)
   creationTimestamp: null
   labels:
@@ -15,5 +15,6 @@ spec:
     targetPort: 3000
   selector:
     io.kompose.service: ea-chatapp
+  type: LoadBalancer
 status:
   loadBalancer: {}

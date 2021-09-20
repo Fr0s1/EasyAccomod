@@ -35,5 +35,5 @@ module.exports = app => {
   // Retrieve account info by username
   router.get("/info/:username", accounts.getUserInfo)
 
-  app.use('/api/accounts', router);
+  app.use('/api/backend/accounts', router);
 };

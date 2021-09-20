@@ -7,5 +7,5 @@ module.exports = app => {
 
     router.post('/', notifications.createNotification)
 
-    app.use('/api/notifications', router);
+    app.use('/api/backend/notifications', router);
 };

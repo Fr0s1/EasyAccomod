@@ -6,12 +6,12 @@ import { Backend } from '../_helpers/backend';
     providedIn: 'root'
 })
 export class StatisticService {
-    route = `${Backend.url}/api/stats`
+    route = `${Backend.url}/stats`
 
     constructor(private http: HttpClient) { }
 
-    getPostOrderByColumn(columName: string) {
-        return this.http.get(this.route + `/${columName}`)
+    getPostOrderByColumn(columnName: string) {
+        return this.http.get(this.route + `/${columnName}`)
     }
 
     getPostOrderByColumInMonthAndYearDESC(column: string, month: number, year: number) {

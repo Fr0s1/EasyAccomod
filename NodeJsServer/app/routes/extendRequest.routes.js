@@ -15,6 +15,6 @@ module.exports = app => {
     //Delete a request with postID
     router.delete("/:id", extendRequests.delete);
   
-    app.use('/api/extend', router);
+    app.use('/api/backend/extend', router);
   };
   

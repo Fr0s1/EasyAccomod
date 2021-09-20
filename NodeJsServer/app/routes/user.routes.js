@@ -15,5 +15,5 @@ module.exports = app => {
   //Delete an user with id
   router.delete("/:id", users.delete);
 
-  app.use('/api/users', router);
+  app.use('/api/backend/users', router);
 };

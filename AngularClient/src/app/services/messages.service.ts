@@ -8,7 +8,7 @@ import { Backend } from '../_helpers/backend';
 export class MessageService {
     constructor(private http: HttpClient) { }
 
-    messageUrl = `${Backend.chat_server}/api/message`
+    messageUrl = `${Backend.chat_server}/message`
     
     sendMessage(message: FormData) {
         return this.http.post(this.messageUrl, message)

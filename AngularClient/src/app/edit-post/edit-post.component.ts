@@ -145,7 +145,7 @@ export class EditPostComponent implements OnInit {
     this.postService.updatePostAndRoomInfo(formData).subscribe(data => this.oldImagesToDelete.forEach(fileName => this.postService.deleteRoomImage(this.postInfo.roomID, fileName).subscribe()))
   }
 
-  uploadURL = `${Backend.url}/api/posts`
+  uploadURL = `${Backend.url}/posts`
 
   getPostCost() {
     this.postService.getUploadFee(this.uploadURL + '/uploadFee').subscribe(data => {
