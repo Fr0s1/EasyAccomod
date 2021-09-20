@@ -4,7 +4,6 @@ metadata:
   annotations:
     kompose.cmd: C:\Users\dthie\kompose\kompose.exe -f docker-compose.yml convert
     kompose.version: 1.21.0 (992df58d8)
-  creationTimestamp: null
   labels:
     io.kompose.service: ea-chatapp
   name: ea-chatapp
@@ -15,6 +14,5 @@ spec:
     targetPort: 3000
   selector:
     io.kompose.service: ea-chatapp
-  type: LoadBalancer
 status:
   loadBalancer: {}

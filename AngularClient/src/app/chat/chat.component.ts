@@ -7,8 +7,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { Backend } from '../_helpers/backend';
 
-const SOCKET_ENDPOINT = Backend.chat_server;
-
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',

@@ -4,7 +4,6 @@ metadata:
   annotations:
     kompose.cmd: C:\Users\dthie\kompose\kompose.exe -f docker-compose.yml convert
     kompose.version: 1.21.0 (992df58d8)
-  creationTimestamp: null
   labels:
     io.kompose.service: ea-backend
   name: ea-backend
@@ -20,7 +19,6 @@ spec:
       annotations:
         kompose.cmd: C:\Users\dthie\kompose\kompose.exe -f docker-compose.yml convert
         kompose.version: 1.21.0 (992df58d8)
-      creationTimestamp: null
       labels:
         io.kompose.network/ea-network: "true"
         io.kompose.service: ea-backend
@@ -30,21 +28,34 @@ spec:
         - npm
         - run
         - server
+        livenessProbe:
+          exec:
+            command:
+            - curl
+            - localhost:8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
         env:
         - name: MYSQL_DB_FILE
-          value: /run/secrets/db-database
+          value: /run/secrets/db-database/db-database
         - name: MYSQL_HOST_FILE
-          value: /run/secrets/db-endpoint
+          value: /run/secrets/db-endpoint/db-endpoint
         - name: MYSQL_PASSWORD_FILE
-          value: /run/secrets/db-password
+          value: /run/secrets/db-password/db-password
         - name: MYSQL_USER
           value: admin
-        image: frost2203/ea-backend:aws
-        imagePullPolicy: ""
+        image: frost2203/ea-backend:local
+        imagePullPolicy: IfNotPresent
         name: ea-backend
         ports:
         - containerPort: 8080
-        resources: {}
+        resources: 
+          requests:
+            memory: 200Mi
+            cpu: 250m
+          limits:
+            memory: 200Mi
+            cpu: 500m
         volumeMounts:
         - mountPath: /run/secrets/db-password
           name: db-password
@@ -60,21 +71,14 @@ spec:
       volumes:
       - name: db-password
         secret:
-          items:
-          - key: db-password
-            path: db-password
           secretName: db-password
       - name: db-endpoint
         secret:
-          items:
-          - key: db-endpoint
-            path: db-endpoint
           secretName: db-endpoint
       - name: db-database
         secret:
-          items:
-          - key: db-database
-            path: db-database
           secretName: db-database
-
+      - name: backend-room-images
+        persistentVolumeClaim:
+          claimName: backend-room-images
 status: {}
