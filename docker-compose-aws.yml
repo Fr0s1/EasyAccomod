@@ -1,0 +1,66 @@
+version: "3.7"
+
+services:            
+    ea-backend:
+        image: frost2203/ea-backend
+        working_dir: /nodejsserver
+        command: ["npm", "run", "server"]
+        ports: 
+            - 8080:8080
+        environment: 
+            MYSQL_HOST: frost-private-db.cifxv6cgbxnq.ap-southeast-1.rds.amazonaws.com
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: "#hieu2203|"
+            MYSQL_DB: easyaccomod
+        volumes: 
+            - backend-room-images:/nodejsserver/roomImages
+        networks: 
+            - ea-network
+        build: NodeJsServer
+    
+    ea-chatapp:
+        image: frost2203/ea-chatapp
+        working_dir: /chatserver
+        command: ["npm", "run", "server"]
+        ports: 
+            - 3000:3000
+        environment: 
+            MYSQL_HOST: frost-private-db.cifxv6cgbxnq.ap-southeast-1.rds.amazonaws.com
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: "#hieu2203|"
+            MYSQL_DB: easyaccomod
+        volumes: 
+            - message-images:/chatserver/messageImages
+        networks: 
+            - ea-network
+        build: ChatServer
+        
+volumes:
+    message-images:
+    backend-room-images:
+
+x-aws-loadbalancer: arn:aws:elasticloadbalancing:ap-southeast-1:207986101045:loadbalancer/net/frost-ea-nlb/7adee4ccda114d90
+
+x-aws-cloudformation:
+    Resources:
+        EabackendTCP8080TargetGroup:
+            Properties:
+                HealthCheckPath: /
+                HealthCheckIntervalSeconds: 30
+                HealthyThresholdCount: 3
+                UnhealthyThresholdCount: 3
+                HealthCheckPort: 8080
+                HealthCheckProtocol: HTTP
+
+        EachatappTCP3000TargetGroup:
+            Properties:
+                HealthCheckPath: /
+                HealthCheckIntervalSeconds: 10
+                HealthyThresholdCount: 2
+                UnhealthyThresholdCount: 2
+                HealthCheckPort: 3000
+                HealthCheckProtocol: HTTP
+               
+networks: 
+    ea-network:
+        
